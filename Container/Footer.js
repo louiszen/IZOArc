@@ -58,7 +58,7 @@ class Footer extends Component {
           paddingLeft: 40,
           bottom: 0,
           background: ColorX.GetColorCSS("black"),
-          zIndex: 2,
+          zIndex: 100,
           }}>
           <Typography style={style}>
             {"[" + BrowserX.getBrowser() + "] " + BrowserX.getUserAgent()}
