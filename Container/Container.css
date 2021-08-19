@@ -1,0 +1,31 @@
+.menu{
+  left: -100px;
+  transition: left 1s;
+}
+
+.menu:hover{
+  left: 0px;
+}
+
+.menu.mini{
+  left: -100px;
+  transition: left 1s;
+}
+
+.menu.mini:hover{
+  left: -100px;
+}
+
+.menubtn:hover{
+  color: black;
+  background: white;
+}
+
+.menubtn.inPage
+{
+  background: white;
+}
+
+.menubtn{
+  color: rgba(242, 132, 62, 1);
+}

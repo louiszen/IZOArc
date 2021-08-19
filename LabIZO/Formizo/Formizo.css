@@ -1,0 +1,27 @@
+.formizo{
+  
+}
+
+.formizo-p{
+  padding: 5px !important
+}
+
+.formizo-m{
+  margin: 5px !important
+}
+
+.formizo-h-p{
+  padding: 0 5px !important; 
+}
+
+.formizo-h-m{
+  margin: 0 5px !important; 
+}
+
+.formizo-v-p{
+  padding: 5px 0 !important; 
+}
+
+.formizo-v-m{
+  margin: 5px 0 !important; 
+}
