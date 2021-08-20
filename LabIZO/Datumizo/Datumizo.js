@@ -345,6 +345,7 @@ class Datumizo extends Component {
   _setInlineButtons = () => {
     let { base } = this.state;
     if (!base.buttons) return;
+    
     let newInline = _.map(base.buttons.inline, (o, i) => {
       let xicon = null;
       if (_.isString(o.icon)) {
