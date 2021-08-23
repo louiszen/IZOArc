@@ -305,7 +305,7 @@ class Container extends Component {
         <Backdrop open={dialogOpen} style={{zIndex: 500, color: ColorX.GetColorCSS("elainOrange")}}>
           {this.renderDialog()}
         </Backdrop>
-        <Footer/>
+        {isContained && <Footer/>}
       </Box>
       
     );
