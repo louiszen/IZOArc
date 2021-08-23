@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { Typography } from '@material-ui/core';
 
-import { DOMAIN } from '__Base/config';
+import { IZOTheme, DOMAIN } from '__Base/config';
 
 import Accessizo from 'IZOArc/LabIZO/Accessizo';
 import { HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
@@ -47,7 +47,7 @@ class Footer extends Component {
 
   render(){
     let style = {
-      color: ColorX.GetColorCSS("elainOrange"), 
+      color: ColorX.GetColorCSS(IZOTheme.foreground), 
       paddingRight: 5,
       fontSize: 9
     };
@@ -57,7 +57,7 @@ class Footer extends Component {
           position: "fixed", 
           paddingLeft: 40,
           bottom: 0,
-          background: ColorX.GetColorCSS("black"),
+          background: ColorX.GetColorCSS(IZOTheme.background),
           zIndex: 100,
           }}>
           <Typography style={style}>

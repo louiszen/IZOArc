@@ -1,6 +1,6 @@
 import React from 'react';
 import HStack from 'IZOArc/LabIZO/Stackizo/HStack';
-import { ZRichText } from 'IZOArc/STATIC';
+//import { ZRichText } from 'IZOArc/STATIC';
 
 let simple = [
   /*

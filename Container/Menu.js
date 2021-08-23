@@ -7,12 +7,12 @@ import { Box, Tooltip } from '@material-ui/core';
 import { VerticalSplit } from '@material-ui/icons';
 
 import './Container.css';
-import * as config from '__Base/config';
 import MenuButton from './_gears/MenuButton';
 
 import { Accessor, ColorX, store } from 'IZOArc/STATIC';
 import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
 import StyledIconButton from 'IZOArc/LabIZO/Stylizo/StyledIconButton';
+import { IZOTheme, MenuConfig } from '__Base/config';
 
 class Menu extends Component {
 
@@ -68,7 +68,7 @@ class Menu extends Component {
   }
 
   renderButtons(){
-    return _.map(config.MenuConfig, (o, i) => {
+    return _.map(MenuConfig, (o, i) => {
       return this.menuButton(o.caption, o.link, o.faIcon, o.auth, o.level, o.submenu, o.disabled);
     });
   }
@@ -80,10 +80,10 @@ class Menu extends Component {
       width: 25,
       height: 25,
       textTransform: "none",
-      color: ColorX.GetColorCSS("elainOrange"),
+      color: ColorX.GetColorCSS(IZOTheme.foreground),
       background: ColorX.GetColorCSS("transparent"),
       hover: {
-        color: ColorX.GetColorCSS("elainOrange", 0.4),
+        color: ColorX.GetColorCSS(IZOTheme.foreground, 0.4),
         background: ColorX.GetColorCSS("transparent"),
       },
       position: "relative"
@@ -94,10 +94,10 @@ class Menu extends Component {
       width: 25,
       height: 25,
       textTransform: "none",
-      color: ColorX.GetColorCSS("elainOrange", 0.4),
+      color: ColorX.GetColorCSS(IZOTheme.foreground, 0.4),
       background: ColorX.GetColorCSS("transparent"),
       hover: {
-        color: ColorX.GetColorCSS("elainOrange"),
+        color: ColorX.GetColorCSS(IZOTheme.foreground),
         background: ColorX.GetColorCSS("transparent"),
       },
       position: "relative"
@@ -118,7 +118,7 @@ class Menu extends Component {
 
   render(){
     return (
-      <Box className={"menu " + (store.mini? "mini" : "")} width="140px" height="100%" bgcolor={ColorX.GetColorCSS("black")} position="fixed" zIndex="300">
+      <Box className={"menu " + (store.mini? "mini" : "")} width="140px" height="100%" bgcolor={ColorX.GetColorCSS(IZOTheme.background)} position="fixed" zIndex="300">
         <VStack width="100%" style={{paddingTop: "50px"}}>
           {this.renderPin()}
           <VStack width="100%" style={{paddingTop: "40px"}}>

@@ -13,6 +13,7 @@ import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
 import { Accessor, store, ColorX } from 'IZOArc/STATIC';
 import { StyledButton } from 'IZOArc/LabIZO/Stylizo';
 import { HMarquee } from 'IZOArc/LabIZO/Animatizo';
+import { IZOTheme } from '__Base/config';
 
 class MenuButton extends Component {
 
@@ -97,7 +98,7 @@ class MenuButton extends Component {
       borderRadius: "0px",
       textTransform: "none",
       background: ColorX.GetColorCSS("pureWhite"),
-      label: ColorX.GetColorCSS("elainOrange"),
+      label: ColorX.GetColorCSS(IZOTheme.foreground),
       hover: {
         color: ColorX.GetColorCSS("black"),
         background: ColorX.GetColorCSS("pureWhite"),
@@ -110,7 +111,7 @@ class MenuButton extends Component {
       padding: "0 !important",
       textTransform: "none",
       borderRadius: "0px",
-      color: ColorX.GetColorCSS("elainOrange"),
+      color: ColorX.GetColorCSS(IZOTheme.foreground),
       background: ColorX.GetColorCSS("black"),
       hover: {
         color: ColorX.GetColorCSS("black"),

@@ -10,6 +10,7 @@ import { Accessor, ColorX } from 'IZOArc/STATIC';
 import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
 import { StyledButton } from 'IZOArc/LabIZO/Stylizo';
 import Formizo from 'IZOArc/LabIZO/Formizo';
+import { IZOTheme } from '__Base/config';
 
 class Inner extends Component {
 
@@ -112,7 +113,7 @@ class Inner extends Component {
               textAlign: "left", 
               fontFamily: "Segoe UI",
               fontSize: 20,
-              color: ColorX.GetColorCSS("elainOrange"),
+              color: ColorX.GetColorCSS(IZOTheme.foreground),
               marginRight: 10
               }}>
               {ibase.title}
@@ -132,7 +133,7 @@ class Inner extends Component {
         <Spacer/>
         <StyledButton theme={{
           color: "white", 
-          background: ColorX.GetColorCSS("elainOrange"),
+          background: ColorX.GetColorCSS(IZOTheme.foreground),
           hover: {
             background: ColorX.GetColorCSS("elainOrangeDark")
           },
