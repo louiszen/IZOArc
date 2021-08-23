@@ -31,6 +31,8 @@ Array of values.
   name: '' | String,    // if empty, the accessor will only call accessor.{n}
   canAdd?: Boolean | false,
   canDelete?: Boolean | false,
+  width?: Number | String | "100%",
+  maxHeight?: Number | String | "100%",
   arrayStyle?: "table" | "card",
   headerStyle?: "header" | "outlined" | "noheader",
   addStyle?: "header" | "placeholder",
@@ -46,6 +48,8 @@ Array of values.
 | :---|:---:|:---:|:---:|:---|
 | label | `String` | ✔ || The label that describes the array field |
 | name | `String` | ✔ || The accessor that used for this array, cannot be '' at the uppermost nest, if '', the accessor will automatically be accessor.{n}, n is the numerical index |
+| width | <code> Number &#124; String </code> || "100%" | The width of the cell |
+| maxHeight | <code> Number &#124; String </code> || "500px" | The maximum expand height of the array list |
 | canAdd | `Boolean` || `false` | Whether user can add elements into the array |
 | canDelete | `Boolean` || `false` | Whether user can delete elements of the array |
 | arrayStyle | `String` || `"table"` | The display style of the elements |

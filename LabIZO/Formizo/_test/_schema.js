@@ -3,6 +3,7 @@ import HStack from 'IZOArc/LabIZO/Stackizo/HStack';
 import { ZRichText } from 'IZOArc/STATIC';
 
 let simple = [
+  /*
   {
     label: "Test RTE",
     name: "rte",
@@ -20,7 +21,6 @@ let simple = [
       );
     }
   }
-  /*
   {
     label: "Check",
     name: "check",
@@ -43,12 +43,15 @@ let simple = [
       }
     ]
   },
+  */
   {
     label: "testarray2 Header",
     name: "testarray2",
     canAdd: true,
     canDelete: true,
     arrayStyle: "card",
+    width: 500,
+    headerStyle: "noheader",
     array: [
       {
         label: "Check",
@@ -74,6 +77,73 @@ let simple = [
       },
     ]
   },
+  {
+    label: "testarray3 Header",
+    name: "testarray3",
+    canAdd: true,
+    canDelete: true,
+    width: 500,
+    headerStyle: "outlined",
+    array: [
+      {
+        label: "Check",
+        name: "check",
+        format: "select",
+        selectStyle: "radio",
+        selectRef: "check",
+        selectCap: "",
+        selectVal: "",
+        selectDirection: "row"
+      },
+      {
+        label: "Separator",
+        control: "check",
+        controlFunc: (doc, field) => field === "A",
+        fold: [
+          {
+            label: "Separator",
+            name: "separator",
+            format: "text"
+          }
+        ]
+      },
+    ]
+  },
+  {
+    label: "Array1 Header",
+    name: "inarray",
+    canAdd: true,
+    canDelete: true,
+    array: [
+      {
+        label: "InArray Header",
+        name: "inarray",
+        canAdd: true,
+        canDelete: true,
+        array: [
+          {
+            label: "ArrayText",
+            name: "",
+            format: "text"
+          }
+        ]
+      },
+      {
+        label: "InArray Header",
+        name: "inarray2",
+        canAdd: true,
+        canDelete: true,
+        array: [
+          {
+            label: "ArrayText",
+            name: "",
+            format: "text"
+          }
+        ]
+      }
+    ]
+  },
+  /*
   {
     header: "Header"
   },
