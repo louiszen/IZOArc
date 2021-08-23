@@ -34,7 +34,7 @@ class Denied extends Component {
       <VStack spacing={15}>
         <Spacer/>
         <HStack width="15vw">
-          <img src="/Images/denied.svg" alt="not-found" style={{width: "100%"}}/> 
+          <img src="Images/denied.svg" alt="not-found" style={{width: "100%"}}/> 
         </HStack>
         <Typography style={{fontSize: 20, fontWeight: "bold"}}>
           {"Access Denied"}

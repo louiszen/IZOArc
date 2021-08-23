@@ -32,7 +32,7 @@ class NoMatch extends Component {
       <VStack>
         <Spacer/>
         <HStack width="30vw" height="30vh">
-          <img src="/Images/404.svg" alt="not-found"/> 
+          <img src="Images/404.svg" alt="not-found"/> 
         </HStack>
         <Spacer/>
       </VStack>
