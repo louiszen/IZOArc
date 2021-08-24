@@ -16,6 +16,7 @@ import CellExpand from './_gears/CellExpand';
 import { StyledLinearProgress, StyledIconButton } from 'IZOArc/LabIZO/Stylizo';
 import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
 import { Accessor, Authority, ColorX, store } from 'IZOArc/STATIC';
+import { IZOTheme } from '__Base/config';
 
 /**
  * Tablizo - displaying rows of data
@@ -412,7 +413,7 @@ class Tablizo extends Component {
     return (
       <GridOverlay>
         <div style={{ position: 'absolute', top: 0, width: '100%' }}>
-          <StyledLinearProgress theme={{bar: ColorX.GetColorCSS("elainOrange"), background: ColorX.GetColorCSS("elainOrangeDark")}}/>
+          <StyledLinearProgress theme={{bar: ColorX.GetColorCSS(IZOTheme.foreground), background: ColorX.GetColorCSS("elainOrangeDark")}}/>
         </div>
       </GridOverlay>
     );
@@ -424,7 +425,7 @@ class Tablizo extends Component {
         <VStack>
           <Spacer/>
           <Box width="250px">
-            <img src="/Images/data-not-found.svg" alt="nodata"/>
+            <img src="Images/data-not-found.svg" alt="nodata"/>
           </Box>
           <Typography>
             Data not found

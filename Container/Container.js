@@ -13,7 +13,7 @@ import Footer from './Footer';
 import Menu from './Menu';
 import NavBar from './NavBar';
 import './Container.css';
-import { DOMAIN, hasContainer, loginSys, serverCheck } from '__Base/config';
+import { IZOTheme, DOMAIN, hasContainer, loginSys, serverCheck } from '__Base/config';
 
 import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
 import { SnackAlert, StyledButton, StyledLinearProgress } from 'IZOArc/LabIZO/Stylizo';
@@ -222,7 +222,7 @@ class Container extends Component {
       <Box bgcolor={ColorX.GetColorCSS("darkBox")}
         padding={2}
         borderRadius={5} 
-        boxShadow={"0px 0px 2px 2px " + ColorX.GetColorCSS("elainOrange", 0.2)}
+        boxShadow={"0px 0px 2px 2px " + ColorX.GetColorCSS(IZOTheme.foreground, 0.2)}
         minWidth={250}
         >
         <VStack width="100%">
@@ -237,7 +237,7 @@ class Container extends Component {
             <Spacer/>
             { store.ask.showCloseIcon && 
               <StyledIconButton onClick={() => store.clearAsk()}
-                theme={{label: ColorX.GetColorCSS("elainOrange"), width: 24}}>
+                theme={{label: ColorX.GetColorCSS(IZOTheme.foreground), width: 24}}>
                 <Close/>
               </StyledIconButton>
             }
@@ -250,8 +250,8 @@ class Container extends Component {
           </Box>
           <StyledLinearProgress 
             theme={{
-              bar: ColorX.GetColorCSS("elainOrange", store.ask.loading? 0.5 : 0.0),
-              background: ColorX.GetColorCSS("elainOrange", store.ask.loading? 0.2 : 0.0)
+              bar: ColorX.GetColorCSS(IZOTheme.foreground, store.ask.loading? 0.5 : 0.0),
+              background: ColorX.GetColorCSS(IZOTheme.foreground, store.ask.loading? 0.2 : 0.0)
               }}/>
           {store.ask.inner && store.ask.inner(store.ask.loading)}
           {store.ask.buttons && store.ask.buttons.length > 0 &&
@@ -299,13 +299,13 @@ class Container extends Component {
             severity={store.alert && store.alert.severity} 
             onClose={this.closeSnack}/>
         </Snackbar>
-        <Backdrop open={loadingOpen} style={{zIndex: 500, color: ColorX.GetColorCSS("elainOrange")}}>
+        <Backdrop open={loadingOpen} style={{zIndex: 500, color: ColorX.GetColorCSS(IZOTheme.foreground)}}>
           <CircularProgress color="inherit" />
         </Backdrop>
-        <Backdrop open={dialogOpen} style={{zIndex: 500, color: ColorX.GetColorCSS("elainOrange")}}>
+        <Backdrop open={dialogOpen} style={{zIndex: 500, color: ColorX.GetColorCSS(IZOTheme.foreground)}}>
           {this.renderDialog()}
         </Backdrop>
-        <Footer/>
+        {isContained && <Footer/>}
       </Box>
       
     );

@@ -7,7 +7,7 @@ import fileDownload from "js-file-download";
 import { Add, CloudDownload, CloudUpload, Delete, DeleteForever, Edit, GetApp, InfoOutlined, Publish, Assessment } from "@material-ui/icons";
 import { Box, Slide, Typography } from "@material-ui/core";
 
-import { DOMAIN } from "__Base/config";
+import { IZOTheme, DOMAIN } from "__Base/config";
 import Inner from "./_gears/Inner";
 
 import Formizo from "IZOArc/LabIZO/Formizo";
@@ -417,7 +417,7 @@ class Datumizo extends Component {
           hover: {
             background: ColorX.GetColorCSS("elainOrangeDark"),
           },
-          background: ColorX.GetColorCSS("elainOrange"),
+          background: ColorX.GetColorCSS(IZOTheme.foreground),
           boxShadow: "0px",
         };
     }

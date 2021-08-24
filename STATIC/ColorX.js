@@ -41,7 +41,7 @@ class ColorX {
     Info: {r: 33, g: 150, b: 243, a: 1},
     Error: {r: 244, g: 67, b: 54, a: 1},
     lightRed: {r: 200, g: 0, b: 0, a: 1},
-    darkRed: {r: 140, g: 1, b: 8, a: 1},
+    darkRed: {r: 140, g: 1, b: 8, a: 1}
   };
 
   static __gradient = {
@@ -68,14 +68,21 @@ class ColorX {
    * @returns 
    */
   static GetColorCSS(name, a = undefined){
-    if(!name || !_.isString(name)) return undefined;
-    if(!ColorX.__staticColor[name]) {
-      return undefined;
+    if(!name) return undefined;
+
+    if(_.isString(name)){
+      if(!ColorX.__staticColor[name]) {
+        return undefined;
+      }
+      if(a === null || a === undefined){
+        return ColorX.toCSS(ColorX.__staticColor[name]);
+      }
+      return ColorX.toCSS({...ColorX.__staticColor[name], a});
     }
-    if(a === null || a === undefined){
-      return ColorX.toCSS(ColorX.__staticColor[name]);
+
+    if(_.isObject(name)){
+      return ColorX.toCSS({...name, a}); 
     }
-    return ColorX.toCSS({...ColorX.__staticColor[name], a});
   }
 
   /**
@@ -85,9 +92,16 @@ class ColorX {
    * @returns 
    */
   static GetBGColorCSS(name, a = undefined){
-    if(!name || !_.isString(name)) return undefined;
-    let _name = "bg" + name.charAt(0).toUpperCase() + name.slice(1);
-    return ColorX.GetColorCSS(_name, a);
+    if(!name) return undefined;
+
+    if(_.isString(name)){
+      let _name = "bg" + name.charAt(0).toUpperCase() + name.slice(1);
+      return ColorX.GetColorCSS(_name, a);
+    }
+
+    if(_.isObject(name)){
+      return ColorX.GetColorCSS(name, a);
+    }
   }
 
   /**

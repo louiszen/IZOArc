@@ -258,7 +258,7 @@ class FGArray extends Component {
       showHeader = false;
     }
     return (
-      <TableContainer style={{width: "100%", maxHeight: "500px"}}>
+      <TableContainer style={{width: "100%", maxHeight: ischema.maxHeight || "500px"}}>
         <Table stickyHeader style={{width: "100%"}}>
           {
             showHeader &&
@@ -336,11 +336,11 @@ class FGArray extends Component {
     );
   }
 
-  renderAddButton(){
+  renderAddButton(size = "normal"){
     let {ischema, readOnly} = this.state;
     let ireadOnly = ischema.readOnly || readOnly;
     return (
-      <IconButton onClick={() => this.onAddItem()} disabled={ireadOnly} color="primary">
+      <IconButton onClick={() => this.onAddItem()} disabled={ireadOnly} color="primary" size={size}>
         <Add/>
       </IconButton>
     );
@@ -351,7 +351,7 @@ class FGArray extends Component {
     let addStyle = ischema.addStyle || "header";
     let ireadOnly = ischema.readOnly || readOnly;
     return (
-      <Paper style={{width:"100%"}}>
+      <Paper style={{width:"100%", borderRadius: 0}}>
         <HStack>
           <Box margin={1} fontWeight="bold">
             {ischema.label}
@@ -387,15 +387,18 @@ class FGArray extends Component {
       case "outlined":
         return (
           <OutlinedBox label={ischema.label} 
-            style={{width: "100%", marginTop: "15px"}} 
+            style={{width: ischema.width || "100%", marginTop: "15px"}} 
             theme={{border: ColorX.GetColorCSS("elainOrangeDark", 0.2)}}
             >
-            <VStack style={{width: "100%"}}>
+            <VStack style={{width: "100%"}} alignItems="flex-start">
+              {!ireadOnly && ischema.canAdd 
+                && addStyle === "header" 
+                && this.renderAddButton("small")}
               <HStack>
               { (arraySize > 0 || addStyle === "placeholder") &&
                 this.renderData()
               }
-              {!ireadOnly && ischema.canAdd && addStyle === "header" && this.renderAddButton()}
+              
               </HStack>
             </VStack>
           </OutlinedBox>
@@ -403,7 +406,7 @@ class FGArray extends Component {
       default: case "header":
         return (
           <OutlinedBox
-            style={{width: "100%", marginTop: "15px"}} 
+            style={{width: ischema.width || "100%", marginTop: "15px"}} 
             theme={{border: ColorX.GetColorCSS("elainOrangeDark", 0.2)}}
             >
             <VStack style={{width: "100%"}}>
@@ -417,17 +420,17 @@ class FGArray extends Component {
       case "noheader":
         return (
           <OutlinedBox
-            style={{width: "100%", marginTop: "15px"}} 
+            style={{width: ischema.width || "100%", marginTop: "15px"}} 
             theme={{border: ColorX.GetColorCSS("elainOrangeDark", 0.2)}}
             >
-            <VStack style={{width: "100%"}}>
-              <HStack alignItems="flex-start">
+            <VStack style={{width: "100%"}} alignItems="flex-start">
+              {!ireadOnly && ischema.canAdd 
+                && addStyle === "header" 
+                && this.renderAddButton("small")}
+              <HStack alignItems="flex-start" width="100%">
               { (arraySize > 0 || addStyle === "placeholder") &&
                 this.renderData()
               }
-              {!ireadOnly && ischema.canAdd 
-                && addStyle === "header" 
-                && this.renderAddButton()}
               </HStack>
             </VStack>
           </OutlinedBox>
