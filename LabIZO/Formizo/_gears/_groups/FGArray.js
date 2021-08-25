@@ -336,7 +336,7 @@ class FGArray extends Component {
     );
   }
 
-  renderAddButton(size = "normal"){
+  renderAddButton(size = "medium"){
     let {ischema, readOnly} = this.state;
     let ireadOnly = ischema.readOnly || readOnly;
     return (
