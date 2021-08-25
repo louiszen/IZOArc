@@ -425,7 +425,7 @@ class Tablizo extends Component {
         <VStack>
           <Spacer/>
           <Box width="250px">
-            <img src="Images/data-not-found.svg" alt="nodata"/>
+            <img src="/Images/data-not-found.svg" alt="nodata"/>
           </Box>
           <Typography>
             Data not found
