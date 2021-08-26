@@ -135,7 +135,7 @@ Display the section in tabs
       reqLevel?: null | Number,     
       reqFunc?: String,             
       label: String,
-      icon: JSX,
+      icon?: JSX,
       page: [
         group | simple
       ]

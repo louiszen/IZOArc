@@ -20,6 +20,7 @@
     | "hidden"      //hidden
     | "display"    //for display only
     | "richtext"  //rich text editor
+    | "custom"  //custom
 
   defaultValue?: String | Number | Boolean | Date,
   variant?: "row" | "standard" | "filled" | "outlined",
@@ -30,7 +31,7 @@
   helperText?: String,
   fullWidth?: Boolean | true,
   Custom?: String | JSX 
-    | (data, field-data, addOns) => 
+    | (data, field-data, addOns, _onValueChange) => 
         {return <div/>}, //for inline edit
   before?: String | JSX,
   after?: String | JSX,

@@ -35,7 +35,7 @@
 | placeholder | `String` ||| Placeholder of the field |
 | helperText | `String` ||| Helper text shown under the field |
 | fullWidth | `Boolean` || `true` | The field width will be extended to the form width |
-| Custom | <code>String &#124; JSX &#124; (data, field, addOns) => {}</code> ||| Customize function for output, `data` is the entire form value, `field` is the field value from accessor, `addOns` is the form addOns |
+| Custom | <code>String &#124; JSX &#124; (data, field, addOns, _onValueChange) => {}</code> ||| Customize function for output, `data` is the entire form value, `field` is the field value from accessor, `addOns` is the form addOns |
 | before | <code>String &#124; JSX </code> ||| Any adornament added before the field value |
 | after | <code>String &#124; JSX </code> ||| Any adornament added after the field value |
 | noLabelGrid | `Boolean` || `false` | Will not render label in grid style |

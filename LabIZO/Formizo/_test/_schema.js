@@ -3,6 +3,15 @@ import HStack from 'IZOArc/LabIZO/Stackizo/HStack';
 //import { ZRichText } from 'IZOArc/STATIC';
 
 let simple = [
+  {
+    label: "Document Requirements",
+    name: "DOCReq",
+    format: "select",
+    selectStyle: "checkbox",
+    selectRef: ["DOCReq001", "DOCReq002", "DOCReq003", "DOCReq004", "DOCReq005", "DOCReq006", "DOCReq007"],
+    selectCap: "",
+    selectVal: ""
+  },
   /*
   {
     label: "Test RTE",

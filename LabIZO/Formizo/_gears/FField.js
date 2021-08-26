@@ -144,7 +144,7 @@ class FField extends Component {
   }
 
   renderDisplay(){
-    let {formValue, addOns, ischema, iname} = this.state;
+    let {formValue, addOns, ischema, iname, _onValueChange} = this.state;
     let {Custom} = ischema;
     
     let fvalue = Accessor.Get(formValue, iname);
@@ -152,7 +152,7 @@ class FField extends Component {
     if(Custom){
       return (
         <HStack key={"display"}>
-          {Custom(formValue, fvalue, addOns)}
+          {Custom(formValue, fvalue, addOns, _onValueChange)}
         </HStack>
       );
     }
@@ -336,7 +336,7 @@ class FField extends Component {
     let {format} = ischema;
     if(!format) return null;
     switch(format){
-      case 'display': 
+      case 'display': case 'custom': 
         return this.renderDisplay();
       case 'text':
         return this.renderText();
