@@ -24,7 +24,8 @@ class Inner extends Component {
     onQuitRefresh: PropsType.func,
     auth: PropsType.object,
     level: PropsType.number,
-    showIDOnTop: PropsType.bool
+    showIDOnTop: PropsType.bool,
+    formizo: PropsType.object,
   }
 
   static defaultProps = {
@@ -37,7 +38,8 @@ class Inner extends Component {
     onQuitRefresh: (docID) => {},
     auth: {},
     level: 999,
-    showIDOnTop: true
+    showIDOnTop: true,
+    formizo: {}
   }
 
   constructor(){
@@ -85,7 +87,7 @@ class Inner extends Component {
   }
 
   renderFormizo(){
-    let {ibase, doc, onSubmit, addOns, auth, level} = this.props;
+    let {ibase, doc, onSubmit, addOns, auth, level, formizo} = this.props;
     return (
       <Formizo
         schema={ibase.schema}
@@ -99,6 +101,7 @@ class Inner extends Component {
         addOns={addOns}
         auth={auth}
         level={level}
+        {...formizo}
         />
     );
   }

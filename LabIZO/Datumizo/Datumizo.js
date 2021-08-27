@@ -1317,6 +1317,7 @@ class Datumizo extends Component {
         auth={store.user.authority}
         level={store.user.level}
         showIDOnTop={base.showIDOnTop || false}
+        formizo={base.formizo || {}}
       />
     );
   }

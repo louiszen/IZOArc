@@ -6,14 +6,29 @@
 ## **Basic**
 | Props | Type | Required | Default | Description |
 | :---|:---:|:---:|:---:|:---|
+| title | `String` || `""` | The title for each record |
 | exportDoc | `String` || `""` | The document name when export |
+| schema | `Object` || `{}` | The schema object / document |
+| reqAuth | `String` || `""` | The base required access path |
 | rowIdAccessor | `String` || `"_id"` | The accessor of the ID of the document |
-| showSelector | `Boolean` || `false` | Show the left-hand-side selector columns |
+
 | columnsToolbar | `Boolean` || `true` | Show the columns selector of the table |
 | filterToolbar | `Boolean` || `false` | Show the filter button of the table |
 | densityToolbar | `Boolean` || `true` | Show the density selector of the table |
 | exportToolbar | `Boolean` || `false` | Show the default export button of the table |
+| density | <code> "standard" &#124; "compact" &#124; "comfortable" </code> || `"standard"` | The row height |
+| defaultPageSize | `Number` || `25` | The default page size |
+| showSelector | `Boolean` || `false` | Show the left-hand-side selector columns |
+| noDefaultTable | `Boolean` || `false` | True if do not want to display the default table |
 <br/>
+
+## **Formizo**
+```jsx
+formizo: {
+  ...
+}
+```
+See Formizo props.
 
 ## **Connect**
 ```jsx
