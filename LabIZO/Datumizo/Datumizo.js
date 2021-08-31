@@ -28,14 +28,21 @@ class Datumizo extends Component {
    *  reqAuth?: String,
    *  showSelector?: Boolean,
    * 
-   *  columnsToolbar?: Boolean,
-   *  filterToolbar?: Boolean,
-   *  densityToolbar?: Boolean,
-   *  exportToolbar?: Boolean,
-   *  density?: "standard" | "compact" | "comfortable",
-   *  defaultPageSize?: Number,
    *  noDefaultButtons?: false,
    *  noDefaultTable?: false,
+   * 
+   *  tablizo: {
+   *    columnsToolbar?: Boolean,
+   *    filterToolbar?: Boolean,
+   *    densityToolbar?: Boolean,
+   *    exportToolbar?: Boolean,
+   *    density?: "standard" | "compact" | "comfortable",
+   *    defaultPageSize?: Number,
+   *  },
+   * 
+   *  formizo: {
+   * 
+   *  },
    *
    *  Connect: {
    *    DBInfo: String,
@@ -168,8 +175,8 @@ class Datumizo extends Component {
       this._fetchData();
       
       let {base} = this.props;
-      if(base.defaultPageSize){
-        this._onPageSizeChange(base.defaultPageSize);
+      if(base.tablizo && base.tablizo.defaultPageSize){
+        this._onPageSizeChange(base.tablizo.defaultPageSize);
       }
 
     });
@@ -1347,6 +1354,11 @@ class Datumizo extends Component {
   renderTable(){
     let { base, addOns, serverSidePagination } = this.props;
     let { table, loading, inlineButtons, inlineButtonsOpposite, nav } = this.state;
+    let tablizo = {
+      columnsToolbar: true,
+      densityToolbar: true,
+      ...base.tablizo
+    };
 
     if(!base.noDefaultTable){
       return (
@@ -1371,12 +1383,7 @@ class Datumizo extends Component {
           auth={store.user.authority}
           level={store.user.level}
           addOns={addOns}
-          columnsToolbar={base.columnsToolbar !== false}
-          filterToolbar={base.filterToolbar || false}
-          densityToolbar={base.densityToolbar !== false}
-          exportToolbar={base.exportToolbar || false}
-          showSelector={base.showSelector || false}
-          density={base.density || "standard"}
+          {...tablizo}
         />
       );
     }
