@@ -87,9 +87,9 @@ class FGArray extends Component {
   }
 
   getArraySchema = () => {
-    let {ischema, addOns} = this.props;
+    let {ischema, formValue, addOns} = this.props;
     if(_.isFunction(ischema.array)){
-      return ischema.array(addOns);
+      return ischema.array(formValue, addOns);
     }
     return ischema.array;
   }
@@ -274,7 +274,9 @@ class FGArray extends Component {
     let {ischema} = this.props;
     if(!ischema) return;
     let showHeader = true;
-    if(ischema.array.length === 1 && _.isEmpty(ischema.array[0].label)){
+    let arraySchema = this.getArraySchema();
+
+    if(arraySchema && arraySchema.length === 1 && _.isEmpty(arraySchema[0].label)){
       showHeader = false;
     }
     return (

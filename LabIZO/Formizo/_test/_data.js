@@ -26,10 +26,15 @@ let addOns = {
     "A",
     "B",
     "C"
-  ]
+  ],
+  TESTLABEL: "XXXXXXX"
 }
 
 let defaultV = {
+  testarray1: [
+    "text1",
+    "text2"
+  ],
   /*
   display: "DISPLAY",
   simpletext: "55555",
@@ -41,10 +46,7 @@ let defaultV = {
   },
   simplebool: true,
   simpleboolsw: true,
-  testarray1: [
-    "text1",
-    "text2"
-  ],
+  
   testarray2: [
     {
       arrayText1: "arrayText11",

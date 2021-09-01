@@ -41,7 +41,7 @@ Array of values.
       //simple
       name: '' | String, //if empty, the accessor will only call accessor.{n}
     } | group
-  ]
+  ] | (formValue, addOns) => []
 }
 ```
 | Props | Type | Required | Default | Description |
@@ -71,7 +71,7 @@ Fields display in one row instead of vertically stacked.
 {
   inline: [
     group | simple
-  ]
+  ] | (formValue, addOns) => []
 }
 ```
 | Props | Type | Required | Default | Description |
@@ -90,7 +90,7 @@ Fields can be folded and controlled by value in the form
   foldStyle?: String | "outlined",
   fold: [
     group | simple
-  ],
+  ] | (formValue, addOns) => [],
 }
 ```
 | Props | Type | Required | Default | Description |
@@ -111,7 +111,7 @@ Fields can be folded as a section in the form. Similar to `Fold` but do not have
   foldStyle?: String | "outlined",
   collapse: [
     group | simple
-  ]
+  ] | (formValue, addOns) => []
 }
 ```
 | Props | Type | Required | Default | Description |
@@ -138,9 +138,9 @@ Display the section in tabs
       icon?: JSX,
       page: [
         group | simple
-      ]
+      ] | (formValue, addOns) => []
     }
-  ]
+  ] | (formValue, addOns) => []
 }
 ```
 | Props | Type | Required | Default | Description |
@@ -167,9 +167,9 @@ Display the section in columns
       width?: Number,
       page: [
         group | simple
-      ]
+      ] | (formValue, addOns) => []
     }
-  ]
+  ] | (formValue, addOns) => []
 }
 ```
 | Props | Type | Required | Default | Description |

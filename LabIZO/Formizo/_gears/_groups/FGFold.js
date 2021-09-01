@@ -13,11 +13,14 @@ class FGFold extends Component {
   static propTypes = {
     //data
     ischema: PropsType.object.isRequired,
+    formValue: PropsType.object,
+    addOns: PropsType.object
   }
 
   static defaultProps = {
-    //data
     ischema: {},
+    formValue: {},
+    addOns: {}
   }
 
   constructor(){
@@ -48,8 +51,6 @@ class FGFold extends Component {
       }
     }
 
-    console.log(iname)
-
     if(ischema.controlFunc && _.isFunction(ischema.controlFunc)){
       let v = Accessor.Get(formValue, iname);
       controlV = ischema.controlFunc(formValue, v);
@@ -77,9 +78,18 @@ class FGFold extends Component {
     }), callback);
   }
 
+  getFoldSchema = () => {
+    let {ischema, formValue, addOns} = this.props;
+    if(_.isFunction(ischema.fold)){
+      return ischema.fold(formValue, addOns);
+    }
+    return ischema.fold;
+  }
+
   renderSchema(){
     let {ischema, ...other} = this.props;
-    return _.map(ischema.fold, (o, i) => {
+    let foldSchema = this.getFoldSchema();
+    return _.map(foldSchema, (o, i) => {
       return (
         <FItem
           key={i}

@@ -14,6 +14,8 @@ class FGAccess extends Component {
     //data
     ischema: PropsType.object.isRequired,
 
+    formValue: PropsType.object.isRequired,
+
     //access
     auth: PropsType.object,
     level: PropsType.number,
@@ -24,7 +26,8 @@ class FGAccess extends Component {
   static defaultProps = {
     //data
     ischema: {},
-
+    formValue: {},
+    
     //access
     auth: {},
     level: 999,
@@ -60,9 +63,9 @@ class FGAccess extends Component {
   }
 
   getAccessizoSchema = () => {
-    let {ischema, addOns} = this.props;
+    let {ischema, formValue, addOns} = this.props;
     if(_.isFunction(ischema.accessizo)){
-      return ischema.accessizo(addOns);
+      return ischema.accessizo(formValue, addOns);
     }
     return ischema.accessizo;
   }

@@ -14,12 +14,16 @@ class FGTabs extends Component {
   static propTypes = {
     //data
     ischema: PropsType.object.isRequired,
+    formValue: PropsType.object,
+    addOns: PropsType.object
 
   }
 
   static defaultProps = {
     //data
-    ischema: {}
+    ischema: {},
+    formValue: {},
+    addOns: {}
   }
 
   constructor(){
@@ -51,6 +55,22 @@ class FGTabs extends Component {
     }), callback);
   }
 
+  getPageSchema = (page) => {
+    let {formValue, addOns} = this.props;
+    if(_.isFunction(page)){
+      return page(formValue, addOns);
+    }
+    return page;
+  }
+
+  getTabSchema = () => {
+    let {ischema, formValue, addOns} = this.props;
+    if(_.isFunction(ischema.tabs)){
+      return ischema.tabs(formValue, addOns);
+    }
+    return ischema.tabs;
+  }
+
   onChangeTab = (e, tab) => {
     this.setState({
       selectedTab: tab
@@ -59,7 +79,8 @@ class FGTabs extends Component {
 
   renderSchema(page){
     let {ischema, ...other} = this.props;
-    return _.map(page, (o, i) => {
+    let pageSchema = this.getPageSchema(page);
+    return _.map(pageSchema, (o, i) => {
       return (
         <FItem
           key={i}
@@ -70,8 +91,9 @@ class FGTabs extends Component {
   }
 
   renderTabPanels(){
-    let {ischema, selectedTab} = this.state;
-    return _.map(ischema.tabs, (o, i) => {
+    let { selectedTab} = this.state;
+    let tabSchema = this.getTabSchema();
+    return _.map(tabSchema, (o, i) => {
       return (
         <div key={i} hidden={selectedTab !== i} style={{width: "100%"}}>
           {this.renderSchema(o.page)}
@@ -81,8 +103,9 @@ class FGTabs extends Component {
   }
 
   renderTabButtons(){
-    let {ischema, auth, level} = this.state;
-    return _.map(ischema.tabs, (o, i) => {
+    let {ischema, auth, level} = this.props;
+    let tabSchema = this.getTabSchema();
+    return _.map(tabSchema, (o, i) => {
       if(Authority.IsAccessible(auth, level, o.reqAuth, o.reqLevel, o.reqFunc)){
         return (
           <Tab key={o.label} label={o.label} icon={o.icon} disabled={o.disabled} style={{minHeight: ischema.height, minWidth: ischema.width}}/>
@@ -92,7 +115,8 @@ class FGTabs extends Component {
   }
 
   render(){
-    let {ischema, selectedTab} = this.state;
+    let {selectedTab} = this.state;
+    let {ischema} = this.props;
     if(!ischema) return null;
 
     ischema.height = ischema.height || 20;

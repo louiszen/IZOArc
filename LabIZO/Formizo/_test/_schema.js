@@ -61,9 +61,9 @@ let simple = [
     arrayStyle: "card",
     width: 500,
     headerStyle: "noheader",
-    array: [
+    array: (addOns) => [
       {
-        label: "Check",
+        label: addOns.TESTLABEL,
         name: "check",
         format: "select",
         selectStyle: "radio",

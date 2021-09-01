@@ -16,11 +16,14 @@ class FGCollapse extends Component {
   static propTypes = {
     //data
     ischema: PropsType.object.isRequired,
+    formValue: PropsType.object,
+    addOns: PropsType.object
   }
 
   static defaultProps = {
-    //data
     ischema: {},
+    formValue: {},
+    addOns: {}
   }
 
   constructor(){
@@ -63,9 +66,18 @@ class FGCollapse extends Component {
     }));
   }
 
+  getCollapseSchema = () => {
+    let {ischema, formValue, addOns} = this.props;
+    if(_.isFunction(ischema.collapse)){
+      return ischema.collapse(formValue, addOns);
+    }
+    return ischema.collapse;
+  }
+
   renderSchema(){
     let {ischema, ...other} = this.props;
-    return _.map(ischema.collapse, (o, i) => {
+    let collapseSchema = this.getCollapseSchema();
+    return _.map(collapseSchema, (o, i) => {
       return (
         <FItem
           key={i}

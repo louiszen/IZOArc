@@ -13,10 +13,14 @@ class FGColumns extends Component {
   static propTypes = {
     //data
     ischema: PropsType.object.isRequired,
+    formValue: PropsType.object,
+    addOns: PropsType.object
   }
 
   static defaultProps = {
-    ischema: {}
+    ischema: {},
+    formValue: {},
+    addOns: {}
   }
 
   constructor(){
@@ -46,9 +50,26 @@ class FGColumns extends Component {
     }), callback);
   }
 
+  getColmunSchema = () => {
+    let {ischema, formValue, addOns} = this.props;
+    if(_.isFunction(ischema.columns)){
+      return ischema.columns(formValue, addOns);
+    }
+    return ischema.columns;
+  }
+
+  getPageSchema = (page) => {
+    let {formValue, addOns} = this.props;
+    if(_.isFunction(page)){
+      return page(formValue, addOns);
+    }
+    return page;
+  }
+
   renderSchema(page){
     let {ischema, ...other} = this.props;
-    return _.map(page, (o, i) => {
+    let pageSchema = this.getPageSchema(page);
+    return _.map(pageSchema, (o, i) => {
       return (
         <FItem
           key={i}
@@ -59,8 +80,10 @@ class FGColumns extends Component {
   }
 
   renderColumns(){
-    let {ischema} = this.state;
-    return _.map(ischema.columns, (o, i) => {
+    let {ischema} = this.props;
+    if(!ischema) return null;
+    let columnSchema = this.getColmunSchema();
+    return _.map(columnSchema, (o, i) => {
       return (
         <VStack key={i} width={o.width} height={ischema.height} paddingX={o.paddingX || 1} flexGrow={1} overflow={"auto"}>
           {this.renderSchema(o.page)}
@@ -70,7 +93,7 @@ class FGColumns extends Component {
   }
 
   render(){
-    let {ischema} = this.state;
+    let {ischema} = this.props;
     if(!ischema) return null;
     return (
       <HStack alignItems={"flex-start"} height="100%" overflow="hidden">

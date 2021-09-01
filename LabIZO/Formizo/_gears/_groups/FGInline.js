@@ -14,11 +14,15 @@ class FGInline extends Component {
   static propTypes = {
     //data
     ischema: PropsType.object.isRequired,
+    formValue: PropsType.object,
+    addOns: PropsType.object
   }
 
   static defaultProps = {
     //data
     ischema: {},
+    formValue: {},
+    addOns: {}
   }
 
   constructor(){
@@ -48,9 +52,18 @@ class FGInline extends Component {
     }), callback);
   }
 
+  getInlineSchema = () => {
+    let {ischema, formValue, addOns} = this.props;
+    if(_.isFunction(ischema.inline)){
+      return ischema.inline(formValue, addOns);
+    }
+    return ischema.inline;
+  }
+
   renderSchema(){
     let {ischema, ...other} = this.props;
-    return _.map(ischema.inline, (o, i) => {
+    let inlineSchema = this.getInlineSchema();
+    return _.map(inlineSchema, (o, i) => {
       return (
         <Box marginX={0.5} width="100%" key={i}>
           <FItem
