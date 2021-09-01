@@ -36,6 +36,8 @@ Array of values.
   arrayStyle?: "table" | "card",
   headerStyle?: "header" | "outlined" | "noheader",
   addStyle?: "header" | "placeholder",
+  showIndex?: Boolean | false,
+  startDisplayIndex?: Number | 0,
   array: [
     {
       //simple
@@ -55,6 +57,8 @@ Array of values.
 | arrayStyle | `String` || `"table"` | The display style of the elements |
 | headerStyle | `String` || `"header"` | The display style of the header |
 | addStyle | `String` || `"header"` | header: on the header line, placeholder: an empty textfield |
+| showIndex | `Boolean` || `false` | Show the array auto index (beginning from 1) at left hand side |
+| startDisplayIndex | `Number` || `0` | The default starting index for display |
 | array | <code>[simple &#124; group]</code> |✔||The items array in the group |
 <br/>
 
