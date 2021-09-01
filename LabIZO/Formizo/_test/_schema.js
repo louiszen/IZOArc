@@ -4,6 +4,22 @@ import HStack from 'IZOArc/LabIZO/Stackizo/HStack';
 
 let simple = [
   {
+    label: "0",
+    name: "test.0",
+    format: "text"
+  },
+  {
+    label: "1",
+    name: "test.1",
+    format: "text"
+  },
+  {
+    label: "#",
+    name: "test.#",
+    format: "text"
+  }
+  /*
+  {
     label: "Document Requirements",
     name: "DOCReq",
     format: "select",
@@ -12,7 +28,6 @@ let simple = [
     selectCap: "",
     selectVal: ""
   },
-  /*
   {
     label: "Test RTE",
     name: "rte",
@@ -52,7 +67,6 @@ let simple = [
       }
     ]
   },
-  */
   {
     label: "testarray2 Header",
     name: "testarray2",

@@ -31,10 +31,6 @@ let addOns = {
 }
 
 let defaultV = {
-  testarray1: [
-    "text1",
-    "text2"
-  ],
   /*
   display: "DISPLAY",
   simpletext: "55555",

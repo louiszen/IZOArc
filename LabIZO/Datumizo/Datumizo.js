@@ -430,7 +430,7 @@ class Datumizo extends Component {
     }
   };
 
-  _getIcons = (name, size = "default") => {
+  _getIcons = (name, size = "medium") => {
     if(!_.isString(name)) { return name; }
     let xname = name.toLowerCase();
     switch (xname) {
@@ -745,9 +745,11 @@ class Datumizo extends Component {
 
   Add = {
     onClick: () => {
+      let {base} = this.props;
       this.setState({
         inEdit: true,
         mode: "Add",
+        doc: base.Add.defaultDoc || {}
       });
     },
 
