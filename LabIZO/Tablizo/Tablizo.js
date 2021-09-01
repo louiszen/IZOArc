@@ -5,10 +5,10 @@ import _ from 'lodash';
 import moment from 'moment';
 import {DataGrid, GridOverlay, 
   GridToolbarContainer, 
-  GridColumnsToolbarButton,
-  GridFilterToolbarButton,
-  GridDensitySelector, 
-  GridToolbarExport} from '@material-ui/data-grid';
+  GridToolbarColumnsButton,
+  GridToolbarFilterButton,
+  GridToolbarDensitySelector, 
+  GridToolbarExport} from '@mui/x-data-grid';
 import { Box, Typography, Tooltip } from '@material-ui/core';
 
 import CellExpand from './_gears/CellExpand';
@@ -401,9 +401,9 @@ class Tablizo extends Component {
     let {columnsToolbar, filterToolbar, densityToolbar, exportToolbar} = this.props;
     return (
       <GridToolbarContainer>
-        {columnsToolbar && <GridColumnsToolbarButton />}
-        {filterToolbar && <GridFilterToolbarButton />}
-        {densityToolbar && <GridDensitySelector />}
+        {columnsToolbar && <GridToolbarColumnsButton />}
+        {filterToolbar && <GridToolbarFilterButton />}
+        {densityToolbar && <GridToolbarDensitySelector />}
         {exportToolbar && <GridToolbarExport />}
       </GridToolbarContainer>
     );

@@ -17,21 +17,27 @@ class FGArray extends Component {
   static propTypes = {
     //data
     ischema: PropsType.object.isRequired,
+    preAccessor: PropsType.string,
 
     //runtime
     formValue: PropsType.object.isRequired,
 
     //readOnly
-    readOnly: PropsType.bool.isRequired
+    readOnly: PropsType.bool.isRequired,
+
+    addOns: PropsType.object
   }
 
   static defaultProps = {
     //data
     ischema: {},
+    preAccessor: "",
 
     formValue: {},
 
-    readOnly: false
+    readOnly: false,
+    
+    addOns: {}
   }
 
   constructor(){
@@ -49,7 +55,8 @@ class FGArray extends Component {
     if(!Accessor.IsIdentical(prevProps, this.props, Object.keys(FGArray.defaultProps))){
       this._setAllStates();
     }
-    let {ischema, preAccessor, formValue, arraySize} = this.state;
+    let {ischema, preAccessor, formValue} = this.props;
+    let {arraySize} = this.state;
     let iname = ischema.name;
     if(!_.isEmpty(preAccessor)){
       if(!_.isEmpty(ischema.name)){
@@ -79,6 +86,14 @@ class FGArray extends Component {
     }), (callback));
   }
 
+  getArraySchema = () => {
+    let {ischema, addOns} = this.props;
+    if(_.isFunction(ischema.array)){
+      return ischema.array(addOns);
+    }
+    return ischema.array;
+  }
+
   onAddItem = () => {
     console.log("onAddItem");
     let {ischema, preAccessor, formValue, _onValueChange, arraySize} = this.state;
@@ -93,6 +108,7 @@ class FGArray extends Component {
     let items = Accessor.Get(formValue, iname);
     if(!items) items = [];
     let newItem = {};
+    
     _.map(ischema.array, (o, i) => {
       if(_.isEmpty(o.name)){
         newItem = "";

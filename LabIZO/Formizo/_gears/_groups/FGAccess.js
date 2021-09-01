@@ -17,6 +17,8 @@ class FGAccess extends Component {
     //access
     auth: PropsType.object,
     level: PropsType.number,
+
+    addOns: PropsType.object
   }
 
   static defaultProps = {
@@ -26,6 +28,8 @@ class FGAccess extends Component {
     //access
     auth: {},
     level: 999,
+
+    addOns: {}
   }
 
   constructor(){
@@ -55,9 +59,19 @@ class FGAccess extends Component {
     }), callback);
   }
 
+  getAccessizoSchema = () => {
+    let {ischema, addOns} = this.props;
+    if(_.isFunction(ischema.accessizo)){
+      return ischema.accessizo(addOns);
+    }
+    return ischema.accessizo;
+  }
+
   renderSchema(){
     let {ischema, ...other} = this.props;
-    return _.map(ischema.accessizo, (o, i) => {
+    let schema = this.getAccessizoSchema();
+
+    return _.map(schema, (o, i) => {
       return (
         <FItem
           key={i}
