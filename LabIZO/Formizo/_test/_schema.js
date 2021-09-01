@@ -533,7 +533,10 @@ let array = [
     name: "testarray1",
     canAdd: true,
     canDelete: true,
-    addStyle: "placeholder",
+    addStyle: "header",
+    showIndex: true,
+    startDisplayIndex: 1,
+    arrayStyle: "card",
     array: [
       {
         label: "",
@@ -547,6 +550,7 @@ let array = [
     name: "testarray2",
     canAdd: true,
     canDelete: false,
+    arrayStyle: "card",
     array: [
       {
         label: "ArrayText1",

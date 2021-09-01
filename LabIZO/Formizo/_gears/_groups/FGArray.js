@@ -94,6 +94,11 @@ class FGArray extends Component {
     return ischema.array;
   }
 
+  getDisplayIdx = (idx) => {
+    let {ischema} = this.props;
+    return "#" + (idx + (ischema.startDisplayIndex || 0));
+  }
+
   onAddItem = () => {
     console.log("onAddItem");
     let {ischema, preAccessor, formValue, _onValueChange} = this.props;
@@ -164,6 +169,15 @@ class FGArray extends Component {
     let ireadOnly = ischema.readOnly || readOnly;
     let rtn = [];
     let arraySchema = this.getArraySchema();
+
+    if(ischema.showIndex){
+      rtn.push(
+        <TableCell key={"index"} style={{textAlign: "center", padding: 5}}>
+          {"#"}
+        </TableCell>
+      )
+    }
+
     _.map(arraySchema, (o, i) => {
       rtn.push (
         <TableCell key={i} style={{textAlign: "center", padding: 5}}>
@@ -209,10 +223,19 @@ class FGArray extends Component {
 
   renderTableRowCells(idx){
     
-    let {ischema, readOnly} = this.state;
+    let {ischema, readOnly} = this.props;
     let ireadOnly = ischema.readOnly || readOnly;
 
     let rtn = [];
+
+    if(ischema.showIndex){
+      rtn.push(
+        <TableCell key={"index"} style={{padding: 5}}>
+          {this.getDisplayIdx(idx)}
+        </TableCell>
+      );
+    }
+
     _.map(ischema.array, (o, i) => {
       rtn.push (
         <TableCell key={i} style={{padding: 5}}>
@@ -233,8 +256,19 @@ class FGArray extends Component {
   }
 
   renderTableRowCellsAdd(idx){
+    let {ischema} = this.props;
+
     let rtn = [];
     let arraySchema = this.getArraySchema();
+
+    if(ischema.showIndex){
+      rtn.push(
+        <TableCell key={"index"} style={{padding: 5}}>
+          {this.getDisplayIdx(idx)}
+        </TableCell>
+      );
+    }
+
     _.map(arraySchema, (o, i) => {
       rtn.push (
         <TableCell key={i} style={{padding: 5}}>
@@ -329,6 +363,7 @@ class FGArray extends Component {
           <VStack style={{width: "100%"}}>
             {this.renderSchema(arraySchema, i)}
             <HStack>
+              {this.getDisplayIdx(i)}
               <Spacer/>
               {this.renderDeleteButton(i)}
             </HStack>
