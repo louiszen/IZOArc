@@ -96,7 +96,8 @@ class FGArray extends Component {
 
   onAddItem = () => {
     console.log("onAddItem");
-    let {ischema, preAccessor, formValue, _onValueChange, arraySize} = this.state;
+    let {ischema, preAccessor, formValue, _onValueChange} = this.props;
+    let {arraySize} = this.state;
     let iname = ischema.name;
     if(!_.isEmpty(preAccessor)){
       if(!_.isEmpty(ischema.name)){
@@ -108,8 +109,8 @@ class FGArray extends Component {
     let items = Accessor.Get(formValue, iname);
     if(!items) items = [];
     let newItem = {};
-    
-    _.map(ischema.array, (o, i) => {
+    let arraySchema = this.getArraySchema();
+    _.map(arraySchema, (o, i) => {
       if(_.isEmpty(o.name)){
         newItem = "";
       }else{
@@ -125,7 +126,8 @@ class FGArray extends Component {
 
   onDeleteItem = (idx) => {
     console.log("onDeleteItem");
-    let {ischema, preAccessor, formValue, _onValueChange, arraySize} = this.state;
+    let {ischema, preAccessor, formValue, _onValueChange} = this.props;
+    let {arraySize} = this.state;
     let iname = ischema.name;
     if(!_.isEmpty(preAccessor)){
       if(!_.isEmpty(ischema.name)){
@@ -161,7 +163,8 @@ class FGArray extends Component {
     let {ischema, readOnly} = this.state;
     let ireadOnly = ischema.readOnly || readOnly;
     let rtn = [];
-    _.map(ischema.array, (o, i) => {
+    let arraySchema = this.getArraySchema();
+    _.map(arraySchema, (o, i) => {
       rtn.push (
         <TableCell key={i} style={{textAlign: "center", padding: 5}}>
           {o.label}
@@ -179,7 +182,8 @@ class FGArray extends Component {
   }
 
   renderTableRows(){
-    let {ischema, readOnly, arraySize} = this.state;
+    let {ischema, readOnly} = this.props;
+    let {arraySize} = this.state;
     let ireadOnly = ischema.readOnly || readOnly;
     
     let rtn = [];
@@ -229,10 +233,9 @@ class FGArray extends Component {
   }
 
   renderTableRowCellsAdd(idx){
-    let {ischema} = this.state;
-
     let rtn = [];
-    _.map(ischema.array, (o, i) => {
+    let arraySchema = this.getArraySchema();
+    _.map(arraySchema, (o, i) => {
       rtn.push (
         <TableCell key={i} style={{padding: 5}}>
           {this.renderItem(o, idx)}
@@ -268,7 +271,8 @@ class FGArray extends Component {
   }
 
   renderTable(){
-    let {ischema} = this.state;
+    let {ischema} = this.props;
+    if(!ischema) return;
     let showHeader = true;
     if(ischema.array.length === 1 && _.isEmpty(ischema.array[0].label)){
       showHeader = false;
@@ -312,15 +316,16 @@ class FGArray extends Component {
   }
 
   renderCards(){
-    let {arraySize, ischema} = this.state;
+    let {arraySize} = this.state;
     
     let rtn = [];
-    
+    let arraySchema = this.getArraySchema();
+
     for(let i = 0; i < arraySize; i++){
       rtn.push(
         <OutlinedBox key={i} theme={{color: ColorX.GetColorCSS("elainOrangeDark", 0.2)}}>
           <VStack style={{width: "100%"}}>
-            {this.renderSchema(ischema.array, i)}
+            {this.renderSchema(arraySchema, i)}
             <HStack>
               <Spacer/>
               {this.renderDeleteButton(i)}
@@ -343,7 +348,7 @@ class FGArray extends Component {
   }
 
   renderDeleteButton(idx){
-    let {ischema, readOnly} = this.state;
+    let {ischema, readOnly} = this.props;
     let ireadOnly = ischema.readOnly || readOnly;
     return (
       <IconButton onClick={() => this.onDeleteItem(idx)} disabled={ireadOnly} color="secondary">
@@ -353,7 +358,7 @@ class FGArray extends Component {
   }
 
   renderAddButton(size = "medium"){
-    let {ischema, readOnly} = this.state;
+    let {ischema, readOnly} = this.props;
     let ireadOnly = ischema.readOnly || readOnly;
     return (
       <IconButton onClick={() => this.onAddItem()} disabled={ireadOnly} color="primary" size={size}>
@@ -363,7 +368,7 @@ class FGArray extends Component {
   }
 
   renderHeader(){
-    let {ischema, readOnly} = this.state;
+    let {ischema, readOnly} = this.props;
     let addStyle = ischema.addStyle || "header";
     let ireadOnly = ischema.readOnly || readOnly;
     return (
@@ -382,8 +387,8 @@ class FGArray extends Component {
   }
 
   renderData(){
-    let {ischema} = this.state;
-    
+    let {ischema} = this.props;
+    if(!ischema) return;
     switch (ischema.arrayStyle){
       case "card":
         return this.renderCardList();
@@ -393,7 +398,8 @@ class FGArray extends Component {
   }
 
   render(){
-    let {ischema, arraySize, readOnly} = this.state;
+    let {ischema, readOnly} = this.props;
+    let {arraySize} = this.state;
     if(!ischema) return null;
     let headerStyle = ischema.headerStyle || "header";
     let addStyle = ischema.addStyle || "header";
