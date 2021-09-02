@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import PropsType from 'prop-types';
 import _ from 'lodash';
-import { FormControl, FormHelperText, FormLabel, MenuItem, Select } from '@material-ui/core';
+import { FormControl, FormHelperText, FormLabel, MenuItem, Select, Tooltip, Typography } from '@material-ui/core';
 
 import { Accessor } from 'IZOArc/STATIC';
 import { OutlinedBox } from 'IZOArc/LabIZO/Stylizo';
@@ -104,13 +104,28 @@ class FFDropdown extends Component {
     return _.map(options, (o, i) => {
       let v = _.isEmpty(ischema.selectVal) ? o : Accessor.Get(o, ischema.selectVal);
       let c = _.isEmpty(ischema.selectCap) ? o : Accessor.Get(o, ischema.selectCap);
-      return (
-        <MenuItem key={v} 
-          value={v} 
-          disabled={ischema.selectDisable && o[ischema.selectDisable]}>
-          {c}
-        </MenuItem>
-      );
+      let t = _.isEmpty(ischema.selectTip) ? o : Accessor.Get(o, ischema.selectTip);
+      if(ischema.showTooltip){
+        return (
+          <MenuItem key={v} 
+            value={v} 
+            disabled={ischema.selectDisable && o[ischema.selectDisable]}>
+            <Tooltip title={t || ""} placement="top" arrow>
+              <Typography>
+                {c}
+              </Typography>
+            </Tooltip>
+          </MenuItem>
+        );
+      }else{
+        return (
+          <MenuItem key={v} 
+            value={v} 
+            disabled={ischema.selectDisable && o[ischema.selectDisable]}>
+            {c}
+          </MenuItem>
+        );
+      }
     });
   }
 
@@ -129,7 +144,7 @@ class FFDropdown extends Component {
         }
         fullWidth={ischema.fullWidth !== false}
         >
-          {this.renderOption()}  
+        {this.renderOption()}  
       </Select>
     );
   }

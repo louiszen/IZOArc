@@ -132,8 +132,8 @@ class FFTextarea extends Component {
             placeholder={ischema.placeholder}
             startAdornment={ischema.before}
             endAdornment={ischema.after}
-            rows={rowsMin}
-            rowsMax={ischema.resizeable? undefined : rowsMin}
+            minRows={rowsMin}
+            maxRows={ischema.resizeable? undefined : rowsMin}
             multiline
             theme={theme && theme.textfield}
             />
@@ -192,8 +192,8 @@ class FFTextarea extends Component {
         }}
         defaultValue={ischema.defaultValue}
         multiline
-        rows={rowsMin}
-        rowsMax={ischema.resizeable? undefined : rowsMin}
+        minRows={rowsMin}
+        maxRows={ischema.resizeable? undefined : rowsMin}
         theme={theme && theme.textfield}
         size={fieldSize}
         />
