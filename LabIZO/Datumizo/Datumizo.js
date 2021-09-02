@@ -63,7 +63,8 @@ class Datumizo extends Component {
    *    Custom?: function (_, _, onQuit, onQuitRefresh, renderFormizo, addOns) => JSX,
    *    QuitReload?: Boolean | false,
    *    onSuccess?: (payload) => {},
-   *    onFail?: (payload) => {}
+   *    onFail?: (payload) => {},
+   *    withFile?: Boolean
    *  }
    *  [Bulk]: {
    *    title: String | (n) => String,
@@ -459,6 +460,19 @@ class Datumizo extends Component {
     }
   };
 
+  _getUploadFormData = (payloadOut) => {
+    let upload = new FormData();
+    upload.append("data", JSON.stringify(payloadOut.data || {}));
+    upload.append("schema", JSON.stringify(payloadOut.schema || {}));
+    upload.append("addOns", JSON.stringify(payloadOut.addOns || {}));
+    upload.append("replace", JSON.stringify(payloadOut.replace || {}));
+    upload.append("JWT", store.user.JWT);
+    if (payloadOut.data.upload) {
+      upload.append("upload", payloadOut.data.upload, payloadOut.data.upload.name);
+    }
+    return upload;
+  }
+
   _Redirect = (func, name, inline = false) => {
     if (_.isString(func) && this[func]) {
       return this[func][name];
@@ -768,6 +782,11 @@ class Datumizo extends Component {
         addOns: addOns,
       };
 
+      if(base.Add.withFile){
+        payloadOut = this._getUploadFormData(payloadOut);
+      }
+
+
       try {
         console.log(base.Add.url, payloadOut);
 
@@ -842,6 +861,10 @@ class Datumizo extends Component {
         JWT: store.user.JWT,
         addOns: addOns,
       };
+
+      if(base.Edit.withFile){
+        payloadOut = this._getUploadFormData(payloadOut);
+      }
 
       try {
         console.log(base.Edit.url, payloadOut);
@@ -1074,15 +1097,7 @@ class Datumizo extends Component {
         addOns: addOns,
       };
 
-      let upload = new FormData();
-      upload.append("data", JSON.stringify(payloadOut.data || {}));
-      upload.append("schema", JSON.stringify(payloadOut.schema || {}));
-      upload.append("addOns", JSON.stringify(payloadOut.addOns || {}));
-      upload.append("replace", JSON.stringify(payloadOut.replace || {}));
-      upload.append("JWT", store.user.JWT);
-      if (payloadOut.data.upload) {
-        upload.append("upload", payloadOut.data.upload, payloadOut.data.upload.name);
-      }
+      let upload = this._getUploadFormData(payloadOut);
 
       try {
         let res = await axios.post(url, upload);
