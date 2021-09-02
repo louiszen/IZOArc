@@ -108,7 +108,7 @@ class FGTabs extends Component {
     return _.map(tabSchema, (o, i) => {
       if(Authority.IsAccessible(auth, level, o.reqAuth, o.reqLevel, o.reqFunc)){
         return (
-          <Tab key={o.label} label={o.label} icon={o.icon} disabled={o.disabled} style={{minHeight: ischema.height, minWidth: ischema.width}}/>
+          <Tab key={i} label={o.label} icon={o.icon} disabled={o.disabled} style={{minHeight: ischema.height, minWidth: ischema.width}}/>
         );
       }
     });

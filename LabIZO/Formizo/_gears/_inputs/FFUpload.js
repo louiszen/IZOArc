@@ -167,10 +167,10 @@ class FFUpload extends Component {
         <input
           accept={ischema.accept}
           id={uuid}
-          onChange={(e) => 
+          onChange={(e) => {
             _onValueChange(iname, 
               e.target.files[0], ischema.validate)
-          }
+          }}
           onFocus={(e) => {
             _onFieldFocus();
           }}

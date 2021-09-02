@@ -17,6 +17,13 @@ let simple = [
     label: "#",
     name: "test.#",
     format: "text"
+  },
+  {
+    label: "Image",
+    name: "image",
+    format: "file",
+    accept: ".png",
+    showFilename: true
   }
   /*
   {

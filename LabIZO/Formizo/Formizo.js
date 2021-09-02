@@ -219,6 +219,7 @@ class Formizo extends Component {
   };
 
   _onValueChange = (name, value, criteria) => {
+    
     let { formValue, onChange } = this.state;
     this._Validate(name, value, criteria);
     if (formValue) {
@@ -230,7 +231,12 @@ class Formizo extends Component {
         }
       }
 
-      Accessor.Set(formValue, name, _.cloneDeep(value));
+      if(value instanceof File){
+        Accessor.Set(formValue, name, value);
+      }else{
+        Accessor.Set(formValue, name, _.cloneDeep(value));
+      }
+
       this.setState({ formValue });
       if (onChange) {
         onChange(formValue, name, value);
