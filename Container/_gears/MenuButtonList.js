@@ -49,7 +49,7 @@ class MenuButtonList extends Component {
     }), callback);
   }
 
-  menuButton(caption, path, fafa, reqAuth, reqLevel = 999, submenu = null){
+  menuButton(caption, path, fafa, reqAuth, reqLevel = 999, submenu = null, disabled = false){
     let {zIndex, mini} = this.props;
     return (
       <MenuButton
@@ -62,6 +62,7 @@ class MenuButtonList extends Component {
         submenu={submenu}
         zIndex={zIndex - 1}
         mini={mini}
+        disabled={disabled}
         />
     );
   }
@@ -69,7 +70,7 @@ class MenuButtonList extends Component {
   renderButtons(){
     let {buttons} = this.props;
     return _.map(buttons, (o, i) => {
-      return this.menuButton(o.caption, o.link, o.faIcon, o.auth, o.level, o.submenu);
+      return this.menuButton(o.caption, o.link, o.faIcon, o.auth, o.level, o.submenu, o.disabled);
     });
   }
 
