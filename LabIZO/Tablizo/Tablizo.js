@@ -83,6 +83,8 @@ class Tablizo extends Component {
     //preset
     density: PropsType.oneOf(["compact", "comfortable", "standard"]),
 
+    datagridProps: PropsType.object
+
   }
 
   static defaultProps = {
@@ -126,7 +128,8 @@ class Tablizo extends Component {
 
     density: "standard",
 
-    store: {}
+    store: {},
+    datagridProps: {}
   }
 
   constructor(){
@@ -159,7 +162,8 @@ class Tablizo extends Component {
       if(this.props.onMounted){
         this.props.onMounted({
           GetSelectedRows: this._GetSelectedRows,
-          ClearSelected: this._ClearSelected
+          ClearSelected: this._ClearSelected,
+          SetSelectedRows: this._SetSelectedRows
         });
       }
       if(callback) callback();
@@ -169,41 +173,51 @@ class Tablizo extends Component {
   _onRowSelected = (params) => {
     let {onRowSelected} = this.props;
     this.setState({
-      selectedRows: params.selectionModel
+      selectedRows: params
+    }, () => {
+      if(onRowSelected){
+        onRowSelected(params.length);
+      }
     });
-    if(onRowSelected){
-      onRowSelected(params.selectionModel.length);
-    }
   }
 
   _ClearSelected = () => {
     let {onRowSelected} = this.props;
     this.setState({
       selectedRows: []
+    }, () => {
+      if(onRowSelected){
+        onRowSelected(0);
+      }
     });
-    if(onRowSelected){
-      onRowSelected(0);
-    }
   }
 
   _onFilterChange = (params) => {
     let {onFilterChange} = this.props;
     this.setState({
       filterModel: params.filterModel
+    }, () => {
+      if(onFilterChange){
+        onFilterChange()
+      }
     });
-    if(onFilterChange){
-      onFilterChange()
-    }
   }
 
   _onSortChange = (params) => {
     let {onSortChange} = this.props;
     this.setState({
       sortModel: params.sortModel
+    }, () => {
+      if(onSortChange){
+        onSortChange();
+      }
     });
-    if(onSortChange){
-      onSortChange();
-    }
+  }
+
+  _SetSelectedRows = (selectedRows) => {
+    this.setState({
+      selectedRows: selectedRows
+    });
   }
 
   _GetSelectedRows = (includeDocs = false) => {
@@ -439,11 +453,12 @@ class Tablizo extends Component {
   render(){
     let {height, width, data, showSelector, rowIdAccessor, 
       pagination, defaultPageSize, pageSizeOption, loading, 
-      rowCount, serverSidePagination, density} = this.props;
+      rowCount, serverSidePagination, density, selectionOnClick, datagridProps} = this.props;
       let {sortModel, filterModel, selectedRows} = this.state;
     return (
       <Box height={height} width={width} overflow={"hidden"}>
         <DataGrid rows={data} 
+          disableSelectionOnClick={!selectionOnClick}
           columns={this.getColumns()}
           checkboxSelection={showSelector}
           onSelectionModelChange={this._onRowSelected}
@@ -468,6 +483,7 @@ class Tablizo extends Component {
           sortModel={sortModel || this.getSortModel()}
           filterModel={filterModel}
           disableColumnReorder={true}
+          {...datagridProps}
           />
       </Box>
     );

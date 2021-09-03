@@ -5,25 +5,21 @@ import HStack from 'IZOArc/LabIZO/Stackizo/HStack';
 let simple = [
   {
     label: "0",
-    name: "test.0",
-    format: "text"
-  },
-  {
-    label: "1",
-    name: "test.1",
-    format: "text"
-  },
-  {
-    label: "#",
-    name: "test.#",
-    format: "text"
-  },
-  {
-    label: "Image",
-    name: "image",
-    format: "file",
-    accept: ".png",
-    showFilename: true
+    name: "test",
+    format: "selectTable",
+    noLabelGrid: true,
+    selectSchema: [
+      {
+        label: "Cap",
+        name: "cap"
+      },
+      {
+        label: "Val",
+        name: "val"
+      }
+    ],
+    selectRef: "selectRef",
+    selectIdAccessor: "val"
   }
   /*
   {

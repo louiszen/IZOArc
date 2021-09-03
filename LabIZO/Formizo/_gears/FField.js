@@ -11,6 +11,7 @@ import { Accessor } from 'IZOArc/STATIC';
 import { StyledButton } from 'IZOArc/LabIZO/Stylizo';
 import { HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
 import FFRichText from './_inputs/FFRichText';
+import FFSelectTable from './_inputs/FFSelectTable';
 
 class FField extends Component {
 
@@ -331,6 +332,20 @@ class FField extends Component {
     )
   }
 
+  renderSelectTable(){
+    let {ischema, fieldStyle} = this.state;
+    let ifieldStyle = (ischema.variant || fieldStyle);
+    return (
+      <FFSelectTable
+        key={"selectTable"}
+        ifieldStyle={ifieldStyle}
+        _onFieldFocus={this._onFieldFocus}
+        _onFieldBlur={this._onFieldBlur}
+        {...this.props}
+        />
+    );
+  }
+
   renderInside(){
     let {ischema} = this.state;
     let {format} = ischema;
@@ -362,6 +377,8 @@ class FField extends Component {
         return this.renderSlider();
       case 'richtext':
         return this.renderRichText();
+      case 'selectTable':
+        return this.renderSelectTable();
       default:
     }
   }
@@ -408,7 +425,7 @@ class FField extends Component {
     let {ischema, fieldStyle, inTable, enableInlineSubmit} = this.state;
     let vstyle = (ischema.variant || fieldStyle);
     
-    if(!inTable && vstyle === "grid" && !ischema.noLabelGrid){
+    if(!inTable && vstyle === "grid" && !ischema.noLabelGrid && ischema.format !== "selectTable"){
       let {labelXS, labelPaddingX, labelJustify,
         fieldXS, fieldPaddingX, separator} = this.state;
       return (

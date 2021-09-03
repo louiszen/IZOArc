@@ -19,6 +19,7 @@
 | select | Value with a list of selection |
 | hidden | Value hidden and will not being cleared or reverted |
 | display | Display the value differently |
+| selectTable | select from a table source |
 <br/>
 
 ### *Common Basic Properties*
@@ -117,6 +118,15 @@
 | startEmpty | `Boolean` || `false` | Enable empty start value |
 | endEmpty | `Boolean` || `false` | Enable empty end value |
 <br/>
+
+### ***`tableSelect`** Specific*
+| Props | Type | Required | Default | Description |
+| :---|:---:|:---:|:---:|:---|
+| multipleSelect | `Boolean` || `true` | can multiple select rows |
+| selectSchema | `Array` || `[]` | The display of the table columns |
+| selectRef | `String` || `""` | Accessor from addOns |
+| selectIdAccessor | `String` || `"_id"` | accessor for the ID of each row |
+| density | <code> "compact" &#124; "standard" &#124; "comfortable" </code> || `"compact"` | The density of the table |
 
 ### ***`select`** Specific*
 | Props | Type | Required | Default | Description |
