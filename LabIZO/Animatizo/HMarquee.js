@@ -59,18 +59,12 @@ class HMarquee extends Component {
   _setAllStates = (callback) => {
     this.setState((state, props) => ({
       ...props,
-    }), () => {
-      this.setState({
-        element: this.element,
-        sWidth: this.element && this.element.scrollWidth, 
-        oWidth: this.element && this.element.offsetWidth
-      }, () => {
-        this.setState({
-          overflowed: this.isElementOverflowing(),
-          speed: this.getSpeed()
-        });
-      });
-    });
+      element: this.element,
+      sWidth: this.element && this.element.scrollWidth, 
+      oWidth: this.element && this.element.offsetWidth,
+      overflowed: this.isElementOverflowing(),
+      speed: this.getSpeed()
+    }));
   }
 
   isElementOverflowing = () => {
