@@ -107,7 +107,7 @@ class Tablizo extends Component {
 
     pagination: true,
     serverSidePagination: false,
-    rowCount: 0,
+    rowCount: undefined,
     onPageChange: () => {},
     onPageSizeChange: () => {},
 
@@ -195,7 +195,7 @@ class Tablizo extends Component {
   _onFilterChange = (params) => {
     let {onFilterChange} = this.props;
     this.setState({
-      filterModel: params.filterModel
+      filterModel: params
     }, () => {
       if(onFilterChange){
         onFilterChange()
@@ -203,15 +203,52 @@ class Tablizo extends Component {
     });
   }
 
-  _onSortChange = (params) => {
+  _onSortChange = (params) => { //onHeaderClick
+    
     let {onSortChange} = this.props;
-    this.setState({
-      sortModel: params.sortModel
-    }, () => {
-      if(onSortChange){
-        onSortChange();
+    let {sortModel} = this.state;
+    let field = params.field;
+    
+    sortModel = sortModel || [];
+    let filtered = sortModel.filter(o => o.field === field) || [];
+    if(filtered.length > 0){
+      let thisSort = filtered[0];
+      if(thisSort.sort === "asc"){
+        this.setState({
+          sortModel: [
+            {
+              field: field,
+              sort: "desc"
+            }
+          ]
+        }, () => {
+          if(onSortChange){
+            onSortChange();
+          }
+        });
+      }else{
+        this.setState({
+          sortModel: []
+        }, () => {
+          if(onSortChange){
+            onSortChange();
+          }
+        });
       }
-    });
+    }else{
+      this.setState({
+        sortModel: [
+          {
+            field: field,
+            sort: "asc"
+          }
+        ]
+      }, () => {
+        if(onSortChange){
+          onSortChange();
+        }
+      });
+    }
   }
 
   _SetSelectedRows = (selectedRows) => {
@@ -230,6 +267,7 @@ class Tablizo extends Component {
   }
 
   _onPageChange = (param) => {
+    console.log(param)
     let {onPageChange} = this.props;
     if(onPageChange){
       onPageChange(param.page);
@@ -237,10 +275,9 @@ class Tablizo extends Component {
   }
 
   _onPageSizeChange = (param) => {
-    console.log(param)
     let {onPageSizeChange} = this.props;
     if(onPageSizeChange){
-      onPageSizeChange(param.pageSize);
+      onPageSizeChange(param);
     }
   }
 
@@ -408,7 +445,6 @@ class Tablizo extends Component {
     });
     sortModel = _.filter(sortModel, o => o);
     return sortModel;
-    
   }
 
   CustomToolbar = () => {
@@ -463,7 +499,7 @@ class Tablizo extends Component {
           checkboxSelection={showSelector}
           onSelectionModelChange={this._onRowSelected}
           onFilterModelChange={this._onFilterChange}
-          onSortModelChange={this._onSortChange}
+          onColumnHeaderClick={this._onSortChange} // Their BUG
           getRowId={(o) => Accessor.Get(o, rowIdAccessor)}
           pageSize={defaultPageSize}
           rowsPerPageOptions={pageSizeOption}

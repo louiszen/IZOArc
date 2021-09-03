@@ -38,6 +38,14 @@ class ZArray {
     return rtn;
   }
 
+  static Equals(a, b) {
+    return Array.isArray(a) &&
+      Array.isArray(b) &&
+      a.length === b.length &&
+      a.every((o, i) => o === b[i]);
+  }
+  
+
 }
 
 export default ZArray;
