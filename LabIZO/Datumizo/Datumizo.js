@@ -151,7 +151,7 @@ class Datumizo extends Component {
         loading: false,
       },
       nav: {
-        pageSize: 25,
+        pageSize: 50,
         curPage: 0,
         totalEntries: 0,
         inQuery: false,
