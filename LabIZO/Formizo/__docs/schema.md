@@ -32,7 +32,7 @@ The item that represents a field.
 or you can pass a function to generate a schema:
 
 ```jsx
-(formValue, addOns) => JSX
+(formValue, addOns) => [] | {}
 ```
 
 ### ***Group***

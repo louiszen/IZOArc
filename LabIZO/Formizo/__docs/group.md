@@ -43,7 +43,7 @@ Array of values.
       //simple
       name: '' | String, //if empty, the accessor will only call accessor.{n}
     } | group
-  ] | (formValue, addOns) => []
+  ] | (formValue, addOns, index) => []
 }
 ```
 | Props | Type | Required | Default | Description |

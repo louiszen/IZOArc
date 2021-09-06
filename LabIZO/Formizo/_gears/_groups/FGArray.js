@@ -94,6 +94,14 @@ class FGArray extends Component {
     return ischema.array;
   }
 
+  getInnerSchema = (cschema, idx) => {
+    let {formValue, addOns} = this.props;
+    if(_.isFunction(cschema)){
+      return cschema(formValue, addOns, idx);
+    }
+    return cschema;
+  }
+
   getDisplayIdx = (idx) => {
     let {ischema} = this.props;
     return "#" + (idx + (ischema.startDisplayIndex || 0));
@@ -227,6 +235,7 @@ class FGArray extends Component {
     let ireadOnly = ischema.readOnly || readOnly;
 
     let rtn = [];
+    let arraySchema = this.getArraySchema();
 
     if(ischema.showIndex){
       rtn.push(
@@ -236,7 +245,7 @@ class FGArray extends Component {
       );
     }
 
-    _.map(ischema.array, (o, i) => {
+    _.map(arraySchema, (o, i) => {
       rtn.push (
         <TableCell key={i} style={{padding: 5}}>
           {this.renderItem(o, idx)}
@@ -341,10 +350,22 @@ class FGArray extends Component {
     }
 
     return _.map(cschema, (o, i) => {
+      let innerSchema = this.getInnerSchema(o, idx);
+      if(_.isArray(innerSchema)){
+        return _.map(innerSchema, (x, v) => {
+          return (
+            <FItem
+              key={"inner_" + i + "_" + v}
+              ischema={x}
+              preAccessor={newPreAccessor}
+              {...other}/>
+          );
+        });
+      }
       return (
         <FItem
           key={i}
-          ischema={o}
+          ischema={innerSchema}
           preAccessor={newPreAccessor}
           {...other}/>
       );

@@ -3,6 +3,26 @@ import HStack from 'IZOArc/LabIZO/Stackizo/HStack';
 //import { ZRichText } from 'IZOArc/STATIC';
 
 let simple = [
+  (formValue, addOns) => {
+    return [
+      {
+        label: addOns.check[0],
+        name: "check0",
+        format: "text"
+      },
+      (formValue, addOns) => {
+        return {
+          label: addOns.check[0],
+          name: "check3",
+          format: "text"
+        }
+      }
+    ]
+  },
+]
+
+/*
+let simple = [
   {
     label: "0",
     name: "test",
@@ -21,7 +41,7 @@ let simple = [
     selectRef: "selectRef",
     selectIdAccessor: "val"
   }
-  /*
+  
   {
     label: "Document Requirements",
     name: "DOCReq",
@@ -324,8 +344,8 @@ let simple = [
     name: "simplenumber",
     format: "number"
   }
-  */
 ];
+*/
 
 let select = [
   {

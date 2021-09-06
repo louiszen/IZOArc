@@ -369,6 +369,14 @@ class Formizo extends Component {
     return schema;
   }
 
+  getInnerSchema = (cschema) => {
+    let {formValue, addOns} = this.props;
+    if(_.isFunction(cschema)){
+      return cschema(formValue, addOns);
+    }
+    return cschema;
+  }
+
   ValidateForm = () => {
     let { formError } = this.state;
     if (Accessor.isDeepEmpty(formError)) {
@@ -408,10 +416,31 @@ class Formizo extends Component {
     let { formValue, formError } = this.state;
     let schema = this.getSchema();
     return _.map(schema, (o, i) => {
+      let innerSchema = this.getInnerSchema(o);
+      if(_.isArray(innerSchema)){
+        return _.map(innerSchema, (v, w) => {
+          return (
+            <FItem
+              key={"inner_" + i + "_" + w}
+              ischema={v}
+              preAccessor=''
+              _onValueChange={this._onValueChange}
+              _onBlurInlineSubmit={this._onBlurInlineSubmit}
+              _onInlineSubmit={this._onInlineSubmit}
+              _onInlineRevert={this._onInlineRevert}
+              _setHiddenValue={this._setHiddenValue}
+              _Validate={this._Validate}
+              formValue={formValue}
+              formError={formError}
+              {...this.props}
+            />
+          );
+        });
+      }
       return (
         <FItem
           key={i}
-          ischema={o}
+          ischema={innerSchema}
           preAccessor=''
           _onValueChange={this._onValueChange}
           _onBlurInlineSubmit={this._onBlurInlineSubmit}
