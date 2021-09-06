@@ -29,6 +29,12 @@ The item that represents a field.
 [see format](./field.md)
 <br/>
 
+or you can pass a function to generate a schema:
+
+```jsx
+(formValue, addOns) => JSX
+```
+
 ### ***Group***
 ---
 The item that represents a group of simple fields or have some special functionality, can be nested.

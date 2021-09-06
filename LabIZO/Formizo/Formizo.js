@@ -28,7 +28,7 @@ class Formizo extends Component {
     formID: PropsType.string.isRequired,
 
     //schema
-    schema: PropsType.array.isRequired,
+    schema: PropsType.oneOfType([PropsType.array.isRequired, PropsType.func.isRequired]),
 
     //listeners
     onMounted: PropsType.func,
@@ -361,6 +361,14 @@ class Formizo extends Component {
     );
   };
 
+  getSchema = () => {
+    let {schema, formValue, addOns} = this.props;
+    if(_.isFunction(schema)){
+      return schema(formValue, addOns);
+    }
+    return schema;
+  }
+
   ValidateForm = () => {
     let { formError } = this.state;
     if (Accessor.isDeepEmpty(formError)) {
@@ -397,7 +405,8 @@ class Formizo extends Component {
   };
 
   renderSchema() {
-    let { schema, formValue, formError } = this.state;
+    let { formValue, formError } = this.state;
+    let schema = this.getSchema();
     return _.map(schema, (o, i) => {
       return (
         <FItem
