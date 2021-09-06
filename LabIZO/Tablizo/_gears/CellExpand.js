@@ -74,7 +74,7 @@ class CellExpand extends Component {
   }
 
   render(){
-    let {value, width} = this.props;
+    let {value, width} = this.state;
     let {showPopper, showFullCell, anchorEl} = this.state;
     return (
       <div
@@ -117,7 +117,7 @@ class CellExpand extends Component {
         >
           <Paper
             elevation={1}
-            style={{ 
+            style={{
               minHeight: this.wrapper && this.wrapper.offsetHeight - 3
             }}
 

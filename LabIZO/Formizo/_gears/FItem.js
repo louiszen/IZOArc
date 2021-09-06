@@ -14,7 +14,7 @@ class FItem extends Component {
 
   static propTypes = {
     //data
-    ischema: PropsType.object.isRequired,
+    ischema: PropsType.oneOfType([PropsType.object.isRequired, PropsType.func.isRequired]),
     preAccessor: PropsType.string.isRequired,
     addOns: PropsType.object.isRequired,
 
@@ -112,8 +112,15 @@ class FItem extends Component {
     }), callback);
   }
 
-  renderHeader(){
-    let {ischema} = this.state;
+  getSchema = () => {
+    let {ischema, formValue, addOns} = this.props;
+    if(_.isFunction(ischema)){
+      return ischema(formValue, addOns);
+    }
+    return ischema;
+  }
+
+  renderHeader(ischema){
     let {textAlign, fontSize, fontWeight, color} = ischema;
     return (
       <Box
@@ -126,67 +133,72 @@ class FItem extends Component {
     );
   }
 
-  renderInject(){
-    let {ischema} = this.state;
+  renderInject(ischema){
     return ischema.inject;
   }
 
-  renderAccessizo(){
+  renderAccessizo(ischema){
     return (
       <FGAccess
         key="accessizo"
         {...this.props}
+        ischema={ischema}
         />
     );
   }
 
-  renderArray(){
+  renderArray(ischema){
     return (
       <FGArray
         key="array"
         {...this.props}
+        ischema={ischema}
         />
     );
   }
 
-  renderInline(){
+  renderInline(ischema){
     return (
       <FGInline
         key="inline"
         {...this.props}
+        ischema={ischema}
         />
     );
   }
 
-  renderFold(){
+  renderFold(ischema){
     return (
       <FGFold
         key="fold"
         {...this.props}
+        ischema={ischema}
         />
     );
   }
 
-  renderCollapse(){
+  renderCollapse(ischema){
     return (
       <FGCollapse
         key="collapse"
         {...this.props}
+        ischema={ischema}
         />
     );
   }
 
-  renderTabs(){
+  renderTabs(ischema){
     return (
       <FGTabs
         key="tabs"
         {...this.props}
+        ischema={ischema}
         />
     );
   }
 
-  renderField(){
-    let {ischema, preAccessor} = this.state;
+  renderField(ischema){
+    let {preAccessor} = this.state;
     let iname = ischema.name;
     if(!_.isEmpty(preAccessor)){
       if(!_.isEmpty(ischema.name)){
@@ -200,67 +212,69 @@ class FItem extends Component {
         key={0}
         iname={iname}
         {...this.props}
+        ischema={ischema}
       />
     );
   }
 
-  renderColumns(){
+  renderColumns(ischema){
     return (
       <FGColumns
         key="columns"
         {...this.props}
+        ischema={ischema}
         />
     );
   }
 
-  renderItem(){
-    let {ischema} = this.state;
-    
+  renderItem(ischema){
+   
     if(ischema.header){
-      return this.renderHeader();
+      return this.renderHeader(ischema);
     }
 
     if(ischema.inject){
-      return this.renderInject();
+      return this.renderInject(ischema);
     }
 
     if(ischema.accessizo){
-      return this.renderAccessizo();
+      return this.renderAccessizo(ischema);
     }
 
     if(ischema.array){
-      return this.renderArray();
+      return this.renderArray(ischema);
     }
 
     if(ischema.inline){
-      return this.renderInline();
+      return this.renderInline(ischema);
     }
 
     if(ischema.fold){
-      return this.renderFold();
+      return this.renderFold(ischema);
     }
 
     if(ischema.collapse){
-      return this.renderCollapse();
+      return this.renderCollapse(ischema);
     }
 
     if(ischema.tabs){
-      return this.renderTabs();
+      return this.renderTabs(ischema);
     }
 
     if(ischema.columns){
-      return this.renderColumns();
+      return this.renderColumns(ischema);
     }
 
-    return this.renderField();
+    return this.renderField(ischema);
   }
 
   render(){
     if(!this.state || !this.state.ischema) return null;
+    let ischema = this.getSchema();
     return (
       <Box marginY={0.75} lineHeight={"30px"}
         width="100%">
-        {this.renderItem()}
+        {this.renderItem(ischema)}
       </Box>
     );
 
