@@ -5,6 +5,7 @@ import PropsType from 'prop-types';
 import ReactFlow from 'react-flow-renderer';
 
 import nodeTypes from './_gears/CustomNodes';
+import { Box } from '@material-ui/core';
 
 /**
  * @augments {Component<Props, State>}
@@ -17,13 +18,20 @@ class Flowizo extends Component {
 
     data: PropsType.array,
 
-    customNodeTypes: PropsType.object
+    customNodeTypes: PropsType.object,
+    width: PropsType.oneOf([PropsType.string, PropsType.number]),
+    height: PropsType.oneOf([PropsType.string, PropsType.number])
   }
 
   static defaultProps = {
     onMounted: null,
     reactFlowProps: {},
-    customNodeTypes: {}
+
+    data: [],
+
+    customNodeTypes: {},
+    width: "100%",
+    height: "100%"
   }
 
   constructor(){
@@ -61,13 +69,15 @@ class Flowizo extends Component {
   }
 
   render(){
-    let {data, customNodeTypes, reactFlowProps} = this.props;
+    let {data, customNodeTypes, reactFlowProps, width, height} = this.props;
     return (
-      <ReactFlow
-        elements={data}
-        nodeTypes={{...nodeTypes, ...customNodeTypes}}
-        {...reactFlowProps}
-        />
+      <Box width={width} height={height}>
+        <ReactFlow
+          elements={data}
+          nodeTypes={{...nodeTypes, ...customNodeTypes}}
+          {...reactFlowProps}
+          />
+      </Box>
     );
   }
 
