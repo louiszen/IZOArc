@@ -4,6 +4,8 @@ import PropsType from 'prop-types';
 
 import ReactFlow from 'react-flow-renderer';
 
+import nodeTypes from './_gears/CustomNodes';
+
 /**
  * @augments {Component<Props, State>}
  */
@@ -13,12 +15,15 @@ class Flowizo extends Component {
     onMounted: PropsType.func,
     reactFlowProps: PropsType.object,
 
-    data: PropsType.array
+    data: PropsType.array,
+
+    customNodeTypes: PropsType.object
   }
 
   static defaultProps = {
     onMounted: null,
-    reactFlowProps: {}
+    reactFlowProps: {},
+    customNodeTypes: {}
   }
 
   constructor(){
@@ -56,10 +61,12 @@ class Flowizo extends Component {
   }
 
   render(){
-    let {data} = this.props;
+    let {data, customNodeTypes, reactFlowProps} = this.props;
     return (
       <ReactFlow
         elements={data}
+        nodeTypes={{...nodeTypes, ...customNodeTypes}}
+        {...reactFlowProps}
         />
     );
   }
