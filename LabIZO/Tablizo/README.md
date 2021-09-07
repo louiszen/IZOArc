@@ -63,7 +63,7 @@ The following is the necessary props that must be passed into `Tablizo` in order
 
 | Props  | Type   | Description | Link |
 | :---   | :---- | :---       | :--- |
-| schema | `array`  | Schema is an array of JS object that represents each field of your table cells  | [format](./__docs/schema.md) |
+| schema | <code> `array` &#124; `(data, addOns) => []`  </code>  | Schema is an array of JS object that represents each field of your table cells, it can also be a function returning the array, data and addOns will pass into it.  | [format](./__docs/schema.md) |
 | data | `array` | list of records to be displayed ||
 <br/>
 ## **Optional Props**

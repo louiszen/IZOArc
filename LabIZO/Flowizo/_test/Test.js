@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Accessor } from 'IZOArc/STATIC';
 import PropsType from 'prop-types';
 
+import data from './_data';
+import Flowizo from '../Flowizo';
+
 /**
  * @augments {Component<Props, State>}
  */
@@ -36,6 +39,10 @@ class Test extends Component {
     };
   }
 
+  onMountFlowizo = (callbacks) => {
+    this.MountFlowizo = callbacks;
+  }
+
   _setAllStates = (callback) => {
     this.setState((state, props) => ({
       ...props,
@@ -44,9 +51,13 @@ class Test extends Component {
 
   render(){
     return (
-      <div>
-
-      </div>
+      <Flowizo
+        data={data}
+        onMounted={this.onMountFlowizo}
+        reactFlowProps={{
+          
+        }}
+        />
     );
   }
 

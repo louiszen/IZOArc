@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Accessor } from 'IZOArc/STATIC';
 import PropsType from 'prop-types';
 
+import ReactFlow from 'react-flow-renderer';
+
 /**
  * @augments {Component<Props, State>}
  */
@@ -9,10 +11,14 @@ class Flowizo extends Component {
 
   static propTypes = {
     onMounted: PropsType.func,
+    reactFlowProps: PropsType.object,
+
+    data: PropsType.array
   }
 
   static defaultProps = {
     onMounted: null,
+    reactFlowProps: {}
   }
 
   constructor(){
@@ -50,10 +56,11 @@ class Flowizo extends Component {
   }
 
   render(){
+    let {data} = this.props;
     return (
-      <div>
-
-      </div>
+      <ReactFlow
+        elements={data}
+        />
     );
   }
 

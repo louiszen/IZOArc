@@ -323,8 +323,17 @@ class Tablizo extends Component {
     return btns;
   }
 
+  getSchema = () => {
+    let {schema, data, addOns} = this.props;
+    if(_.isFunction(schema)){
+      return schema(data, addOns);
+    }
+    return schema;
+  }
+
   getColumns = () => {
-    let {auth, level, schema, addOns, inlineButtons, inlineButtonsOpposite, inlineButtonsAlign, selectionOnClick} = this.props;
+    let {auth, level, addOns, inlineButtons, inlineButtonsOpposite, inlineButtonsAlign, selectionOnClick} = this.props;
+    let schema = this.getSchema();
     let cols = _.map(schema, (o, i) => {
       if(Authority.IsAccessible(auth, level, o.reqAuth, o.reqLevel, o.reqFunc)){
 
@@ -432,7 +441,8 @@ class Tablizo extends Component {
   }
 
   getSortModel = () => {
-    let {auth, level, schema} = this.props;
+    let {auth, level} = this.props;
+    let schema = this.getSchema();
     let sortModel = _.map(schema, (o, i) => {
       if(Authority.IsAccessible(auth, level, o.reqAuth, o.reqLevel, o.reqFunc)){
         if(o.defaultSort){
