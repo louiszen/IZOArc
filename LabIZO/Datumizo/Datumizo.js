@@ -91,7 +91,9 @@ class Datumizo extends Component {
    *        icon: String | JSX,
    *        func: String | Function | Object, //(id, row) => {}
    *        reqLevel: Number,
-   *        reqFunc: String
+   *        reqFunc: String,
+   *        theme: Object,
+   *        disableFunc: (id, row) => Boolean
    *      }
    *    ],
    *    inlineOpposite: [
@@ -141,6 +143,8 @@ class Datumizo extends Component {
     func: PropsType.oneOf([PropsType.string, PropsType.object, PropsType.func]),
     reqLevel: PropsType.string,
     reqFunc: PropsType.string,
+    theme: PropsType.object,
+    disableFunc: PropsType.func // (id, row) => Boolean
   }
 
   static propTypes = {

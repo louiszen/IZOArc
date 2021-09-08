@@ -173,7 +173,7 @@ class FGArray extends Component {
   }
 
   renderTableHeaderCell(){
-    let {ischema, readOnly} = this.state;
+    let {ischema, readOnly} = this.props;
     let ireadOnly = ischema.readOnly || readOnly;
     let rtn = [];
     let arraySchema = this.getArraySchema();
