@@ -63,6 +63,7 @@ class Test extends Component {
             }
           ]}
           inlineButtonsAlign={"right"}
+          datagridProps={{}}
           />
       </VStack>
       

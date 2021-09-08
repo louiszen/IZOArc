@@ -50,37 +50,39 @@ class Datumizo extends Component {
    *    schema: [schema]
    *  },
    *
-   *  [Row]: {
-   *    title: String | (id, row) => String,
-   *    content?: String | (id, row) => String,
-   *    url?: String,
-   *    success?: String,
-   *    fail?: String,
-   *    schema?: [schema],
-   *    buttons?: [String],
-   *    readOnly?: Boolean,
-   *    onSubmit?: String | (formProps) => Void,
-   *    Custom?: function (_, _, onQuit, onQuitRefresh, renderFormizo, addOns) => JSX,
-   *    QuitReload?: Boolean | false,
-   *    onSuccess?: (payload) => {},
-   *    onFail?: (payload) => {},
-   *    withFile?: Boolean
-   *  }
-   *  [Bulk]: {
-   *    title: String | (n) => String,
-   *    content?: String | (n) => String,
-   *    url?: String,
-   *    success?: String,
-   *    fail?: String,
-   *    schema?: [schema],
-   *    buttons?: [String],
-   *    readOnly?: Boolean,
-   *    onSubmit?: String | (formProps) => Void,
-   *    Custom?: function (_, _, onQuit, onQuitRefresh, renderFormizo, addOns) => JSX,
-   *    QuitReload?: Boolean | false,
-   *    onSuccess?: (payload) => {},
-   *    onFail?: (payload) => {}
-   *  }
+   *  operations: {
+   *    [Row]: {
+   *      title: String | (id, row) => String,
+   *      content?: String | (id, row) => String,
+   *      url?: String,
+   *      success?: String,
+   *      fail?: String,
+   *      schema?: [schema],
+   *      buttons?: [String],
+   *      readOnly?: Boolean,
+   *      onSubmit?: String | (formProps) => Void,
+   *      Custom?: function (_, _, onQuit, onQuitRefresh, renderFormizo, addOns) => JSX,
+   *      QuitReload?: Boolean | false,
+   *      onSuccess?: (payload) => {},
+   *      onFail?: (payload) => {},
+   *      withFile?: Boolean
+   *    },
+   *    [Bulk]: {
+   *      title: String | (n) => String,
+   *      content?: String | (n) => String,
+   *      url?: String,
+   *      success?: String,
+   *      fail?: String,
+   *      schema?: [schema],
+   *      buttons?: [String],
+   *      readOnly?: Boolean,
+   *      onSubmit?: String | (formProps) => Void,
+   *      Custom?: function (_, _, onQuit, onQuitRefresh, renderFormizo, addOns) => JSX,
+   *      QuitReload?: Boolean | false,
+   *      onSuccess?: (payload) => {},
+   *      onFail?: (payload) => {}
+   *    }
+   *  },
    *
    *  buttons: {
    *    inline: [
@@ -115,9 +117,60 @@ class Datumizo extends Component {
    *    onFail: (res) => {}
    * }
    */
+
+  static operationsPropsType = {
+    title: PropsType.string,
+    content: PropsType.string,
+    url: PropsType.string,
+    success: PropsType.string,
+    fail: PropsType.string,
+    schema: PropsType.arrayOf(PropsType.object),
+    buttons: PropsType.arrayOf(PropsType.string),
+    readOnly: PropsType.bool,
+    onSubmit: PropsType.oneOf([PropsType.string, PropsType.func]),
+    Custom: PropsType.func,
+    QuitReload: PropsType.bool, 
+    onSuccess: PropsType.func,
+    onFail: PropsType.func,
+    withFile: PropsType.bool
+  };
+
+  static buttonPropsType = {
+    caption: PropsType.string,
+    icon: PropsType.oneOf([PropsType.string, PropsType.object]),
+    func: PropsType.oneOf([PropsType.string, PropsType.object, PropsType.func]),
+    reqLevel: PropsType.string,
+    reqFunc: PropsType.string,
+  }
+
   static propTypes = {
     //config
-    base: PropsType.object,
+    base: PropsType.shape({
+      exportDoc: PropsType.string,
+      rowIdAccessor: PropsType.string,
+      reqAuth: PropsType.string,
+      showSelector: PropsType.bool,
+      noDefaultButtons: PropsType.bool,
+      noDefaultTable: PropsType.bool,
+
+      tablizo: PropsType.shape({
+        ...Tablizo.propTypes
+      }),
+
+      formizo: PropsType.shape({
+        ...Formizo.propTypes
+      }), 
+
+      operations: PropsType.objectOf(PropsType.shape(this.operationsPropsType)),
+      
+      buttons: PropsType.shape({
+        inline: PropsType.arrayOf(PropsType.shape(this.buttonPropsType)),
+        inlineOpposite: PropsType.arrayOf(PropsType.shape(this.buttonPropsType)),
+        left: PropsType.arrayOf(PropsType.shape(this.buttonPropsType)),
+        right: PropsType.arrayOf(PropsType.shape(this.buttonPropsType)),
+      })
+
+    }),
     inject: PropsType.oneOfType([PropsType.func, PropsType.object]),
     addOns: PropsType.object,
     onMounted: PropsType.func,
@@ -515,7 +568,7 @@ class Datumizo extends Component {
             name: "upload",
             label: "Upload file",
             format: "file",
-            accept: base.Import?.accept || ".xlsx, xls",
+            accept: base.operations?.Import?.accept || ".xlsx, xls",
             noLabelGrid: true,
             showFilename: false,
             middle: true,
@@ -680,11 +733,11 @@ class Datumizo extends Component {
   Delete = {
     onClick: (id, row) => {
       let { base } = this.props;
-      let title = base.Delete.title;
+      let title = base.operations?.Delete?.title;
       if (_.isFunction(title)) {
         title = title(id, row);
       }
-      let content = base.Delete.content;
+      let content = base.operations?.Delete?.content;
       if (_.isFunction(content)) {
         content = content(id, row);
       }
@@ -698,7 +751,7 @@ class Datumizo extends Component {
       console.log("submit Delete");
 
       let { base, addOns } = this.props;
-      let url = DOMAIN + base.Delete.url;
+      let url = DOMAIN + base.operations?.Delete?.url;
 
       let payloadOut = {
         data: {
@@ -709,26 +762,26 @@ class Datumizo extends Component {
       };
 
       try {
-        console.log(base.Delete.url, payloadOut);
+        console.log(base.operations?.Delete?.url, payloadOut);
 
         store.isLoading(true);
         let res = await axios.post(url, payloadOut);
         store.isLoading(false);
 
-        console.log(base.Delete.url, res.data);
+        console.log(base.operations?.Delete?.url, res.data);
 
         let { Success, payload } = res.data;
 
         if (Success === true) {
-          if (base.Delete.onSuccess) {
-            base.Delete.onSuccess(payload);
+          if (base.operations?.Delete?.onSuccess) {
+            base.operations?.Delete?.onSuccess(payload);
           } else {
             this.Delete.onSuccess(payload);
           }
           return { Success: true };
         } else {
-          if (base.Delete.onFail) {
-            base.Delete.onFail(payload);
+          if (base.operations?.Delete?.onFail) {
+            base.operations?.Delete?.onFail(payload);
           } else {
             this.Delete.onFail(payload);
           }
@@ -736,8 +789,8 @@ class Datumizo extends Component {
         }
       } catch (e) {
         store.isLoading(false);
-        if (base.Delete.onFail) {
-          base.Delete.onFail(e);
+        if (base.operations?.Delete?.onFail) {
+          base.operations?.Delete?.onFail(e);
         } else {
           this.Delete.onFail(e);
         }
@@ -747,13 +800,13 @@ class Datumizo extends Component {
 
     onSuccess: (payload) => {
       let { base } = this.props;
-      store.Alert(base.Delete.success, "success");
+      store.Alert(base.operations?.Delete?.success, "success");
       this._fetchData();
     },
 
     onFail: (payload) => {
       let { base } = this.props;
-      let msg = base.Delete.fail + (payload.message || "");
+      let msg = base.operations?.Delete?.fail + (payload.message || "");
       store.Alert(msg, "error");
     },
   };
@@ -764,7 +817,7 @@ class Datumizo extends Component {
       this.setState({
         inEdit: true,
         mode: "Add",
-        doc: base.Add.defaultDoc || {}
+        doc: base.operations?.Add?.defaultDoc || {}
       });
     },
 
@@ -773,7 +826,7 @@ class Datumizo extends Component {
       console.log(formProps);
 
       let { base, addOns, docID } = this.props;
-      let url = DOMAIN + base.Add.url;
+      let url = DOMAIN + base.operations?.Add?.url;
 
       let payloadOut = {
         data: {
@@ -783,40 +836,40 @@ class Datumizo extends Component {
         addOns: addOns,
       };
 
-      if(base.Add.withFile){
+      if(base.operations?.Add?.withFile){
         payloadOut = this._getUploadFormData(payloadOut);
       }
 
 
       try {
-        console.log(base.Add.url, payloadOut);
+        console.log(base.operations?.Add?.url, payloadOut);
 
         store.isLoading(true);
         let res = await axios.post(url, payloadOut);
         store.isLoading(false);
 
-        console.log(base.Add.url, res.data);
+        console.log(base.operations?.Add?.url, res.data);
 
         let { Success, payload } = res.data;
 
         if (Success === true) {
-          if (base.Add.onSuccess) {
-            base.Add.onSuccess(payload);
+          if (base.operations?.Add?.onSuccess) {
+            base.operations?.Add?.onSuccess(payload);
           } else {
             this.Add.onSuccess(payload);
           }
           this._QuitInner(docID);
         } else {
-          if (base.Add.onFail) {
-            base.Add.onFail(payload);
+          if (base.operations?.Add?.onFail) {
+            base.operations?.Add?.onFail(payload);
           } else {
             this.Add.onFail(payload);
           }
         }
       } catch (e) {
         store.isLoading(false);
-        if (base.Add.onFail) {
-          base.Add.onFail(e);
+        if (base.operations?.Add?.onFail) {
+          base.operations?.Add?.onFail(e);
         } else {
           this.Add.onFail(e);
         }
@@ -825,13 +878,13 @@ class Datumizo extends Component {
 
     onSuccess: (payload) => {
       let { base } = this.props;
-      store.Alert(base.Add.success, "success");
+      store.Alert(base.operations?.Add?.success, "success");
       this._fetchData();
     },
 
     onFail: (payload) => {
       let { base } = this.props;
-      let msg = base.Add.fail + (payload.message || "");
+      let msg = base.operations?.Add?.fail + (payload.message || "");
       store.Alert(msg, "error");
     },
   };
@@ -852,7 +905,7 @@ class Datumizo extends Component {
       let { base, addOns } = this.props;
       let { doc } = this.state;
 
-      let url = DOMAIN + base.Edit.url;
+      let url = DOMAIN + base.operations?.Edit?.url;
 
       let payloadOut = {
         data: {
@@ -863,39 +916,39 @@ class Datumizo extends Component {
         addOns: addOns,
       };
 
-      if(base.Edit.withFile){
+      if(base.operations?.Edit?.withFile){
         payloadOut = this._getUploadFormData(payloadOut);
       }
 
       try {
-        console.log(base.Edit.url, payloadOut);
+        console.log(base.operations?.Edit?.url, payloadOut);
 
         store.isLoading(true);
         let res = await axios.post(url, payloadOut);
         store.isLoading(false);
 
-        console.log(base.Edit.url, res.data);
+        console.log(base.operations?.Edit?.url, res.data);
 
         let { Success, payload } = res.data;
 
         if (Success === true) {
-          if (base.Edit.onSuccess) {
-            base.Edit.onSuccess(payload);
+          if (base.operations?.Edit?.onSuccess) {
+            base.operations?.Edit?.onSuccess(payload);
           } else {
             this.Edit.onSuccess(payload);
           }
           this._QuitInner();
         } else {
-          if (base.Edit.onSuccess) {
-            base.Edit.onFail(payload);
+          if (base.operations?.Edit?.onSuccess) {
+            base.operations?.Edit?.onFail(payload);
           } else {
             this.Edit.onFail(payload);
           }
         }
       } catch (e) {
         store.isLoading(false);
-        if (base.Edit.onFail) {
-          base.Edit.onFail(e);
+        if (base.operations?.Edit?.onFail) {
+          base.operations?.Edit?.onFail(e);
         } else {
           this.Edit.onFail(e);
         }
@@ -904,13 +957,13 @@ class Datumizo extends Component {
 
     onSuccess: (payload) => {
       let { base } = this.props;
-      store.Alert(base.Edit.success, "success");
+      store.Alert(base.operations?.Edit?.success, "success");
       this._fetchData();
     },
 
     onFail: (payload) => {
       let { base } = this.props;
-      let msg = base.Edit.fail + (payload.message || "");
+      let msg = base.operations?.Edit?.fail + (payload.message || "");
       store.Alert(msg, "error");
     },
   };
@@ -929,11 +982,11 @@ class Datumizo extends Component {
   Export = {
     onClick: async () => {
       let { base, addOns } = this.state;
-      if (!base.Export || !base.Export.url) {
+      if (!base.operations?.Export || !base.operations?.Export?.url) {
         store.Alert("Export Not Implemented.", "warn");
         return;
       }
-      let url = DOMAIN + base.Export.url;
+      let url = DOMAIN + base.operations?.Export?.url;
       let selected = this.MountTablizo? this.MountTablizo.GetSelectedRows() : [];
 
       let payloadOut = {
@@ -941,7 +994,7 @@ class Datumizo extends Component {
         data: {
           selected: selected,
           format: null,
-          schema: base.Export.schema,
+          schema: base.operations?.Export?.schema,
           skip: 0,
           limit: 9999,
         },
@@ -959,8 +1012,8 @@ class Datumizo extends Component {
         fileDownload(blob, base.exportDoc + ".xlsx");
       } catch (e) {
         store.isLoading(false);
-        if (base.Export.onFail) {
-          base.Export.onFail(e);
+        if (base.operations?.Export?.onFail) {
+          base.operations?.Export?.onFail(e);
         } else {
           this.Export.onFail(e);
         }
@@ -987,14 +1040,14 @@ class Datumizo extends Component {
         return;
       }
 
-      let title = base.DeleteBulk.title;
-      if (_.isFunction(base.DeleteBulk.title)) {
-        title = base.DeleteBulk.title(selected.length);
+      let title = base.operations?.DeleteBulk?.title;
+      if (_.isFunction(base.operations?.DeleteBulk?.title)) {
+        title = base.operations?.DeleteBulk?.title(selected.length);
       }
 
-      let content = base.DeleteBulk.content;
-      if (_.isFunction(base.DeleteBulk.content)) {
-        content = base.DeleteBulk.content(selected.length);
+      let content = base.operations?.DeleteBulk?.content;
+      if (_.isFunction(base.operations?.DeleteBulk?.content)) {
+        content = base.operations?.DeleteBulk?.content(selected.length);
       }
 
       store.Ask(title, content, async () => {
@@ -1004,11 +1057,11 @@ class Datumizo extends Component {
 
     onSubmit: async () => {
       let { base, addOns } = this.state;
-      if (!base.DeleteBulk || !base.DeleteBulk.url) {
+      if (!base.operations?.DeleteBulk || !base.operations?.DeleteBulk?.url) {
         store.Alert("DeleteBulk Not Implemented.", "warn");
         return;
       }
-      let url = DOMAIN + base.DeleteBulk.url;
+      let url = DOMAIN + base.operations?.DeleteBulk?.url;
       let selected = this.MountTablizo.GetSelectedRows();
 
       let payloadOut = {
@@ -1020,26 +1073,26 @@ class Datumizo extends Component {
       };
 
       try {
-        console.log(base.DeleteBulk.url, payloadOut);
+        console.log(base.operations?.DeleteBulk?.url, payloadOut);
 
         store.isLoading(true);
         let res = await axios.post(url, payloadOut);
         store.isLoading(false);
 
-        console.log(base.DeleteBulk.url, res.data);
+        console.log(base.operations?.DeleteBulk?.url, res.data);
 
         let { Success, payload } = res.data;
         if (Success === true) {
-          if (base.DeleteBulk.onSuccess) {
-            base.DeleteBulk.onSuccess(payload);
+          if (base.operations?.DeleteBulk?.onSuccess) {
+            base.operations?.DeleteBulk?.onSuccess(payload);
           } else {
             this.DeleteBulk.onSuccess(payload);
           }
           this.MountTablizo.ClearSelected();
           return { Success: true };
         } else {
-          if (base.DeleteBulk.onFail) {
-            base.DeleteBulk.onFail(payload);
+          if (base.operations?.DeleteBulk?.onFail) {
+            base.operations?.DeleteBulk?.onFail(payload);
           } else {
             this.DeleteBulk.onFail(payload);
           }
@@ -1047,8 +1100,8 @@ class Datumizo extends Component {
         }
       } catch (e) {
         store.isLoading(false);
-        if (base.DeleteBulk.onFail) {
-          base.DeleteBulk.onFail(e);
+        if (base.operations?.DeleteBulk?.onFail) {
+          base.operations?.DeleteBulk?.onFail(e);
         } else {
           this.DeleteBulk.onFail(e);
         }
@@ -1058,13 +1111,13 @@ class Datumizo extends Component {
 
     onSuccess: (payload) => {
       let { base } = this.props;
-      store.Alert(base.DeleteBulk.success, "success");
+      store.Alert(base.operations?.DeleteBulk?.success, "success");
       this._fetchData();
     },
 
     onFail: (payload) => {
       let { base } = this.props;
-      let msg = base.DeleteBulk.fail + (payload.message || "");
+      let msg = base.operations?.DeleteBulk?.fail + (payload.message || "");
       store.Alert(msg, "error");
     },
   };
@@ -1072,12 +1125,12 @@ class Datumizo extends Component {
   Import = {
     onClick: () => {
       let { base } = this.state;
-      if (!base.Import || !base.Import.url) {
+      if (!base.operations?.Import || !base.operations?.Import?.url) {
         store.Alert("Import Not Implemented.", "warn");
         return;
       }
-      store.Form(base.Import.title, base.Import.content 
-        || (base.Import.replace? "CAUTION!! It will DELETE and REPLACE all the content in database. <br/>": "") + "(File size cannot exceed 10MB, only accept .xlsx and .xls)", 
+      store.Form(base.operations?.Import?.title, base.operations?.Import?.content 
+        || (base.operations?.Import?.replace? "CAUTION!! It will DELETE and REPLACE all the content in database. <br/>": "") + "(File size cannot exceed 10MB, only accept .xlsx and .xls)", 
         this._importForm, this.Import.onSubmit);
     },
 
@@ -1087,13 +1140,13 @@ class Datumizo extends Component {
       console.log(name, value);
       let { base, addOns } = this.state;
 
-      let url = DOMAIN + base.Import.url;
+      let url = DOMAIN + base.operations?.Import?.url;
       let payloadOut = {
         data: {
           [name]: value,
         },
-        schema: base.Import.schema || [],
-        replace: base.Import.replace || false,
+        schema: base.operations?.Import?.schema || [],
+        replace: base.operations?.Import?.replace || false,
         JWT: store.user.JWT,
         addOns: addOns,
       };
@@ -1103,27 +1156,27 @@ class Datumizo extends Component {
       try {
         let res = await axios.post(url, upload);
 
-        console.log(base.Import.url, res.data);
+        console.log(base.operations?.Import?.url, res.data);
 
         store.SetAskLoading(false);
         let { Success, payload } = res.data;
 
         if (Success === true) {
-          if (base.Import.onSuccess) {
-            base.Import.onSuccess(payload);
+          if (base.operations?.Import?.onSuccess) {
+            base.operations?.Import?.onSuccess(payload);
           } else {
             this.Import.onSuccess(payload);
           }
         } else {
-          if (base.Import.onFail) {
-            base.Import.onFail(payload);
+          if (base.operations?.Import?.onFail) {
+            base.operations?.Import?.onFail(payload);
           } else {
             this.Import.onFail(payload);
           }
         }
       } catch (e) {
-        if (base.Import.onFail) {
-          base.Import.onFail(e);
+        if (base.operations?.Import?.onFail) {
+          base.operations?.Import?.onFail(e);
         } else {
           this.Import.onFail(e);
         }
@@ -1143,7 +1196,7 @@ class Datumizo extends Component {
 
     onFail: (payload) => {
       let { base } = this.props;
-      let msg = base.Import.fail + (payload.message || "");
+      let msg = base.operations?.Import?.fail + (payload.message || "");
       store.Alert(msg, "error");
       store.clearAsk();
     },
@@ -1152,7 +1205,7 @@ class Datumizo extends Component {
   Sync = {
     onClick: () => {
       let { base } = this.state;
-      store.Ask(base.Sync.title, base.Sync.content, async () => {
+      store.Ask(base.operations?.Sync?.title, base.operations?.Sync?.content, async () => {
         return await this.Sync.onSubmit();
       });
     },
@@ -1162,33 +1215,33 @@ class Datumizo extends Component {
 
       let { base, addOns } = this.state;
 
-      let url = DOMAIN + base.Sync.url;
+      let url = DOMAIN + base.operations?.Sync?.url;
       let payloadOut = {
         JWT: store.user.JWT,
         addOns: addOns,
       };
 
       try {
-        console.log(base.Sync.url, payloadOut);
+        console.log(base.operations?.Sync?.url, payloadOut);
 
         store.isLoading(true);
         let res = await axios.post(url, payloadOut);
         store.isLoading(false);
 
-        console.log(base.Sync.url, res.data);
+        console.log(base.operations?.Sync?.url, res.data);
 
         let { Success, payload } = res.data;
 
         if (Success === true) {
-          if (base.Sync.onSuccess) {
-            base.Sync.onSuccess(payload);
+          if (base.operations?.Sync?.onSuccess) {
+            base.operations?.Sync?.onSuccess(payload);
           } else {
             this.Sync.onSuccess(payload);
           }
           return { Success: true };
         } else {
-          if (base.Sync.onFail) {
-            base.Sync.onFail(payload);
+          if (base.operations?.Sync?.onFail) {
+            base.operations?.Sync?.onFail(payload);
           } else {
             this.Sync.onFail(payload);
           }
@@ -1196,8 +1249,8 @@ class Datumizo extends Component {
         }
       } catch (e) {
         store.isLoading(false);
-        if (base.Sync.onFail) {
-          base.Sync.onFail(e);
+        if (base.operations?.Sync?.onFail) {
+          base.operations?.Sync?.onFail(e);
         } else {
           this.Sync.onFail(e);
         }
@@ -1207,13 +1260,13 @@ class Datumizo extends Component {
 
     onSuccess: (payload) => {
       let { base } = this.props;
-      store.Alert(base.Sync.success, "success");
+      store.Alert(base.operations?.Sync?.success, "success");
       this._fetchData();
     },
 
     onFail: (payload) => {
       let { base } = this.props;
-      let msg = base.Sync.fail + (payload.message || "");
+      let msg = base.operations?.Sync?.fail + (payload.message || "");
       store.Alert(msg, "error");
     },
   };
@@ -1336,7 +1389,7 @@ class Datumizo extends Component {
         onQuitRefresh={this._QuitAndFetch}
         doc={doc}
         docID={docID}
-        ibase={base[mode]}
+        ibase={base.operations[mode]}
         onSubmit={this._Redirect(mode, "onSubmit", true)}
         addOns={addOns}
         auth={store.user.authority}

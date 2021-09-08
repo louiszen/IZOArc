@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Accessor } from 'IZOArc/STATIC';
-
-import data from './_data';
-import Flowizo from '../Flowizo';
+import PropsType from 'prop-types';
+import Datumizo from '..';
 
 /**
  * @augments {Component<Props, State>}
@@ -38,10 +37,6 @@ class Test extends Component {
     };
   }
 
-  onMountFlowizo = (callbacks) => {
-    this.MountFlowizo = callbacks;
-  }
-
   _setAllStates = (callback) => {
     this.setState((state, props) => ({
       ...props,
@@ -50,12 +45,8 @@ class Test extends Component {
 
   render(){
     return (
-      <Flowizo
-        data={data}
-        onMounted={this.onMountFlowizo}
-        reactFlowProps={{
-          
-        }}
+      <Datumizo
+        
         />
     );
   }

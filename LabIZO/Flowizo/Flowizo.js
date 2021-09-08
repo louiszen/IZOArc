@@ -14,7 +14,9 @@ class Flowizo extends Component {
 
   static propTypes = {
     onMounted: PropsType.func,
-    reactFlowProps: PropsType.object,
+    reactFlowProps: PropsType.shape({
+      ...ReactFlow.propTypes,
+    }),
 
     data: PropsType.array,
 
