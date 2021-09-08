@@ -96,6 +96,18 @@ class Flowizo extends Component {
     });
   }
 
+  _onConnect = ({source, target}) => {
+    console.log(source, target);
+  }
+
+  AddNode = () => {
+
+  }
+
+
+
+  
+
   renderControl(){
     let {customControls, controlsProps} = this.props;
     let btns = _.map(customControls, (o, i) => {
@@ -122,6 +134,8 @@ class Flowizo extends Component {
           elements={data}
           nodeTypes={{...nodeTypes, ...customNodeTypes}}
           edgeTypes={{...edgeTypes, ...customEdgeTypes}}
+          onConnect={this._onConnect}
+          onSet
           {...reactFlowProps}
           >
           {showControl && this.renderControl()}
