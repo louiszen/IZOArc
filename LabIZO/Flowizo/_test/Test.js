@@ -51,8 +51,9 @@ class Test extends Component {
   render(){
     return (
       <Flowizo
-        data={data}
+        defaultData={data}
         onMounted={this.onMountFlowizo}
+        controlsProps={{}}
         reactFlowProps={{
           
         }}

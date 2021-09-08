@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { Accessor } from 'IZOArc/STATIC';
 import PropsType from 'prop-types';
 
-import ReactFlow from 'react-flow-renderer';
+import ReactFlow, { ControlButton, Controls } from 'react-flow-renderer';
 
 import nodeTypes from './_gears/CustomNodes';
+import edgeTypes from './_gears/CustomLine';
 import { Box } from '@material-ui/core';
+import _ from 'lodash';
 
 /**
  * @augments {Component<Props, State>}
@@ -14,26 +16,49 @@ class Flowizo extends Component {
 
   static propTypes = {
     onMounted: PropsType.func,
+    
+    defaultData: PropsType.array,
+
+    customNodeTypes: PropsType.object,
+    customEdgeTypes: PropsType.object,
+    width: PropsType.oneOfType([PropsType.string, PropsType.number]),
+    height: PropsType.oneOfType([PropsType.string, PropsType.number]),
+
+    showControl: PropsType.bool,
+    controlsProps: PropsType.shape({
+      showZoom: PropsType.bool,
+      showFitView: PropsType.bool,
+      showInteractive: PropsType.bool,
+      style: PropsType.object,
+      className: PropsType.string,
+      onZoomIn: PropsType.func,
+      onZoomOut: PropsType.func,
+      onFitView: PropsType.func,
+      onInteractiveChange: PropsType.func
+    }),
+    customControls: PropsType.arrayOf(PropsType.shape({
+      icon: PropsType.object,
+      func: PropsType.func
+    })),
+
     reactFlowProps: PropsType.shape({
       ...ReactFlow.propTypes,
     }),
-
-    data: PropsType.array,
-
-    customNodeTypes: PropsType.object,
-    width: PropsType.oneOf([PropsType.string, PropsType.number]),
-    height: PropsType.oneOf([PropsType.string, PropsType.number])
   }
 
   static defaultProps = {
     onMounted: null,
-    reactFlowProps: {},
 
-    data: [],
+    defaultData: [],
 
     customNodeTypes: {},
+    customEdgeTypes: {},
     width: "100%",
-    height: "100%"
+    height: "100%",
+
+    showControl: true,
+
+    reactFlowProps: {}
   }
 
   constructor(){
@@ -60,6 +85,7 @@ class Flowizo extends Component {
   _setAllStates = (callback) => {
     this.setState((state, props) => ({
       ...props,
+      data: props.defaultData
     }), () => {
       if(this.props.onMounted){
         this.props.onMounted({
@@ -70,15 +96,36 @@ class Flowizo extends Component {
     });
   }
 
+  renderControl(){
+    let {customControls, controlsProps} = this.props;
+    let btns = _.map(customControls, (o, i) => {
+      return (
+        <ControlButton key={i} onClick={() => o.func()}>
+          {o.icon}
+        </ControlButton>
+      );
+    });
+
+    return (
+      <Controls {...controlsProps}>
+        {btns}
+      </Controls>
+    );
+  }
+
   render(){
-    let {data, customNodeTypes, reactFlowProps, width, height} = this.props;
+    let {customNodeTypes, customEdgeTypes, reactFlowProps, width, height, showControl} = this.props;
+    let {data} = this.state;
     return (
       <Box width={width} height={height}>
         <ReactFlow
           elements={data}
           nodeTypes={{...nodeTypes, ...customNodeTypes}}
+          edgeTypes={{...edgeTypes, ...customEdgeTypes}}
           {...reactFlowProps}
-          />
+          >
+          {showControl && this.renderControl()}
+        </ReactFlow>
       </Box>
     );
   }

@@ -129,7 +129,7 @@ class Datumizo extends Component {
     schema: PropsType.arrayOf(PropsType.object),
     buttons: PropsType.arrayOf(PropsType.string),
     readOnly: PropsType.bool,
-    onSubmit: PropsType.oneOf([PropsType.string, PropsType.func]),
+    onSubmit: PropsType.oneOfType([PropsType.string, PropsType.func]),
     Custom: PropsType.func,
     QuitReload: PropsType.bool, 
     onSuccess: PropsType.func,
@@ -139,8 +139,8 @@ class Datumizo extends Component {
 
   static buttonPropsType = {
     caption: PropsType.string,
-    icon: PropsType.oneOf([PropsType.string, PropsType.object]),
-    func: PropsType.oneOf([PropsType.string, PropsType.object, PropsType.func]),
+    icon: PropsType.oneOfType([PropsType.string, PropsType.object]),
+    func: PropsType.oneOfType([PropsType.string, PropsType.object, PropsType.func]),
     reqLevel: PropsType.string,
     reqFunc: PropsType.string,
     theme: PropsType.object,
