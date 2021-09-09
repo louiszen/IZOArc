@@ -10,7 +10,7 @@
 
 //inject
 {
-  inject: String | JSX
+  inject: String | JSX | (formValue, addOns) => JSX
 }
 
 

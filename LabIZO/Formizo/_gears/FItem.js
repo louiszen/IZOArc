@@ -134,6 +134,10 @@ class FItem extends Component {
   }
 
   renderInject(ischema){
+    let {formValue, addOns} = this.props;
+    if(_.isFunction(ischema.inject)){
+      return ischema.inject(formValue, addOns);
+    }
     return ischema.inject;
   }
 

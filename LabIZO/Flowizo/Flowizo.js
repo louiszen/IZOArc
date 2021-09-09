@@ -5,7 +5,7 @@ import PropsType from 'prop-types';
 import ReactFlow, { ControlButton, Controls } from 'react-flow-renderer';
 
 import nodeTypes from './_gears/CustomNodes';
-import edgeTypes from './_gears/CustomLine';
+import edgeTypes from './_gears/CustomEdges';
 import { Box } from '@material-ui/core';
 import _ from 'lodash';
 
@@ -104,10 +104,6 @@ class Flowizo extends Component {
 
   }
 
-
-
-  
-
   renderControl(){
     let {customControls, controlsProps} = this.props;
     let btns = _.map(customControls, (o, i) => {
@@ -135,7 +131,6 @@ class Flowizo extends Component {
           nodeTypes={{...nodeTypes, ...customNodeTypes}}
           edgeTypes={{...edgeTypes, ...customEdgeTypes}}
           onConnect={this._onConnect}
-          onSet
           {...reactFlowProps}
           >
           {showControl && this.renderControl()}

@@ -7,7 +7,8 @@ import { Paper, Tab, Tabs } from '@material-ui/core';
 import FItem from '../FItem';
 
 import { Accessor, Authority } from 'IZOArc/STATIC';
-import { VStack } from 'IZOArc/LabIZO/Stackizo';
+import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
+import { Typography } from 'antd';
 
 class FGTabs extends Component {
 
@@ -107,8 +108,34 @@ class FGTabs extends Component {
     let tabSchema = this.getTabSchema();
     return _.map(tabSchema, (o, i) => {
       if(Authority.IsAccessible(auth, level, o.reqAuth, o.reqLevel, o.reqFunc)){
+        let label = o.label;
+        let icon = o.icon;
+        if(o.noTransform){
+          label = <Typography style={{textTransform: 'none'}}>{o.label}</Typography>
+        }
+        switch(o.iconPos){
+          case "top": default: 
+            break;
+          case "bottom":
+            label = <VStack spacing={o.spacing || 5}>{label}{icon}</VStack>; 
+            icon = null; break;
+          case "left": 
+            label = <HStack spacing={o.spacing || 5}>
+              {o.alignment === "right" && <Spacer/>}
+              {icon}{label}
+              {o.alignment === "left" && <Spacer/>}
+              </HStack>; 
+            icon = null; break;
+          case "right":
+            label = <HStack spacing={o.spacing || 5}>
+              {o.alignment === "right" && <Spacer/>}
+              {label}{icon}
+              {o.alignment === "left" && <Spacer/>}
+              </HStack>; 
+            icon = null; break;
+        }
         return (
-          <Tab key={i} label={o.label} icon={o.icon} disabled={o.disabled} style={{minHeight: ischema.height, minWidth: ischema.width}}/>
+          <Tab key={i} label={label} icon={icon} disabled={o.disabled} style={{minHeight: ischema.height, minWidth: ischema.width}}/>
         );
       }
     });

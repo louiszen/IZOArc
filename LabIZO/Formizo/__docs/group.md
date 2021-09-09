@@ -140,6 +140,10 @@ Display the section in tabs
       reqFunc?: String,             
       label: String,
       icon?: JSX,
+      iconPos: "top" | "left" | "right" | "bottom",
+      noTransform: Boolean | false,
+      spacing: Number | 5,
+      alignment: "center" | "left" | "right"
       page: [
         group | simple
       ] | (formValue, addOns) => []
@@ -160,6 +164,10 @@ Display the section in tabs
 | ~.label | `String` |||The label of the tab |
 | ~.icon | `JSX` ||| The icon of the tab |
 | ~.page | <code>[simple &#124; group]</code> |✔||The items array in the group |
+| ~.iconPos | <code> "top" &#124; "left" &#124; "right" &#124; "bottom"  </code> || `"top"` | The position of the icon |
+| ~.noTransform | `Boolean` || `false` | Whether transforming the caption to UPPERCASE |
+| ~.spacing | `Number` || `5` | The spacing between the icon and label |
+| ~.alignment | <code> "center" &#124; "left" &#124; "right" </code> || `"center"` | The alignment of the caption |
 <br/>
 
 ### ***Columns***
