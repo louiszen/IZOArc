@@ -3,6 +3,8 @@ import { Accessor } from 'IZOArc/STATIC';
 
 import data from './_data';
 import Flowizo from '../Flowizo';
+import { VStack,HStack } from 'IZOArc/LabIZO/Stackizo';
+import { StyledButton } from 'IZOArc/LabIZO/Stylizo';
 
 /**
  * @augments {Component<Props, State>}
@@ -48,16 +50,39 @@ class Test extends Component {
     }), callback);
   }
 
+  onDataUpdated = (data) => {
+    console.log("onDataUpdated");
+  }
+
+  addQ = () => {
+    this.MountFlowizo.AddNode("Rect_YesNo");
+  }
+
+  addA = () => {
+    this.MountFlowizo.AddNode("Tube_End");
+  }
+
+
   render(){
     return (
-      <Flowizo
-        defaultData={data}
-        onMounted={this.onMountFlowizo}
-        controlsProps={{}}
-        reactFlowProps={{
-          
-        }}
-        />
+      <VStack>
+        <HStack>
+          <StyledButton onClick={() => this.addQ()}>
+            {"Add Question"}
+          </StyledButton>
+          <StyledButton onClick={() => this.addA()}>
+            {"Add Answer"}
+          </StyledButton>
+        </HStack>
+        <Flowizo
+          defaultData={data}
+          onMounted={this.onMountFlowizo}
+          onDataUpdated={this.onDataUpdated}
+          controlsProps={{}}
+          reactFlowProps={{}}
+          />
+      </VStack>
+      
     );
   }
 

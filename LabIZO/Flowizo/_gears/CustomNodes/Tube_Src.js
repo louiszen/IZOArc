@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { Accessor, ColorX } from 'IZOArc/STATIC';
 import PropsType from 'prop-types';
 import { Handle } from 'react-flow-renderer';
-import { Box } from '@material-ui/core';
-import { Cancel, PlayForWork } from '@material-ui/icons';
+import { Box, Typography } from '@material-ui/core';
+import { AllOutOutlined} from '@material-ui/icons';
+import { HStack } from 'IZOArc/LabIZO/Stackizo';
+import _ from 'lodash';
 
 /**
  * @augments {Component<Props, State>}
  */
-class Tube_End extends Component {
+class Tube_Src extends Component {
 
   static propTypes = {
     data: PropsType.object
@@ -28,7 +30,7 @@ class Tube_End extends Component {
   }
 
   componentDidUpdate(prevProps, prevState){
-    if(!Accessor.IsIdentical(prevProps, this.props, Object.keys(Tube_End.defaultProps))){
+    if(!Accessor.IsIdentical(prevProps, this.props, Object.keys(Tube_Src.defaultProps))){
       this._setAllStates();
     }
   }
@@ -45,49 +47,44 @@ class Tube_End extends Component {
     }), callback);
   }
 
-  renderHandlerOverlay(){
+  renderInner(){
     let {data, id} = this.props;
+    if(_.isFunction(data.inner)){
+      return data.inner(id)
+    }else if (_.isString(data.inner)){
+      return (
+        <HStack>
+          <Typography>
+            {data.inner}
+          </Typography>
+        </HStack>
+      );
+    }
+    return data.inner;
+  }
+
+  renderHandlerOverlay(){
+    let {id, data} = this.props;
     return [
       <Box 
         key={0}
         style={{
-          width: 40,
-          height: 40,
-          top: 0,
+          width: 30,
+          height: 30,
+          bottom: 0,
           position: "absolute", 
           left: "50%"
         }}>
-        <PlayForWork
+        <AllOutOutlined
           style={{
             width: "100%",
             height: "100%",
+            
             color: ColorX.GetColorCSS("blue"),
             position: "relative",
-            left: -20,
-            top: -20,
+            left: -15,
+            top: 15,
           }}/>
-      </Box>,
-      <Box 
-        key={"del"}
-        style={{
-          width: 15,
-          height: 15,
-          top: -20,
-          position: "absolute", 
-          right: -20
-        }}>
-          <Cancel onClick={() => {if(data.callback?.onDelete) data.callback.onDelete(id);}} 
-            style={{
-              width: "100%",
-              height: "100%",
-              
-              color: ColorX.GetColorCSS("red"),
-              position: "relative",
-              left: -15,
-              top: 15,
-              cursor: "pointer"
-            }}
-            size="small"/>
       </Box>
     ];
   }
@@ -95,9 +92,9 @@ class Tube_End extends Component {
   renderHandle(){
     return [
       <Handle
-        key={"in"}
-        type="target"
-        position="top"
+        key={"out"}
+        type="source"
+        position="bottom"
         style={{ width: 20, height: 20, background: "transparent", borderWidth: 0 }}
       />
     ];
@@ -106,12 +103,13 @@ class Tube_End extends Component {
   render(){
     return (
       <Box style={{
-        borderRadius: 40, 
+        borderRadius: 50, 
         width: 160, 
-        height: 80, 
-        background: ColorX.GetBGColorCSS("blue"),
+        height: 60, 
+        background: ColorX.GetBGColorCSS("yellow"),
         padding: 12
         }}>
+        {this.renderInner()}
         {this.renderHandlerOverlay()}
         {this.renderHandle()}
       </Box>
@@ -120,4 +118,4 @@ class Tube_End extends Component {
 
 }
 
-export default Tube_End;
+export default Tube_Src;

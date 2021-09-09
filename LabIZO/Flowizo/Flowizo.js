@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
-import { Accessor } from 'IZOArc/STATIC';
+import { Accessor, ColorX } from 'IZOArc/STATIC';
 import PropsType from 'prop-types';
 
-import ReactFlow, { ControlButton, Controls } from 'react-flow-renderer';
+import ReactFlow, { 
+  ControlButton, 
+  Controls, 
+  addEdge,
+  removeElements,
+  isNode
+} from 'react-flow-renderer';
 
 import nodeTypes from './_gears/CustomNodes';
 import edgeTypes from './_gears/CustomEdges';
-import { Box } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import _ from 'lodash';
+import { v1 } from 'uuid';
+import { Close } from '@material-ui/icons';
 
 /**
  * @augments {Component<Props, State>}
@@ -16,6 +24,7 @@ class Flowizo extends Component {
 
   static propTypes = {
     onMounted: PropsType.func,
+    onDataUpdated: PropsType.func,
     
     defaultData: PropsType.array,
 
@@ -23,6 +32,9 @@ class Flowizo extends Component {
     customEdgeTypes: PropsType.object,
     width: PropsType.oneOfType([PropsType.string, PropsType.number]),
     height: PropsType.oneOfType([PropsType.string, PropsType.number]),
+
+    oneWayIn: PropsType.bool,
+    oneWayOut: PropsType.bool,
 
     showControl: PropsType.bool,
     controlsProps: PropsType.shape({
@@ -48,6 +60,7 @@ class Flowizo extends Component {
 
   static defaultProps = {
     onMounted: null,
+    onDataUpdated: null,
 
     defaultData: [],
 
@@ -55,6 +68,9 @@ class Flowizo extends Component {
     customEdgeTypes: {},
     width: "100%",
     height: "100%",
+
+    oneWayIn: false,
+    oneWayOut: true,
 
     showControl: true,
 
@@ -85,22 +101,146 @@ class Flowizo extends Component {
   _setAllStates = (callback) => {
     this.setState((state, props) => ({
       ...props,
-      data: props.defaultData
+      data: this._setCallback(props.defaultData)
     }), () => {
       if(this.props.onMounted){
         this.props.onMounted({
-          
+          AddNode: this._AddNode
         });
       }
       if(callback) callback();
     });
   }
 
-  _onConnect = ({source, target}) => {
-    console.log(source, target);
+  _setCallback = (data) => {
+    let rtn = [];
+    _.map(data, (o, i) => {
+      if(isNode(o)){
+        Accessor.Set(o, "data.callback", this._getCallbacks);
+      }
+      rtn.push(o);
+    });
+    return rtn;
   }
 
-  AddNode = () => {
+  _getCallbacks = () => {
+    return  {
+      onDelete: this._onDelete
+    }
+  }
+
+  _onDelete = (id) => {
+    console.log(id);
+    let {data} = this.state;
+    let elementsToRemove = _.filter(data, (o, i) => o.id === id || o.source === id || o.target === id);
+    console.log(elementsToRemove)
+    this.setState((state, props) => ({
+      data: removeElements(elementsToRemove, state.data)
+    }), () => {
+      let {data} = this.state;
+      let {onDataUpdated} = this.props;
+      if(onDataUpdated){
+        onDataUpdated(data);
+      }
+    });
+  }
+
+  IsSourceConnected = (source, sourceHandle) => {
+    let {data} = this.state;
+    
+    for(let i=0; i<data.length; i++){
+      if(data[i].source === source && data[i].sourceHandle === sourceHandle){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  IsTargetConnected = (target, targetHandle) => {
+    let {data} = this.state;
+    
+    for(let i=0; i<data.length; i++){
+      if(data[i].target === target && data[i].targetHandle === targetHandle){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  _onConnect = ({source, sourceHandle, target, targetHandle}) => {
+    //Add Edge
+    console.log("onConnect");
+    let {oneWayIn, oneWayOut} = this.props;
+
+    //Check if the source is connected
+    if(oneWayOut && this.IsSourceConnected(source, sourceHandle)){
+      return;
+    }
+
+    //Check if the target is connected
+    if(oneWayIn && this.IsTargetConnected(target, targetHandle)){
+      return;
+    }
+
+
+    let strokeColor = ColorX.GetColorCSS("black", 0.75);
+    switch(sourceHandle){
+      case 'yes': strokeColor = ColorX.GetColorCSS("green", 0.75); break;
+      case 'no': strokeColor = ColorX.GetColorCSS("red", 0.75); break;
+      default: break;
+    }
+    
+    let id = v1();
+    let newEdge = {
+      id: id,
+      source: source,
+      sourceHandle: sourceHandle,
+      target: target,
+      targetHandle: targetHandle,
+      style: {
+        stroke: strokeColor,
+        strokeWidth: 3
+      },
+      animated: true
+    };
+
+    this.setState((state, props) => ({
+      data: addEdge(newEdge, state.data)
+    }), () => {
+      let {data} = this.state;
+      let {onDataUpdated} = this.props;
+      if(onDataUpdated){
+        onDataUpdated(data);
+      }
+    });
+  }
+
+  _onElementRemove = (param) => {
+    console.log(param);
+  }
+
+  _AddNode = (type) => {
+    let newID = v1();
+    let {data} = this.state;
+
+    data.push({
+      id: newID,
+      type: type,
+      data: {
+        callback: this._getCallbacks()
+      },
+      position: { x: Math.random() * 500, y: Math.random() * 500 }
+    });
+
+    this.setState((state, props) => ({
+      data: removeElements([], state.data)
+    }), () => {
+      let {data} = this.state;
+      let {onDataUpdated} = this.props;
+      if(onDataUpdated){
+        onDataUpdated(data);
+      }
+    });
 
   }
 
@@ -131,6 +271,8 @@ class Flowizo extends Component {
           nodeTypes={{...nodeTypes, ...customNodeTypes}}
           edgeTypes={{...edgeTypes, ...customEdgeTypes}}
           onConnect={this._onConnect}
+          onElementsRemove={this._onElementRemove}
+          arrowHeadColor={ColorX.GetColorCSS("green", 0.8)}
           {...reactFlowProps}
           >
           {showControl && this.renderControl()}

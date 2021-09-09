@@ -1,26 +1,41 @@
+import { v1 } from "uuid";
+
 const data = [
   {
-    id: '1',
-    type: 'input', // input node
-    data: { label: 'Input Node' },
-    position: { x: 250, y: 25 },
+    id: "1",
+    type: 'Tube_Src', // input node
+    data: { 
+      inner: 'Input Node'
+    },
+    position: { x: 100, y: 100 },
   },
   // default node
   {
-    id: '2',
+    id: "2",
+    type: "Rect_YesNo",
     // you can also pass a React component as a label
-    data: { label: <div>Default Node</div> },
-    position: { x: 100, y: 125 },
+    data: { 
+      inner: <div>Default Node</div>, 
+    },
+    position: { x: 200, y: 200 },
   },
   {
-    id: '3',
-    type: 'output', // output node
-    data: { label: 'Output Node' },
-    position: { x: 250, y: 250 },
+    id: "3",
+    type: "Rect_YesNo",
+    // you can also pass a React component as a label
+    data: { 
+      inner: (id) => <div onClick={() => console.log(id)}>Default Node</div>,
+    },
+    position: { x: 200, y: 200 },
   },
-  // animated edge
-  { id: 'e1-2', source: '1', target: '2', animated: true },
-  { id: 'e2-3', source: '2', target: '3', arrowHeadType: "arrowclosed" },
+  {
+    id: "4",
+    type: 'Tube_End', // output node
+    data: { 
+      inner: 'Output Node'
+    },
+    position: { x: 350, y: 350 },
+  }
 ];
 
 export default data;
