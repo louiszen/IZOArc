@@ -10,6 +10,9 @@ import { Accessor, ColorX } from 'IZOArc/STATIC';
 import { HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
 import { OutlinedBox, StyledButton } from 'IZOArc/LabIZO/Stylizo';
 
+/**
+ * @augments {Component<Props, State>}
+ */
 class FFUpload extends Component {
 
   static propTypes = {

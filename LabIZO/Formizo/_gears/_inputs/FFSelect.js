@@ -9,6 +9,9 @@ import FFAutoComplete from './FFAutoComplete';
 
 import { Accessor } from 'IZOArc/STATIC';
 
+/**
+ * @augments {Component<Props, State>}
+ */
 class FFSelect extends Component {
 
   static propTypes = {

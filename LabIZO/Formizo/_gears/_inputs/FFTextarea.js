@@ -7,6 +7,9 @@ import { FormControl, FormHelperText } from '@material-ui/core';
 import { Accessor } from 'IZOArc/STATIC';
 import { StyledInput, StyledTextField } from 'IZOArc/LabIZO/Stylizo';
 
+/**
+ * @augments {Component<Props, State>}
+ */
 class FFTextarea extends Component {
 
   static propTypes = {

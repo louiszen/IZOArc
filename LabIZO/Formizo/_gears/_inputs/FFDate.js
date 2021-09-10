@@ -12,6 +12,9 @@ import { Accessor } from 'IZOArc/STATIC';
 import { HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
 import { OutlinedBox } from 'IZOArc/LabIZO/Stylizo';
 
+/**
+ * @augments {Component<Props, State>}
+ */
 class FFDate extends Component {
 
   static propTypes = {

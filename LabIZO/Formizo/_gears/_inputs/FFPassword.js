@@ -8,6 +8,9 @@ import { FormControl, FormHelperText, IconButton, InputAdornment } from "@materi
 import { Accessor } from "IZOArc/STATIC";
 import { StyledInput, StyledTextField } from "IZOArc/LabIZO/Stylizo";
 
+/**
+ * @augments {Component<Props, State>}
+ */
 class FFPassword extends Component {
   static propTypes = {
     //data

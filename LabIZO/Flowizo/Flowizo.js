@@ -56,6 +56,8 @@ class Flowizo extends Component {
     reactFlowProps: PropsType.shape({
       ...ReactFlow.propTypes,
     }),
+
+    addOns: PropsType.object
   }
 
   static defaultProps = {
@@ -74,7 +76,9 @@ class Flowizo extends Component {
 
     showControl: true,
 
-    reactFlowProps: {}
+    reactFlowProps: {},
+    
+    addOns: {}
   }
 
   constructor(){
@@ -101,22 +105,27 @@ class Flowizo extends Component {
   _setAllStates = (callback) => {
     this.setState((state, props) => ({
       ...props,
-      data: this._setCallback(props.defaultData)
+      data: this._setDataAddOns(props.defaultData)
     }), () => {
-      if(this.props.onMounted){
+      let {onDataUpdated, onMounted} = this.props;
+      let {data} = this.state;
+      if(onDataUpdated){
+        onDataUpdated(data);
+      }
+      if(onMounted){
         this.props.onMounted({
           AddNode: this._AddNode
         });
       }
-      if(callback) callback();
     });
   }
 
-  _setCallback = (data) => {
+  _setDataAddOns = (data) => {
     let rtn = [];
     _.map(data, (o, i) => {
       if(isNode(o)){
-        Accessor.Set(o, "data.callback", this._getCallbacks);
+        Accessor.Set(o, "data.callback", this._getCallbacks());
+        Accessor.Set(o, "data.addOns", this._getAddOns());
       }
       rtn.push(o);
     });
@@ -129,11 +138,14 @@ class Flowizo extends Component {
     }
   }
 
+  _getAddOns = () => {
+    return this.props.addOns;
+  }
+
   _onDelete = (id) => {
     console.log(id);
     let {data} = this.state;
     let elementsToRemove = _.filter(data, (o, i) => o.id === id || o.source === id || o.target === id);
-    console.log(elementsToRemove)
     this.setState((state, props) => ({
       data: removeElements(elementsToRemove, state.data)
     }), () => {
@@ -227,7 +239,8 @@ class Flowizo extends Component {
       id: newID,
       type: type,
       data: {
-        callback: this._getCallbacks()
+        callback: this._getCallbacks(),
+        addOns: this._getAddOns()
       },
       position: { x: Math.random() * 500, y: Math.random() * 500 }
     });
@@ -273,6 +286,7 @@ class Flowizo extends Component {
           onConnect={this._onConnect}
           onElementsRemove={this._onElementRemove}
           arrowHeadColor={ColorX.GetColorCSS("green", 0.8)}
+          
           {...reactFlowProps}
           >
           {showControl && this.renderControl()}

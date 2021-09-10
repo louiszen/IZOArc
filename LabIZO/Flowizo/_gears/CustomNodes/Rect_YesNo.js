@@ -4,6 +4,8 @@ import PropsType from 'prop-types';
 import { Handle } from 'react-flow-renderer';
 import { Box } from '@material-ui/core';
 import { CancelOutlined, CheckCircleOutlined, PlayForWork, Cancel } from '@material-ui/icons';
+import { VStack } from 'IZOArc/LabIZO/Stackizo';
+import { FFDropdown } from 'IZOArc/LabIZO/Formizo/_gears/_inputs';
 
 /**
  * @augments {Component<Props, State>}
@@ -114,7 +116,10 @@ class Rect_YesNo extends Component {
           position: "absolute", 
           right: -20
         }}>
-          <Cancel onClick={() => {if(data.callback?.onDelete) data.callback.onDelete(id);}} 
+          <Cancel onClick={() => {
+            if(data.callback?.onDelete) {
+              data.callback.onDelete(id);
+            }}}
             style={{
               width: "100%",
               height: "100%",
@@ -157,14 +162,41 @@ class Rect_YesNo extends Component {
     ];
   }
 
+  renderDisplay(){
+    let {data} = this.props;
+    return (
+      <VStack>
+        <FFDropdown
+          ischema={
+            {
+              label: "Question",
+              name: "selected",
+              selectRef: "Questions",
+              selectCap: "refID",
+              selectVal: "refID",
+              showTooltip: true,
+              selectTip: "description"
+            }
+          }
+          addOns={data.addOns}
+          ifieldStyle="outlined"
+          />
+      </VStack>
+    );
+  }
+
   render(){
     return (
       <Box style={{
+        paddingTop: 15,
+        paddingLeft: 10,
+        paddingRight: 10,
         borderRadius: 0, 
-        width: 200, 
-        height: 100, 
+        width: 300, 
+        height: 120, 
         background: ColorX.GetBGColorCSS("lightYellow"),
         }}>
+        {this.renderDisplay()}
         {this.renderHandleOverlay()}
         {this.renderHandle()}
       </Box>

@@ -7,6 +7,9 @@ import { Favorite, FavoriteBorder } from '@material-ui/icons';
 
 import { Accessor } from 'IZOArc/STATIC';
 
+/**
+ * @augments {Component<Props, State>}
+ */
 class FFBool extends Component {
 
   static propTypes = {

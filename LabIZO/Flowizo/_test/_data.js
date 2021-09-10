@@ -16,6 +16,7 @@ const data = [
     // you can also pass a React component as a label
     data: { 
       inner: <div>Default Node</div>, 
+      selected: "Q001"
     },
     position: { x: 200, y: 200 },
   },
@@ -32,7 +33,8 @@ const data = [
     id: "4",
     type: 'Tube_End', // output node
     data: { 
-      inner: 'Output Node'
+      inner: 'Output Node', 
+      selected: "Q001"
     },
     position: { x: 350, y: 350 },
   }

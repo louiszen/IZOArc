@@ -4,6 +4,9 @@ import PropsType from 'prop-types';
 
 import { Accessor } from 'IZOArc/STATIC';
 
+/**
+ * @augments {Component<Props, State>}
+ */
 class FFHidden extends Component {
 
   static propTypes = {

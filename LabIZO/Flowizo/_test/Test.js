@@ -3,8 +3,9 @@ import { Accessor } from 'IZOArc/STATIC';
 
 import data from './_data';
 import Flowizo from '../Flowizo';
-import { VStack,HStack } from 'IZOArc/LabIZO/Stackizo';
+import { VStack, HStack } from 'IZOArc/LabIZO/Stackizo';
 import { StyledButton } from 'IZOArc/LabIZO/Stylizo';
+import addOns from './_addOns';
 
 /**
  * @augments {Component<Props, State>}
@@ -52,6 +53,9 @@ class Test extends Component {
 
   onDataUpdated = (data) => {
     console.log("onDataUpdated");
+    this.setState({
+      flowizoData: data
+    })
   }
 
   addQ = () => {
@@ -62,16 +66,23 @@ class Test extends Component {
     this.MountFlowizo.AddNode("Tube_End");
   }
 
+  getData = () => {
+    console.log(this.state.flowizoData);
+  }
+
 
   render(){
     return (
       <VStack>
-        <HStack>
-          <StyledButton onClick={() => this.addQ()}>
+        <HStack spacing={10}>
+          <StyledButton onClick={() => this.addQ()} theme={{color: "yellow"}}>
             {"Add Question"}
           </StyledButton>
-          <StyledButton onClick={() => this.addA()}>
+          <StyledButton onClick={() => this.addA()} theme={{color: "blue"}}>
             {"Add Answer"}
+          </StyledButton>
+          <StyledButton onClick={() => this.getData()}  theme={{color: "red"}}>
+            {"GetData"}
           </StyledButton>
         </HStack>
         <Flowizo
@@ -80,6 +91,7 @@ class Test extends Component {
           onDataUpdated={this.onDataUpdated}
           controlsProps={{}}
           reactFlowProps={{}}
+          addOns={addOns}
           />
       </VStack>
       

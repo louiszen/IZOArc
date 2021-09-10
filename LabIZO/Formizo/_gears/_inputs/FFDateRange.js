@@ -14,6 +14,9 @@ import { OutlinedBox } from 'IZOArc/LabIZO/Stylizo';
 
 const { RangePicker } = DatePicker;
 
+/**
+ * @augments {Component<Props, State>}
+ */
 class FFDateRange extends Component {
 
   static propTypes = {

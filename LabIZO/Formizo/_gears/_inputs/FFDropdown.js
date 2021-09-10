@@ -8,6 +8,9 @@ import { Accessor } from 'IZOArc/STATIC';
 import { OutlinedBox } from 'IZOArc/LabIZO/Stylizo';
 import { HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
 
+/**
+ * @augments {Component<Props, State>}
+ */
 class FFDropdown extends Component {
 
   static propTypes = {

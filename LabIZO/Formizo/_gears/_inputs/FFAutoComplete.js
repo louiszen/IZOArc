@@ -6,6 +6,9 @@ import { AutoComplete } from 'antd';
 
 import { Accessor } from 'IZOArc/STATIC';
 
+/**
+ * @augments {Component<Props, State>}
+ */
 class FFAutoComplete extends Component {
 
   static propTypes = {
