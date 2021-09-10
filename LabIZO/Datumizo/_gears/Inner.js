@@ -153,9 +153,9 @@ class Inner extends Component {
   }
 
   renderContent(){
-    let {ibase, docID, doc, onQuit, onQuitRefresh, addOns} = this.props;
+    let {ibase, docID, doc, onQuit, onQuitRefresh, addOns, onSubmit, auth, level, formizo} = this.props;
     if(_.isFunction(ibase.Custom)){
-      return ibase.Custom(docID, doc, onQuit, onQuitRefresh, () => {return this.renderFormizo()}, addOns);
+      return ibase.Custom(docID, doc, onQuit, onQuitRefresh, () => {return this.renderFormizo()}, addOns, ibase, onSubmit, auth, level, formizo);
     }else{
       return this.renderFormizo();
     }

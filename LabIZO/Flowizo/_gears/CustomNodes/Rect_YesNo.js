@@ -136,7 +136,6 @@ class Rect_YesNo extends Component {
   }
 
   renderHandle(){
-    let {id} = this.props;
     return [
       <Handle
         key={"in"}

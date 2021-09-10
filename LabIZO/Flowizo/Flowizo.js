@@ -13,10 +13,9 @@ import ReactFlow, {
 
 import nodeTypes from './_gears/CustomNodes';
 import edgeTypes from './_gears/CustomEdges';
-import { Box, Typography } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import _ from 'lodash';
 import { v1 } from 'uuid';
-import { Close } from '@material-ui/icons';
 
 /**
  * @augments {Component<Props, State>}
