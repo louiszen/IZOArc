@@ -7,7 +7,8 @@ import ReactFlow, {
   Controls, 
   addEdge,
   removeElements,
-  isNode
+  isNode,
+  MiniMap
 } from 'react-flow-renderer';
 
 import nodeTypes from './_gears/CustomNodes';
@@ -37,6 +38,7 @@ class Flowizo extends Component {
     oneWayOut: PropsType.bool,
 
     showControl: PropsType.bool,
+    showMiniMap: PropsType.bool,
     controlsProps: PropsType.shape({
       showZoom: PropsType.bool,
       showFitView: PropsType.bool,
@@ -75,6 +77,7 @@ class Flowizo extends Component {
     oneWayOut: true,
 
     showControl: true,
+    showMiniMap: true,
 
     reactFlowProps: {},
     
@@ -305,7 +308,7 @@ class Flowizo extends Component {
   }
 
   render(){
-    let {customNodeTypes, customEdgeTypes, reactFlowProps, width, height, showControl} = this.props;
+    let {customNodeTypes, customEdgeTypes, reactFlowProps, width, height, showControl, showMiniMap} = this.props;
     let {data} = this.state;
     return (
       <Box width={width} height={height}>
@@ -322,6 +325,7 @@ class Flowizo extends Component {
           {...reactFlowProps}
           >
           {showControl && this.renderControl()}
+          {showMiniMap && <MiniMap/>}
         </ReactFlow>
       </Box>
     );
