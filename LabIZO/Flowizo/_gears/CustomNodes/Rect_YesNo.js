@@ -116,21 +116,21 @@ class Rect_YesNo extends Component {
           position: "absolute", 
           right: -20
         }}>
-          <Cancel onClick={() => {
-            if(data.callback?.onDelete) {
-              data.callback.onDelete(id);
-            }}}
-            style={{
-              width: "100%",
-              height: "100%",
-              
-              color: ColorX.GetColorCSS("red"),
-              position: "relative",
-              left: -15,
-              top: 15,
-              cursor: "pointer"
-            }}
-            size="small"/>
+        <Cancel onClick={() => {
+          if(data.callback?.onDelete) {
+            data.callback.onDelete(id);
+          }}}
+          style={{
+            width: "100%",
+            height: "100%",
+            
+            color: ColorX.GetColorCSS("red"),
+            position: "relative",
+            left: -15,
+            top: 15,
+            cursor: "pointer"
+          }}
+          size="small"/>
       </Box>
     ];
   }
@@ -144,42 +144,43 @@ class Rect_YesNo extends Component {
         type="target"
         position="top"
         style={{ width: 20, height: 20, background: "transparent", borderWidth: 0, top: -5 }}
-      />,
+        />,
       <Handle
         key={"out1"}
         id={"yes"}
         type="source"
         position="bottom"
         style={{ left: "20%", width: 20, height: 20, background: "transparent", borderWidth: 0, bottom: -10 }}
-      />,
+        />,
       <Handle
         key={"out2"}
         id={"no"}
         type="source"
         position="bottom"
         style={{ left: "80%", width: 20, height: 20, background: "transparent", borderWidth: 0, bottom: -10 }}
-      />
+        />
     ];
   }
 
   renderDisplay(){
-    let {data} = this.props;
+    let {id, data} = this.props;
     return (
       <VStack>
         <FFDropdown
-          ischema={
-            {
-              label: "Question",
-              name: "selected",
-              selectRef: "Questions",
-              selectCap: "refID",
-              selectVal: "refID",
-              showTooltip: true,
-              selectTip: "description"
-            }
-          }
+          iname={"selected"}
+          ischema={{
+            label: "Question",
+            name: "selected",
+            selectRef: "Questions",
+            selectCap: "refID",
+            selectVal: "refID",
+            showTooltip: true,
+            selectTip: "description"
+          }}
           addOns={data.addOns}
           ifieldStyle="outlined"
+          _onValueChange={(iname, value, validate) => data.callback?.onValueChange(id, iname, value, validate)}
+          formValue={data}
           />
       </VStack>
     );

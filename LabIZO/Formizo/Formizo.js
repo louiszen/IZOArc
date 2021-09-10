@@ -25,7 +25,7 @@ class Formizo extends Component {
     //basic
     width: PropsType.oneOfType([PropsType.string, PropsType.number]),
     height: PropsType.oneOfType([PropsType.string, PropsType.number]),
-    formID: PropsType.string.isRequired,
+    formID: PropsType.string,
 
     //schema
     schema: PropsType.oneOfType([PropsType.array.isRequired, PropsType.func.isRequired]),

@@ -121,11 +121,11 @@ class Datumizo extends Component {
    */
 
   static operationsPropsType = {
-    title: PropsType.string,
-    content: PropsType.string,
-    url: PropsType.string,
-    success: PropsType.string,
-    fail: PropsType.string,
+    title: PropsType.oneOfType([PropsType.string, PropsType.object, PropsType.func]),
+    content: PropsType.oneOfType([PropsType.string, PropsType.object, PropsType.func]),
+    url: PropsType.oneOfType([PropsType.string, PropsType.object, PropsType.func]),
+    success: PropsType.oneOfType([PropsType.string, PropsType.object, PropsType.func]),
+    fail: PropsType.oneOfType([PropsType.string, PropsType.object, PropsType.func]),
     schema: PropsType.arrayOf(PropsType.object),
     buttons: PropsType.arrayOf(PropsType.string),
     readOnly: PropsType.bool,
@@ -138,12 +138,12 @@ class Datumizo extends Component {
   };
 
   static buttonPropsType = {
-    caption: PropsType.string,
+    caption: PropsType.oneOfType([PropsType.string, PropsType.object, PropsType.func]),
     icon: PropsType.oneOfType([PropsType.string, PropsType.object]),
     func: PropsType.oneOfType([PropsType.string, PropsType.object, PropsType.func]),
     reqLevel: PropsType.string,
     reqFunc: PropsType.string,
-    theme: PropsType.object,
+    theme: PropsType.oneOfType([PropsType.string, PropsType.object, PropsType.func]),
     disableFunc: PropsType.func // (id, row) => Boolean
   }
 

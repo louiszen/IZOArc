@@ -1,5 +1,3 @@
-import { v1 } from "uuid";
-
 const data = [
   {
     id: "1",
@@ -15,7 +13,6 @@ const data = [
     type: "Rect_YesNo",
     // you can also pass a React component as a label
     data: { 
-      inner: <div>Default Node</div>, 
       selected: "Q001"
     },
     position: { x: 200, y: 200 },
@@ -25,17 +22,14 @@ const data = [
     type: "Rect_YesNo",
     // you can also pass a React component as a label
     data: { 
-      inner: (id) => <div onClick={() => console.log(id)}>Default Node</div>,
+      selected: "Q002"
     },
     position: { x: 200, y: 200 },
   },
   {
     id: "4",
     type: 'Tube_End', // output node
-    data: { 
-      inner: 'Output Node', 
-      selected: "Q001"
-    },
+    data: {},
     position: { x: 350, y: 350 },
   }
 ];

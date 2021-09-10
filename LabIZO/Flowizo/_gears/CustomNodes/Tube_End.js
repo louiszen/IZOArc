@@ -4,6 +4,8 @@ import PropsType from 'prop-types';
 import { Handle } from 'react-flow-renderer';
 import { Box } from '@material-ui/core';
 import { Cancel, PlayForWork } from '@material-ui/icons';
+import { VStack } from 'IZOArc/LabIZO/Stackizo';
+import { FFDropdown } from 'IZOArc/LabIZO/Formizo/_gears/_inputs';
 
 /**
  * @augments {Component<Props, State>}
@@ -43,6 +45,32 @@ class Tube_End extends Component {
     this.setState((state, props) => ({
       ...props,
     }), callback);
+  }
+
+  renderDisplay(){
+    let {id, data} = this.props;
+    return (
+      <VStack>
+        <FFDropdown
+          iname={"selected"}
+          ischema={
+            {
+              label: "Answer Template",
+              name: "selected",
+              selectRef: "Answers",
+              selectCap: "refID",
+              selectVal: "refID",
+              showTooltip: true,
+              selectTip: "description"
+            }
+          }
+          addOns={data.addOns}
+          ifieldStyle="outlined"
+          _onValueChange={(iname, value, validate) => data.callback?.onValueChange(id, iname, value, validate)}
+          formValue={data}
+          />
+      </VStack>
+    );
   }
 
   renderHandlerOverlay(){
@@ -106,12 +134,16 @@ class Tube_End extends Component {
   render(){
     return (
       <Box style={{
-        borderRadius: 40, 
-        width: 160, 
-        height: 80, 
-        background: ColorX.GetBGColorCSS("blue"),
+        paddingTop: 15,
+        paddingLeft: 10,
+        paddingRight: 10,
+        borderRadius: 5, 
+        width: 300, 
+        height: 110, 
+        background: ColorX.GetBGColorCSS("lightBlue"),
         padding: 12
         }}>
+        {this.renderDisplay()}
         {this.renderHandlerOverlay()}
         {this.renderHandle()}
       </Box>

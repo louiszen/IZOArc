@@ -134,12 +134,17 @@ class Flowizo extends Component {
 
   _getCallbacks = () => {
     return  {
-      onDelete: this._onDelete
+      onDelete: this._onDelete,
+      onValueChange: this._onValueChange
     }
   }
 
   _getAddOns = () => {
     return this.props.addOns;
+  }
+
+  _getFormValue = () => {
+    return this.state.data;
   }
 
   _onDelete = (id) => {
@@ -148,6 +153,31 @@ class Flowizo extends Component {
     let elementsToRemove = _.filter(data, (o, i) => o.id === id || o.source === id || o.target === id);
     this.setState((state, props) => ({
       data: removeElements(elementsToRemove, state.data)
+    }), () => {
+      let {data} = this.state;
+      let {onDataUpdated} = this.props;
+      if(onDataUpdated){
+        onDataUpdated(data);
+      }
+    });
+  }
+
+  _onValueChange = (id, name, value, validate) => {
+    console.log(id, name, value, validate)
+
+    let newData = this.state.data;
+    for(let i=0; i<newData.length; i++){
+      let o = newData[i];
+      if(o.id === id){
+        o.data = {
+          ...o.newData,
+          selected: value
+        };
+      }
+    }
+
+    this.setState((state, props) => ({
+      data: removeElements([], this._setDataAddOns(newData))
     }), () => {
       let {data} = this.state;
       let {onDataUpdated} = this.props;
@@ -286,7 +316,9 @@ class Flowizo extends Component {
           onConnect={this._onConnect}
           onElementsRemove={this._onElementRemove}
           arrowHeadColor={ColorX.GetColorCSS("green", 0.8)}
-          
+          onLoad={(ref) => {
+            ref.fitView();
+          }}
           {...reactFlowProps}
           >
           {showControl && this.renderControl()}

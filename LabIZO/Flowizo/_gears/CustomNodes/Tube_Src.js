@@ -64,7 +64,6 @@ class Tube_Src extends Component {
   }
 
   renderHandlerOverlay(){
-    let {id, data} = this.props;
     return [
       <Box 
         key={0}
@@ -79,7 +78,6 @@ class Tube_Src extends Component {
           style={{
             width: "100%",
             height: "100%",
-            
             color: ColorX.GetColorCSS("blue"),
             position: "relative",
             left: -15,
