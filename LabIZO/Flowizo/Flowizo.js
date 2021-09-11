@@ -165,7 +165,7 @@ class Flowizo extends Component {
   }
 
   _onValueChange = (id, name, value, validate) => {
-    console.log(id, name, value, validate)
+    console.log("_onValueChange")
 
     let newData = this.state.data;
     for(let i=0; i<newData.length; i++){
@@ -213,7 +213,7 @@ class Flowizo extends Component {
 
   _onConnect = ({source, sourceHandle, target, targetHandle}) => {
     //Add Edge
-    console.log("onConnect");
+    console.log("_onConnect");
     let {oneWayIn, oneWayOut} = this.props;
 
     //Check if the source is connected
@@ -260,7 +260,7 @@ class Flowizo extends Component {
   }
 
   _onElementRemove = (param) => {
-    console.log(param);
+    console.log("_onElementRemove");
   }
 
   _AddNode = (type) => {
@@ -287,6 +287,28 @@ class Flowizo extends Component {
       }
     });
 
+  }
+
+  _onNodeDragStop = (param, node) => {
+    console.log("_onNodeDragStop")
+    let id = node.id;
+    let newData = this.state.data;
+    for(let i=0; i<newData.length; i++){
+      let o = newData[i];
+      if(o.id === id){
+        o.position = node.position;
+      }
+    }
+
+    this.setState((state, props) => ({
+      data: removeElements([], this._setDataAddOns(newData))
+    }), () => {
+      let {data} = this.state;
+      let {onDataUpdated} = this.props;
+      if(onDataUpdated){
+        onDataUpdated(data);
+      }
+    });
   }
 
   renderControl(){
@@ -321,6 +343,7 @@ class Flowizo extends Component {
           onLoad={(ref) => {
             ref.fitView();
           }}
+          onNodeDragStop={this._onNodeDragStop}
           {...reactFlowProps}
           >
           {showControl && this.renderControl()}
