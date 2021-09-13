@@ -181,7 +181,7 @@ class FFUpload extends Component {
             _onFieldBlur();
             _onBlurInlineSubmit(iname)
           }}
-          multiple
+          multiple={false}
           type="file"
           style={{
             display: "none"
