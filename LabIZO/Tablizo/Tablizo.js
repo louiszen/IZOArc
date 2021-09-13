@@ -368,7 +368,7 @@ class Tablizo extends Component {
         if (o.Cell) {
           renderCell = (param) => o.Cell(param.row, Accessor.Get(param.row, o.name), addOns);
         } else {
-          renderCell = (param) => <CellExpand value={param.value} width={param.colDef.width} />;
+          renderCell = (param) => <CellExpand value={param.value} width={param.colDef.width || param.colDef.computedWidth} />;
         }
 
         let renderHeader = undefined;
