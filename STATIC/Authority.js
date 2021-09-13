@@ -33,7 +33,6 @@ class Authority {
     return this.IsAccessible(store.user.authority, store.user.level, reqAuth, reqLevel, reqFunc);
   }
 
-
   static Require(reqAuth = "", reqLevel = 999, reqFunc = []){
     if(!this.IsAccessibleQ(reqAuth, reqLevel, reqFunc)){
       window.location.assign("/Denied");

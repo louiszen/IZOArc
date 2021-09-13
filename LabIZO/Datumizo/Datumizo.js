@@ -358,7 +358,6 @@ class Datumizo extends Component {
 
   _onPageSizeChange = (pageSize) => {
     let { serverSidePagination, refreshOnPageChange } = this.props;
-    console.log(pageSize);
     this.setState(
       (state, props) => ({
         nav: {
