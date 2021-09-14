@@ -58,6 +58,8 @@ class Flowizo extends Component {
       ...ReactFlow.propTypes,
     }),
 
+    readOnly: PropsType.bool,
+
     addOns: PropsType.object
   }
 
@@ -79,6 +81,8 @@ class Flowizo extends Component {
     showMiniMap: true,
 
     reactFlowProps: {},
+
+    readOnly: false,
     
     addOns: {}
   }
@@ -312,7 +316,7 @@ class Flowizo extends Component {
   }
 
   renderControl(){
-    let {customControls, controlsProps} = this.props;
+    let {customControls, controlsProps, readOnly} = this.props;
     let btns = _.map(customControls, (o, i) => {
       return (
         <ControlButton key={i} onClick={() => o.func()}>
@@ -322,14 +326,14 @@ class Flowizo extends Component {
     });
 
     return (
-      <Controls {...controlsProps}>
+      <Controls {...controlsProps} showInteractive={!readOnly}>
         {btns}
       </Controls>
     );
   }
 
   render(){
-    let {customNodeTypes, customEdgeTypes, reactFlowProps, width, height, showControl, showMiniMap} = this.props;
+    let {customNodeTypes, customEdgeTypes, reactFlowProps, width, height, showControl, showMiniMap, readOnly} = this.props;
     let {data} = this.state;
     return (
       <Box width={width} height={height}>
@@ -344,7 +348,11 @@ class Flowizo extends Component {
             ref.fitView();
           }}
           onNodeDragStop={this._onNodeDragStop}
+          
           {...reactFlowProps}
+          nodesConnectable={!readOnly}
+          nodesDraggable={!readOnly}
+          elementsSelectable={!readOnly}
           >
           {showControl && this.renderControl()}
           {showMiniMap && <MiniMap/>}
