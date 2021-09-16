@@ -987,6 +987,13 @@ class Datumizo extends Component {
     },
   };
 
+  flatExcelSchema = (arr, d = 1) => {
+    return d > 0 ? 
+      arr.reduce((o, i) => o.concat(Array.isArray(i) ? 
+      this.flatExcelSchema(i, d - 1) : i), [])
+      : arr.slice();
+  };
+
   Export = {
     onClick: async () => {
       let { base, addOns } = this.state;
@@ -997,12 +1004,14 @@ class Datumizo extends Component {
       let url = DOMAIN + base.operations?.Export?.url;
       let selected = this.MountTablizo? this.MountTablizo.GetSelectedRows() : [];
 
+      let schema = this.flatExcelSchema(base.operations?.Export?.schema, Infinity);
+
       let payloadOut = {
         JWT: store.user.JWT,
         data: {
           selected: selected,
           format: null,
-          schema: base.operations?.Export?.schema,
+          schema: schema,
           skip: 0,
           limit: 9999,
         },
@@ -1153,7 +1162,7 @@ class Datumizo extends Component {
         data: {
           [name]: value,
         },
-        schema: base.operations?.Import?.schema || [],
+        schema: this.flatExcelSchema(base.operations?.Import?.schema, Infinity) || [],
         replace: base.operations?.Import?.replace || false,
         JWT: store.user.JWT,
         addOns: addOns,
