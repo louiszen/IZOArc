@@ -154,7 +154,7 @@ class FFCheckbox extends Component {
           <HStack flexWrap="wrap" justifyContent={ischema.selectAlignment || "flex-start"}>
             {this.renderOption()}
           </HStack> :
-          <VStack flexWrap="wrap">
+          <VStack flexWrap="wrap" alignItems={ischema.selectAlignment || "flex-start"}>
             {this.renderOption()}
           </VStack>
         }            
