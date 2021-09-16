@@ -267,6 +267,7 @@ class Datumizo extends Component {
             Reload: this._fetchData,
             GetData: this._getData,
             GetDoc: this._getDoc,
+            GetDocID: this._getDocID,
             CustomInner: this._CustomInner,
             QuitInner: this._QuitInner,
             SoftReload: this._SoftReload,
@@ -300,6 +301,10 @@ class Datumizo extends Component {
       doc: doc || state.doc,
     }));
   };
+
+  _getDocID = () => {
+    return this.state.docID;
+  }
 
   _fetchData = () => {
     let { serverSidePagination, onLoad } = this.props;
@@ -1386,14 +1391,16 @@ class Datumizo extends Component {
   renderInner() {
     let { base, addOns } = this.props;
     let { doc, mode, docID } = this.state;
+    
+    let ibase = base?.operations[mode];
     return (
       <Inner
         onQuit={this._QuitInner}
         onQuitRefresh={this._QuitAndFetch}
         doc={doc}
         docID={docID}
-        ibase={base.operations[mode]}
-        onSubmit={this._Redirect(mode, "onSubmit", true)}
+        ibase={ibase}
+        onSubmit={this._Redirect(ibase?.onSubmit || mode, "onSubmit", true)}
         addOns={addOns}
         auth={store.user.authority}
         level={store.user.level}

@@ -6,7 +6,7 @@ import { Checkbox, FormControl, FormControlLabel, FormGroup,
   FormHelperText, FormLabel } from '@material-ui/core';
 
 import { Accessor } from 'IZOArc/STATIC';
-import { HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
+import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
 import { OutlinedBox } from 'IZOArc/LabIZO/Stylizo';
 
 /**
@@ -151,10 +151,12 @@ class FFCheckbox extends Component {
       <FormGroup>
         {
           ischema.selectDirection === "row"?
-          <HStack flexWrap="wrap">
-            {this.renderOption(ivalue)}
+          <HStack flexWrap="wrap" justifyContent={ischema.selectAlignment || "flex-start"}>
+            {this.renderOption()}
           </HStack> :
-          this.renderOption(ivalue)
+          <VStack flexWrap="wrap">
+            {this.renderOption()}
+          </VStack>
         }            
       </FormGroup>
     );

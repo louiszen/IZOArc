@@ -5,7 +5,7 @@ import _ from 'lodash';
 import { FormControl, FormControlLabel, FormHelperText, FormLabel, Radio, RadioGroup } from '@material-ui/core';
 
 import { Accessor } from 'IZOArc/STATIC';
-import { HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
+import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
 import { OutlinedBox } from 'IZOArc/LabIZO/Stylizo';
 
 /**
@@ -144,14 +144,17 @@ class FFRadio extends Component {
             e.target.value, ischema.validate)
         }
         >
+        <HStack justifyContent={ischema.selectAlignment || "flex-start"}>
           {
             ischema.selectDirection === "row"?
-            <HStack flexWrap="wrap">
+            <HStack flexWrap="wrap" justifyContent={ischema.selectAlignment || "flex-start"}>
               {this.renderOption()}
             </HStack> :
-            this.renderOption()
+            <VStack flexWrap="wrap">
+              {this.renderOption()}
+            </VStack>
           }
-                  
+        </HStack>    
       </RadioGroup>
     );
   }

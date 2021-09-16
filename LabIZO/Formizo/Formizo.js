@@ -417,30 +417,33 @@ class Formizo extends Component {
     let blocks = [];
 
     _.map(schema, (o, i) => {
-      console.log(o);
       if(_.isFunction(o)){
         let subschema = this.getInnerSchema(o);
         _.map(subschema, (v, w) => {
           if(_.isArray(v)){
             _.map(v, (j, k) => {
-              blocks.push(this.renderBlock(j));
+              let id = "inner_" + i + "_" + w + "_" + k;
+              blocks.push(this.renderBlock(j, id));
             })
           } else {
-            blocks.push(this.renderBlock(v));
+            let id = "inner_" + i + "_" + w;
+            blocks.push(this.renderBlock(v, id));
           }
         });
       } else if(_.isArray(o)){
         _.map(o, (v, w) => {
           if(_.isArray(v)){
             _.map(v, (j, k) => {
-              blocks.push(this.renderBlock(j));
+              let id = "inner_" + i + "_" + w + "_" + k;
+              blocks.push(this.renderBlock(j, id));
             })
           } else {
-            blocks.push(this.renderBlock(v));
+            let id = "inner_" + i + "_" + w;
+            blocks.push(this.renderBlock(v, id));
           }
         })
       } else {
-        blocks.push(this.renderBlock(o));
+        blocks.push(this.renderBlock(o, i));
       }
     });
 

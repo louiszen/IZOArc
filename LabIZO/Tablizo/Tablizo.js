@@ -106,7 +106,7 @@ class Tablizo extends Component {
     noRowsOverlay: undefined,
 
     defaultPageSize: 50,
-    pageSizeOption: [25, 50, 100, 200],
+    pageSizeOption: [25, 50, 100],
 
     auth: {},
     level: 999,

@@ -375,7 +375,6 @@ let select = [
     selectRef: "selectRef",
     selectCap: "cap",
     selectVal: "val",
-    selectEnable: "enable",
     selectDirection: "column"
   },
   {
@@ -387,7 +386,6 @@ let select = [
     selectRef: "selectRef",
     selectCap: "cap",
     selectVal: "val",
-    selectEnable: "enable",
     selectDirection: "column"
   }
 ]; 

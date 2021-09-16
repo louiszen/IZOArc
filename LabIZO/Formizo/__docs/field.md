@@ -139,6 +139,7 @@
 | showTooltip | `Boolean` ||  `false` | Show tooltip or not |
 | selectDisable | `String` || `""` | Accessor from selectRef for the option accessibility |
 | selectDirection | `String` || `"row"` | The flex direction of the options |
+| selectAlignment | `String` || `"flex-start"` | The justifyContent of the buttons |
 <br/>
 
 ### ***Style***
