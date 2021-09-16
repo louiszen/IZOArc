@@ -347,86 +347,31 @@ class Tablizo extends Component {
     return schema;
   };
 
-  getColumns = () => {
-    let { auth, level, addOns, inlineButtons, inlineButtonsOpposite, inlineButtonsAlign, selectionOnClick } = this.props;
-    let schema = this.getSchema();
-    let cols = _.map(schema, (o, i) => {
-      if (Authority.IsAccessible(auth, level, o.reqAuth, o.reqLevel, o.reqFunc)) {
-        let renderCell;
-
-        if (!o.Cell && o.transform === "datetime") {
-          o.transform = undefined;
-          o.Cell = (row, field, addOns) => {
-            if (field) {
-              return moment(field).format(o.dateFormat || "DD MMM YYYY, HH:mm:ss");
-            } else {
-              return o.fallback || "N/A";
-            }
-          };
-        }
-
-        if (o.Cell) {
-          renderCell = (param) => o.Cell(param.row, Accessor.Get(param.row, o.name), addOns);
-        } else {
-          renderCell = (param) => <CellExpand value={param.value} width={param.colDef.width || param.colDef.computedWidth} />;
-        }
-
-        let renderHeader = undefined;
-        let headerName = undefined;
-        if (_.isString(o.label)) {
-          headerName = o.label;
-        } else {
-          renderHeader = () => o.label;
-        }
-
-        let cellClassName = undefined;
-        if (_.isFunction(o.cellClass)) {
-          cellClassName = (param) => o.cellClass(param.row, Accessor.Get(param.row, o.name), addOns);
-        } else if (_.isString(o.cellClass)) {
-          cellClassName = o.cellClass;
-        }
-
-        let sortComparator = undefined;
-        if (_.isFunction(o.sortComparator)) {
-          sortComparator = (v1, v2, param1, param2) => {
-            return o.sortComparator(param1.row, param2.row, Accessor.Get(param1.row, o.name), Accessor.Get(param2.row, o.name));
-          };
-        }
-
-        let valueGetter = (param) => {
-          return Accessor.Get(param.row, o.name);
-        };
-
-        if (o.valueGetter) {
-          valueGetter = (param) => {
-            return o.valueGetter(param.row, Accessor.Get(param.row, o.name), addOns);
-          };
-        }
-
-        let rtn = {
-          headerName: headerName,
-          renderHeader: renderHeader,
-          headerAlign: o.headerAlign || "center",
-          headerClassName: o.headerClass,
-          field: o.name,
-          width: o.width,
-          flex: o.width ? undefined : o.flex || 1,
-          valueGetter: valueGetter,
-          sortable: o.sortable !== false,
-          filterable: o.filterable !== false,
-          disableColumnMenu: !(o.menu || false),
-          type: o.type,
-          renderCell: renderCell,
-          cellClassName: cellClassName,
-          description: o.description,
-          autoHeight: o.autoHeight || false,
-          disableClickEventBubbling: !selectionOnClick,
-          hide: o.hide,
-        };
-
-        if (sortComparator) rtn.sortComparator = sortComparator;
-        return rtn;
+  getColumns = (schema) => {
+    let { inlineButtons, inlineButtonsOpposite, inlineButtonsAlign, data, addOns } = this.props;
+    
+    let cols = [];
+    _.map(schema, (o, i) => {
+      
+      if(_.isFunction(o)){
+        let subschema = o(data, addOns);
+        _.map(subschema, (v, w) => {
+          if(_.isArray(v)){
+            _.map(v, (j, k) => {
+              cols.push(this.getColumn(j));
+            })
+          } else {
+            cols.push(this.getColumn(v));
+          }
+        });
+      } else if(_.isArray(o)){
+        _.map(o, (v, w) => {
+          cols.push(this.getColumn(v));
+        })
+      } else {
+        cols.push(this.getColumn(o));
       }
+      
     });
     cols = _.filter(cols, (o) => o);
 
@@ -446,6 +391,86 @@ class Tablizo extends Component {
 
     return rtn;
   };
+
+  getColumn = (o) => {
+    let { auth, level, addOns, selectionOnClick } = this.props;
+    if (Authority.IsAccessible(auth, level, o.reqAuth, o.reqLevel, o.reqFunc)) {
+      let renderCell;
+
+      if (!o.Cell && o.transform === "datetime") {
+        o.transform = undefined;
+        o.Cell = (row, field, addOns) => {
+          if (field) {
+            return moment(field).format(o.dateFormat || "DD MMM YYYY, HH:mm:ss");
+          } else {
+            return o.fallback || "N/A";
+          }
+        };
+      }
+
+      if (o.Cell) {
+        renderCell = (param) => o.Cell(param.row, Accessor.Get(param.row, o.name), addOns);
+      } else {
+        renderCell = (param) => <CellExpand value={param.value} width={param.colDef.width || param.colDef.computedWidth} />;
+      }
+
+      let renderHeader = undefined;
+      let headerName = undefined;
+      if (_.isString(o.label)) {
+        headerName = o.label;
+      } else {
+        renderHeader = () => o.label;
+      }
+
+      let cellClassName = undefined;
+      if (_.isFunction(o.cellClass)) {
+        cellClassName = (param) => o.cellClass(param.row, Accessor.Get(param.row, o.name), addOns);
+      } else if (_.isString(o.cellClass)) {
+        cellClassName = o.cellClass;
+      }
+
+      let sortComparator = undefined;
+      if (_.isFunction(o.sortComparator)) {
+        sortComparator = (v1, v2, param1, param2) => {
+          return o.sortComparator(param1.row, param2.row, Accessor.Get(param1.row, o.name), Accessor.Get(param2.row, o.name));
+        };
+      }
+
+      let valueGetter = (param) => {
+        return Accessor.Get(param.row, o.name);
+      };
+
+      if (o.valueGetter) {
+        valueGetter = (param) => {
+          return o.valueGetter(param.row, Accessor.Get(param.row, o.name), addOns);
+        };
+      }
+
+      let rtn = {
+        headerName: headerName,
+        renderHeader: renderHeader,
+        headerAlign: o.headerAlign || "center",
+        headerClassName: o.headerClass,
+        field: o.name,
+        width: o.width,
+        flex: o.width ? undefined : o.flex || 1,
+        valueGetter: valueGetter,
+        sortable: o.sortable !== false,
+        filterable: o.filterable !== false,
+        disableColumnMenu: !(o.menu || false),
+        type: o.type,
+        renderCell: renderCell,
+        cellClassName: cellClassName,
+        description: o.description,
+        autoHeight: o.autoHeight || false,
+        disableClickEventBubbling: !selectionOnClick,
+        hide: o.hide,
+      };
+
+      if (sortComparator) rtn.sortComparator = sortComparator;
+      return rtn;
+    }
+  }
 
   getSortModel = () => {
     let { auth, level } = this.props;
@@ -505,12 +530,13 @@ class Tablizo extends Component {
     let { height, width, data, showSelector, rowIdAccessor, pagination, defaultPageSize, pageSizeOption, loading, rowCount, serverSidePagination, density, selectionOnClick, datagridProps } =
       this.props;
     let { sortModel, filterModel, selectedRows } = this.state;
+    let schema = this.getSchema();
     return (
       <Box height={height} width={width} overflow={"hidden"}>
         <DataGrid
           rows={data}
           disableSelectionOnClick={!selectionOnClick}
-          columns={this.getColumns()}
+          columns={this.getColumns(schema)}
           checkboxSelection={showSelector}
           onSelectionModelChange={this._onRowSelected}
           onFilterModelChange={this._onFilterChange}

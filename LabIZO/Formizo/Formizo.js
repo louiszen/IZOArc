@@ -413,47 +413,58 @@ class Formizo extends Component {
   };
 
   renderSchema() {
-    let { formValue, formError } = this.state;
     let schema = this.getSchema();
-    return _.map(schema, (o, i) => {
-      let innerSchema = this.getInnerSchema(o);
-      if(_.isArray(innerSchema)){
-        return _.map(innerSchema, (v, w) => {
-          return (
-            <FItem
-              key={"inner_" + i + "_" + w}
-              ischema={v}
-              preAccessor=''
-              _onValueChange={this._onValueChange}
-              _onBlurInlineSubmit={this._onBlurInlineSubmit}
-              _onInlineSubmit={this._onInlineSubmit}
-              _onInlineRevert={this._onInlineRevert}
-              _setHiddenValue={this._setHiddenValue}
-              _Validate={this._Validate}
-              formValue={formValue}
-              formError={formError}
-              {...this.props}
-            />
-          );
+    let blocks = [];
+
+    _.map(schema, (o, i) => {
+      console.log(o);
+      if(_.isFunction(o)){
+        let subschema = this.getInnerSchema(o);
+        _.map(subschema, (v, w) => {
+          if(_.isArray(v)){
+            _.map(v, (j, k) => {
+              blocks.push(this.renderBlock(j));
+            })
+          } else {
+            blocks.push(this.renderBlock(v));
+          }
         });
+      } else if(_.isArray(o)){
+        _.map(o, (v, w) => {
+          if(_.isArray(v)){
+            _.map(v, (j, k) => {
+              blocks.push(this.renderBlock(j));
+            })
+          } else {
+            blocks.push(this.renderBlock(v));
+          }
+        })
+      } else {
+        blocks.push(this.renderBlock(o));
       }
-      return (
-        <FItem
-          key={i}
-          ischema={innerSchema}
-          preAccessor=''
-          _onValueChange={this._onValueChange}
-          _onBlurInlineSubmit={this._onBlurInlineSubmit}
-          _onInlineSubmit={this._onInlineSubmit}
-          _onInlineRevert={this._onInlineRevert}
-          _setHiddenValue={this._setHiddenValue}
-          _Validate={this._Validate}
-          formValue={formValue}
-          formError={formError}
-          {...this.props}
-        />
-      );
     });
+
+    return blocks;
+  }
+
+  renderBlock(schema, id){
+    let { formValue, formError } = this.state;
+    return (
+      <FItem
+        key={id}
+        ischema={schema}
+        preAccessor=''
+        _onValueChange={this._onValueChange}
+        _onBlurInlineSubmit={this._onBlurInlineSubmit}
+        _onInlineSubmit={this._onInlineSubmit}
+        _onInlineRevert={this._onInlineRevert}
+        _setHiddenValue={this._setHiddenValue}
+        _Validate={this._Validate}
+        formValue={formValue}
+        formError={formError}
+        {...this.props}
+      />
+    );
   }
 
   renderButtons() {

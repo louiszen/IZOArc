@@ -35,6 +35,18 @@ or you can pass a function to generate a schema:
 (formValue, addOns) => [] | {}
 ```
 
+or you can mix with function and blocks:
+```jsx
+schema = [
+  {
+    label: String,
+    name: String,
+    format: "text" 
+  },
+  (formValue, addOns) => [] | {}
+]
+```
+
 ### ***Group***
 ---
 The item that represents a group of simple fields or have some special functionality, can be nested.

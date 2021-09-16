@@ -126,7 +126,7 @@ class Datumizo extends Component {
     url: PropsType.oneOfType([PropsType.string, PropsType.object, PropsType.func]),
     success: PropsType.oneOfType([PropsType.string, PropsType.object, PropsType.func]),
     fail: PropsType.oneOfType([PropsType.string, PropsType.object, PropsType.func]),
-    schema: PropsType.arrayOf(PropsType.object),
+    schema: PropsType.arrayOf(PropsType.oneOfType([PropsType.string, PropsType.object, PropsType.func, PropsType.array])),
     buttons: PropsType.arrayOf(PropsType.string),
     readOnly: PropsType.bool,
     onSubmit: PropsType.oneOfType([PropsType.string, PropsType.func]),
@@ -1326,9 +1326,9 @@ class Datumizo extends Component {
 
   renderTableButtons(buttons, left = true) {
     let { table } = this.state;
-    let { addOns } = this.props;
+    let { base, addOns } = this.props;
     return _.map(buttons, (o, i) => {
-      if (Authority.IsAccessibleQ(o.reqAuth, o.reqLevel, o.reqFunc)) {
+      if (Authority.IsAccessibleQ(base.reqAuth, o.reqLevel, o.reqFunc)) {
         //injection
         if (o.inject) {
           return o.inject(table.data, addOns);

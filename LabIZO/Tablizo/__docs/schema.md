@@ -4,6 +4,17 @@
 
 `Tablizo` accept the following JS Array format to generate the table.
 
+or you can mix with function and blocks:
+```jsx
+schema = [
+  {
+    label: String,
+    name: String,
+  },
+  (formValue, addOns) => [] | {}
+]
+```
+
 ```jsx
 {
   label: String | JSX,
