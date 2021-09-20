@@ -129,7 +129,6 @@ class FFDate extends Component {
     return (
       <TimePicker
         value={dpvalue}
-        picker={itype}
         showTime={itype === "datetime"}
         onChange={(v) =>
           _onValueChange(iname, 
@@ -167,9 +166,8 @@ class FFDate extends Component {
     
     return (
       <DatePicker
-        value={dpvalue}
-        picker={itype}
         showTime={itype === "datetime"}
+        value={dpvalue}        
         onChange={(v) => {
           _onValueChange(iname, 
             this._handleReturn(v, idateformat), ischema.validate)

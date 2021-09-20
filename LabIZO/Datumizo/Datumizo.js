@@ -4,7 +4,8 @@ import PropsType from "prop-types";
 import _ from "lodash";
 import axios from "axios";
 import fileDownload from "js-file-download";
-import { Add, CloudDownload, CloudUpload, Delete, DeleteForever, Edit, GetApp, InfoOutlined, Publish, Assessment } from "@material-ui/icons";
+import { Add, CloudDownload, CloudUpload, Delete, DeleteForever, Edit, GetApp, InfoOutlined, Publish, Assessment} from "@material-ui/icons";
+import { ContentCopy } from '@mui/icons-material';
 import { Box, Slide, Typography } from "@material-ui/core";
 
 import { IZOTheme, DOMAIN } from "__Base/config";
@@ -517,6 +518,8 @@ class Datumizo extends Component {
         return <Delete fontSize={size} />;
       case "analyse":
         return <Assessment fontSize={size} />;
+      case "duplicate":
+        return <ContentCopy fontSize={size} />;
       default:
         return null;
     }
@@ -819,6 +822,87 @@ class Datumizo extends Component {
     },
   };
 
+  Duplicate = {
+    onClick: (id, row) => {
+      let { base } = this.props;
+      let title = base.operations?.Duplicate?.title;
+      if (_.isFunction(title)) {
+        title = title(id, row);
+      }
+      let content = base.operations?.Duplicate?.content;
+      if (_.isFunction(content)) {
+        content = content(id, row);
+      }
+
+      store.Ask(title, content, async () => {
+        return await this.Duplicate.onSubmit(id, row);
+      });
+    },
+
+    onSubmit: async (id, row) => {
+      console.log("submit Duplicate");
+
+      let { base, addOns } = this.props;
+      let url = DOMAIN + base.operations?.Duplicate?.url;
+
+      let payloadOut = {
+        data: {
+          ...row,
+        },
+        JWT: store.user.JWT,
+        addOns: addOns,
+      };
+
+      try {
+        console.log(base.operations?.Duplicate?.url, payloadOut);
+
+        store.isLoading(true);
+        let res = await axios.post(url, payloadOut);
+        store.isLoading(false);
+
+        console.log(base.operations?.Duplicate?.url, res.data);
+
+        let { Success, payload } = res.data;
+
+        if (Success === true) {
+          if (base.operations?.Duplicate?.onSuccess) {
+            base.operations?.Duplicate?.onSuccess(payload);
+          } else {
+            this.Duplicate.onSuccess(payload);
+          }
+          return { Success: true };
+        } else {
+          if (base.operations?.Duplicate?.onFail) {
+            base.operations?.Duplicate?.onFail(payload);
+          } else {
+            this.Duplicate.onFail(payload);
+          }
+          return { Success: false };
+        }
+      } catch (e) {
+        store.isLoading(false);
+        if (base.operations?.Duplicate?.onFail) {
+          base.operations?.Duplicate?.onFail(e);
+        } else {
+          this.Duplicate.onFail(e);
+        }
+        return { Success: false };
+      }
+    },
+
+    onSuccess: (payload) => {
+      let { base } = this.props;
+      store.Alert(base.operations?.Duplicate?.success, "success");
+      this._fetchData();
+    },
+
+    onFail: (payload) => {
+      let { base } = this.props;
+      let msg = base.operations?.Duplicate?.fail + (payload.message || "");
+      store.Alert(msg, "error");
+    },
+  };
+
   Add = {
     onClick: () => {
       let {base} = this.props;
@@ -826,6 +910,88 @@ class Datumizo extends Component {
         inEdit: true,
         mode: "Add",
         doc: base.operations?.Add?.defaultDoc || {}
+      });
+    },
+
+    onSubmit: async (formProps) => {
+      console.log("submit Add");
+      console.log(formProps);
+
+      let { base, addOns, docID } = this.props;
+      let url = DOMAIN + base.operations?.Add?.url;
+
+      let payloadOut = {
+        data: {
+          ...formProps,
+        },
+        JWT: store.user.JWT,
+        addOns: addOns,
+      };
+
+      if(base.operations?.Add?.withFile){
+        payloadOut = this._getUploadFormData(payloadOut);
+      }
+
+
+      try {
+        console.log(base.operations?.Add?.url, payloadOut);
+
+        store.isLoading(true);
+        let res = await axios.post(url, payloadOut);
+        store.isLoading(false);
+
+        console.log(base.operations?.Add?.url, res.data);
+
+        let { Success, payload } = res.data;
+
+        if (Success === true) {
+          if (base.operations?.Add?.onSuccess) {
+            base.operations?.Add?.onSuccess(payload);
+          } else {
+            this.Add.onSuccess(payload);
+          }
+          this._QuitInner(docID);
+        } else {
+          if (base.operations?.Add?.onFail) {
+            base.operations?.Add?.onFail(payload);
+          } else {
+            this.Add.onFail(payload);
+          }
+        }
+      } catch (e) {
+        store.isLoading(false);
+        if (base.operations?.Add?.onFail) {
+          base.operations?.Add?.onFail(e);
+        } else {
+          this.Add.onFail(e);
+        }
+      }
+    },
+
+    onSuccess: (payload) => {
+      let { base } = this.props;
+      store.Alert(base.operations?.Add?.success, "success");
+      this._fetchData();
+    },
+
+    onFail: (payload) => {
+      let { base } = this.props;
+      let msg = base.operations?.Add?.fail + (payload.message || "");
+      store.Alert(msg, "error");
+    },
+  };
+
+  DuplicateAdd = {
+    onClick: (id, row) => {
+      let {base} = this.props;
+      let doc = _.cloneDeep(row);
+      if(Accessor.Get(doc, base.rowIdAccessor || "_id")){
+        Accessor.Set(doc, base.rowIdAccessor || "_id", undefined);
+      }
+      this.setState({
+        inEdit: true,
+        mode: "Add",
+        doc: doc || {}
       });
     },
 
