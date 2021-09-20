@@ -3,14 +3,14 @@ import React, { Component } from 'react';
 
 import PropsType from 'prop-types';
 import _ from 'lodash';
-import { Add, Delete } from '@material-ui/icons';
+import { Add, ArrowDownward, ArrowUpward, Delete } from '@material-ui/icons';
 import { Box, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 
 import FItem from '../FItem';
 
 import { Accessor, ColorX } from 'IZOArc/STATIC';
 import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
-import { OutlinedBox } from 'IZOArc/LabIZO/Stylizo';
+import { OutlinedBox, StyledIconButton } from 'IZOArc/LabIZO/Stylizo';
 
 class FGArray extends Component {
 
@@ -105,6 +105,27 @@ class FGArray extends Component {
   getDisplayIdx = (idx) => {
     let {ischema} = this.props;
     return "#" + (idx + (ischema.startDisplayIndex || 0));
+  }
+
+  onSwap = (src, target) => {
+    console.log("onSwap", src, target);
+    let {ischema, preAccessor, formValue, _onValueChange} = this.props;
+    let iname = ischema.name;
+    if(!_.isEmpty(preAccessor)){
+      if(!_.isEmpty(ischema.name)){
+        iname = preAccessor + "." + ischema.name;
+      }else{
+        iname = preAccessor;
+      }
+    }
+
+    let items = Accessor.Get(formValue, iname);
+    if(!items) items = [];
+    let tmp = items[src];
+    items[src] = items[target];
+    items[target] = tmp;
+
+    _onValueChange(iname, items);
   }
 
   onAddItem = () => {
@@ -244,11 +265,22 @@ class FGArray extends Component {
         </TableCell>
       );
     }
-
+    console.log("<WIP>");
     _.map(arraySchema, (o, i) => {
+      let innerSchema = this.getInnerSchema(o, i);
+      if(_.isArray(innerSchema)){
+        _.map(innerSchema, (v, w) => {
+          console.log(v);
+          rtn.push (
+            <TableCell key={i + "_" + w} style={{padding: 5}}>
+              {this.renderItem(v, idx)}
+            </TableCell>
+          );
+        });
+      }
       rtn.push (
         <TableCell key={i} style={{padding: 5}}>
-          {this.renderItem(o, idx)}
+          {this.renderItem(innerSchema, idx)}
         </TableCell>
       );
     });
@@ -319,6 +351,8 @@ class FGArray extends Component {
     let showHeader = true;
     let arraySchema = this.getArraySchema();
 
+    console.log(arraySchema)
+
     if(arraySchema && arraySchema.length === 1 && _.isEmpty(arraySchema[0].label)){
       showHeader = false;
     }
@@ -372,8 +406,23 @@ class FGArray extends Component {
     });
   }
 
+
+
+  renderOrderingButton(idx, arraySize){
+    return (
+      <HStack>
+        <StyledIconButton disabled={idx === 0} onClick={() => this.onSwap(idx, idx - 1)}>
+          <ArrowUpward/>
+        </StyledIconButton>
+        <StyledIconButton disabled={idx === arraySize - 1} onClick={() => this.onSwap(idx, idx + 1)}>
+          <ArrowDownward/>
+        </StyledIconButton>
+      </HStack>
+    );
+  }
+
   renderCards(){
-    let {arraySize} = this.state;
+    let {ischema, arraySize} = this.state;
     
     let rtn = [];
     let arraySchema = this.getArraySchema();
@@ -385,6 +434,7 @@ class FGArray extends Component {
             {this.renderSchema(arraySchema, i)}
             <HStack>
               {this.getDisplayIdx(i)}
+              {ischema.reordering && this.renderOrderingButton(i, arraySize)}
               <Spacer/>
               {this.renderDeleteButton(i)}
             </HStack>

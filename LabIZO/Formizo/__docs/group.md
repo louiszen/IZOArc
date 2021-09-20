@@ -38,6 +38,7 @@ Array of values.
   addStyle?: "header" | "placeholder",
   showIndex?: Boolean | false,
   startDisplayIndex?: Number | 0,
+  reordering?: Boolean | false,
   array: [
     {
       //simple
@@ -59,6 +60,7 @@ Array of values.
 | addStyle | `String` || `"header"` | header: on the header line, placeholder: an empty textfield |
 | showIndex | `Boolean` || `false` | Show the array auto index (beginning from 1) at left hand side |
 | startDisplayIndex | `Number` || `0` | The default starting index for display |
+| reordering | `Boolean` || `false` | Reordering arrows shown |
 | array | <code>[simple &#124; group]</code> |✔||The items array in the group |
 <br/>
 
