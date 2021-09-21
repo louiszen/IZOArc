@@ -215,22 +215,7 @@ class Flowizo extends Component {
     return false;
   }
 
-  _onConnect = ({source, sourceHandle, target, targetHandle}) => {
-    //Add Edge
-    console.log("_onConnect");
-    let {oneWayIn, oneWayOut} = this.props;
-
-    //Check if the source is connected
-    if(oneWayOut && this.IsSourceConnected(source, sourceHandle)){
-      return;
-    }
-
-    //Check if the target is connected
-    if(oneWayIn && this.IsTargetConnected(target, targetHandle)){
-      return;
-    }
-
-
+  addNewEdge = ({source, sourceHandle, target, targetHandle}) => {
     let strokeColor = ColorX.GetColorCSS("black", 0.75);
     switch(sourceHandle){
       case 'yes': strokeColor = ColorX.GetColorCSS("green", 0.75); break;
@@ -261,6 +246,44 @@ class Flowizo extends Component {
         onDataUpdated(data);
       }
     });
+  }
+
+  _onConnect = ({source, sourceHandle, target, targetHandle}) => {
+    //Add Edge
+    console.log("_onConnect");
+    let {oneWayIn, oneWayOut} = this.props;
+    let {data} = this.state;
+
+    //Check if the source is connected
+    if(oneWayOut && this.IsSourceConnected(source, sourceHandle)){
+      let idx = -1;
+      for(let i=0; i<data.length; i++){
+        if(data[i].source === source && data[i].sourceHandle === sourceHandle){
+          idx = i;
+        }
+      }
+
+      if(idx >= 0){
+        this.setState((state, props) => ({
+          data: removeElements([data[idx]], state.data)
+        }), () => {
+          //Check if the target is connected
+          if(oneWayIn && this.IsTargetConnected(target, targetHandle)){
+            return;
+          }
+          this.addNewEdge({source, sourceHandle, target, targetHandle});
+        }); 
+        return;
+      }
+    }
+
+    //Check if the target is connected
+    if(oneWayIn && this.IsTargetConnected(target, targetHandle)){
+      return;
+    }
+
+    this.addNewEdge({source, sourceHandle, target, targetHandle});
+    
   }
 
   _onElementRemove = (param) => {

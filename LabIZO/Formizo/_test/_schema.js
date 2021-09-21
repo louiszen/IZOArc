@@ -571,7 +571,8 @@ let array = [
     addStyle: "header",
     showIndex: true,
     startDisplayIndex: 1,
-    arrayStyle: "card",
+    arrayStyle: "table",
+    reordering: true,
     array: [
       {
         label: "",

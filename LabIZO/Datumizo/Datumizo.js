@@ -130,7 +130,7 @@ class Datumizo extends Component {
     schema: PropsType.arrayOf(PropsType.oneOfType([PropsType.string, PropsType.object, PropsType.func, PropsType.array])),
     buttons: PropsType.arrayOf(PropsType.string),
     readOnly: PropsType.bool,
-    onSubmit: PropsType.oneOfType([PropsType.string, PropsType.func]),
+    onSubmit: PropsType.oneOfType([PropsType.string, PropsType.func, PropsType.object]),
     Custom: PropsType.func,
     QuitReload: PropsType.bool, 
     onSuccess: PropsType.func,

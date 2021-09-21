@@ -207,6 +207,14 @@ class FGArray extends Component {
       )
     }
 
+    if(ischema.reordering){
+      rtn.push(
+        <TableCell key={"reordering"} style={{textAlign: "center", padding: 5}}>
+          {""}
+        </TableCell>
+      )
+    }
+
     _.map(arraySchema, (o, i) => {
       rtn.push (
         <TableCell key={i} style={{textAlign: "center", padding: 5}}>
@@ -253,6 +261,7 @@ class FGArray extends Component {
   renderTableRowCells(idx){
     
     let {ischema, readOnly} = this.props;
+    let {arraySize} = this.state;
     let ireadOnly = ischema.readOnly || readOnly;
 
     let rtn = [];
@@ -265,7 +274,20 @@ class FGArray extends Component {
         </TableCell>
       );
     }
-    console.log("<WIP>");
+    if(ischema.reordering){
+      console.warn("<WIP>: arraySchema not supporting functions");
+      rtn.push(
+        <TableCell key={"reordering"} style={{padding: 5}}>
+          <StyledIconButton disabled={idx === 0} onClick={() => this.onSwap(idx, idx - 1)}>
+            <ArrowUpward/>
+          </StyledIconButton>
+          <StyledIconButton disabled={idx === arraySize - 1} onClick={() => this.onSwap(idx, idx + 1)}>
+            <ArrowDownward/>
+          </StyledIconButton>
+        </TableCell>
+      );
+    }
+    
     _.map(arraySchema, (o, i) => {
       let innerSchema = this.getInnerSchema(o, i);
       if(_.isArray(innerSchema)){
