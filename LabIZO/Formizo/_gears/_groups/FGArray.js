@@ -373,8 +373,6 @@ class FGArray extends Component {
     let showHeader = true;
     let arraySchema = this.getArraySchema();
 
-    console.log(arraySchema)
-
     if(arraySchema && arraySchema.length === 1 && _.isEmpty(arraySchema[0].label)){
       showHeader = false;
     }

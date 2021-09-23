@@ -88,6 +88,7 @@ class Inner extends Component {
 
   renderFormizo(){
     let {ibase, doc, onSubmit, addOns, auth, level, formizo} = this.props;
+    
     return (
       <Formizo
         schema={ibase.schema}

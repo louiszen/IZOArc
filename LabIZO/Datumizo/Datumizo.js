@@ -906,10 +906,17 @@ class Datumizo extends Component {
   Add = {
     onClick: () => {
       let {base} = this.props;
+      let defDoc = {};
+      if(_.isFunction(base.operations?.Add?.defaultDoc)){
+        defDoc = base.operations?.Add?.defaultDoc()
+      }else{
+        defDoc = base.operations?.Add?.defaultDoc || {}
+      }
+      console.log(base)
       this.setState({
         inEdit: true,
         mode: "Add",
-        doc: base.operations?.Add?.defaultDoc || {}
+        doc: defDoc
       });
     },
 

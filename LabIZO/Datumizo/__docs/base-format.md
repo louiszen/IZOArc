@@ -24,7 +24,8 @@ base: {
     readOnly?: Boolean,
     onSubmit?: String | (formprops) => void,
     Custom?: (docID, doc, onQuit, onQuitRefresh, renderFormizo, addOns) => JSX,
-    QuitReload?: Boolean | false
+    QuitReload?: Boolean | false,
+    defaultDoc?: () => {} | {}
   },
 
   buttons: {

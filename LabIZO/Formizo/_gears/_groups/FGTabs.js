@@ -81,14 +81,27 @@ class FGTabs extends Component {
   renderSchema(page){
     let {ischema, ...other} = this.props;
     let pageSchema = this.getPageSchema(page);
-    return _.map(pageSchema, (o, i) => {
-      return (
-        <FItem
-          key={i}
-          ischema={o}
-          {...other}/>
-      );
+    let rtn = [];
+    _.map(pageSchema, (o, i) => {
+      if(_.isArray(o)){
+        _.map(o, (v, w) => {
+          rtn.push(
+            <FItem
+              key={i + "_" + w}
+              ischema={v}
+              {...other}/>
+          );
+        })
+      }else{
+        rtn.push(
+          <FItem
+            key={i}
+            ischema={o}
+            {...other}/>
+        );
+      }
     });
+    return rtn;
   }
 
   renderTabPanels(){
