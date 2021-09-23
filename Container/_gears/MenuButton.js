@@ -10,10 +10,10 @@ import MenuButtonList from './MenuButtonList';
 
 import Accessizo from 'IZOArc/LabIZO/Accessizo';
 import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
-import { Accessor, store, ColorX } from 'IZOArc/STATIC';
+import { Accessor, store } from 'IZOArc/STATIC';
 import { StyledButton } from 'IZOArc/LabIZO/Stylizo';
 import { HMarquee } from 'IZOArc/LabIZO/Animatizo';
-import { IZOTheme } from '__Base/config';
+import theme from './theme';
 
 class MenuButton extends Component {
 
@@ -25,7 +25,8 @@ class MenuButton extends Component {
     reqLevel: PropsType.number,
     submenu: PropsType.array,
     mini: PropsType.bool,
-    zIndex: PropsType.number
+    zIndex: PropsType.number,
+    disabled: PropsType.bool
   }
 
   static defaultProps = {
@@ -36,7 +37,8 @@ class MenuButton extends Component {
     reqLevel: 999,
     submenu: [],
     mini: false,
-    zIndex: 50
+    zIndex: 50,
+    disabled: false
   }
 
   constructor(){
@@ -91,38 +93,22 @@ class MenuButton extends Component {
   }
 
   renderButton(){
-    let {caption, fafa, location, path, zIndex, mini} = this.props;
+    let {caption, fafa, location, path, zIndex, mini, disabled, submenu} = this.props;
     let inPage =  (location && location.pathname).includes(path);
-    let inPageTheme = {
-      padding: "0 !important",
-      borderRadius: "0px",
-      textTransform: "none",
-      background: ColorX.GetColorCSS("pureWhite"),
-      label: ColorX.GetColorCSS(IZOTheme.foreground),
-      hover: {
-        color: ColorX.GetColorCSS("black"),
-        background: ColorX.GetColorCSS("pureWhite"),
-      },
-      position: "relative",
+    
+    let btnTheme = theme.originTheme;
+    if(submenu && inPage) { btnTheme = theme.inPageSubmenuTheme; }
+    else if(submenu && disabled) { btnTheme = theme.submenuTheme; }
+    else if(inPage) { btnTheme = theme.inPageTheme; }
+    else if(disabled) { btnTheme = theme.disabledTheme; }
+
+    btnTheme = {
+      ...btnTheme,
       zIndex: zIndex
     };
 
-    let theme = {
-      padding: "0 !important",
-      textTransform: "none",
-      borderRadius: "0px",
-      color: ColorX.GetColorCSS(IZOTheme.foreground),
-      background: ColorX.GetColorCSS("black"),
-      hover: {
-        color: ColorX.GetColorCSS("black"),
-        background: ColorX.GetColorCSS("pureWhite"),
-      },
-      position: "relative",
-      zIndex: zIndex
-    };
-    
     return (
-      <StyledButton theme={inPage? inPageTheme : theme}>
+      <StyledButton theme={btnTheme}>
         <HStack padding={1} width="140px">
           <HMarquee width="90px">
             <Typography style={{fontSize: 14, opacity: store.mini? 0: 1, whiteSpace: "nowrap"}}>
