@@ -89,10 +89,10 @@ class FFNumber extends Component {
       let {formValue, ischema, iname, _Validate, _onValueChange} = this.state;
       let ivalue = Accessor.Get(formValue, iname);
       if(!_.isEmpty(ischema.validate)){
-        _Validate(iname, ivalue, ischema.validate);
+        _Validate(iname, Number(ivalue), ischema.validate);
       }
       if(!ivalue && ischema.defaultValue){
-        _onValueChange(iname, ischema.defaultValue, ischema.validate);
+        _onValueChange(iname, Number(ischema.defaultValue), ischema.validate);
       }
     });
   }
@@ -122,7 +122,7 @@ class FFNumber extends Component {
         name={iname}
         onChange={(e) => 
           _onValueChange(iname, 
-            e.target.value, ischema.validate)
+            Number(e.target.value), ischema.validate)
         }
         onFocus={(e) => {
           _onFieldFocus();
@@ -182,7 +182,7 @@ class FFNumber extends Component {
         placeholder={ischema.placeholder || ""}
         onChange={(e) => 
           _onValueChange(iname, 
-            e.target.value, ischema.validate)} 
+            Number(e.target.value), ischema.validate)} 
         onFocus={(e) => {
           _onFieldFocus();
         }}
