@@ -65,7 +65,7 @@ class FGInline extends Component {
     let inlineSchema = this.getInlineSchema();
     return _.map(inlineSchema, (o, i) => {
       return (
-        <Box marginX={0.5} width="100%" key={i}>
+        <Box marginX={0.5} width={o.width || "100%"} key={i}>
           <FItem
             key={i}
             ischema={o}
