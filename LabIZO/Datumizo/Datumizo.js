@@ -135,7 +135,8 @@ class Datumizo extends Component {
     QuitReload: PropsType.bool, 
     onSuccess: PropsType.func,
     onFail: PropsType.func,
-    withFile: PropsType.bool
+    withFile: PropsType.bool,
+    defaultDoc: PropsType.oneOfType([PropsType.string, PropsType.func, PropsType.object]),
   };
 
   static buttonPropsType = {
