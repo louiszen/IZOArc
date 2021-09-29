@@ -1,11 +1,13 @@
 import _ from 'lodash';
 import {makeAutoObservable, runInAction} from 'mobx';
 import { toJS, autorun, set } from 'mobx';
+import { Accessor } from '.';
 import BrowserX from './BrowserX';
 
 class AppStore {
 
   browser = "";
+  lang = "EN";
   user = {};
   server = {};
   alert = {};
@@ -13,6 +15,8 @@ class AppStore {
   initialized = false;
   ask = {};
   mini = true;
+  config = {};
+  save = {};
 
   constructor(){
     makeAutoObservable(this);
@@ -42,6 +46,22 @@ class AppStore {
 
   }
 
+  RESET(){
+    runInAction(() => {
+      this.browser = "";
+      this.lang = "EN";
+      this.user = {};
+      this.server = {};
+      this.alert = {};
+      this.loading = false;
+      this.initialized = false;
+      this.ask = {};
+      this.mini = true;
+      this.config = {};
+      this.save = {};
+    })
+  }
+
   setBrowser(){
     runInAction(() => {
       let browser = BrowserX.getBrowser();
@@ -58,6 +78,24 @@ class AppStore {
   clearUser(){
     runInAction(() => {
       this.user = {};
+    });
+  }
+
+  setConfig(config){
+    runInAction(() => {
+      this.config = config;
+    });
+  }
+
+  clearConfig(){
+    runInAction(() => {
+      this.config = {};
+    });
+  }
+
+  setLang(lang){
+    runInAction(() => {
+      this.lang = lang;
     });
   }
 
@@ -157,6 +195,28 @@ class AppStore {
   toggleMini(){
     runInAction(() => {
       this.mini = !this.mini;
+    });
+  }
+
+  clearSave(){
+    runInAction(() => {
+      this.save = {};
+    });
+  }
+
+  setSave(save){
+    runInAction(() => {
+      this.save = save;
+    });
+  }
+
+  Save(save){
+    let newSave = {
+      ...this.save,
+      ...save
+    };
+    runInAction(() => {
+      this.save = newSave;
     });
   }
 
