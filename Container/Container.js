@@ -13,7 +13,7 @@ import Footer from './Footer';
 import Menu from './Menu';
 import NavBar from './NavBar';
 import './Container.css';
-import { IZOTheme, DOMAIN, hasContainer, loginSys, serverCheck } from '__Base/config';
+import { IZOTheme, DOMAIN, hasContainer, loginSys, serverCheck, StartUp } from '__Base/config';
 
 import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
 import { SnackAlert, StyledButton, StyledLinearProgress } from 'IZOArc/LabIZO/Stylizo';
@@ -37,6 +37,9 @@ class Container extends Component {
       if(serverCheck){
         this.GetServerDetail();
       }
+      _.map(StartUp, (o, i) => {
+        o();
+      });
     });
   }
 
