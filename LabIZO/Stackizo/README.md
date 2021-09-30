@@ -12,7 +12,7 @@ A generic react-class written for stacking HTML tags
 | justifyContent | `CSS.justify-content` || `"flex-start"` | The justifying way of childrens | 
 | alignContent | `CSS.align-content` || `undefined` | The alignment of content |
 | alignItems | `CSS.align-items` || `"center"` | The aligning way of childrens |
-| height | `CSS.height` || `"fit-content"` | The height of the flexbox |
+| height | `CSS.height` || `"100%"` | The height of the flexbox |
 | spacing | `Number` || `0` | The spacing between children |
 <br/>
 

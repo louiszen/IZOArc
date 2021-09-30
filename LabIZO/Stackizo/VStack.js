@@ -26,7 +26,7 @@ class VStack extends Component {
     justifyContent: "flex-start",
     alignContent: undefined,
     alignItems: "center",
-    height: "fit-content",
+    height: "100%",
     spacing: 0
   }
 
