@@ -16,6 +16,7 @@ class AppStore {
   mini = true;
   config = {};
   save = {};
+  backdrop = null;
 
   constructor(){
     makeAutoObservable(this);
@@ -58,6 +59,7 @@ class AppStore {
       this.mini = true;
       this.config = {};
       this.save = {};
+      this.backdrop = null;
     })
   }
 
@@ -156,6 +158,18 @@ class AppStore {
         onConfirm,
         buttons: ["OK"]
       };
+    });
+  }
+
+  Backdrop(backdrop){
+    runInAction(() => {
+      this.backdrop = backdrop;
+    });
+  }
+
+  clearBackdrop(){
+    runInAction(() => {
+      this.backdrop = null;
     });
   }
 

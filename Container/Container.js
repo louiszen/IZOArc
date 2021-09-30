@@ -28,6 +28,7 @@ class Container extends Component {
       snackOpen: false,
       loadingOpen: false,
       dialogOpen: false,
+      backdropOpen: false,
       buttonWidth: "100px"
     }
   }
@@ -65,6 +66,14 @@ class Container extends Component {
       () => {
         this.setState({
           dialogOpen: !_.isEmpty(store.ask)
+        });
+      }
+    );
+
+    when(() => this.state.backdropOpen !== !_.isEmpty(store.backdrop),
+      () => {
+        this.setState({
+          backdropOpen: !_.isEmpty(store.backdrop)
         });
       }
     );
@@ -212,6 +221,11 @@ class Container extends Component {
     });
   }
 
+  renderBackDrop(){
+    console.log(store.backdrop)
+    return store.backdrop;
+  }
+
   renderDialog(){
     let title = store.ask.title;
     if(_.isString(title)){
@@ -278,7 +292,7 @@ class Container extends Component {
   }
 
   render(){
-    let {snackOpen, loadingOpen, dialogOpen} = this.state;
+    let {snackOpen, loadingOpen, dialogOpen, backdropOpen} = this.state;
     let {location} = this.props;
     let isPublic = (location && location.pathname) === "/";
     let isChatbot = (location && location.pathname) === "/Chatbot";
@@ -307,6 +321,9 @@ class Container extends Component {
         </Backdrop>
         <Backdrop open={dialogOpen} style={{zIndex: 500, color: ColorX.GetColorCSS(IZOTheme.foreground)}}>
           {this.renderDialog()}
+        </Backdrop>
+        <Backdrop open={backdropOpen} style={{zIndex: 500, color: ColorX.GetColorCSS(IZOTheme.foreground)}} onClick={() => store.clearBackdrop()}>
+          {this.renderBackDrop()}
         </Backdrop>
         {isContained && <Footer/>}
       </Box>
