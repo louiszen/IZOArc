@@ -222,10 +222,8 @@ class Container extends Component {
   }
 
   renderBackDrop(){
-    
     if(store.backdrop){
       let {render, state, props, addOns} = store.backdrop;
-      console.log(render, state, props, addOns)
       return (
         <VStack width="100%">
           {_.isFunction(render) && render(state, props, addOns)}
