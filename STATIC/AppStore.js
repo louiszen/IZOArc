@@ -161,9 +161,14 @@ class AppStore {
     });
   }
 
-  Backdrop(backdrop){
+  Backdrop(backdrop, state, props, addOns){
     runInAction(() => {
-      this.backdrop = backdrop;
+      this.backdrop = {
+        render: backdrop,
+        state: state, 
+        props: props, 
+        addOns: addOns
+      }
     });
   }
 
