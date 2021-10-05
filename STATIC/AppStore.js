@@ -161,12 +161,10 @@ class AppStore {
     });
   }
 
-  Backdrop(backdrop, state, props, addOns){
+  Backdrop(backdrop, addOns){
     runInAction(() => {
       this.backdrop = {
-        render: backdrop,
-        state: state, 
-        props: props, 
+        render: backdrop, 
         addOns: addOns
       }
     });

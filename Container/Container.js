@@ -223,10 +223,10 @@ class Container extends Component {
 
   renderBackDrop(justifyContent = "center"){
     if(store.backdrop){
-      let {render, state, props, addOns} = store.backdrop;
+      let {render, addOns} = store.backdrop;
       return (
         <VStack width="100%" justifyContent={justifyContent}>
-          {_.isFunction(render) && render(state, props, addOns)}
+          {_.isFunction(render) && render(addOns)}
         </VStack>
       );
     }
