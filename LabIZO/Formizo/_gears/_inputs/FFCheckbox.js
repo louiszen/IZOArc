@@ -152,10 +152,10 @@ class FFCheckbox extends Component {
         {
           ischema.selectDirection === "row"?
           <HStack flexWrap="wrap" justifyContent={ischema.selectAlignment || "flex-start"}>
-            {this.renderOption()}
+            {this.renderOption(ivalue)}
           </HStack> :
           <VStack flexWrap="wrap" alignItems={ischema.selectAlignment || "flex-start"}>
-            {this.renderOption()}
+            {this.renderOption(ivalue)}
           </VStack>
         }            
       </FormGroup>

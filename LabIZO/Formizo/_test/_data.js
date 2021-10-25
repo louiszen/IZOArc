@@ -31,9 +31,6 @@ let addOns = {
 }
 
 let defaultV = {
-  test: [
-    "opt1"
-  ]
   /*
   display: "DISPLAY",
   simpletext: "55555",

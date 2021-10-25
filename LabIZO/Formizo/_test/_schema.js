@@ -1,24 +1,213 @@
 import React from 'react';
 import HStack from 'IZOArc/LabIZO/Stackizo/HStack';
 //import { ZRichText } from 'IZOArc/STATIC';
+import _ from 'lodash';
+
+let ITEMS = [
+  "All worker of the team wear safety harness with lanyard (Each lifeline is only for one worker)",
+  "All worker of the team wear safety helmet with chin strap",
+  "All hand-tools are in good condition",
+  "Loosened material had proper containment",
+  "All hand-tools/ portable electric tools equipped with hand sling",
+  "If the hot work is included, valid hot work permit had been obtained.",
+  "Safety net at the workplace is in good condition",
+  "Working at AC Platform, mobile temporary fall arrest system should be adopted",
+  "Others"
+]
 
 let simple = [
-  (formValue, addOns) => {
-    return [
+  {
+    header: "Application"
+  },
+  {
+    label: "Type",
+    name: "type",
+    format: "select",
+    selectStyle: "radio",
+    selectRef: ["Balcony", "AC Platform"],
+    variant: "outlined"
+  },
+  {
+    inline: [
       {
-        label: addOns.check[0],
-        name: "check0",
+        label: "Company",
+        name: "company",
         format: "text"
       },
-      (formValue, addOns) => {
-        return {
-          label: addOns.check[0],
-          name: "check3",
-          format: "text"
-        }
+      {
+        label: "Date",
+        name: "appliedDate",
+        format: "date"
       }
     ]
   },
+  {
+    inline: [
+      {
+        label: "Work location",
+        name: "location",
+        format: "text"
+      },
+      {
+        label: "Working Task",
+        name: "task",
+        format: "text"
+      },
+    ]
+  },
+  {
+    inline: [
+      {
+        label: "Work in charge",
+        name: "WIC.name",
+        format: "text"
+      },
+      {
+        label: "Contact Number",
+        name: "WIC.phone",
+        format: "text"
+      }
+    ]
+  },
+  {
+    inline: [
+      {
+        label: "Permit effective from",
+        name: "permit.Start",
+        format: "date"
+      },
+      {
+        label: "Permit expired at",
+        name: "permit.End",
+        format: "date"
+      }
+    ]
+  },
+  {
+    header: "Risk Assessment",
+  },
+  {
+    label: "Item",
+    name: "itemtoCheck",
+    format: "select",
+    selectStyle: "checkbox",
+    selectRef: [
+      {cap: "Falling of people", val: "a1"},
+      {cap: "Falling of objects", val: "a2"},
+      {cap: "Handtools", val: "a3"},
+      {cap: "Welding at height", val: "a4"},
+    ],
+    selectCap: "cap",
+    selectVal: "val"
+  },
+  {
+    inline: [
+      {
+        label: "Other high risk activities",
+        name: "otherItem",
+        format: "bool",
+      },
+      {
+        control: "otherItem",
+        fold:[
+          {
+            label: "",
+            name: "otherItemDesc",
+            format: "text",
+            noLabelGrid: true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    label: "FCS attachment",
+    name: "fcsAttachment",
+    format: "bool",
+    boolStyle: "switch"
+  },
+  {
+    header: "Pre-inspection check and briefing"
+  },
+  {
+    label: "Pre-inspection check to be conducted as according to the checklist in P.2, the overall condition is satisfactory and suitable to issue working permit.",
+    name: "preCheck",
+    format: "bool",
+    boolStyle: "switch"
+  },
+  {
+    label: "I hereby certified that I fully understand the working restrictions and conditions relating to this Work Permit, including the risk and safety measures of working at external scaffold, and can confirm that this information has been relayed to my team.",
+    name: "informedWorker",
+    canAdd: true,
+    canDelete: true,
+    arrayStyle: "card",
+    array: [
+      {
+        label: "Worker Name",
+        name: "name",
+        format: "text"
+      },
+      {
+        label: "Position",
+        name: "position",
+        format: "text"
+      },
+      {
+        label: "Signature",
+        name: "signature",
+        format: "text"
+      }
+    ]
+  },
+  {
+    header: "Permit to work Checklist"
+  },
+  {
+    inline: [
+      {
+        label: "Company",
+        name: "companyName",
+        format: "text"
+      },
+      {
+        label: "Location",
+        name: "location",
+        format: "text"
+      }
+    ]
+  },
+  {
+    label: "Weather",
+    name: "weather",
+    format: "select",
+    selectStyle: "radio",
+    selectRef: [
+      "Fine",
+      "Windy",
+      "Rainy",
+      "Heavy Rain"
+    ]
+  },
+  {
+    header: "Inspection Items"
+  },
+  _.map(ITEMS, (o, i) => ({
+    inline: [
+      {
+        inject: o,
+      },
+      {
+        label: "Result",
+        name: "result" + i,
+        format: "text"
+      },
+      {
+        label: "Remarks",
+        name: "remarks" + i,
+        format: "text"
+      }
+    ]
+  }))
 ]
 
 /*
