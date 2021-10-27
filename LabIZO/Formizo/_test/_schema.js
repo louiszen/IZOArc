@@ -90,7 +90,7 @@ let simple = [
     label: "Item",
     name: "itemtoCheck",
     format: "select",
-    selectStyle: "checkbox",
+    selectStyle: "radio",
     selectRef: [
       {cap: "Falling of people", val: "a1"},
       {cap: "Falling of objects", val: "a2"},
