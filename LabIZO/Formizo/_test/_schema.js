@@ -25,14 +25,16 @@ let simple = [
     format: "select",
     selectStyle: "radio",
     selectRef: ["Balcony", "AC Platform"],
-    variant: "outlined"
+    variant: "outlined",
+    selectDirection: "row"
   },
   {
     inline: [
       {
         label: "Company",
         name: "company",
-        format: "text"
+        format: "text",
+        validate: ["required"]
       },
       {
         label: "Date",
@@ -90,7 +92,7 @@ let simple = [
     label: "Item",
     name: "itemtoCheck",
     format: "select",
-    selectStyle: "radio",
+    selectStyle: "checkbox",
     selectRef: [
       {cap: "Falling of people", val: "a1"},
       {cap: "Falling of objects", val: "a2"},
