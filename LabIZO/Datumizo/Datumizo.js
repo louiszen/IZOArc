@@ -660,7 +660,7 @@ class Datumizo extends Component {
             (state, props) => ({
               table: {
                 ...state.table,
-                data: payload.docs,
+                data: payload,
               },
             }),
             () => {
