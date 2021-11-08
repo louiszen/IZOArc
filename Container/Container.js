@@ -122,10 +122,11 @@ class Container extends Component {
   }
 
   GetServerDetail = async () => {
-    let url = DOMAIN + '/Common/Name/Get';
+    let url = DOMAIN + '/CommonAPI/Env/Info';
     
     try{
       let rtn = await axios.post(url);
+      console.log('/CommonAPI/Env/Info', rtn.data);
       if(rtn.data.Success === true){
         store.setServer(rtn.data.payload);
       }else{
