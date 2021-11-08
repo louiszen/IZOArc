@@ -7,7 +7,7 @@ class Env {
 
   static async CheckInitialized(){
 
-    let url = DOMAIN + "/Base/Env/IsInitialized";
+    let url = DOMAIN + "/Common/Env/IsInitialized";
 
     let payloadOut = {
       JWT: store.user.JWT

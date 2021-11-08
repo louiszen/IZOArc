@@ -122,7 +122,7 @@ class Container extends Component {
   }
 
   GetServerDetail = async () => {
-    let url = DOMAIN + '/Base/Name/Get';
+    let url = DOMAIN + '/Common/Name/Get';
     
     try{
       let rtn = await axios.post(url);
