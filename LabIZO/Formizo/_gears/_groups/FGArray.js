@@ -11,6 +11,7 @@ import FItem from '../FItem';
 import { Accessor, ColorX } from 'IZOArc/STATIC';
 import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
 import { OutlinedBox, StyledIconButton } from 'IZOArc/LabIZO/Stylizo';
+import { IZOTheme } from '__Base/config';
 
 class FGArray extends Component {
 
@@ -449,7 +450,7 @@ class FGArray extends Component {
 
     for(let i = 0; i < arraySize; i++){
       rtn.push(
-        <OutlinedBox key={i} theme={{color: ColorX.GetColorCSS("elainOrangeDark", 0.2)}}>
+        <OutlinedBox key={i} theme={{color: ColorX.GetColorCSS(IZOTheme.btnHover, 0.2)}}>
           <VStack style={{width: "100%"}}>
             {this.renderSchema(arraySchema, i)}
             <HStack>
@@ -538,7 +539,7 @@ class FGArray extends Component {
         return (
           <OutlinedBox label={ischema.label} 
             style={{width: ischema.width || "100%", marginTop: "15px"}} 
-            theme={{border: ColorX.GetColorCSS("elainOrangeDark", 0.2)}}
+            theme={{border: ColorX.GetColorCSS(IZOTheme.btnHover, 0.2)}}
             >
             <VStack style={{width: "100%"}} alignItems="flex-start">
               {!ireadOnly && ischema.canAdd 
@@ -557,7 +558,7 @@ class FGArray extends Component {
         return (
           <OutlinedBox
             style={{width: ischema.width || "100%", marginTop: "15px"}} 
-            theme={{border: ColorX.GetColorCSS("elainOrangeDark", 0.2)}}
+            theme={{border: ColorX.GetColorCSS(IZOTheme.btnHover, 0.2)}}
             >
             <VStack style={{width: "100%"}}>
               { this.renderHeader()}
@@ -571,7 +572,7 @@ class FGArray extends Component {
         return (
           <OutlinedBox
             style={{width: ischema.width || "100%", marginTop: "15px"}} 
-            theme={{border: ColorX.GetColorCSS("elainOrangeDark", 0.2)}}
+            theme={{border: ColorX.GetColorCSS(IZOTheme.btnHover, 0.2)}}
             >
             <VStack style={{width: "100%"}} alignItems="flex-start">
               {!ireadOnly && ischema.canAdd 

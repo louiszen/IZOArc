@@ -117,7 +117,7 @@ class Inner extends Component {
               textAlign: "left", 
               fontFamily: "Segoe UI",
               fontSize: 20,
-              color: ColorX.GetColorCSS(IZOTheme.foreground),
+              color: ColorX.GetColorCSS(IZOTheme.menuFG),
               marginRight: 10
               }}>
               {ibase.title}
@@ -137,9 +137,9 @@ class Inner extends Component {
         <Spacer/>
         <StyledButton theme={{
           color: "white", 
-          background: ColorX.GetColorCSS(IZOTheme.foreground),
+          background: ColorX.GetColorCSS(IZOTheme.menuFG),
           hover: {
-            background: ColorX.GetColorCSS("elainOrangeDark")
+            background: ColorX.GetColorCSS(IZOTheme.menuBG)
           },
           boxShadow: "transparent",
           borderRadius: "0px"

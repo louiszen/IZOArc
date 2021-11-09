@@ -47,7 +47,7 @@ class Footer extends Component {
 
   render(){
     let style = {
-      color: ColorX.GetColorCSS(IZOTheme.foreground), 
+      color: ColorX.GetColorCSS(IZOTheme.menuFG), 
       paddingRight: 5,
       fontSize: 9
     };
@@ -57,7 +57,7 @@ class Footer extends Component {
           position: "fixed", 
           paddingLeft: 40,
           bottom: 0,
-          background: ColorX.GetColorCSS(IZOTheme.background),
+          background: ColorX.GetColorCSS(IZOTheme.menuBG),
           zIndex: 100,
           }}>
           <Typography style={style}>

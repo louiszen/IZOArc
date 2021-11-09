@@ -246,7 +246,7 @@ class Container extends Component {
       <Box bgcolor={ColorX.GetColorCSS("darkBox")}
         padding={2}
         borderRadius={5} 
-        boxShadow={"0px 0px 2px 2px " + ColorX.GetColorCSS(IZOTheme.foreground, 0.2)}
+        boxShadow={"0px 0px 2px 2px " + ColorX.GetColorCSS(IZOTheme.menuFG, 0.2)}
         minWidth={250}
         >
         <VStack width="100%">
@@ -261,7 +261,7 @@ class Container extends Component {
             <Spacer/>
             { store.ask.showCloseIcon && 
               <StyledIconButton onClick={() => store.clearAsk()}
-                theme={{label: ColorX.GetColorCSS(IZOTheme.foreground), width: 24}}>
+                theme={{label: ColorX.GetColorCSS(IZOTheme.menuFG), width: 24}}>
                 <Close/>
               </StyledIconButton>
             }
@@ -274,8 +274,8 @@ class Container extends Component {
           </Box>
           <StyledLinearProgress 
             theme={{
-              bar: ColorX.GetColorCSS(IZOTheme.foreground, store.ask.loading? 0.5 : 0.0),
-              background: ColorX.GetColorCSS(IZOTheme.foreground, store.ask.loading? 0.2 : 0.0)
+              bar: ColorX.GetColorCSS(IZOTheme.menuFG, store.ask.loading? 0.5 : 0.0),
+              background: ColorX.GetColorCSS(IZOTheme.menuFG, store.ask.loading? 0.2 : 0.0)
               }}/>
           {store.ask.inner && store.ask.inner(store.ask.loading)}
           {store.ask.buttons && store.ask.buttons.length > 0 &&
@@ -302,9 +302,8 @@ class Container extends Component {
     let {snackOpen, loadingOpen, dialogOpen, backdropOpen} = this.state;
     let {location} = this.props;
     let isPublic = (location && location.pathname) === "/";
-    let isChatbot = (location && location.pathname) === "/Chatbot";
     let isTest = (location && location.pathname).startsWith("/Test/");
-    let isContained = hasContainer && !isPublic && !isTest && !isChatbot && store.isLoggedIn();
+    let isContained = hasContainer && !isPublic && !isTest && store.isLoggedIn();
 
     return (
       <Box className="container" height="100%">
@@ -323,13 +322,13 @@ class Container extends Component {
             severity={store.alert && store.alert.severity} 
             onClose={this.closeSnack}/>
         </Snackbar>
-        <Backdrop open={loadingOpen} style={{zIndex: 500, color: ColorX.GetColorCSS(IZOTheme.foreground)}}>
+        <Backdrop open={loadingOpen} style={{zIndex: 500, color: ColorX.GetColorCSS(IZOTheme.menuFG)}}>
           <CircularProgress color="inherit" />
         </Backdrop>
-        <Backdrop open={dialogOpen} style={{zIndex: 500, color: ColorX.GetColorCSS(IZOTheme.foreground)}}>
+        <Backdrop open={dialogOpen} style={{zIndex: 500, color: ColorX.GetColorCSS(IZOTheme.menuFG)}}>
           {this.renderDialog()}
         </Backdrop>
-        <Backdrop open={backdropOpen} style={{zIndex: 500, color: ColorX.GetColorCSS(IZOTheme.foreground)}} onClick={() => store.clearBackdrop()}>
+        <Backdrop open={backdropOpen} style={{zIndex: 500, color: ColorX.GetColorCSS(IZOTheme.menuFG)}} onClick={() => store.clearBackdrop()}>
           {this.renderBackDrop()}
         </Backdrop>
         {isContained && <Footer/>}

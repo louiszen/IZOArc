@@ -9,7 +9,7 @@ const Tail = {
 };
 
 const originTheme = {
-  color: ColorX.GetColorCSS(IZOTheme.foreground),
+  color: ColorX.GetColorCSS(IZOTheme.menuFG),
   background: ColorX.GetColorCSS("black"),
   hover: {
     color: ColorX.GetColorCSS("black"),
@@ -20,7 +20,7 @@ const originTheme = {
 
 const inPageTheme = {
   background: ColorX.GetColorCSS("pureWhite"),
-  label: ColorX.GetColorCSS(IZOTheme.foreground),
+  label: ColorX.GetColorCSS(IZOTheme.menuFG),
   hover: {
     color: ColorX.GetColorCSS("black"),
     background: ColorX.GetColorCSS("pureWhite"),
@@ -39,7 +39,7 @@ const disabledTheme = {
 }
 
 const submenuTheme = {
-  color: ColorX.GetColorCSS(IZOTheme.foreground, 0.6),
+  color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.6),
   background: ColorX.GetColorCSS("black"),
   hover: {
     color: ColorX.GetColorCSS("black"),
@@ -50,7 +50,7 @@ const submenuTheme = {
 
 const inPageSubmenuTheme = {
   background: ColorX.GetColorCSS("pureWhite"),
-  label: ColorX.GetColorCSS(IZOTheme.foreground, 0.6),
+  label: ColorX.GetColorCSS(IZOTheme.menuFG, 0.6),
   hover: {
     color: ColorX.GetColorCSS("black"),
     background: ColorX.GetColorCSS("pureWhite"),

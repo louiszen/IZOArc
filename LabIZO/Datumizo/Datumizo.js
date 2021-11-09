@@ -487,9 +487,9 @@ class Datumizo extends Component {
         return {
           color: "white",
           hover: {
-            background: ColorX.GetColorCSS("elainOrangeDark"),
+            background: ColorX.GetColorCSS(IZOTheme.btnHover),
           },
-          background: ColorX.GetColorCSS(IZOTheme.foreground),
+          background: ColorX.GetColorCSS(IZOTheme.menuFG),
           boxShadow: "0px",
         };
     }

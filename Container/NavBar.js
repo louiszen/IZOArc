@@ -60,27 +60,27 @@ class NavBar extends Component {
 
   render(){
     return (
-      <Box width="100%" height="30px" bgcolor={ColorX.GetColorCSS(IZOTheme.background, 1)}  paddingRight={2} position="fixed" zIndex="300" overflow="hidden" style={{transition: "top 1s", userSelect: "none"}}>
+      <Box width="100%" height="30px" bgcolor={ColorX.GetColorCSS(IZOTheme.menuBG, 1)}  paddingRight={2} position="fixed" zIndex="300" overflow="hidden" style={{transition: "top 1s", userSelect: "none"}}>
         <HStack>
           <HStack width="fit-content">
-            <Typography style={{marginLeft: 10, fontFamily: "Palanquin", fontSize: 14, fontWeight: "bold", color: ColorX.GetColorCSS(IZOTheme.foreground, 0.2)}}>
+            <Typography style={{marginLeft: 10, fontFamily: "Palanquin", fontSize: 14, fontWeight: "bold", color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.2)}}>
               {"IZO"}
             </Typography>
-            <Typography style={{marginLeft: 10, fontFamily: "Palanquin", fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.foreground, 0.2)}}>
+            <Typography style={{marginLeft: 10, fontFamily: "Palanquin", fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.2)}}>
               {IZOVersion}
             </Typography>
           </HStack>
           <HStack width="fit-content">
-            <Typography style={{marginLeft: 30, fontFamily: "Palanquin", fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.foreground, 1)}}>
+            <Typography style={{marginLeft: 30, fontFamily: "Palanquin", fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 1)}}>
               {"Logged in as "}
             </Typography>
-            <Typography style={{marginLeft: 10, fontFamily: "Palanquin", fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.foreground, 0.8)}}>
+            <Typography style={{marginLeft: 10, fontFamily: "Palanquin", fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.8)}}>
               {store.user && store.user.UserDisplayName}
             </Typography>
           </HStack>
           <Spacer/>
           <Accessizo reqLevel={0} auth={store.user.auth} level={store.user.level}>
-            <Typography style={{fontFamily: "Palanquin", color: ColorX.GetColorCSS(IZOTheme.foreground, 0.3)}}>
+            <Typography style={{fontFamily: "Palanquin", color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.3)}}>
               {"v" + Version}
             </Typography>
           </Accessizo>
@@ -91,7 +91,7 @@ class NavBar extends Component {
             <img src={NavbarDis && NavbarDis.src} alt="elain" draggable={false}/>
           </Box>
           <Tooltip title="Logout" arrow={true} placement="bottom">
-            <IconButton style={{color: ColorX.GetColorCSS(IZOTheme.foreground, 1)}} size="small" onClick={() => this._Logout()}>
+            <IconButton style={{color: ColorX.GetColorCSS(IZOTheme.menuFG, 1)}} size="small" onClick={() => this._Logout()}>
               <ExitToAppOutlined/>
             </IconButton>
           </Tooltip>

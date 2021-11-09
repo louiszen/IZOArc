@@ -80,10 +80,10 @@ class Menu extends Component {
       width: 25,
       height: 25,
       textTransform: "none",
-      color: ColorX.GetColorCSS(IZOTheme.foreground),
+      color: ColorX.GetColorCSS(IZOTheme.menuFG),
       background: ColorX.GetColorCSS("transparent"),
       hover: {
-        color: ColorX.GetColorCSS(IZOTheme.foreground, 0.4),
+        color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.4),
         background: ColorX.GetColorCSS("transparent"),
       },
       position: "relative"
@@ -94,10 +94,10 @@ class Menu extends Component {
       width: 25,
       height: 25,
       textTransform: "none",
-      color: ColorX.GetColorCSS(IZOTheme.foreground, 0.4),
+      color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.4),
       background: ColorX.GetColorCSS("transparent"),
       hover: {
-        color: ColorX.GetColorCSS(IZOTheme.foreground),
+        color: ColorX.GetColorCSS(IZOTheme.menuFG),
         background: ColorX.GetColorCSS("transparent"),
       },
       position: "relative"
@@ -118,7 +118,7 @@ class Menu extends Component {
 
   render(){
     return (
-      <Box className={"menu " + (store.mini? "mini" : "")} width="140px" height="100%" bgcolor={ColorX.GetColorCSS(IZOTheme.background)} position="fixed" zIndex="300">
+      <Box className={"menu " + (store.mini? "mini" : "")} width="140px" height="100%" bgcolor={ColorX.GetColorCSS(IZOTheme.menuBG)} position="fixed" zIndex="300">
         <VStack width="100%" style={{paddingTop: "50px"}}>
           {this.renderPin()}
           <VStack width="100%" style={{paddingTop: "40px"}}>

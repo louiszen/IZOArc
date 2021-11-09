@@ -505,7 +505,7 @@ class Tablizo extends Component {
     return (
       <GridOverlay>
         <div style={{ position: "absolute", top: 0, width: "100%" }}>
-          <StyledLinearProgress theme={{ bar: ColorX.GetColorCSS(IZOTheme.foreground), background: ColorX.GetColorCSS("elainOrangeDark") }} />
+          <StyledLinearProgress theme={{ bar: ColorX.GetColorCSS(IZOTheme.menuFG), background: ColorX.GetColorCSS(IZOTheme.btnHover) }} />
         </div>
       </GridOverlay>
     );
