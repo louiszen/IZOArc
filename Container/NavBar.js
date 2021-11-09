@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 
 import { observer } from 'mobx-react';
 
-import { ExitToAppOutlined } from '@material-ui/icons';
+import { ExitToAppOutlined, Language } from '@material-ui/icons';
 import { Box, IconButton, Typography, Tooltip } from '@material-ui/core';
 
 import './Container.css';
@@ -13,7 +13,8 @@ import IZOVersion from '../version';
 import { Accessor, ColorX, store } from 'IZOArc/STATIC';
 import { HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
 import Accessizo from 'IZOArc/LabIZO/Accessizo';
-import { IZOTheme, NavbarDis, Project } from '__Base/config';
+import { IZOTheme, Locale, NavbarDis, Project } from '__Base/config';
+import LocaleX from 'IZOArc/STATIC/LocaleX';
 
 class NavBar extends Component {
 
@@ -58,43 +59,111 @@ class NavBar extends Component {
     store.Alert("Logout Successful", "success");
   }
 
+  _ToggleLanguage = () => {
+    let max = Locale.length;
+    let idx = Locale.findIndex(o => o.code === store.lang);
+    idx += 1;
+    if(idx >= max) idx = 0;
+    let newLang = Locale[idx].code;
+    store.setLang(newLang);
+  }
+
+  renderLocale(){
+    let langO = Locale.find(o => o.code === store.lang);
+    let langLabel = langO.caption;
+    return (
+      <HStack width="fit-content" marginX={5}>
+        <Tooltip title={LocaleX.Get("NavBar.SwitchLang")} arrow={true} placement="bottom">
+          <IconButton style={{color: ColorX.GetColorCSS(IZOTheme.menuFG, 1)}} size="small" onClick={() => this._ToggleLanguage()}>
+            <Language/>
+          </IconButton>
+        </Tooltip>
+        <Typography style={{width: 60, marginLeft: 5, fontFamily: "Palanquin", fontSize: 14, fontWeight: "bold", color: ColorX.GetColorCSS(IZOTheme.menuFG)}}>
+          {langLabel}
+        </Typography>
+      </HStack>
+    );
+  }
+
+  renderIZO(){
+    return (
+      <HStack width="fit-content">
+        <Typography style={{marginLeft: 10, fontFamily: "Palanquin", fontSize: 14, fontWeight: "bold", color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.4)}}>
+          {"IZO"}
+        </Typography>
+        <Typography style={{marginLeft: 10, fontFamily: "Palanquin", fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.4)}}>
+          {IZOVersion}
+        </Typography>
+      </HStack>
+    )
+  }
+
+  renderLogin(){
+    return (
+      <HStack width="fit-content">
+        <Typography style={{
+          width: 80, marginLeft: 30, 
+          fontFamily: "Palanquin", fontSize: 14, 
+          color: ColorX.GetColorCSS(IZOTheme.menuFG, 1),
+          textAlign: "right"
+          }}>
+          {LocaleX.Get("NavBar.LoggedInAs")}
+        </Typography>
+        <Typography style={{marginLeft: 10, marginRight: 30, fontFamily: "Palanquin", fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.8)}}>
+          {store.user && store.user.UserDisplayName}
+        </Typography>
+      </HStack>
+    );
+  }
+
+  renderVersion(){
+    return (
+      <Accessizo reqLevel={0} auth={store.user.auth} level={store.user.level}>
+        <Typography style={{fontFamily: "Palanquin", color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.3)}}>
+          {"v" + Version}
+        </Typography>
+      </Accessizo>
+    );
+  }
+
+  renderProject(){
+    return (
+      <Box width="fit-content" marginX={3}>
+        {Project}
+      </Box>
+    );
+  }
+
+  renderIcon(){
+    return (
+      <Box position="absolute" style={NavbarDis && NavbarDis.style}>
+        <img src={NavbarDis && NavbarDis.src} alt="elain" draggable={false}/>
+      </Box>
+    );
+  }
+
+  renderLogout(){
+    return (
+      <Tooltip title="Logout" arrow={true} placement="bottom">
+        <IconButton style={{color: ColorX.GetColorCSS(IZOTheme.menuFG, 1)}} size="small" onClick={() => this._Logout()}>
+          <ExitToAppOutlined/>
+        </IconButton>
+      </Tooltip>
+    );
+  }
+
   render(){
     return (
       <Box width="100%" height="30px" bgcolor={ColorX.GetColorCSS(IZOTheme.menuBG, 1)}  paddingRight={2} position="fixed" zIndex="300" overflow="hidden" style={{transition: "top 1s", userSelect: "none"}}>
         <HStack>
-          <HStack width="fit-content">
-            <Typography style={{marginLeft: 10, fontFamily: "Palanquin", fontSize: 14, fontWeight: "bold", color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.2)}}>
-              {"IZO"}
-            </Typography>
-            <Typography style={{marginLeft: 10, fontFamily: "Palanquin", fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.2)}}>
-              {IZOVersion}
-            </Typography>
-          </HStack>
-          <HStack width="fit-content">
-            <Typography style={{marginLeft: 30, fontFamily: "Palanquin", fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 1)}}>
-              {"Logged in as "}
-            </Typography>
-            <Typography style={{marginLeft: 10, fontFamily: "Palanquin", fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.8)}}>
-              {store.user && store.user.UserDisplayName}
-            </Typography>
-          </HStack>
+          {this.renderIZO()}
+          {this.renderLogin()}
           <Spacer/>
-          <Accessizo reqLevel={0} auth={store.user.auth} level={store.user.level}>
-            <Typography style={{fontFamily: "Palanquin", color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.3)}}>
-              {"v" + Version}
-            </Typography>
-          </Accessizo>
-          <Box width="fit-content" marginX={3}>
-            {Project}
-          </Box>
-          <Box position="absolute" style={NavbarDis && NavbarDis.style}>
-            <img src={NavbarDis && NavbarDis.src} alt="elain" draggable={false}/>
-          </Box>
-          <Tooltip title="Logout" arrow={true} placement="bottom">
-            <IconButton style={{color: ColorX.GetColorCSS(IZOTheme.menuFG, 1)}} size="small" onClick={() => this._Logout()}>
-              <ExitToAppOutlined/>
-            </IconButton>
-          </Tooltip>
+          {this.renderLocale()}
+          {this.renderVersion()}
+          {this.renderProject()}
+          {this.renderIcon()}
+          {this.renderLogout()}
         </HStack>
       </Box>
     );
