@@ -13,7 +13,7 @@ import IZOVersion from '../version';
 import { Accessor, ColorX, store } from 'IZOArc/STATIC';
 import { HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
 import Accessizo from 'IZOArc/LabIZO/Accessizo';
-import { IZOTheme, Locale, NavbarDis, Project } from '__Base/config';
+import { IZODis, IZOTheme, Locale, NavbarDis, Project } from '__Base/config';
 import LocaleX from 'IZOArc/STATIC/LocaleX';
 
 class NavBar extends Component {
@@ -88,12 +88,15 @@ class NavBar extends Component {
   renderIZO(){
     return (
       <HStack width="fit-content">
-        <Typography style={{marginLeft: 10, fontFamily: "Palanquin", fontSize: 14, fontWeight: "bold", color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.4)}}>
+        <Typography style={{marginLeft: 10, fontFamily: "Palanquin", fontSize: 14, fontWeight: "bold", color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.3)}}>
           {"IZO"}
         </Typography>
-        <Typography style={{marginLeft: 10, fontFamily: "Palanquin", fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.4)}}>
+        <Typography style={{marginLeft: 10, fontFamily: "Palanquin", fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.3)}}>
           {IZOVersion}
         </Typography>
+        <Box position="absolute" style={IZODis && IZODis.style}>
+          <img src={IZODis && IZODis.src} alt="elain" draggable={false}/>
+        </Box>
       </HStack>
     )
   }
