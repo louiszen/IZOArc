@@ -14,11 +14,12 @@ import { Accessor, store } from 'IZOArc/STATIC';
 import { StyledButton } from 'IZOArc/LabIZO/Stylizo';
 import { HMarquee } from 'IZOArc/LabIZO/Animatizo';
 import theme from './theme';
+import { v1 } from 'uuid';
 
 class MenuButton extends Component {
 
   static propTypes = {
-    caption: PropsType.string,
+    caption: PropsType.oneOfType([PropsType.string, PropsType.func]),
     path: PropsType.string,
     fafa: PropsType.any,
     reqAuth: PropsType.string,
@@ -102,6 +103,8 @@ class MenuButton extends Component {
     else if(inPage) { btnTheme = theme.inPageTheme; }
     else if(disabled) { btnTheme = theme.disabledTheme; }
 
+    let icaption = _.isFunction(caption)? caption() : caption;
+
     btnTheme = {
       ...btnTheme,
       zIndex: zIndex
@@ -112,13 +115,13 @@ class MenuButton extends Component {
         <HStack padding={1} width="140px">
           <HMarquee width="90px">
             <Typography style={{fontSize: 14, opacity: store.mini? 0: 1, whiteSpace: "nowrap"}}>
-              {caption}
+              {icaption}
             </Typography>
           </HMarquee>
           <Spacer/>
           <VStack>
             <Spacer/>
-            <Tooltip title={mini? caption : ""} aria-label="label" placement="right" arrow={true}>
+            <Tooltip title={mini? icaption : ""} aria-label="label" placement="right" arrow={true}>
               <HStack width={24} height={24}>
                 <Spacer/>
                 { _.isString(fafa)?
@@ -160,10 +163,10 @@ class MenuButton extends Component {
   }
 
   render(){
-    let {caption, reqAuth, reqLevel} = this.props;
+    let {reqAuth, reqLevel} = this.props;
     return (
       <Accessizo 
-        key={caption}
+        key={v1()}
         reqAuth={reqAuth} 
         reqLevel={reqLevel}
         auth={store.user.authority} 

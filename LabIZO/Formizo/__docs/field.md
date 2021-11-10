@@ -25,7 +25,7 @@
 ### *Common Basic Properties*
 | Props | Type | Required | Default | Description |
 | :---|:---:|:---:|:---:|:---|
-| label | `String` |✔|| The label displayed to describe the field |
+| label | `String` | `(formValue, addOns) => String` |✔|| The label displayed to describe the field |
 | name | `String` |✔|| The accessor to the field e.g. `{a: {b: "value" } }` use `"a.b"`
 | format | `String` |✔|| Format of the data |
 | defaultValue | `any` ||| Form Default Value, reference for `Revert` |

@@ -187,6 +187,7 @@ class Datumizo extends Component {
     //settings
     serverSidePagination: PropsType.bool,
     refreshOnPageChange: PropsType.bool,
+    lang: PropsType.string
   };
 
   static defaultProps = {
@@ -200,6 +201,7 @@ class Datumizo extends Component {
 
     serverSidePagination: false,
     refreshOnPageChange: false,
+    lang: "EN"
   };
 
   constructor() {
@@ -1616,14 +1618,13 @@ class Datumizo extends Component {
   }
 
   renderTable(){
-    let { base, addOns, serverSidePagination } = this.props;
+    let { base, addOns, serverSidePagination, lang } = this.props;
     let { table, loading, inlineButtons, inlineButtonsOpposite, nav } = this.state;
     let tablizo = {
       columnsToolbar: true,
       densityToolbar: true,
       ...base.tablizo
     };
-
     if(!base.noDefaultTable){
       return (
         <Tablizo
@@ -1647,6 +1648,7 @@ class Datumizo extends Component {
           auth={store.user.authority}
           level={store.user.level}
           addOns={addOns}
+          lang={lang}
           {...tablizo}
         />
       );

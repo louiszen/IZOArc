@@ -91,9 +91,10 @@ class FFBool extends Component {
   }
 
   renderCheckBox(){
-    let {formValue, iname, ischema, readOnly, _onValueChange, ifieldStyle} = this.state;
+    let {formValue, iname, ischema, readOnly, _onValueChange, ifieldStyle, addOns} = this.state;
     let ivalue = Accessor.Get(formValue, iname) || false;
     let ireadOnly = ischema.readOnly || readOnly;
+    let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
 
     if(ifieldStyle === "grid"){
       return (
@@ -119,7 +120,7 @@ class FFBool extends Component {
                   e.target.checked, ischema.validate)} 
               disabled={ireadOnly}/>
           }
-          label={ischema.label}
+          label={label}
           />
       );
     }
@@ -166,9 +167,10 @@ class FFBool extends Component {
   }
 
   renderHeart(){
-    let {formValue, iname, ischema, readOnly, _onValueChange, ifieldStyle} = this.state;
+    let {formValue, iname, ischema, readOnly, _onValueChange, ifieldStyle, addOns} = this.state;
     let ivalue = Accessor.Get(formValue, iname) || false;
     let ireadOnly = ischema.readOnly || readOnly;
+    let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
 
     if(ifieldStyle === "grid"){
       return (
@@ -198,7 +200,7 @@ class FFBool extends Component {
               checkedIcon={<Favorite />} 
               />
           }
-          label={ischema.label}
+          label={label}
           />
       );
     }

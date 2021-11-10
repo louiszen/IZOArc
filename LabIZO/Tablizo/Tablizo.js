@@ -12,6 +12,7 @@ import { StyledLinearProgress, StyledIconButton } from "IZOArc/LabIZO/Stylizo";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
 import { Accessor, Authority, ColorX, store } from "IZOArc/STATIC";
 import { IZOTheme } from "__Base/config";
+import locale from "./_locale";
 
 /**
  * Tablizo - displaying rows of data
@@ -77,6 +78,7 @@ class Tablizo extends Component {
     density: PropsType.oneOf(["compact", "comfortable", "standard"]),
 
     datagridProps: PropsType.object,
+    lang: PropsType.string
   };
 
   static defaultProps = {
@@ -122,6 +124,7 @@ class Tablizo extends Component {
 
     store: {},
     datagridProps: {},
+    lang: "EN"
   };
 
   constructor() {
@@ -527,10 +530,11 @@ class Tablizo extends Component {
   };
 
   render() {
-    let { height, width, data, showSelector, rowIdAccessor, pagination, defaultPageSize, pageSizeOption, loading, rowCount, serverSidePagination, density, selectionOnClick, datagridProps } =
+    let { height, width, data, showSelector, rowIdAccessor, pagination, defaultPageSize, pageSizeOption, loading, rowCount, serverSidePagination, density, selectionOnClick, datagridProps, lang } =
       this.props;
     let { sortModel, filterModel, selectedRows } = this.state;
     let schema = this.getSchema();
+    let localText = locale[lang];
     return (
       <Box height={height} width={width} overflow={"hidden"}>
         <DataGrid
@@ -560,6 +564,7 @@ class Tablizo extends Component {
           sortModel={sortModel || this.getSortModel()}
           filterModel={filterModel}
           disableColumnReorder={true}
+          localeText={localText}
           {...datagridProps}
         />
       </Box>

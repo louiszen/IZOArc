@@ -117,18 +117,20 @@ class FFSelectTable extends Component {
   }
 
   getLabel = () => {
-    let {ischema} = this.props;
+    let {ischema, formValue, addOns} = this.props;
+    let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
+
     if(_.isString(ischema.label)){
       return (
         <HStack width="100%">
           <Typography style={{fontWeight: "bold"}}>
-            {ischema.label}
+            {label}
           </Typography>
           <Spacer/>
         </HStack>
       );
     }
-    return ischema.label
+    return label;
   }
 
   _onRowSelected = (n) => {

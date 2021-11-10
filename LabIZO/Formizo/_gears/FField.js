@@ -13,6 +13,8 @@ import { HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
 import FFRichText from './_inputs/FFRichText';
 import FFSelectTable from './_inputs/FFSelectTable';
 
+import _ from 'lodash';
+
 class FField extends Component {
 
   static propTypes = {
@@ -422,8 +424,10 @@ class FField extends Component {
 
   renderField(){
     
-    let {ischema, fieldStyle, inTable, enableInlineSubmit} = this.state;
+    let {ischema, fieldStyle, inTable, enableInlineSubmit, formValue, addOns} = this.state;
     let vstyle = (ischema.variant || fieldStyle);
+
+    let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
     
     if(!inTable && vstyle === "grid" && !ischema.noLabelGrid && ischema.format !== "selectTable"){
       let {labelXS, labelPaddingX, labelJustify,
@@ -434,7 +438,7 @@ class FField extends Component {
             <Box paddingX={labelPaddingX} borderRight={separator} width={"100%"} height={"100%"}>
               <HStack justifyContent={labelJustify} height="100%">
                 <Typography>
-                  {ischema.label}
+                  {label}
                 </Typography> 
               </HStack>
             </Box>              

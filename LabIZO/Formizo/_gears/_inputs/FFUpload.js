@@ -154,8 +154,10 @@ class FFUpload extends Component {
     let {ischema, iname, formError, uuid, 
       _onValueChange, _onBlurInlineSubmit, 
       _onFieldFocus, _onFieldBlur, errorsShowOnHelperText, 
-      ifieldStyle, readOnly} = this.state;
+      ifieldStyle, readOnly, formValue, addOns} = this.state;
     if(!ischema) return null;
+
+    let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
 
     let ierror = Accessor.Get(formError, iname);
     let ireadOnly = ischema.readOnly || readOnly;
@@ -191,11 +193,11 @@ class FFUpload extends Component {
         {ifieldStyle === "grid"? 
           this.renderUploader() : 
           ifieldStyle === "outlined" ?
-          <OutlinedBox label={ischema.label}>
+          <OutlinedBox label={label}>
             {this.renderUploader()}
           </OutlinedBox> :
           <HStack>
-            <FormLabel className="formizo-h-m">{ischema.label}</FormLabel>
+            <FormLabel className="formizo-h-m">{label}</FormLabel>
             {this.renderUploader()}
           </HStack>
         }

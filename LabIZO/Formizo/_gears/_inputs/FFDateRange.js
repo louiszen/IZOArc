@@ -151,8 +151,10 @@ class FFDateRange extends Component {
 
   render(){
     let {ischema, iname, ifieldStyle, formError, 
-      errorsShowOnHelperText, readOnly} = this.state;
+      errorsShowOnHelperText, readOnly, formValue, addOns} = this.state;
     if(!ischema) return null;
+
+    let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
     
     let ireadOnly = ischema.readOnly || readOnly;
 
@@ -169,7 +171,7 @@ class FFDateRange extends Component {
           {ifieldStyle === "grid"? 
             this.renderDatePicker() : 
             ifieldStyle === "outlined" ?
-            <OutlinedBox label={ischema.label}>
+            <OutlinedBox label={label}>
               {this.renderDatePicker()}
             </OutlinedBox> :
             <HStack>

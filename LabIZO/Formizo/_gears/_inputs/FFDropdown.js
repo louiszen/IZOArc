@@ -155,7 +155,7 @@ class FFDropdown extends Component {
   renderInside(){
     let {ischema, iname, formError, ifieldStyle,
       _onBlurInlineSubmit, 
-      _onFieldFocus, _onFieldBlur, errorsShowOnHelperText, readOnly} = this.state;
+      _onFieldFocus, _onFieldBlur, errorsShowOnHelperText, readOnly, formValue, addOns} = this.state;
     if(!ischema) return null;
 
     let ierror = Accessor.Get(formError, iname);
@@ -165,6 +165,8 @@ class FFDropdown extends Component {
     if(errorsShowOnHelperText){
       helperText = ierror;
     }
+
+    let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
 
     return(
       <FormControl 
@@ -187,11 +189,11 @@ class FFDropdown extends Component {
         {ifieldStyle === "grid"? 
             this.renderSelect() : 
             ifieldStyle === "outlined" ?
-            <OutlinedBox label={ischema.label}>
+            <OutlinedBox label={label}>
               {this.renderSelect()}
             </OutlinedBox> :
             <HStack>
-              <FormLabel className="formizo-h-m">{ischema.label}</FormLabel>
+              <FormLabel className="formizo-h-m">{label}</FormLabel>
               {this.renderSelect()}
               <Spacer/>
             </HStack>

@@ -12,7 +12,7 @@ class Test extends Component {
 
   render(){
     return (
-      <Datumizo
+      <Datumizo lang={store.lang}
         />
     );
   }
@@ -37,7 +37,7 @@ componentDidMount(){
 //link the onMount function to the component
 render(){
   return (
-    <Datumizo
+    <Datumizo lang={store.lang}
       onMount={this.onMountDatumizo}
       />
   );

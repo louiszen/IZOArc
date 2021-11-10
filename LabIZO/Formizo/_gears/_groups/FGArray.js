@@ -497,14 +497,15 @@ class FGArray extends Component {
   }
 
   renderHeader(){
-    let {ischema, readOnly} = this.props;
+    let {ischema, readOnly, formValue, addOns} = this.props;
     let addStyle = ischema.addStyle || "header";
     let ireadOnly = ischema.readOnly || readOnly;
+    let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
     return (
       <Paper style={{width:"100%", borderRadius: 0}}>
         <HStack>
           <Box margin={1} fontWeight="bold">
-            {ischema.label}
+            {label}
           </Box>
           <Spacer/>
           {!ireadOnly && ischema.canAdd 
@@ -527,17 +528,19 @@ class FGArray extends Component {
   }
 
   render(){
-    let {ischema, readOnly} = this.props;
+    let {ischema, readOnly, formValue, addOns} = this.props;
     let {arraySize} = this.state;
     if(!ischema) return null;
     let headerStyle = ischema.headerStyle || "header";
     let addStyle = ischema.addStyle || "header";
     let ireadOnly = ischema.readOnly || readOnly;
 
+    let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
+
     switch(headerStyle){
       case "outlined":
         return (
-          <OutlinedBox label={ischema.label} 
+          <OutlinedBox label={label} 
             style={{width: ischema.width || "100%", marginTop: "15px"}} 
             theme={{border: ColorX.GetColorCSS(IZOTheme.btnHover, 0.2)}}
             >

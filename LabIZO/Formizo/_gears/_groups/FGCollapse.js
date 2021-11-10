@@ -88,7 +88,8 @@ class FGCollapse extends Component {
   }
 
   renderInside(){
-    let {ischema, open} = this.state;
+    let {ischema, open, formValue, addOns} = this.state;
+    let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
     return (
       <VStack style={{width: "100%"}}>
         <StyledButton theme={{
@@ -96,7 +97,7 @@ class FGCollapse extends Component {
           }} 
           onClick={() => this.onToggle()}>
           <HStack>
-            {ischema.label}
+            {label}
             {
               open? <KeyboardArrowDown/>
               : <KeyboardArrowRight/> 

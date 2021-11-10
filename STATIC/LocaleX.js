@@ -11,7 +11,7 @@ class LocaleX {
 
     let str = Accessor.Get(lib, accessor);
     if(_.isEmpty(str)){
-      console.warn("No locale ID: " + accessor);
+      console.warn("No locale ID <" + store.lang + ">: " + accessor);
     }
     return str;
 

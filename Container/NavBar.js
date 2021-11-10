@@ -144,7 +144,7 @@ class NavBar extends Component {
 
   renderLogout(){
     return (
-      <Tooltip title="Logout" arrow={true} placement="bottom">
+      <Tooltip title={LocaleX.Get("NavBar.Logout")} arrow={true} placement="bottom">
         <IconButton style={{color: ColorX.GetColorCSS(IZOTheme.menuFG, 1)}} size="small" onClick={() => this._Logout()}>
           <ExitToAppOutlined/>
         </IconButton>

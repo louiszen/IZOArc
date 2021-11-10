@@ -150,8 +150,10 @@ class FFText extends Component {
   }
 
   renderTextField() {
-    let { ischema, iname, formValue, formError, _onValueChange, _onBlurInlineSubmit, _onFieldFocus, _onFieldBlur, errorsShowOnHelperText, ifieldStyle, readOnly, fieldSize, theme } = this.state;
+    let { ischema, iname, formValue, formError, _onValueChange, _onBlurInlineSubmit, _onFieldFocus, _onFieldBlur, errorsShowOnHelperText, ifieldStyle, readOnly, fieldSize, theme, addOns } = this.state;
     if (!ischema) return null;
+
+    let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
 
     let ivalue = Accessor.Get(formValue, iname) || "";
     let ierror = Accessor.Get(formError, iname);
@@ -183,7 +185,7 @@ class FFText extends Component {
           {() => (
             <StyledTextField
               value={ivalue}
-              label={ischema.label || ""}
+              label={label || ""}
               helperText={helperText || ""}
               placeholder={ischema.placeholder || ""}
               name={iname}
@@ -205,7 +207,7 @@ class FFText extends Component {
     return (
       <StyledTextField
         value={ivalue}
-        label={ischema.label || ""}
+        label={label || ""}
         helperText={helperText || ""}
         placeholder={ischema.placeholder || ""}
         onChange={(e) => _onValueChange(iname, e.target.value, ischema.validate)}

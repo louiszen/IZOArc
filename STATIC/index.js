@@ -11,3 +11,4 @@ export {default as ZGen} from './ZGen';
 export {default as ZMath} from './ZMath';
 export {default as ZTime} from './ZTime';
 export {default as ZRichText} from './ZRichText';
+export {default as LocaleX} from './LocaleX';

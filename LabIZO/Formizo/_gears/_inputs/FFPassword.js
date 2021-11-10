@@ -153,9 +153,10 @@ class FFPassword extends Component {
   }
 
   renderTextField() {
-    let { ischema, iname, formValue, formError, _onValueChange, _onBlurInlineSubmit, _onFieldFocus, _onFieldBlur, errorsShowOnHelperText, ifieldStyle, readOnly, showPassword, fieldSize, theme } =
+    let { ischema, iname, formValue, formError, _onValueChange, _onBlurInlineSubmit, _onFieldFocus, _onFieldBlur, errorsShowOnHelperText, ifieldStyle, readOnly, showPassword, fieldSize, theme, addOns } =
       this.state;
     if (!ischema) return null;
+    let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
 
     let ivalue = Accessor.Get(formValue, iname);
     if (ivalue === undefined || ivalue === null) ivalue = "";
@@ -170,7 +171,7 @@ class FFPassword extends Component {
     return (
       <StyledTextField
         value={ivalue}
-        label={ischema.label || ""}
+        label={label || ""}
         helperText={helperText || ""}
         placeholder={ischema.placeholder || ""}
         onChange={(e) => _onValueChange(iname, e.target.value, ischema.validate)}

@@ -162,8 +162,10 @@ class FFRadio extends Component {
   renderInside(){
     let {ischema, iname, formError, ifieldStyle,
       _onBlurInlineSubmit, 
-      _onFieldFocus, _onFieldBlur, errorsShowOnHelperText, readOnly} = this.state;
+      _onFieldFocus, _onFieldBlur, errorsShowOnHelperText, readOnly, formValue, addOns} = this.state;
     if(!ischema) return null;
+
+    let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
 
     let ierror = Accessor.Get(formError, iname);
     let ireadOnly = ischema.readOnly || readOnly;
@@ -194,11 +196,11 @@ class FFRadio extends Component {
         {ifieldStyle === "grid"? 
           this.renderRadioGroup() : 
           ifieldStyle === "outlined" ?
-          <OutlinedBox label={ischema.label}>
+          <OutlinedBox label={label}>
             {this.renderRadioGroup()}
           </OutlinedBox> :
           <HStack>
-            <FormLabel className="formizo-h-m">{ischema.label}</FormLabel>
+            <FormLabel className="formizo-h-m">{label}</FormLabel>
             {this.renderRadioGroup()}
             <Spacer/>
           </HStack>
