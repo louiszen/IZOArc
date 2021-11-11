@@ -50,8 +50,7 @@ class Formizo extends Component {
     readOnly: PropsType.bool,
 
     //access
-    auth: PropsType.object,
-    level: PropsType.number,
+    user: PropsType.object,
 
     //data
     defaultValue: PropsType.object,
@@ -100,8 +99,7 @@ class Formizo extends Component {
     errorsShowOnHelperText: true,
     readOnly: false,
 
-    auth: {},
-    level: 999,
+    user: {},
 
     defaultValue: {},
     addOns: {},

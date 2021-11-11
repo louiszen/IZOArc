@@ -24,6 +24,8 @@ class MenuButton extends Component {
     fafa: PropsType.any,
     reqAuth: PropsType.string,
     reqLevel: PropsType.number,
+    reqGroup: PropsType.string,
+    reqRole: PropsType.string,
     submenu: PropsType.array,
     mini: PropsType.bool,
     zIndex: PropsType.number,
@@ -35,7 +37,9 @@ class MenuButton extends Component {
     path: "",
     fafa: "",
     reqAuth: "",
-    reqLevel: 999,
+    reqLevel: Number.MAX_SAFE_INTEGER,
+    reqGroup: "",
+    reqRole: "",
     submenu: [],
     mini: false,
     zIndex: 50,
@@ -163,14 +167,15 @@ class MenuButton extends Component {
   }
 
   render(){
-    let {reqAuth, reqLevel} = this.props;
+    let {reqAuth, reqLevel, reqGroup, reqRole} = this.props;
     return (
       <Accessizo 
         key={v1()}
-        reqAuth={reqAuth} 
+        reqAuth={reqAuth}
         reqLevel={reqLevel}
-        auth={store.user.authority} 
-        level={store.user.level}>
+        reqGroup={reqGroup}
+        reqRole={reqRole}
+        user={store.user}>
           {this.renderInner()}
       </Accessizo>
     );

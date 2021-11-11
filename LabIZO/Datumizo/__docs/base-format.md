@@ -36,7 +36,9 @@ base: {
         icon?:  String | JSX,
         func?: String | Object | (id, row) => void,
         reqLevel?: Number | 999,
-        reqFunc?: String | ""
+        reqFunc?: String | "",
+        reqGroup?: String | "",
+        reqRole?: String | ""
       }
     ],
     inlineOpposite: [...],

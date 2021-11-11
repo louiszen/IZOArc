@@ -33,6 +33,8 @@ schema = [
   reqAuth?: String,
   reqLevel?: Number,
   reqFunc?: String,
+  reqGroup?: String,
+  reqRole?: String,
   headerAlign?: "left" | "center" | "right",
   headerClass?: String,
   cellClass?: String | (row, field, addOns) => Void,
@@ -62,6 +64,8 @@ schema = [
 | reqAuth | `String` ||| Required Authority tree node to view it |
 | reqLevel | `Number` ||| Required level of access to view it |
 | reqFunc | `String` ||| Required functionality access to view it |
+| reqGroup | `String` || `null` | The required group tag of Access, see `Accessizo` |
+| reqRole | `String` || `null` | The required role of Access, see `Accessizo` |
 | headerAlign | `String` ||| The alignment of header |
 | headerCless | `String` ||| The className of the header |
 | cellClass | <code>String &#124; function (row, field, addOns) => {} </code> ||| The cell className |

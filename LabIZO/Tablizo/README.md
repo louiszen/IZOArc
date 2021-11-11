@@ -97,8 +97,7 @@ Listener functions triggered when the form reacts.
 | onPageSizeChange | `function` || `(pagesize) => {}` | The listener of page size changing of the table |
 | defaultPageSize | `Number` || `25` | default page size |
 | pageSizeOption | `[Number]` || `[25, 50, 100]` | option of page size |
-| auth | `Object` || `{}` | authority tree of the user |
-| level | `Number` || `999` | the access level of the user | 
+| user | `Object` || `{}` | the user object |
 | addOns | `function` || `() => {}` | additional data for the cell rendering / default functions |
 <br/>
 
@@ -125,6 +124,8 @@ Listener functions triggered when the form reacts.
     reqAuth: String,
     reqLevel: Number,
     reqFunc: String,
+    reqGroup: String,
+    reqRole: String,
     theme: Object,
     disableFunc: (id, row) => Boolean
   }

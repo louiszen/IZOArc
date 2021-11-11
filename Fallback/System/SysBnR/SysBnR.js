@@ -284,14 +284,13 @@ class SysBnR extends Component {
   renderDatabases(){
     let {dbs} = this.state;
     return (
-      <Accessizo reqLevel={0} auth={store.user.auth} level={store.user.level}>
+      <Accessizo reqLevel={0} user={store.user}>
         <VStack paddingY={2}>
           <Tablizo 
           width={400} 
           height="100%" 
           density="compact"
-          auth={store.user.auth}
-          level={store.user.level}
+          user={store.user}
           rowIdAccessor="name"
           schema={schema.database}
           showSelector={false}
@@ -313,8 +312,7 @@ class SysBnR extends Component {
         width={500} 
         height="100%" 
         density="compact"
-        auth={store.user.auth}
-        level={store.user.level}
+        user={store.user}
         schema={schema.restore}
         showSelector={false}
         data={Backups}

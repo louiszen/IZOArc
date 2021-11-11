@@ -20,6 +20,8 @@ Access Control using Accessizo.
 | reqAuth | `String` || `null` | The required Authority Tree Node accessor, see `Accessizo` |
 | reqLevel | <code>null &#124; Number</code> || The required Level of Access, see `Accessizo` |
 | reqFunc | `String` || `null` | The required function of Access, see `Accessizo` |
+| reqGroup | `String` || `null` | The required group tag of Access, see `Accessizo` |
+| reqRole | `String` || `null` | The required role of Access, see `Accessizo` |
 <br/>
 
 
@@ -159,6 +161,8 @@ Display the section in tabs
 | reqAuth | `String` || `null` | The required Authority Tree Node accessor, see `Accessizo` |
 | reqLevel | <code>null &#124; Number</code> || The required Level of Access, see `Accessizo` |
 | reqFunc | `String` || `null` | The required function of Access, see `Accessizo` |
+| reqGroup | `String` || `null` | The required group tag of Access, see `Accessizo` |
+| reqRole | `String` || `null` | The required role of Access, see `Accessizo` |
 | disabled | `Boolean` || `false` | Disable the tab |
 | height | `Number` || `20` | The height of the tab |
 | width | `Number` || `undefined` | The width of the tab |

@@ -94,6 +94,8 @@ class Datumizo extends Component {
    *        func: String | Function | Object, //(id, row) => {}
    *        reqLevel: Number,
    *        reqFunc: String,
+   *        reqGroup: String,
+   *        reqRole: String,
    *        theme: Object,
    *        disableFunc: (id, row) => Boolean
    *      }
@@ -104,7 +106,9 @@ class Datumizo extends Component {
    *        icon: String | JSX,
    *        func: String | Function | Object, //(id, row) => {}
    *        reqLevel: Number,
-   *        reqFunc: String
+   *        reqFunc: String,
+   *        reqGroup: String,
+   *        reqRole: String,
    *      }
    *    ],
    *    left: [],
@@ -146,6 +150,8 @@ class Datumizo extends Component {
     func: PropsType.oneOfType([PropsType.string, PropsType.object, PropsType.func]),
     reqLevel: PropsType.string,
     reqFunc: PropsType.string,
+    reqGroup: PropsType.string,
+    reqRole: PropsType.string,
     theme: PropsType.oneOfType([PropsType.string, PropsType.object, PropsType.func]),
     disableFunc: PropsType.func // (id, row) => Boolean
   }
@@ -436,6 +442,8 @@ class Datumizo extends Component {
         reqAuth: base.reqAuth,
         reqLevel: o.reqLevel,
         reqFunc: o.reqFunc,
+        reqGroup: o.reqGroup,
+        reqRole: o.reqRole,
         theme: o.theme,
         disableFunc: o.disableFunc,
       };
@@ -464,6 +472,8 @@ class Datumizo extends Component {
         reqAuth: base.reqAuth,
         reqLevel: o.reqLevel,
         reqFunc: o.reqFunc,
+        reqGroup: o.reqGroup,
+        reqRole: o.reqRole,
         theme: o.theme,
         disableFunc: o.disableFunc,
       };
@@ -1519,7 +1529,7 @@ class Datumizo extends Component {
     let { table } = this.state;
     let { base, addOns } = this.props;
     return _.map(buttons, (o, i) => {
-      if (Authority.IsAccessibleQ(base.reqAuth, o.reqLevel, o.reqFunc)) {
+      if (Authority.IsAccessibleQ(base.reqAuth, o.reqLevel, o.reqFunc, o.reqGroup, o.reqRole)) {
         //injection
         if (o.inject) {
           return o.inject(table.data, addOns);
@@ -1588,8 +1598,7 @@ class Datumizo extends Component {
         ibase={ibase}
         onSubmit={this._Redirect(ibase?.onSubmit || mode, "onSubmit", true)}
         addOns={addOns}
-        auth={store.user.authority}
-        level={store.user.level}
+        user={store.user}
         showIDOnTop={base.showIDOnTop || false}
         formizo={base.formizo || {}}
       />
@@ -1646,8 +1655,7 @@ class Datumizo extends Component {
           onPageChange={this._onPageChange}
           onPageSizeChange={this._onPageSizeChange}
           defaultPageSize={nav.pageSize}
-          auth={store.user.authority}
-          level={store.user.level}
+          user={store.user}
           addOns={addOns}
           lang={lang}
           {...tablizo}

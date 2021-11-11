@@ -64,8 +64,7 @@ class Tablizo extends Component {
     pageSizeOption: PropsType.arrayOf(PropsType.number),
 
     //authority
-    auth: PropsType.object,
-    level: PropsType.number,
+    user: PropsType.object,
 
     //addOns
     addOns: PropsType.object,
@@ -112,8 +111,7 @@ class Tablizo extends Component {
     defaultPageSize: 50,
     pageSizeOption: [25, 50, 100],
 
-    auth: {},
-    level: 999,
+    user: null,
 
     addOns: {},
 
@@ -301,10 +299,10 @@ class Tablizo extends Component {
   };
 
   _defaultButtons = (buttons) => {
-    let { auth, level, rowIdAccessor } = this.props;
+    let { user, rowIdAccessor } = this.props;
     let btns = [];
     _.map(buttons, (o, i) => {
-      if (Authority.IsAccessible(auth, level, o.reqAuth, o.reqLevel, o.reqFunc)) {
+      if (Authority.IsAccessible(user, o.reqAuth, o.reqLevel, o.reqFunc, o.reqGroup, o.reqRole)) {
         btns.push({
           headerName: "",
           renderHeader: () => <div />,
@@ -398,8 +396,8 @@ class Tablizo extends Component {
   };
 
   getColumn = (o) => {
-    let { auth, level, addOns, selectionOnClick } = this.props;
-    if (Authority.IsAccessible(auth, level, o.reqAuth, o.reqLevel, o.reqFunc)) {
+    let { user, addOns, selectionOnClick } = this.props;
+    if (Authority.IsAccessible(user, o.reqAuth, o.reqLevel, o.reqFunc, o.reqGroup, o.reqRole)) {
       let renderCell;
 
       if (!o.Cell && o.transform === "datetime") {
@@ -478,10 +476,10 @@ class Tablizo extends Component {
   }
 
   getSortModel = () => {
-    let { auth, level } = this.props;
+    let { user } = this.props;
     let schema = this.getSchema();
     let sortModel = _.map(schema, (o, i) => {
-      if (Authority.IsAccessible(auth, level, o.reqAuth, o.reqLevel, o.reqFunc)) {
+      if (Authority.IsAccessible(user, o.reqAuth, o.reqLevel, o.reqFunc, o.reqGroup, o.reqRole)) {
         if (o.defaultSort) {
           return {
             field: o.name,

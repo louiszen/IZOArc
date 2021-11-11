@@ -727,7 +727,7 @@ let access = [
         
       }
     ],
-    reqLevel: 0
+    reqAuth: "System"
   },
   {
     accessizo: [
@@ -738,7 +738,7 @@ let access = [
         
       }
     ],
-    reqLevel: 1
+    reqGroup: "Test"
   },
   {
     accessizo: [

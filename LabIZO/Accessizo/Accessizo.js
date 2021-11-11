@@ -14,16 +14,18 @@ class Accessizo extends Component {
     reqAuth: PropsType.string,
     reqLevel: PropsType.number,
     reqFunc: PropsType.string,
-    auth: PropsType.object,
-    level: PropsType.number.isRequired
+    reqGroup: PropsType.string,
+    reqRole: PropsType.string,
+    user: PropsType.object
   }
 
   static defaultProps = {
     reqAuth: "",
     reqLevel: 999,
     reqFunc: "",
-    auth: null,
-    level: 999
+    reqGroup: "",
+    reqRole: "",
+    user: {}
   }
 
   constructor(){
@@ -53,9 +55,9 @@ class Accessizo extends Component {
     this.setState((state, props) => ({
       ...props,
     }), () => {
-      let {auth, level, reqLevel, reqAuth, reqFunc} = this.state;
+      let {user, reqLevel, reqAuth, reqFunc, reqGroup, reqRole} = this.state;
       this.setState({
-        pass: Authority.IsAccessible(auth, level, reqAuth, reqLevel, reqFunc)
+        pass: Authority.IsAccessible(user, reqAuth, reqLevel, reqFunc, reqGroup, reqRole)
       });
     });
   }

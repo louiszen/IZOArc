@@ -81,6 +81,8 @@ buttons: {
 | func | <code> String &#124; Button Object &#124; (id, row) => {}  &#124; (selectedRows) => {} </code> || `""` | Default functions or specified function when button clicked |
 | reqLevel | `Number` || `999` | The required level of access |
 | reqFunc | `String` || `""` | The required function of access |
+| reqGroup |  `String` || `""` | The required group tag of access |
+| reqRole | `String` || `""` | The required role match of access |
 <br/>
 
 ## **Button Object**

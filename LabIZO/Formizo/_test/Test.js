@@ -129,7 +129,13 @@ class Test extends Component {
               enableInlineSubmit={false}
               defaultValue={data.defaultV}
               addOns={data.addOns}
-              level={1}
+              user={{
+                level: 1,
+                authority: {
+                  System: ["*"]
+                },
+                groups: ["Test"]
+              }}
               fieldStyle={vtype}
               fieldSize="small"
               inputColor={{

@@ -23,18 +23,43 @@ class Authority {
     return false;
   }
 
-  static IsAccessible = (authority, level, reqAuth = "", reqLevel = 999, reqFunc = "") => {
+  /**
+   * 
+   * @param {[String]} groups 
+   * @param {String} reqGroup 
+   * @returns 
+   */
+  static GroupCheck = (groups, reqGroup) => {
+    if(_.isEmpty(reqGroup)) return true;
+    return groups.includes(reqGroup) || groups.includes("*");
+  }
+
+  /**
+   * 
+   * @param {String} role 
+   * @param {String} reqRole 
+   */
+  static RoleCheck = (role, reqRole) => {
+    if(_.isEmpty(reqRole)) return true;
+    return role === reqRole;
+  }
+
+  static IsAccessible = (user, reqAuth = "", reqLevel = Number.MAX_SAFE_INTEGER, reqFunc = "", reqGroup = "", reqRole = "") => {
+    if(!user) return false;
+    let {authority, level, groups, role} = user;
     return this.AuthCheck(authority, reqAuth) 
       && this.LevelCheck(level, reqLevel) 
-      && this.FuncCheck(authority, reqAuth, reqFunc);
+      && this.FuncCheck(authority, reqAuth, reqFunc)
+      && this.GroupCheck(groups, reqGroup)
+      && this.RoleCheck(role, reqRole);
   }
 
-  static IsAccessibleQ = (reqAuth = "", reqLevel = 999, reqFunc = "") => {
-    return this.IsAccessible(store.user.authority, store.user.level, reqAuth, reqLevel, reqFunc);
+  static IsAccessibleQ = (reqAuth = "", reqLevel = Number.MAX_SAFE_INTEGER, reqFunc = "", reqGroup = "", reqRole = "") => {
+    return this.IsAccessible(store.user, reqAuth, reqLevel, reqFunc, reqGroup, reqRole);
   }
 
-  static Require(reqAuth = "", reqLevel = 999, reqFunc = []){
-    if(!this.IsAccessibleQ(reqAuth, reqLevel, reqFunc)){
+  static Require(reqAuth = "", reqLevel = Number.MAX_SAFE_INTEGER, reqFunc = [], reqGroup = "", reqRole = ""){
+    if(!this.IsAccessibleQ(reqAuth, reqLevel, reqFunc, reqGroup, reqRole)){
       window.location.assign("/Denied");
     }
   }

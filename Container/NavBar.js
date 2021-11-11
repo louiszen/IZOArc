@@ -123,7 +123,7 @@ class NavBar extends Component {
 
   renderVersion(){
     return (
-      <Accessizo reqLevel={0} auth={store.user.auth} level={store.user.level}>
+      <Accessizo reqLevel={0} user={store.user}>
         <Typography style={{fontFamily: "Palanquin", color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.3)}}>
           {"v" + Version}
         </Typography>

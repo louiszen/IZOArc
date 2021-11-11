@@ -17,8 +17,7 @@ class FGAccess extends Component {
     formValue: PropsType.object.isRequired,
 
     //access
-    auth: PropsType.object,
-    level: PropsType.number,
+    user: PropsType.object,
 
     addOns: PropsType.object
   }
@@ -29,8 +28,7 @@ class FGAccess extends Component {
     formValue: {},
     
     //access
-    auth: {},
-    level: 999,
+    user: null,
 
     addOns: {}
   }
@@ -85,15 +83,16 @@ class FGAccess extends Component {
   }
 
   render(){
-    let {ischema, auth, level} = this.state;
+    let {ischema, user} = this.state;
     if(!ischema) return null;
     return (
       <Accessizo 
         reqAuth={ischema.reqAuth} 
         reqLevel={ischema.reqLevel} 
         reqFunc={ischema.reqFunc}
-        auth={auth}
-        level={level}>
+        reqGroup={ischema.reqGroup}
+        reqRole={ischema.reqRole}
+        user={user}>
         {this.renderSchema()}
       </Accessizo>
     );

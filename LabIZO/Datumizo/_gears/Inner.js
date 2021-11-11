@@ -23,8 +23,7 @@ class Inner extends Component {
     onSubmit: PropsType.func,
     onQuit: PropsType.func,
     onQuitRefresh: PropsType.func,
-    auth: PropsType.object,
-    level: PropsType.number,
+    user: PropsType.object,
     showIDOnTop: PropsType.bool,
     formizo: PropsType.object,
   }
@@ -37,8 +36,7 @@ class Inner extends Component {
     onSubmit: () => {},
     onQuit: (docID) => {},
     onQuitRefresh: (docID) => {},
-    auth: {},
-    level: 999,
+    user: null,
     showIDOnTop: true,
     formizo: {}
   }
@@ -88,7 +86,7 @@ class Inner extends Component {
   }
 
   renderFormizo(){
-    let {ibase, doc, onSubmit, addOns, auth, level, formizo} = this.props;
+    let {ibase, doc, onSubmit, addOns, user, formizo} = this.props;
     
     return (
       <Formizo
@@ -101,8 +99,7 @@ class Inner extends Component {
         defaultValue={doc}
         onSubmit={onSubmit}
         addOns={addOns}
-        auth={auth}
-        level={level}
+        user={user}
         {...formizo}
         />
     );
@@ -155,9 +152,9 @@ class Inner extends Component {
   }
 
   renderContent(){
-    let {ibase, docID, doc, onQuit, onQuitRefresh, addOns, onSubmit, auth, level, formizo} = this.props;
+    let {ibase, docID, doc, onQuit, onQuitRefresh, addOns, onSubmit, user, formizo} = this.props;
     if(_.isFunction(ibase.Custom)){
-      return ibase.Custom(docID, doc, onQuit, onQuitRefresh, () => {return this.renderFormizo()}, addOns, ibase, onSubmit, auth, level, formizo);
+      return ibase.Custom(docID, doc, onQuit, onQuitRefresh, () => {return this.renderFormizo()}, addOns, ibase, onSubmit, user, formizo);
     }else{
       return this.renderFormizo();
     }

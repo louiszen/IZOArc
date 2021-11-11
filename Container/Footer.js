@@ -53,7 +53,7 @@ class Footer extends Component {
       fontSize: 9
     };
     return (
-      <Accessizo reqLevel={0} auth={store.user.auth} level={store.user.level}>
+      <Accessizo reqLevel={0} user={store.user}>
         <HStack height={15} style={{
           position: "fixed", 
           paddingLeft: 40,

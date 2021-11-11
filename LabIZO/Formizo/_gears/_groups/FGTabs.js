@@ -117,10 +117,10 @@ class FGTabs extends Component {
   }
 
   renderTabButtons(){
-    let {ischema, auth, level} = this.props;
+    let {ischema, user} = this.props;
     let tabSchema = this.getTabSchema();
     return _.map(tabSchema, (o, i) => {
-      if(Authority.IsAccessible(auth, level, o.reqAuth, o.reqLevel, o.reqFunc)){
+      if(Authority.IsAccessible(user, o.reqAuth, o.reqLevel, o.reqFunc, o.reqGroup, o.reqRole)){
         let label = o.label;
         let icon = o.icon;
         if(o.noTransform){

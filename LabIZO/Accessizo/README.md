@@ -29,16 +29,17 @@ The following is the necessary props that must be passed into `Accessizo` in ord
 
 | Props  | Type  | Description | Link |
 | :---   | :---- | :---        | :--- |
-| auth | `Object` | The authority tree of user given by the backend that controls the accessiblility of the UI ||
-| level | `Number` | The access level of user given by the backend that controls how deep that the user can access the UI ||
+| user | `Object` | The user object given by the backend that controls the accessiblility of the UI ||
 <br/>
 
 ## **Optional Props**
 | Props | Type | Required | Default | Description |
 | :---|:---:|:---:|:---:|:---|
 | reqAuth | `String` || `""` | The accessor of the required node of the authority tree |
-| reqLevel | `Number` || `999` | The required access level |
+| reqLevel | `Number` || `MAX INT` | The required access level |
 | reqFunc | `String` || `""` | The required break-down function authority |
+| reqGroup | `String` || `""` | The required group tag |
+| reqRole | `String` || `""` | The required role string |
 <br/>
 
 ### ***functions***

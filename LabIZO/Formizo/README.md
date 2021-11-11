@@ -102,8 +102,7 @@ Listener functions triggered when the form reacts.
 | enableOnBlurAutoSubmit | `Boolean` || `false` | Enabled will make the form auto submit whole form when lose focus of form |
 | errorsShowOnHelperText | `Boolean` || `true` | Display the error in the helper text line |
 | readOnly | `Boolean` || `false` | Enabled will prevent the entire form from editing |
-| auth | `Object` || `{}` | User authority tree, see `Accessizo` |
-| level | `Number` || `999` | User access level, see `Accessizo` |
+| user | `Object` || `{}` | User Object, see `Accessizo` |
 | defaultValue | `Object` || `{}` || Default value of the form |
 | addOns | `Object` || `{}` || Addition data used for referencing like select components |
 | buttons | `[String | JSX]` || `[]` | Show default buttons `OK, Submit, Cancel, Clear, Revert, Login, Logout` or customize buttons| 

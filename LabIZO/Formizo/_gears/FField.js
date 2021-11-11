@@ -39,8 +39,7 @@ class FField extends Component {
     formError: PropsType.object.isRequired,
 
     //access
-    auth: PropsType.object.isRequired,
-    level: PropsType.number.isRequired,
+    user: PropsType.object.isRequired,
 
     //controls
     enableInlineSubmit: PropsType.bool.isRequired,
@@ -82,8 +81,7 @@ class FField extends Component {
     formValue: {},
     formError: {},
 
-    auth: {},
-    level: 999,
+    user: null,
 
     enableInlineSubmit: false,
     errorsShowOnHelperText: true, 
