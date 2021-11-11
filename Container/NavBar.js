@@ -7,13 +7,15 @@ import { ExitToAppOutlined, Language } from '@material-ui/icons';
 import { Box, IconButton, Typography, Tooltip } from '@material-ui/core';
 
 import './Container.css';
-import Version from '__Base/version';
+import Version from '__SYSDefault/Version';
 import IZOVersion from '../version';
 
 import { Accessor, ColorX, store } from 'IZOArc/STATIC';
 import { HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
 import Accessizo from 'IZOArc/LabIZO/Accessizo';
-import { IZODis, IZOTheme, Locale, NavbarDis, Project } from '__Base/config';
+
+import { IZODis, IZOTheme, NavbarDis, ProjectDis } from '__SYSDefault/Theme';
+import { LocaleConfig } from '__SYSDefault/Locale';
 import LocaleX from 'IZOArc/STATIC/LocaleX';
 
 class NavBar extends Component {
@@ -60,16 +62,16 @@ class NavBar extends Component {
   }
 
   _ToggleLanguage = () => {
-    let max = Locale.length;
-    let idx = Locale.findIndex(o => o.code === store.lang);
+    let max = LocaleConfig.length;
+    let idx = LocaleConfig.findIndex(o => o.code === store.lang);
     idx += 1;
     if(idx >= max) idx = 0;
-    let newLang = Locale[idx].code;
+    let newLang = LocaleConfig[idx].code;
     store.setLang(newLang);
   }
 
   renderLocale(){
-    let langO = Locale.find(o => o.code === store.lang);
+    let langO = LocaleConfig.find(o => o.code === store.lang);
     let langLabel = langO.caption;
     return (
       <HStack width="fit-content" marginX={5}>
@@ -132,7 +134,7 @@ class NavBar extends Component {
   renderProject(){
     return (
       <Box width="fit-content" marginX={3}>
-        {Project}
+        {ProjectDis}
       </Box>
     );
   }

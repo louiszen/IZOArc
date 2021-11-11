@@ -13,7 +13,11 @@ import Footer from './Footer';
 import Menu from './Menu';
 import NavBar from './NavBar';
 import './Container.css';
-import { IZOTheme, DOMAIN, hasContainer, loginSys, serverCheck, StartUp } from '__Base/config';
+
+import { IZOTheme } from '__SYSDefault/Theme';
+import { DOMAIN } from '__SYSDefault/Domain';
+import { hasContainer, loginSys, serverCheck } from '__SYSDefault/Config';
+import { StartUp } from '__SYSDefault/StartUp';
 
 import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
 import { SnackAlert, StyledButton, StyledLinearProgress } from 'IZOArc/LabIZO/Stylizo';
@@ -81,14 +85,14 @@ class Container extends Component {
     if(loginSys){
       let {location} = this.props;
       let isPublic = (location && location.pathname) === "/";
-      let isChatbot = (location && location.pathname) === "/Chatbot";
+      let isLogin = (location && location.pathname) === "/Login";
       let isTest = location && location.pathname && location.pathname.startsWith("/Test/");
 
-      if(loginSys && !isPublic && !isChatbot && !isTest && (!store.isLoggedIn() || !store.isInitialized())){
+      if(loginSys && !isPublic && !isLogin && !isTest && (!store.isLoggedIn() || !store.isInitialized())){
         this.AutoLogout();
       }
 
-      if(loginSys && isPublic && store.isLoggedIn() && store.isInitialized()){
+      if(loginSys && (isPublic || isLogin) && store.isLoggedIn() && store.isInitialized()){
         this.AutoLogin();
       }
     }
@@ -117,7 +121,7 @@ class Container extends Component {
     setTimeout(() => {
       store.Alert("Unauthorized", "warn");
       store.clearUser();
-      this.props.history.push('/');
+      this.props.history.push('/Login');
     }, 1000);
   }
 
@@ -302,8 +306,9 @@ class Container extends Component {
     let {snackOpen, loadingOpen, dialogOpen, backdropOpen} = this.state;
     let {location} = this.props;
     let isPublic = (location && location.pathname) === "/";
+    let isLogin = (location && location.pathname) === "/Login";
     let isTest = (location && location.pathname).startsWith("/Test/");
-    let isContained = hasContainer && !isPublic && !isTest && store.isLoggedIn();
+    let isContained = hasContainer && !isPublic && !isTest && !isLogin && store.isLoggedIn();
 
     return (
       <Box className="container" height="100%">

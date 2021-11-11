@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 import { Typography } from '@material-ui/core';
 
-import { IZOTheme, DOMAIN } from '__Base/config';
+import { IZOTheme } from '__SYSDefault/Theme';
+import { DOMAIN } from '__SYSDefault/Domain';
 
 import Accessizo from 'IZOArc/LabIZO/Accessizo';
 import { HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';

@@ -10,7 +10,8 @@ import { Accessor, ColorX } from 'IZOArc/STATIC';
 import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
 import { StyledButton } from 'IZOArc/LabIZO/Stylizo';
 import Formizo from 'IZOArc/LabIZO/Formizo';
-import { IZOTheme } from '__Base/config';
+
+import { IZOTheme } from '__SYSDefault/Theme';
 
 class Inner extends Component {
 

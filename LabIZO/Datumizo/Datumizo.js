@@ -8,7 +8,8 @@ import { Add, CloudDownload, CloudUpload, Delete, DeleteForever, Edit, GetApp, I
 import { ContentCopy } from '@mui/icons-material';
 import { Box, Slide, Typography } from "@material-ui/core";
 
-import { IZOTheme, DOMAIN } from "__Base/config";
+import { IZOTheme } from "__SYSDefault/Theme";
+import { DOMAIN } from "__SYSDefault/Domain";
 import Inner from "./_gears/Inner";
 
 import Formizo from "IZOArc/LabIZO/Formizo";

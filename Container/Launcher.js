@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Accessor } from 'IZOArc/STATIC';
-import PropsType from 'prop-types';
-import { IZODis } from '__Base/config';
 
 /**
  * @augments {Component<Props, State>}

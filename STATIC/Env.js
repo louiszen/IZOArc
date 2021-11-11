@@ -1,7 +1,7 @@
 import store from './AppStore';
 import axios from 'axios';
 
-import { DOMAIN } from '__Base/config';
+import { DOMAIN } from '__SYSDefault/Domain';
 
 class Env {
 

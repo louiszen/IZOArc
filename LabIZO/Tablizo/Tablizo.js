@@ -11,7 +11,8 @@ import CellExpand from "./_gears/CellExpand";
 import { StyledLinearProgress, StyledIconButton } from "IZOArc/LabIZO/Stylizo";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
 import { Accessor, Authority, ColorX, store } from "IZOArc/STATIC";
-import { IZOTheme } from "__Base/config";
+
+import { IZOTheme } from "__SYSDefault/Theme";
 import locale from "./_locale";
 
 /**

@@ -11,7 +11,7 @@ import FItem from '../FItem';
 import { Accessor, ColorX } from 'IZOArc/STATIC';
 import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
 import { OutlinedBox, StyledIconButton } from 'IZOArc/LabIZO/Stylizo';
-import { IZOTheme } from '__Base/config';
+import { IZOTheme } from '__SYSDefault/Theme';
 
 class FGArray extends Component {
 

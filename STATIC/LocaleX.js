@@ -1,12 +1,13 @@
 import _ from 'lodash';
-import { Locale } from '__Base/config';
+import { LocaleConfig } from '__SYSDefault/Locale';
+
 import { Accessor, store } from '.';
 
 
 class LocaleX {
 
   static Get(accessor){
-    let langO = Locale.find(o => o.code === store.lang);
+    let langO = LocaleConfig.find(o => o.code === store.lang);
     let lib = langO.lib;
 
     let str = Accessor.Get(lib, accessor);

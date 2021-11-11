@@ -1,0 +1,22 @@
+.Login{
+  width: 100vw;
+  height: 100vh;
+  background: rgba(29, 25, 25, 1);
+}
+
+.Login-elain{
+  height: 40vh;
+}
+
+.Login-elain img{
+  height: 100%;
+}
+
+.Login-elain-form{
+  background-color:white;
+  width: 300px;
+}
+
+.server-detail{
+  color: rgba(242, 131, 62, 0.2);
+}

@@ -1,5 +1,5 @@
 import { ColorX } from "IZOArc/STATIC";
-import { IZOTheme } from "__Base/config";
+import { IZOTheme } from "__SYSDefault/Theme";
 
 const Tail = {
   padding: "0 !important",
