@@ -22,7 +22,7 @@ import { StartUp } from '__SYSDefault/StartUp';
 import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
 import { SnackAlert, StyledButton, StyledLinearProgress } from 'IZOArc/LabIZO/Stylizo';
 import { StyledIconButton } from 'IZOArc/LabIZO/Stylizo';
-import { ColorX, store } from 'IZOArc/STATIC';
+import { ColorX, LocaleX, store } from 'IZOArc/STATIC';
 
 class Container extends Component {
 
@@ -198,7 +198,7 @@ class Container extends Component {
         onClick={this._onOK} 
         disabled={store.ask.loading}
         >
-        <i className="fas fa-check"/><div className="formizo-h-m">OK</div>
+        <i className="fas fa-check"/><div className="formizo-h-m">{LocaleX.Get("__IZO.Formizo.Confirm")}</div>
       </StyledButton>,
       "Cancel":
       <StyledButton className={"formizo-h-m"} key={2} theme={{
@@ -213,7 +213,7 @@ class Container extends Component {
         onClick={this._onCancel} 
         disabled={store.ask.loading}
         >
-        <i className="fas fa-ban"/><div className="formizo-h-m">Cancel</div>
+        <i className="fas fa-ban"/><div className="formizo-h-m">{LocaleX.Get("__IZO.Formizo.Cancel")}</div>
       </StyledButton>,
     }
 

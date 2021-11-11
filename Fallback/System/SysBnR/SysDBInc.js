@@ -5,6 +5,7 @@ import { IconButton, Tooltip } from '@material-ui/core';
 
 import { Accessor, ColorX } from 'IZOArc/STATIC';
 import { HStack } from 'IZOArc/LabIZO/Stackizo';
+import { observer } from 'mobx-react';
 
 class SysDBInc extends Component {
 
@@ -67,4 +68,4 @@ class SysDBInc extends Component {
 
 }
 
-export default SysDBInc;
+export default observer(SysDBInc);

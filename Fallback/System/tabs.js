@@ -1,11 +1,12 @@
 import { Group, Sync } from "@material-ui/icons";
+import { LocaleX } from "IZOArc/STATIC";
 
 import SysBnR from "./SysBnR/SysBnR";
 import SysUser from "./SysUser/SysUser";
 
 const tabs = [
   {
-    label: "Backup & Restore",
+    label: () => LocaleX.Get("__IZO.System.BnR"),
     icon: <Sync/>,
     reqAuth: "System.BnR",
     render: <SysBnR/>,
@@ -14,7 +15,7 @@ const tabs = [
     alignment: "left"
   },
   {
-    label: "User Access Control",
+    label: () => LocaleX.Get("__IZO.System.UAC"),
     icon: <Group/>,
     reqAuth: "System.User",
     render: <SysUser/>,

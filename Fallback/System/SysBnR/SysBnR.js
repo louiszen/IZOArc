@@ -11,9 +11,10 @@ import { DOMAIN } from '__SYSDefault/Domain';
 
 import Tablizo from 'IZOArc/LabIZO/Tablizo';
 import Accessizo from 'IZOArc/LabIZO/Accessizo';
-import { Accessor, ColorX, store, ErrorX } from 'IZOArc/STATIC';
+import { Accessor, ColorX, store, ErrorX, LocaleX } from 'IZOArc/STATIC';
 import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
 import { StyledButton } from 'IZOArc/LabIZO/Stylizo';
+import { observer } from 'mobx-react';
 
 class SysBnR extends Component {
 
@@ -63,16 +64,17 @@ class SysBnR extends Component {
   }
 
   _GetInfo = async () => {
-    let url = DOMAIN + "/Data/General/Info";
+    let reqPath = "/CommonAPI/BnR/Info"
+    let url = DOMAIN + reqPath;
     let payloadOut = {
       JWT: store.user.JWT,
     };
 
     try{
-      console.log("/Data/General/Info", payloadOut);
+      console.log(reqPath, payloadOut);
       let res = await axios.post(url, payloadOut);
 
-      console.log("/Data/General/Info", res.data);
+      console.log(reqPath, res.data);
 
       let {Success, payload} = res.data;
       if (Success === true) {
@@ -98,20 +100,20 @@ class SysBnR extends Component {
           includeDB: include
         })
       } else {
-        store.Alert("Server return error.", "error")
+        store.Alert(LocaleX.Get("__IZO.Alert.ServerReturnError"), "error")
       }
     } catch (e) {
       console.log(e);
-      store.Alert("Cannot connect to Server.", "error")
+      store.Alert(LocaleX.Get("__IZO.Alert.CannotConnect"), "error")
     }
   }
 
   _Backup = {
     onClick: () => {
-      store.Ask("Backup", "Backup System?", this._Backup.onSubmit);
+      store.Ask(LocaleX.Get("__IZO.System.Backup"), LocaleX.Get("__IZO.System.BackupSystem"), this._Backup.onSubmit);
     }, 
     onSubmit: async () => {
-      let url = DOMAIN + "/Data/General/Backup";
+      let url = DOMAIN + "/CommonAPI/BnR/Backup";
       let payloadOut = {
         JWT: store.user.JWT,
       };
@@ -121,7 +123,7 @@ class SysBnR extends Component {
         console.log(res);
         let {Success} = res.data;
         if (Success === true) {
-          store.Alert("Backup Successful.", "success");
+          store.Alert(LocaleX.Get("__IZO.Alert.BackupSuccess"), "success");
           this._GetInfo();
         } else {
           this._Backup.onError(res.data);
@@ -137,7 +139,7 @@ class SysBnR extends Component {
 
   _IncToggle = async (dbname, f) => {
     console.log(dbname, f);
-    let url = DOMAIN + "/Config/Database/Include";
+    let url = DOMAIN + "/CommonAPI/DBConfig/Include";
     let payloadOut = {
       JWT: store.user.JWT,
       data: {
@@ -155,7 +157,7 @@ class SysBnR extends Component {
         this._GetInfo();
 
       }else{
-        store.Alert("Cannot Update Doc Status.", "error");
+        store.Alert(LocaleX.Get("__IZO.Alert.UpdateError"), "error");
       }
     }catch(e){
       store.Alert(ErrorX.Handle(e), "error");
@@ -166,14 +168,14 @@ class SysBnR extends Component {
     onClick: (datestr) => {
       let mObj = this._dateStrToMomemt(datestr);
       let str = this._momentToDisplay(mObj);
-      store.Ask("Restore", "Restore System to " + str + "?<br/>The current state of the system will be backup-ed automatically.", async () => {
+      store.Ask(LocaleX.Get("__IZO.System.Restore"), LocaleX.Get("__IZO.System.RestoreTo", {str: str}), async () => {
         await this._Restore.onSubmit(datestr);
       });
     }, 
     onSubmit: async (datestr) => {
       let mObj = this._dateStrToMomemt(datestr);
       let str = this._momentToDisplay(mObj);
-      let url = DOMAIN + "/Data/General/Restore";
+      let url = DOMAIN + "/CommonAPI/BnR/Restore";
       let payloadOut = {
         JWT: store.user.JWT,
         data: {
@@ -186,7 +188,7 @@ class SysBnR extends Component {
         console.log(res);
         let {Success} = res.data;
         if (Success === true) {
-          store.Alert("Restore Successful to \n" + str + ".", "success");
+          store.Alert(LocaleX.Get("__IZO.Alert.RestoreSuccess", {str: str}), "success");
           this._GetInfo();
         } else {
           this._Restore.onError(res.data);
@@ -204,14 +206,14 @@ class SysBnR extends Component {
     onClick: (datestr) => {
       let mObj = this._dateStrToMomemt(datestr);
       let str = this._momentToDisplay(mObj);
-      store.Ask("Delete", "Delete Backup " + str + "?", async () => {
+      store.Ask(LocaleX.Get("__IZO.System.Delete"), LocaleX.Get("__IZO.System.DeleteBackup", {str: str}), async () => {
         await this._Delete.onSubmit(datestr);
       });
     }, 
     onSubmit: async (datestr) => {
       let mObj = this._dateStrToMomemt(datestr);
       let str = this._momentToDisplay(mObj);
-      let url = DOMAIN + "/Data/General/Delete";
+      let url = DOMAIN + "/CommonAPI/BnR/Delete";
       let payloadOut = {
         JWT: store.user.JWT,
         data: {
@@ -224,7 +226,7 @@ class SysBnR extends Component {
         console.log(res);
         let {Success} = res.data;
         if (Success === true) {
-          store.Alert(str + " Successfully Deleted.", "success");
+          store.Alert(str + " " + LocaleX.Get("__IZO.Alert.DeleteSuccess"), "success");
           this._GetInfo();
         } else {
           this._Delete.onError(res.data);
@@ -255,15 +257,15 @@ class SysBnR extends Component {
             <HStack spacing={5}>
               <SaveOutlined/>
               <Typography>
-                Backup
+                {LocaleX.Get("__IZO.System.Backup")}
               </Typography>
             </HStack>            
         </StyledButton>
         <Typography>
-          Last Backup:
+          {LocaleX.Get("__IZO.System.LastBackup")}
         </Typography>
         <Typography style={{fontWeight: "bold"}}>
-          {LastBackup || "No Backup Available."}
+          {LastBackup || LocaleX.Get("__IZO.System.NoBackup")}
         </Typography>
       </HStack>
     );
@@ -297,6 +299,7 @@ class SysBnR extends Component {
           addOns={{
             onToggle: this._IncToggle
           }}
+          lang={store.lang}
           />
         </VStack>
       </Accessizo>
@@ -319,6 +322,7 @@ class SysBnR extends Component {
           Restore: this._Restore.onClick,
           Delete: this._Delete.onClick
         }}
+        lang={store.lang}
         /> 
     );
   }
@@ -334,4 +338,4 @@ class SysBnR extends Component {
 
 }
 
-export default SysBnR;
+export default observer(SysBnR);

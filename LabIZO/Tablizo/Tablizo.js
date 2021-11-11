@@ -13,6 +13,7 @@ import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
 import { Accessor, Authority, ColorX, store } from "IZOArc/STATIC";
 
 import { IZOTheme } from "__SYSDefault/Theme";
+import { LocaleX } from "IZOArc/STATIC";
 import locale from "./_locale";
 
 /**
@@ -536,6 +537,7 @@ class Tablizo extends Component {
     let { sortModel, filterModel, selectedRows } = this.state;
     let schema = this.getSchema();
     let localText = locale[lang];
+    console.log(localText);
     return (
       <Box height={height} width={width} overflow={"hidden"}>
         <DataGrid
@@ -566,6 +568,7 @@ class Tablizo extends Component {
           filterModel={filterModel}
           disableColumnReorder={true}
           localeText={localText}
+          labelRowsPerPage={LocaleX.Get("__IZO.Tablizo.labelRowsPerPage")}
           {...datagridProps}
         />
       </Box>

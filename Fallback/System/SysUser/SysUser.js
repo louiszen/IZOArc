@@ -11,6 +11,7 @@ import { VStack } from 'IZOArc/LabIZO/Stackizo';
 import { Accessor, ColorX, Authority, store } from 'IZOArc/STATIC';
 import { IZOTheme } from '__SYSDefault/Theme';
 import { Denied } from 'IZOArc/Fallback';
+import { observer } from 'mobx-react';
 
 /**
  * @augments {Component<Props, State>}
@@ -185,4 +186,4 @@ class SysUser extends Component {
 
 }
 
-export default SysUser;
+export default observer(SysUser);

@@ -75,7 +75,7 @@ class NavBar extends Component {
     let langLabel = langO.caption;
     return (
       <HStack width="fit-content" marginX={5}>
-        <Tooltip title={LocaleX.Get("NavBar.SwitchLang")} arrow={true} placement="bottom">
+        <Tooltip title={LocaleX.Get("__IZO.NavBar.SwitchLang")} arrow={true} placement="bottom">
           <IconButton style={{color: ColorX.GetColorCSS(IZOTheme.menuFG, 1)}} size="small" onClick={() => this._ToggleLanguage()}>
             <Language/>
           </IconButton>
@@ -112,7 +112,7 @@ class NavBar extends Component {
           color: ColorX.GetColorCSS(IZOTheme.menuFG, 1),
           textAlign: "right"
           }}>
-          {LocaleX.Get("NavBar.LoggedInAs")}
+          {LocaleX.Get("__IZO.NavBar.LoggedInAs")}
         </Typography>
         <Typography style={{marginLeft: 10, marginRight: 30, fontFamily: "Palanquin", fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.8)}}>
           {store.user && store.user.UserDisplayName}
@@ -149,7 +149,7 @@ class NavBar extends Component {
 
   renderLogout(){
     return (
-      <Tooltip title={LocaleX.Get("NavBar.Logout")} arrow={true} placement="bottom">
+      <Tooltip title={LocaleX.Get("__IZO.NavBar.Logout")} arrow={true} placement="bottom">
         <IconButton style={{color: ColorX.GetColorCSS(IZOTheme.menuFG, 1)}} size="small" onClick={() => this._Logout()}>
           <ExitToAppOutlined/>
         </IconButton>

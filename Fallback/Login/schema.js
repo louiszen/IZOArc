@@ -2,7 +2,7 @@ import { LocaleX } from "IZOArc/STATIC";
 
 const loginName = [
   {
-    label: () => LocaleX.Get("Login.form.username"),
+    label: () => LocaleX.Get("__IZO.Login.form.username"),
     name: "username",
     format: "text",
     validate: ["required"],
@@ -12,7 +12,7 @@ const loginName = [
 
 const loginPassword = [
   {
-    label: () => LocaleX.Get("Login.form.password"),
+    label: () => LocaleX.Get("__IZO.Login.form.password"),
     name: "password",
     format: "password",
     autoFocus: true,

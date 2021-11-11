@@ -79,7 +79,7 @@ class Login extends Component {
     let langLabel = langO.caption;
     return (
       <HStack width="fit-content" marginX={5}>
-        <Tooltip title={LocaleX.Get("NavBar.SwitchLang")} arrow={true} placement="bottom">
+        <Tooltip title={LocaleX.Get("__IZO.NavBar.SwitchLang")} arrow={true} placement="bottom">
           <IconButton style={{color: ColorX.GetColorCSS(IZOTheme.menuFG, 1)}} size="small" onClick={() => this._ToggleLanguage()}>
             <Language/>
           </IconButton>
@@ -115,14 +115,14 @@ class Login extends Component {
               userDisplayName: payload.UserDisplayName
             });
           }else{
-            store.Alert(LocaleX.Get("Alert.UserNotFound"), "error");
+            store.Alert(LocaleX.Get("__IZO.Alert.UserNotFound"), "error");
             this.setState({
               loading: false
             });
           }
         }
       }catch(e){
-        store.Alert(LocaleX.Get("Alert.CannotConnect"), "error");
+        store.Alert(LocaleX.Get("__IZO.Alert.CannotConnect"), "error");
         this.setState({
           loading: false
         });
@@ -152,7 +152,7 @@ class Login extends Component {
         if(Success === true){
           console.log(payload);
           store.setUser(payload);
-          store.Alert(LocaleX.Get("Alert.SuccessLogin"), "success");
+          store.Alert(LocaleX.Get("__IZO.Alert.SuccessLogin"), "success");
           await Env.CheckInitialized();
 
           if(!store.isInitialized()){
@@ -163,13 +163,13 @@ class Login extends Component {
           }
           
         }else{
-          store.Alert(LocaleX.Get("IncorrectPassword"), "error");
+          store.Alert(LocaleX.Get("__IZO.IncorrectPassword"), "error");
           this.setState({
             loading: false
           });
         }
       }catch(e){
-        store.Alert(LocaleX.Get("Alert.CannotConnect"), "error");
+        store.Alert(LocaleX.Get("__IZO.Alert.CannotConnect"), "error");
         this.setState({
           loading: false
         });
@@ -205,7 +205,7 @@ class Login extends Component {
           }}
           disabled={loading}>
           <HStack>
-            <div>{LocaleX.Get("Login.Next")}</div>
+            <div>{LocaleX.Get("__IZO.Login.Next")}</div>
             <Spacer/>
             <i className="fas fa-arrow-right"/>
           </HStack>
@@ -236,7 +236,7 @@ class Login extends Component {
           }}
           disabled={loading}>
           <HStack>
-            <div>{LocaleX.Get("Login.Login")}</div>
+            <div>{LocaleX.Get("__IZO.Login.Login")}</div>
             <Spacer/>
             <i className="fas fa-arrow-right"/>
           </HStack>
@@ -298,10 +298,10 @@ class Login extends Component {
   renderHeaderMessage(){
     let {page, userDisplayName} = this.state;
     switch(page){
-      default: case "user": return LocaleX.Get("Login.HeaderMessage");
+      default: case "user": return LocaleX.Get("__IZO.Login.HeaderMessage");
       case "password": return (
         <Link onClick={() => this.backToUser()}>
-          {LocaleX.Get("Login.Not") + " " + userDisplayName + " ?"}
+          {LocaleX.Get("__IZO.Login.Not") + " " + userDisplayName + " ?"}
         </Link>
       );
     }

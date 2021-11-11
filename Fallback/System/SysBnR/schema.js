@@ -5,7 +5,7 @@ import SysDBInc from "./SysDBInc";
 
 import { HStack } from "IZOArc/LabIZO/Stackizo";
 import { StyledButton } from "IZOArc/LabIZO/Stylizo";
-import { ColorX } from "IZOArc/STATIC";
+import { ColorX, LocaleX } from "IZOArc/STATIC";
 
 const database = [
   {
@@ -51,7 +51,7 @@ const restore = [
             <HStack spacing={5}>
               <Restore fontSize="small"/>
               <Typography style={{fontSize: 12}}>
-                Restore
+                {LocaleX.Get("__IZO.System.Restore")}
               </Typography>
             </HStack>            
           </StyledButton>

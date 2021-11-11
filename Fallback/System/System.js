@@ -8,8 +8,10 @@ import tabs from './tabs';
 import { Accessor, Authority } from 'IZOArc/STATIC';
 import { VStack, HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
 import { Denied } from 'IZOArc/Fallback';
+import { observer } from 'mobx-react';
 
 /** 
+ * Add ~react-tabs.js as tab.js in the same scope
 tabs = [
   {
     label: String,
@@ -88,10 +90,10 @@ class System extends Component {
   renderTabButtons(){
     return _.map(tabs, (o, i) => {
       if(Authority.IsAccessibleQ(o.reqAuth, o.reqLevel, o.reqFunc)){
-        let label = o.label;
+        let label = _.isFunction(o.label)? o.label() : o.label;
         let icon = o.icon;
         if(o.noTransform){
-          label = <Typography style={{textTransform: 'none'}}>{o.label}</Typography>
+          label = <Typography style={{textTransform: 'none'}}>{label}</Typography>
         }
         switch(o.iconPos){
           case "top": default: 
@@ -147,4 +149,4 @@ class System extends Component {
 
 }
 
-export default System;
+export default observer(System);
