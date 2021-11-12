@@ -14,7 +14,7 @@ import { Accessor, ColorX, store } from 'IZOArc/STATIC';
 import { HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
 import Accessizo from 'IZOArc/LabIZO/Accessizo';
 
-import { IZODis, IZOTheme, NavbarDis, ProjectDis } from '__SYSDefault/Theme';
+import { CompanyDis, IZOTheme, NavbarDis, ProjectDis } from '__SYSDefault/Theme';
 import { LocaleConfig } from '__SYSDefault/Locale';
 import LocaleX from 'IZOArc/STATIC/LocaleX';
 
@@ -96,8 +96,12 @@ class NavBar extends Component {
         <Typography style={{marginLeft: 10, fontFamily: "Palanquin", fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.3)}}>
           {IZOVersion}
         </Typography>
-        <Box position="absolute" style={IZODis && IZODis.style}>
-          <img src={IZODis && IZODis.src} alt="elain" draggable={false}/>
+        <Box position="absolute" style={{
+          width: 150,
+          marginTop: 0,
+          opacity: 0.15,
+          }}>
+          <img src={"/Images/izo.png"} alt="elain" draggable={false}/>
         </Box>
       </HStack>
     )
@@ -140,10 +144,28 @@ class NavBar extends Component {
   }
 
   renderIcon(){
+    if(!NavbarDis) return;
     return (
-      <Box position="absolute" style={NavbarDis && NavbarDis.style}>
-        <img src={NavbarDis && NavbarDis.src} alt="elain" draggable={false}/>
-      </Box>
+      <HStack position="absolute" style={NavbarDis.style}>
+        {NavbarDis.preRender}
+        <Box style={NavbarDis.imgStyle}>
+          <img src={NavbarDis.src} alt="elain" draggable={false}/>
+        </Box>
+        {NavbarDis.postRender}
+      </HStack>
+    );
+  }
+
+  renderCompany(){
+    if(!CompanyDis) return;
+    return (
+      <HStack position="absolute" style={CompanyDis.style}>
+        {CompanyDis.preRender}
+        <Box style={CompanyDis.imgStyle}>
+          <img src={CompanyDis.src} alt="elain" draggable={false}/>
+        </Box>
+        {CompanyDis.postRender}
+      </HStack>
     );
   }
 
@@ -163,6 +185,7 @@ class NavBar extends Component {
         <HStack>
           {this.renderIZO()}
           {this.renderLogin()}
+          {this.renderCompany()}
           <Spacer/>
           {this.renderLocale()}
           {this.renderVersion()}

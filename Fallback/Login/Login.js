@@ -360,11 +360,11 @@ class Login extends Component {
     return (
       <VStack spacing="1px" alignItems="center" width="100%" height="100vh">
         <VStack justifyContent="center">
-          {GateDis.postRender && GateDis.preRender()}
+          {GateDis.preRender}
           <Box style={GateDis.style}>
-            <img src={GateDis.src} alt="Logo"/>
+            <img src={GateDis.src} alt="Logo" style={{width: "100%"}}/>
           </Box>
-          {GateDis.postRender && GateDis.postRender()}
+          {GateDis.postRender}
         </VStack>
         {this.renderEnv()}
       </VStack>
