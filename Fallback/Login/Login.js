@@ -16,6 +16,7 @@ import { VStack, HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
 import { StyledButton, StyledLinearProgress } from 'IZOArc/LabIZO/Stylizo';
 import { Language } from '@material-ui/icons';
 import { LocaleConfig } from '__SYSDefault/Locale';
+import { FirstPage } from '__SYSDefault/Config';
 
 class Login extends Component {
 
@@ -180,7 +181,7 @@ class Login extends Component {
   redirectToDashboard = () => {
     if(store.isInitialized){
       setTimeout(() => {
-        this.props.history.push("/Dashboard");
+        this.props.history.push(FirstPage);
         store.isLoading(false);
       }, 1000);
     }
@@ -335,7 +336,7 @@ class Login extends Component {
       fontSize: 9
     };
     return (
-      <Box style={{position: "absolute", bottom: 0}}>
+      <Box style={{position: "absolute", bottom: 0, left: 0}}>
         <Typography style={style}>
           {"[" + envStr + "]"}
         </Typography>
@@ -357,10 +358,14 @@ class Login extends Component {
 
   renderLogo(){
     return (
-      <VStack spacing="1px" alignItems="flex-start" width="100%">
-        <Box style={GateDis.style}>
-          <img src={GateDis.src} alt="Logo"/>
-        </Box>
+      <VStack spacing="1px" alignItems="center" width="100%" height="100vh">
+        <VStack justifyContent="center">
+          {GateDis.postRender && GateDis.preRender()}
+          <Box style={GateDis.style}>
+            <img src={GateDis.src} alt="Logo"/>
+          </Box>
+          {GateDis.postRender && GateDis.postRender()}
+        </VStack>
         {this.renderEnv()}
       </VStack>
     );
