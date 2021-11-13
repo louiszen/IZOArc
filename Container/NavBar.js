@@ -118,8 +118,11 @@ class NavBar extends Component {
           }}>
           {LocaleX.Get("__IZO.NavBar.LoggedInAs")}
         </Typography>
-        <Typography style={{marginLeft: 10, marginRight: 30, fontFamily: "Palanquin", fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.8)}}>
+        <Typography style={{marginLeft: 10, marginRight: 5, fontFamily: "Palanquin", fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.8)}}>
           {store.user && store.user.UserDisplayName}
+        </Typography>
+        <Typography style={{marginLeft: 5, marginRight: 5, fontFamily: "Palanquin", fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.8)}}>
+          {store.user && ("[" + store.user.role + "]")}
         </Typography>
       </HStack>
     );
