@@ -80,7 +80,7 @@ class Login extends Component {
     let langO = LocaleConfig.find(o => o.code === store.lang);
     let langLabel = langO.caption;
     return (
-      <HStack width="fit-content" marginX={5}>
+      <HStack width="fit-content" marginRight={5}>
         <Tooltip title={LocaleX.Get("__IZO.NavBar.SwitchLang")} arrow={true} placement="bottom">
           <IconButton style={{color: ColorX.GetColorCSS(IZOTheme.menuFG, 1)}} size="small" onClick={() => this._ToggleLanguage()}>
             <Language/>
@@ -313,13 +313,18 @@ class Login extends Component {
       <VStack width="100%">
         <Spacer/>
           <HStack>
-            <VStack>
-              <Box margin={1} width={1}>
-              {this.renderHeaderMessage()}
-              </Box>
+            <VStack spacing={10}>
+              <HStack marginY={3} width={1}>
+                {this.renderHeaderMessage()}
+                <Spacer/>
+              </HStack>
               <Box width="300px" style={{background: "white"}}>
                 {this.renderForm()}
               </Box>
+              <HStack>
+                {this.renderLocale()}
+                <Spacer/>
+              </HStack>
             </VStack>
             <Spacer/>
           </HStack>
@@ -384,9 +389,6 @@ class Login extends Component {
           {this.renderInside()}
           <Spacer/>
         </HStack> 
-        <VStack>
-          {this.renderLocale()}
-        </VStack>
         <Spacer/>
       </VStack>
     );

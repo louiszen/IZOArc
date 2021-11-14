@@ -66,7 +66,8 @@ let DefTC = {
     Clear: "清除",
     Revert: "還原",
     Login: "登入",
-    Logout: "登出"
+    Logout: "登出",
+    Upload: "上傳"
   },
   Tablizo: {
     labelRowsPerPage: "每頁行數:"

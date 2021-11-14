@@ -1333,7 +1333,17 @@ class Datumizo extends Component {
         store.Alert(LocaleX.Get("__IZO.Alert.ImportNotImplement"), "warn");
         return;
       }
-      store.Form(base.operations?.Import?.title, base.operations?.Import?.content 
+      let title = base.operations?.Import?.title;
+      if(_.isFunction(title)){
+        title = title();
+      }
+
+      let content = base.operations?.Import?.content;
+      if(_.isFunction(content)){
+        content = content();
+      }
+
+      store.Form(title, content 
         || (base.operations?.Import?.replace? 
           LocaleX.Get("__IZO.Datumizo.ReplaceAllCaution")
           : "") + LocaleX.Get("__IZO.Datumizo.FileSizeLimit"),

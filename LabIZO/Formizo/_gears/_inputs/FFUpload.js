@@ -6,7 +6,7 @@ import { v1 } from 'uuid';
 import { CloudUpload } from '@material-ui/icons';
 import { FormHelperText, FormLabel, Typography } from '@material-ui/core';
 
-import { Accessor, ColorX } from 'IZOArc/STATIC';
+import { Accessor, ColorX, LocaleX } from 'IZOArc/STATIC';
 import { HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
 import { OutlinedBox, StyledButton } from 'IZOArc/LabIZO/Stylizo';
 
@@ -127,7 +127,7 @@ class FFUpload extends Component {
             <HStack spacing={5}>
               <CloudUpload/>
               <Typography style={{fontSize:14, fontWeight: 500}}>
-                Upload
+                {LocaleX.Get("__IZO.Formizo.Upload")}
               </Typography>
             </HStack>
           </StyledButton>

@@ -66,7 +66,8 @@ let DefEN = {
     Clear: "Clear",
     Revert: "Revert",
     Login: "Login",
-    Logout: "Logout"
+    Logout: "Logout",
+    Upload: "上傳"
   },
   Tablizo: {
     labelRowsPerPage: "Rows Per Page:"

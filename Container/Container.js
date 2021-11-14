@@ -247,6 +247,7 @@ class Container extends Component {
     if(_.isString(message)){
       message = htmlParser(message);
     }
+
     return (
       <Box bgcolor={ColorX.GetColorCSS("darkBox")}
         padding={2}
