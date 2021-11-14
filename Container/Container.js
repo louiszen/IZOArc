@@ -16,7 +16,7 @@ import './Container.css';
 
 import { IZOTheme } from '__SYSDefault/Theme';
 import { DOMAIN } from '__SYSDefault/Domain';
-import { hasContainer, loginSys, serverCheck } from '__SYSDefault/Config';
+import { FirstPage, hasContainer, loginSys, serverCheck } from '__SYSDefault/Config';
 import { StartUp } from '__SYSDefault/StartUp';
 
 import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
@@ -113,14 +113,14 @@ class Container extends Component {
 
   AutoLogin = () => {
     setTimeout(() => {
-      this.props.history.push('/Dashboard');
-      store.Alert("Auto Login", "success");
+      this.props.history.push(FirstPage);
+      store.Alert(LocaleX.Get("__IZO.Alert.AutoLogin"), "success");
     }, 1000);
   }
 
   AutoLogout = () => {
     setTimeout(() => {
-      store.Alert("Unauthorized", "warn");
+      store.Alert(LocaleX.Get("__IZO.Alert.Unauthorized"), "warn");
       store.clearUser();
       this.props.history.push('/Login');
     }, 1000);
@@ -135,14 +135,14 @@ class Container extends Component {
       if(rtn.data.Success === true){
         store.setServer(rtn.data.payload);
       }else{
-        store.Alert("Internal Server Error", "error");
+        store.Alert(LocaleX.Get("__IZO.Alert.InternalServerError"), "error");
       }
     }catch{
       let {location} = this.props;
       let isPublic = (location && location.pathname) === "/";
       let isTest = location && location.pathname && location.pathname.startsWith("/Test/");
 
-      store.Alert("Cannot connect to server", "error");
+      store.Alert(LocaleX.Get("__IZO.Alert.CannotConnect"), "error");
       if(!isPublic && !isTest){
         this.AutoLogout();
       }

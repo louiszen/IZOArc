@@ -24,11 +24,15 @@ let DefEN = {
     CannotConnect: "Cannot connect to server.",
     IncorrectPassword: "Incorrect password.",
     SuccessLogin: "Login Successful",
+    SuccessLogout: "Logout Successful",
+    InteranlServerError: "Internal Server Error.",
     ServerReturnError: "Server Return Error",
     BackupSuccess: "Backup Successful.",
     RestoreSuccess: "Restore Successful to \n@str.",
     DeleteSuccess: "Delete Successful.",
-    UpdateError: "Update Error."
+    UpdateError: "Update Error.",
+    AutoLogin: "Auto Login.",
+    Unauthorized: "Unauthorized.",
   },
   System: {
     BnR: "Backup & Restore",
@@ -40,7 +44,12 @@ let DefEN = {
     RestoreTo: "Restore System to @str?<br/>The current state of the system will be backup-ed automatically.",
     BackupSystem: "Backup System?",
     Delete: "Delete",
-    DeleteBackup: "Delete Backup @str?"
+    DeleteBackup: "Delete Backup @str?",
+    AccessDenied: "Access Denied"
+  },
+  BnR: {
+    Include: "Include",
+    Exclude: "Exclude"
   },
   Formizo: {
     OK: "OK",

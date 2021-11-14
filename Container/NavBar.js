@@ -58,7 +58,7 @@ class NavBar extends Component {
   _Logout = () => {
     store.clearUser();
     this.props.history.push("/");
-    store.Alert("Logout Successful", "success");
+    store.Alert(LocaleX.Get("__IZO.Alert.SuccessLogout"), "success");
   }
 
   _ToggleLanguage = () => {

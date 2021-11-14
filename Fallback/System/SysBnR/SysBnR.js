@@ -15,6 +15,7 @@ import { Accessor, ColorX, store, ErrorX, LocaleX } from 'IZOArc/STATIC';
 import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
 import { StyledButton } from 'IZOArc/LabIZO/Stylizo';
 import { observer } from 'mobx-react';
+import { BnRBackup, BnRDBInclude, BnRDelete, BnRInfo, BnRRestore } from '__SYSDefault/SysAPI';
 
 class SysBnR extends Component {
 
@@ -64,17 +65,16 @@ class SysBnR extends Component {
   }
 
   _GetInfo = async () => {
-    let reqPath = "/CommonAPI/BnR/Info"
-    let url = DOMAIN + reqPath;
+    let url = DOMAIN + BnRInfo;
     let payloadOut = {
       JWT: store.user.JWT,
     };
 
     try{
-      console.log(reqPath, payloadOut);
+      console.log(BnRInfo, payloadOut);
       let res = await axios.post(url, payloadOut);
 
-      console.log(reqPath, res.data);
+      console.log(BnRInfo, res.data);
 
       let {Success, payload} = res.data;
       if (Success === true) {
@@ -113,14 +113,15 @@ class SysBnR extends Component {
       store.Ask(LocaleX.Get("__IZO.System.Backup"), LocaleX.Get("__IZO.System.BackupSystem"), this._Backup.onSubmit);
     }, 
     onSubmit: async () => {
-      let url = DOMAIN + "/CommonAPI/BnR/Backup";
+      let url = DOMAIN + BnRBackup;
       let payloadOut = {
         JWT: store.user.JWT,
       };
 
       try{
         let res = await axios.post(url, payloadOut);
-        console.log(res);
+        console.log(BnRBackup, res.data);
+
         let {Success} = res.data;
         if (Success === true) {
           store.Alert(LocaleX.Get("__IZO.Alert.BackupSuccess"), "success");
@@ -139,7 +140,7 @@ class SysBnR extends Component {
 
   _IncToggle = async (dbname, f) => {
     console.log(dbname, f);
-    let url = DOMAIN + "/CommonAPI/DBConfig/Include";
+    let url = DOMAIN + BnRDBInclude;
     let payloadOut = {
       JWT: store.user.JWT,
       data: {
@@ -150,7 +151,7 @@ class SysBnR extends Component {
 
     try{
       let res = await axios.post(url, payloadOut);
-      console.log(res);
+      console.log(BnRDBInclude, res.data);
       let {Success} = res.data;
       if (Success === true) {
 
@@ -175,7 +176,7 @@ class SysBnR extends Component {
     onSubmit: async (datestr) => {
       let mObj = this._dateStrToMomemt(datestr);
       let str = this._momentToDisplay(mObj);
-      let url = DOMAIN + "/CommonAPI/BnR/Restore";
+      let url = DOMAIN + BnRRestore;
       let payloadOut = {
         JWT: store.user.JWT,
         data: {
@@ -185,7 +186,7 @@ class SysBnR extends Component {
 
       try{
         let res = await axios.post(url, payloadOut);
-        console.log(res);
+        console.log(BnRRestore, res.data);
         let {Success} = res.data;
         if (Success === true) {
           store.Alert(LocaleX.Get("__IZO.Alert.RestoreSuccess", {str: str}), "success");
@@ -213,7 +214,7 @@ class SysBnR extends Component {
     onSubmit: async (datestr) => {
       let mObj = this._dateStrToMomemt(datestr);
       let str = this._momentToDisplay(mObj);
-      let url = DOMAIN + "/CommonAPI/BnR/Delete";
+      let url = DOMAIN + BnRDelete;
       let payloadOut = {
         JWT: store.user.JWT,
         data: {
@@ -223,7 +224,7 @@ class SysBnR extends Component {
 
       try{
         let res = await axios.post(url, payloadOut);
-        console.log(res);
+        console.log(BnRDelete, res.data);
         let {Success} = res.data;
         if (Success === true) {
           store.Alert(str + " " + LocaleX.Get("__IZO.Alert.DeleteSuccess"), "success");

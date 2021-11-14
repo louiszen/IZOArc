@@ -24,11 +24,15 @@ let DefTC = {
     CannotConnect: "不能連接伺服器",
     IncorrectPassword: "密碼錯誤",
     SuccessLogin: "成功登入",
+    SuccessLogout: "成功登出",
+    InteranlServerError: "伺服器內部錯誤",
     ServerReturnError: "伺服器回傳錯誤",
     BackupSuccess: "備份成功",
-    RestoreSuccess: "恢復成功到 <br/>@str.",
+    RestoreSuccess: "恢復成功到 <br/>@str",
     DeleteSuccess: "刪除成功",
-    UpdateError: "更新錯誤"
+    UpdateError: "更新錯誤",
+    AutoLogin: "自動登入",
+    Unauthorized: "沒有權限"
   },
   System: {
     BnR: "備份和恢復",
@@ -40,7 +44,12 @@ let DefTC = {
     RestoreTo: "將系統還原到@str？<br/>系統將自動備份當前狀態",
     BackupSystem: "備份系統?",
     Delete: "刪除",
-    DeleteBackup: "刪除備份@str?"
+    DeleteBackup: "刪除備份@str?",
+    AccessDenied: "訪問被拒"
+  },
+  BnR: {
+    Include: "備份",
+    Exclude: "不備份"
   },
   Formizo: {
     OK: "好的",

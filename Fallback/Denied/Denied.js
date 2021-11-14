@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Typography } from '@material-ui/core';
 
 import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
-import { Accessor } from 'IZOArc/STATIC';
+import { Accessor, LocaleX } from 'IZOArc/STATIC';
 
 class Denied extends Component {
 
@@ -37,7 +37,7 @@ class Denied extends Component {
           <img src="/Images/denied.svg" alt="not-found" style={{width: "100%"}}/> 
         </HStack>
         <Typography style={{fontSize: 20, fontWeight: "bold"}}>
-          {"Access Denied"}
+          {LocaleX.Get("__IZO.System.AccessDenied")}
         </Typography>
         <Spacer/>
       </VStack>

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Cancel, CheckCircle } from '@material-ui/icons';
 import { IconButton, Tooltip } from '@material-ui/core';
 
-import { Accessor, ColorX } from 'IZOArc/STATIC';
+import { Accessor, ColorX, LocaleX } from 'IZOArc/STATIC';
 import { HStack } from 'IZOArc/LabIZO/Stackizo';
 import { observer } from 'mobx-react';
 
@@ -55,7 +55,7 @@ class SysDBInc extends Component {
     let {included} = this.props;
     return (
       <HStack>
-        <Tooltip title={included? "Exclude" : "Include"} arrow={true} placement="top">
+        <Tooltip title={included? LocaleX.Get("__IZO.BnR.Exclude") : LocaleX.Get("__IZO.BnR.Include")} arrow={true} placement="top">
           <IconButton
             onClick={() => {this._onToggle(!included);}}
             style={{color: ColorX.GetColorCSS(included ? "green" : "lightGrey")}}>
