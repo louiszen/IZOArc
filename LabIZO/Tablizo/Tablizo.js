@@ -314,6 +314,10 @@ class Tablizo extends Component {
           alignment: "center",
           width: 50,
           renderCell: (param) => {
+            let caption = o.caption;
+            if(_.isFunction(o.caption)){
+              caption = o.caption();
+            }
             return (
               <HStack>
                 <StyledIconButton
@@ -328,7 +332,7 @@ class Tablizo extends Component {
                     }
                   }}
                 >
-                  <Tooltip title={o.caption} arrow={true} placement='top'>
+                  <Tooltip title={caption} arrow={true} placement='top'>
                     {o.icon}
                   </Tooltip>
                 </StyledIconButton>
@@ -421,6 +425,8 @@ class Tablizo extends Component {
       let headerName = undefined;
       if (_.isString(o.label)) {
         headerName = o.label;
+      } if(_.isFunction(o.label)){
+        headerName = o.label();
       } else {
         renderHeader = () => o.label;
       }
@@ -535,7 +541,7 @@ class Tablizo extends Component {
     let { sortModel, filterModel, selectedRows } = this.state;
     let schema = this.getSchema();
     let localText = locale[lang];
-    console.log(localText);
+
     return (
       <Box height={height} width={width} overflow={"hidden"}>
         <DataGrid

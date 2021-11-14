@@ -9,11 +9,11 @@ import { ColorX, LocaleX } from "IZOArc/STATIC";
 
 const database = [
   {
-    label: "Databases",
+    label: () => LocaleX.Get("__IZO.BnR.Databases"),
     name: "name"
   },
   {
-    label: "Included",
+    label: () => LocaleX.Get("__IZO.BnR.Included"),
     name: "included",
     width: 115,
     Cell: (row, field, addOns) => {
@@ -24,7 +24,7 @@ const database = [
 
 const restore = [
   {
-    label: "Version",
+    label: () => LocaleX.Get("__IZO.BnR.Version"),
     name: "name"
   },
   {

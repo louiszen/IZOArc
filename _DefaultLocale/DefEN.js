@@ -33,6 +33,10 @@ let DefEN = {
     UpdateError: "Update Error.",
     AutoLogin: "Auto Login.",
     Unauthorized: "Unauthorized.",
+    NoRowsSelect: "No rows are selected.",
+    FuncNotImplement: "Preset function (@func) Not Implemented",
+    ExportNotImplement: "Export Not Implemented.",
+    ImportNotImplement: "Import Not Implemented."
   },
   System: {
     BnR: "Backup & Restore",
@@ -49,7 +53,10 @@ let DefEN = {
   },
   BnR: {
     Include: "Include",
-    Exclude: "Exclude"
+    Exclude: "Exclude",
+    Databases: "Databases",
+    Included: "Included",
+    Version: "Version"
   },
   Formizo: {
     OK: "OK",
@@ -63,6 +70,62 @@ let DefEN = {
   },
   Tablizo: {
     labelRowsPerPage: "Rows Per Page:"
+  },
+  Datumizo: {
+    All: "All",
+    UploadFile: "Upload file",
+    FileSizeLimit: "(File size cannot exceed 10MB, only accept .xlsx and .xls)",
+    ReplaceAllCaution: "CAUTION!! It will DELETE and REPLACE all the content in database. <br/>"
+  },
+  UAC: {
+    PageTitle: "User Access Control",
+    Title: "User",
+    Add: {
+      title: "Add User",
+      success: "User Added Successfully",
+      fail: "User Add Failed: "
+    },
+    Delete: {
+      title: "Delete this User?",
+      content: "Caution: This is irrevertable.",
+      success: "User Deleted Successfully.",
+      fail: "User Delete Failed: "
+    },
+    Edit: {
+      title: "Edit User",
+      success: "User Edited Successfully",
+      fail: "User Edit Failed: ",     
+    },
+    Info: {
+      title: "User Access Control",
+      success: "User Access Control Load Successfully",
+      fail: "User Access Control Load Failed: ",
+    },
+    Import: {
+      title: "Import Users",
+      success: "Users Imported Successfully.",
+      fail: "Users Import Failed: ",
+    },
+    Export: {
+      title: "Export Users",
+      success: "Users exported Successfully.",
+      fail: "Users Export Failed: ",
+    },
+    DeleteBulk: {
+      title: "Delete these @n User?",
+      content: "Caution: This is irrevertable.",
+      success: "User Deleted Successfully.",
+      fail: "User Delete Failed: ",
+    },
+    ButtonCaption: {
+      Add: "Add User",
+      Edit: "Edit",
+      Info: "Details",
+      Delete: "Delete",
+      DeleteBulk: "Delete(@n)",
+      Export: "Export(@n)",
+      Import: "Import",
+    }
   }
 };
 

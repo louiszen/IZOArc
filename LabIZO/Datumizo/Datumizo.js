@@ -15,7 +15,7 @@ import Inner from "./_gears/Inner";
 import Formizo from "IZOArc/LabIZO/Formizo";
 import Tablizo from "IZOArc/LabIZO/Tablizo";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
-import { Accessor, Authority, ColorX, ErrorX, store } from "IZOArc/STATIC";
+import { Accessor, Authority, ColorX, ErrorX, LocaleX, store } from "IZOArc/STATIC";
 import { StyledButton } from "IZOArc/LabIZO/Stylizo";
 
 /**
@@ -579,7 +579,7 @@ class Datumizo extends Component {
       }
     } else {
       return () => {
-        store.Alert("Preset function (" + func + ") Not Implemented", "warn");
+        store.Alert(LocaleX.Get("__IZO.Alert.FuncNotImplement", {func: func}), "warn");
       };
     }
   };
@@ -591,7 +591,7 @@ class Datumizo extends Component {
         schema={[
           {
             name: "upload",
-            label: "Upload file",
+            label: () => LocaleX.Get("__IZO.Datumizo.UploadFile"),
             format: "file",
             accept: base.operations?.Import?.accept || ".xlsx, xls",
             noLabelGrid: true,
@@ -1185,7 +1185,7 @@ class Datumizo extends Component {
     onClick: async () => {
       let { base, addOns } = this.state;
       if (!base.operations?.Export || !base.operations?.Export?.url) {
-        store.Alert("Export Not Implemented.", "warn");
+        store.Alert(LocaleX.Get("__IZO.Alert.ExportNotImplement"), "warn");
         return;
       }
       let url = DOMAIN + base.operations?.Export?.url;
@@ -1235,12 +1235,12 @@ class Datumizo extends Component {
     onClick: () => {
       let { base } = this.props;
       if(!this.MountTablizo){
-        store.Alert("No rows are selected.", "warn");
+        store.Alert(LocaleX.Get("__IZO.Alert.NoRowsSelect"), "warn");
         return;
       }
       let selected = this.MountTablizo.GetSelectedRows();
       if (selected.length <= 0) {
-        store.Alert("No rows are selected.", "warn");
+        store.Alert(LocaleX.Get("__IZO.Alert.NoRowsSelect"), "warn");
         return;
       }
 
@@ -1330,11 +1330,13 @@ class Datumizo extends Component {
     onClick: () => {
       let { base } = this.state;
       if (!base.operations?.Import || !base.operations?.Import?.url) {
-        store.Alert("Import Not Implemented.", "warn");
+        store.Alert(LocaleX.Get("__IZO.Alert.ImportNotImplement"), "warn");
         return;
       }
       store.Form(base.operations?.Import?.title, base.operations?.Import?.content 
-        || (base.operations?.Import?.replace? "CAUTION!! It will DELETE and REPLACE all the content in database. <br/>": "") + "(File size cannot exceed 10MB, only accept .xlsx and .xls)", 
+        || (base.operations?.Import?.replace? 
+          LocaleX.Get("__IZO.Datumizo.ReplaceAllCaution")
+          : "") + LocaleX.Get("__IZO.Datumizo.FileSizeLimit"),
         this._importForm, this.Import.onSubmit);
     },
 

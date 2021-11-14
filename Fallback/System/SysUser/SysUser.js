@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import PropsType from 'prop-types';
 
 import { Box, Typography } from '@material-ui/core';
+import _ from 'lodash';
 
 import schema from './schema';
 import datalink from './datalink';
 
 import Datumizo from 'IZOArc/LabIZO/Datumizo/Datumizo';
 import { VStack } from 'IZOArc/LabIZO/Stackizo';
-import { Accessor, ColorX, Authority, store } from 'IZOArc/STATIC';
+import { Accessor, ColorX, Authority, store, LocaleX } from 'IZOArc/STATIC';
 import { IZOTheme } from '__SYSDefault/Theme';
 import { Denied } from 'IZOArc/Fallback';
 import { observer } from 'mobx-react';
@@ -29,10 +30,10 @@ class SysUser extends Component {
   constructor(){
     super();
     this.state = {
-      title: "User Access Control",
+      title: () => LocaleX.Get("__IZO.UAC.PageTitle"),
       serverSidePagination: false, 
       base: {
-        title: "User",
+        title: () => LocaleX.Get("__IZO.UAC.Title"),
         exportDoc: "users",
         schema: schema,
         reqAuth: "System.User",
@@ -62,45 +63,45 @@ class SysUser extends Component {
 
         operations: {
           Add: {
-            title: "Add User",
+            title: () => LocaleX.Get("__IZO.UAC.Add.title"),
             url: datalink.Request.Add,
-            success: "User Added Successfully",
-            fail: "User Add Failed: ",
+            success: () => LocaleX.Get("__IZO.UAC.Add.success"),
+            fail: () => LocaleX.Get("__IZO.UAC.Add.fail"),
             schema: schema.Add,
             buttons: ["Clear", "Submit"],
             onSubmit: "Add"
           },
           Delete: {
-            title: "Delete this User?",
-            content: "Caution: This is irrevertable.",
+            title: () => LocaleX.Get("__IZO.UAC.Delete.title"),
+            content: () => LocaleX.Get("__IZO.UAC.Delete.content"),
             url: datalink.Request.Delete,
-            success: "User Deleted Successfully.",
-            fail: "User Delete Failed: ",
+            success: () => LocaleX.Get("__IZO.UAC.Delete.success"),
+            fail: () => LocaleX.Get("__IZO.UAC.Delete.fail"),
             onSubmit: "Delete"
           },
           Edit: {
-            title: "Edit User ",
+            title: () => LocaleX.Get("__IZO.UAC.Edit.title"),
             url: datalink.Request.Edit,
-            success: "User Edited Successfully",
-            fail: "User Edit Failed: ",
+            success: () => LocaleX.Get("__IZO.UAC.Edit.success"),
+            fail: () => LocaleX.Get("__IZO.UAC.Edit.fail"),
             schema: schema.Edit,
             buttons: ["Revert", "Submit"],
             onSubmit: "Edit"
           },
           Info: {
-            title: "User Access Control ",
+            title: () => LocaleX.Get("__IZO.UAC.Info.title"),
             url: datalink.Request.Info,
-            success: "User Access Control Load Successfully",
-            fail: "User Access Control Load Failed: ",
+            success: () => LocaleX.Get("__IZO.UAC.Info.success"),
+            fail: () => LocaleX.Get("__IZO.UAC.Info.fail"),
             schema: schema.Info,
             readOnly: true
           },
           Import: {
-            title: "User Import",
+            title: () => LocaleX.Get("__IZO.UAC.Import.title"),
             content: "",
             url: datalink.Request.Import,
-            success: "User Imported Successfully.",
-            fail: "User Import Failed: ",
+            success: () => LocaleX.Get("__IZO.UAC.Import.success"),
+            fail: () => LocaleX.Get("__IZO.UAC.Import.fail"),
             schema: schema.ImportFormat,
             replace: false
           },
@@ -109,26 +110,26 @@ class SysUser extends Component {
             schema: schema.Export,
           },
           DeleteBulk: {
-            title: (n) => "Delete these " + n + " User?",
-            content: "Caution: This is irrevertable.",
+            title: (n) => LocaleX.Get("__IZO.UAC.DeleteBulk.title", {n: n}),
+            content: () => LocaleX.Get("__IZO.UAC.DeleteBulk.content"),
             url: datalink.Request.DeleteBulk,
-            success: "User Deleted Successfully.",
-            fail: "User Delete Failed: ",
+            success: () => LocaleX.Get("__IZO.UAC.DeleteBulk.success"),
+            fail: () => LocaleX.Get("__IZO.UAC.DeleteBulk.fail"),
             onSubmit: "DeleteBulk",
           },
         },
 
         buttons: {
           inline: [
-            { icon: "edit", func: "Edit", caption: "Edit", reqFunc: "Edit" },
-            { icon: "info", func: "Info", caption: "Details" },
-            { icon: "delete", func: "Delete", caption: "Delete", reqFunc: "Delete" },
+            { icon: "edit", func: "Edit", caption: () => LocaleX.Get("__IZO.UAC.ButtonCaption.Edit"), reqFunc: "Edit" },
+            { icon: "info", func: "Info", caption: () => LocaleX.Get("__IZO.UAC.ButtonCaption.Info") },
+            { icon: "delete", func: "Delete", caption: () => LocaleX.Get("__IZO.UAC.ButtonCaption.Delete"), reqFunc: "Delete" },
           ],
-          left: [{ icon: "add", func: "Add", caption: "Add User", reqFunc: "Add" }],
+          left: [{ icon: "add", func: "Add", caption: () => LocaleX.Get("__IZO.UAC.ButtonCaption.Add"), reqFunc: "Add" }],
           right: [
-            { icon: "deletebulk", func: "DeleteBulk", caption: (n) => "Delete (" + n + ")", reqFunc: "Delete", theme: "caution" },
-            //{ icon: "export", func: "Export", caption: (n) => "Export (" + (n === 0 ? "All" : n) + ")", reqFunc: "Export" },
-            //{ icon: "import", func: "Import", caption: "Import", reqFunc: "Import" },
+            { icon: "deletebulk", func: "DeleteBulk", caption: (n) => LocaleX.Get("__IZO.UAC.ButtonCaption.DeleteBulk", {n: n}), reqFunc: "Delete", theme: "caution" },
+            { icon: "export", func: "Export", caption: (n) => LocaleX.Get("__IZO.UAC.ButtonCaption.Export", {n: n === 0? LocaleX.Get("__IZO.Datumizo.All") : n}), reqFunc: "Export" },
+            { icon: "import", func: "Import", caption: () => LocaleX.Get("__IZO.UAC.ButtonCaption.Import"), reqFunc: "Import" },
           ],
         },
       }
@@ -165,6 +166,12 @@ class SysUser extends Component {
     let {addOns} = this.props;
     let {base, serverSidePagination, title} = this.state;
     if(!Authority.IsAccessibleQ("System.User")) return <Denied/>;
+
+    let pageTitle = title;
+    if(_.isFunction(title)){
+      pageTitle = title();
+    }
+
     return (
       <VStack>
         <Box padding={1} width="100%">
@@ -174,7 +181,7 @@ class SysUser extends Component {
             fontSize: 25,
             color: ColorX.GetColorCSS(IZOTheme.menuFG)
             }}>
-            {title}
+            {pageTitle}
           </Typography>
         </Box>
         <Datumizo lang={store.lang}
