@@ -14,7 +14,7 @@ import { Accessor, ColorX, store } from 'IZOArc/STATIC';
 import { HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
 import Accessizo from 'IZOArc/LabIZO/Accessizo';
 
-import { CompanyDis, IZOTheme, NavbarDis, ProjectDis } from '__SYSDefault/Theme';
+import { CompanyDis, IZOFontFamily, IZOTheme, NavbarDis, ProjectDis } from '__SYSDefault/Theme';
 import { LocaleConfig } from '__SYSDefault/Locale';
 import LocaleX from 'IZOArc/STATIC/LocaleX';
 
@@ -80,7 +80,7 @@ class NavBar extends Component {
             <Language/>
           </IconButton>
         </Tooltip>
-        <Typography style={{width: 60, marginLeft: 5, fontFamily: "Palanquin", fontSize: 14, fontWeight: "bold", color: ColorX.GetColorCSS(IZOTheme.menuFG)}}>
+        <Typography style={{width: 60, marginLeft: 5, fontFamily: IZOFontFamily, fontSize: 14, fontWeight: "bold", color: ColorX.GetColorCSS(IZOTheme.menuFG)}}>
           {langLabel}
         </Typography>
       </HStack>
@@ -90,10 +90,10 @@ class NavBar extends Component {
   renderIZO(){
     return (
       <HStack width="fit-content">
-        <Typography style={{marginLeft: 10, fontFamily: "Palanquin", fontSize: 14, fontWeight: "bold", color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.3)}}>
+        <Typography style={{marginLeft: 10, fontFamily: IZOFontFamily, fontSize: 14, fontWeight: "bold", color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.3)}}>
           {"IZO"}
         </Typography>
-        <Typography style={{marginLeft: 10, fontFamily: "Palanquin", fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.3)}}>
+        <Typography style={{marginLeft: 10, fontFamily: IZOFontFamily, fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.3)}}>
           {IZOVersion}
         </Typography>
         <Box position="absolute" style={{
@@ -112,16 +112,16 @@ class NavBar extends Component {
       <HStack width="fit-content">
         <Typography style={{
           width: 80, marginLeft: 30, 
-          fontFamily: "Palanquin", fontSize: 14, 
+          fontFamily: IZOFontFamily, fontSize: 14, 
           color: ColorX.GetColorCSS(IZOTheme.menuFG, 1),
           textAlign: "right"
           }}>
           {LocaleX.Get("__IZO.NavBar.LoggedInAs")}
         </Typography>
-        <Typography style={{marginLeft: 10, marginRight: 5, fontFamily: "Palanquin", fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.8)}}>
+        <Typography style={{marginLeft: 10, marginRight: 5, fontFamily: IZOFontFamily, fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.8)}}>
           {store.user && store.user.UserDisplayName}
         </Typography>
-        <Typography style={{marginLeft: 5, marginRight: 5, fontFamily: "Palanquin", fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.8)}}>
+        <Typography style={{marginLeft: 5, marginRight: 5, fontFamily: IZOFontFamily, fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.8)}}>
           {store.user && ("[" + store.user.role + "]")}
         </Typography>
       </HStack>
@@ -131,7 +131,7 @@ class NavBar extends Component {
   renderVersion(){
     return (
       <Accessizo reqLevel={0} user={store.user}>
-        <Typography style={{fontFamily: "Palanquin", color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.3)}}>
+        <Typography style={{fontFamily: IZOFontFamily, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.3)}}>
           {"v" + Version}
         </Typography>
       </Accessizo>

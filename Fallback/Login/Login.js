@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Box, IconButton, Link, Typography, Tooltip } from '@material-ui/core';
 
 import schema from './schema';
-import { IZOTheme, GateDis } from '__SYSDefault/Theme';
+import { IZOTheme, GateDis, IZOFontFamily } from '__SYSDefault/Theme';
 import { DOMAIN } from '__SYSDefault/Domain';
 import Version from '__SYSDefault/Version';
 
@@ -86,7 +86,7 @@ class Login extends Component {
             <Language/>
           </IconButton>
         </Tooltip>
-        <Typography style={{width: 60, marginLeft: 5, fontFamily: "Palanquin", fontSize: 14, fontWeight: "bold", color: ColorX.GetColorCSS(IZOTheme.menuFG)}}>
+        <Typography style={{width: 60, marginLeft: 5, fontFamily: IZOFontFamily, fontSize: 14, fontWeight: "bold", color: ColorX.GetColorCSS(IZOTheme.menuFG)}}>
           {langLabel}
         </Typography>
       </HStack>

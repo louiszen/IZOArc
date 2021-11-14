@@ -17,7 +17,7 @@ class LocaleX {
     let lib = langO.lib;
 
     let str = Accessor.Get(lib, accessor);
-    if(!_.isString(str)) {
+    if(!_.isEmpty(str) && !_.isString(str)) {
       console.warn("Not Type of String <" + store.lang + ">: " + accessor);
       return str;
     }
