@@ -17,6 +17,7 @@ import { StyledButton, StyledLinearProgress } from 'IZOArc/LabIZO/Stylizo';
 import { Language } from '@material-ui/icons';
 import { LocaleConfig } from '__SYSDefault/Locale';
 import { FirstPage } from '__SYSDefault/Config';
+import { CheckUserNameAPI, SignInAPI } from '__SYSDefault/SysAPI';
 
 class Login extends Component {
 
@@ -94,7 +95,7 @@ class Login extends Component {
 
   _CheckUser = (formProps) => {
 
-    let url = DOMAIN + '/CommonAPI/Auth/CheckUserName';
+    let url = DOMAIN + CheckUserNameAPI;
     let req = {
       ...formProps
     };
@@ -136,7 +137,7 @@ class Login extends Component {
     console.log("_signIn");
 
     let {username} = this.state;
-    let url = DOMAIN + '/CommonAPI/Auth/SignIn';
+    let url = DOMAIN + SignInAPI;
 
     let req = {
       username: username,
@@ -255,22 +256,21 @@ class Login extends Component {
     return (
       <Formizo
         formID="login"
-        height={ 
-          page === "user"? "95px" : 
-          page === "password"? "95px" :
-          "225px"}
+        height={"95px"}
         schema={ 
-          page === "user"? schema.loginName : 
-          page === "password"? schema.loginPassword :
-          schema.initial}
+          page === "user"? 
+          schema.loginName 
+          : schema.loginPassword}
         buttons={[
-          page === "user"? this.renderNextButton() :
-          this.renderLoginButton()
+          page === "user"? 
+          this.renderNextButton() 
+          : this.renderLoginButton()
         ]}
         buttonPadding={0}
         onSubmit={
-          page === "user"? this._CheckUser : 
-          this._Login
+          page === "user"? 
+          this._CheckUser 
+          : this._Login
         }
         onMounted={this.onMountForm}
         fieldStyle="standard"

@@ -23,6 +23,7 @@ import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
 import { SnackAlert, StyledButton, StyledLinearProgress } from 'IZOArc/LabIZO/Stylizo';
 import { StyledIconButton } from 'IZOArc/LabIZO/Stylizo';
 import { ColorX, LocaleX, store } from 'IZOArc/STATIC';
+import { EnvInfoAPI } from '__SYSDefault/SysAPI';
 
 class Container extends Component {
 
@@ -126,11 +127,11 @@ class Container extends Component {
   }
 
   GetServerDetail = async () => {
-    let url = DOMAIN + '/CommonAPI/Env/Info';
+    let url = DOMAIN + EnvInfoAPI;
     
     try{
       let rtn = await axios.post(url);
-      console.log('/CommonAPI/Env/Info', rtn.data);
+      console.log(EnvInfoAPI, rtn.data);
       if(rtn.data.Success === true){
         store.setServer(rtn.data.payload);
       }else{

@@ -2,12 +2,13 @@ import store from './AppStore';
 import axios from 'axios';
 
 import { DOMAIN } from '__SYSDefault/Domain';
+import { CheckInitAPI } from '__SYSDefault/SysAPI';
 
 class Env {
 
   static async CheckInitialized(){
 
-    let url = DOMAIN + "/CommonAPI/Env/IsInitialized";
+    let url = DOMAIN + CheckInitAPI;
 
     let payloadOut = {
       JWT: store.user.JWT
