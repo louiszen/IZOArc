@@ -301,12 +301,19 @@ class Tablizo extends Component {
   _defaultButtons = (buttons) => {
     let { user, rowIdAccessor } = this.props;
     let btns = [];
+
     _.map(buttons, (o, i) => {
       if (Authority.IsAccessible(user, o.reqAuth, o.reqLevel, o.reqFunc, o.reqGroup, o.reqRole)) {
+        
+        let caption = o.caption;
+        if(_.isFunction(o.caption)){
+          caption = o.caption();
+        }
+
         btns.push({
           headerName: "",
           renderHeader: () => <div />,
-          field: "<Button> " + o.caption,
+          field: "<Button> " + caption,
           sortable: false,
           filterable: false,
           disableColumnMenu: true,
@@ -314,10 +321,6 @@ class Tablizo extends Component {
           alignment: "center",
           width: 50,
           renderCell: (param) => {
-            let caption = o.caption;
-            if(_.isFunction(o.caption)){
-              caption = o.caption();
-            }
             return (
               <HStack>
                 <StyledIconButton

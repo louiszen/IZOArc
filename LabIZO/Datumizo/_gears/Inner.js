@@ -107,6 +107,10 @@ class Inner extends Component {
 
   renderBackBar(){
     let {ibase, docID, showIDOnTop} = this.props;
+    let title = ibase.title;
+    if(_.isFunction(ibase.title)){
+      title = ibase.title();
+    }
     return (
       <HStack>
         <Box height="100%" background="#f9ffff">
@@ -114,11 +118,11 @@ class Inner extends Component {
             <Typography style={{
               textAlign: "left", 
               fontFamily: "Segoe UI",
-              fontSize: 20,
+              fontSize: 22,
               color: ColorX.GetColorCSS(IZOTheme.menuFG),
               marginRight: 10
               }}>
-              {ibase.title}
+              {title}
             </Typography>
             {docID && showIDOnTop && 
               <Typography style={{
