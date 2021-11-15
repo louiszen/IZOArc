@@ -16,12 +16,12 @@ let localText = {
   toolbarColumnsLabel: '選擇列',
 
   // 過濾工具欄按鈕文本
-  toolbarFilters:'過濾器',
-  toolbarFiltersLabel: '顯示過濾器',
-  toolbarFiltersTooltipHide: '隱藏過濾器',
-  toolbarFiltersTooltipShow: '顯示過濾器',
+  toolbarFilters:'篩選',
+  toolbarFiltersLabel: '顯示篩選',
+  toolbarFiltersTooltipHide: '隱藏篩選',
+  toolbarFiltersTooltipShow: '顯示篩選',
   toolbarFiltersTooltipActive: (count) => 
-    count !== 1 ? `${count} 個活動過濾器`:`${count} 個活動過濾器`,
+    count !== 1 ? `${count} 個項目篩選`:`${count} 個項目篩選`,
 
   // 導出選擇器工具欄按鈕文本
   toolbarExport:'導出',
@@ -37,14 +37,14 @@ let localText = {
   columnsPanelHideAllButton: '隱藏全部',
 
   // 過濾面板文本
-  filterPanelAddFilter: '添加過濾器',
+  filterPanelAddFilter: '添加篩選',
   filterPanelDeleteIconLabel: '刪除',
   filterPanelOperators: '運算符',
   filterPanelOperatorAnd: 'And',
   filterPanelOperatorOr: '或',
   filterPanelColumns: '列',
   filterPanelInputLabel: '值',
-  filterPanelInputPlaceholder: '過濾器值',
+  filterPanelInputPlaceholder: '篩選值',
 
   // 過濾操作符文本
   filterOperatorContains: '包含',
@@ -68,7 +68,7 @@ let localText = {
   // 列菜單文本
   columnMenuLabel: '菜單',
   columnMenuShowColumns: '顯示列',
-  columnMenuFilter: '過濾器',
+  columnMenuFilter: '篩選',
   columnMenuHideColumn: '隱藏',
   columnMenuUnsort: '取消排序',
   columnMenuSortAsc: '按 ASC 排序',
@@ -76,8 +76,8 @@ let localText = {
 
   // 列標題文本
   columnHeaderFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} 個活動過濾器`:`${count} 個活動過濾器`,
-  columnHeaderFiltersLabel: '顯示過濾器',
+    count !== 1 ? `${count} 個項目篩選`:`${count} 個項目篩選`,
+  columnHeaderFiltersLabel: '顯示過篩選',
   columnHeaderSortIconLabel: '排序',
 
   // 行選中的頁腳文本

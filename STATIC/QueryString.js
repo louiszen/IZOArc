@@ -6,7 +6,6 @@ class QueryString {
   static Parse(queryString){
 
     let qS = queryString.slice(1);
-    console.log(qS);
 
     let rtn = {};
 

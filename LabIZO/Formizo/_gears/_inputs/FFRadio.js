@@ -116,6 +116,9 @@ class FFRadio extends Component {
         cap = o;
       }else{
         cap = Accessor.Get(o, ischema.selectCap);
+        if(_.isFunction(cap)){
+          cap = cap();
+        }
       }
       let disabled = ischema.selectDisable && Accessor.Get(o, ischema.selectDisable);
       return (        
@@ -199,11 +202,11 @@ class FFRadio extends Component {
           <OutlinedBox label={label}>
             {this.renderRadioGroup()}
           </OutlinedBox> :
-          <HStack>
+          <VStack alignItems="flex-start">
             <FormLabel className="formizo-h-m">{label}</FormLabel>
             {this.renderRadioGroup()}
             <Spacer/>
-          </HStack>
+          </VStack>
         }
         {
           !_.isEmpty(helperText) &&

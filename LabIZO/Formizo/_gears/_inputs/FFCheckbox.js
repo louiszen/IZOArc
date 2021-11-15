@@ -118,6 +118,9 @@ class FFCheckbox extends Component {
         cap = o;
       }else{
         cap = Accessor.Get(o, ischema.selectCap);
+        if(_.isFunction(cap)){
+          cap = cap();
+        }
       }
       let disabled = ischema.selectDisable && Accessor.Get(o, ischema.selectDisable);
 
@@ -202,11 +205,11 @@ class FFCheckbox extends Component {
           <OutlinedBox label={label}>
             {this.renderFormGroup()}
           </OutlinedBox> :
-          <HStack>
+          <VStack alignItems="flex-start">
             <FormLabel className="formizo-h-m">{label}</FormLabel>
             {this.renderFormGroup()}
             <Spacer/>
-          </HStack>
+          </VStack>
         }
         {
           !_.isEmpty(helperText) &&

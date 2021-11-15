@@ -175,7 +175,7 @@ class FFDateRange extends Component {
               {this.renderDatePicker()}
             </OutlinedBox> :
             <HStack>
-              <FormLabel className="formizo-h-m">{ischema.label}</FormLabel>
+              <FormLabel className="formizo-h-m">{label}</FormLabel>
               {this.renderDatePicker()}
               <Spacer/>
             </HStack>
