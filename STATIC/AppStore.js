@@ -188,6 +188,10 @@ class AppStore {
     });
   }
 
+  clearPop(){
+    this.clearAsk();
+  }
+
   isLoggedIn(){
     return !_.isEmpty(this.user);
   }
