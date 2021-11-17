@@ -70,7 +70,8 @@ let DefTC = {
     Upload: "上傳"
   },
   Tablizo: {
-    labelRowsPerPage: "每頁行數:"
+    labelRowsPerPage: "每頁行數:",
+    dataNotFound: "找不到相關資料",
   },
   Datumizo: {
     All: "全部",

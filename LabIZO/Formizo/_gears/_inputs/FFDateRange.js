@@ -143,7 +143,10 @@ class FFDateRange extends Component {
           _onFieldBlur();
           _onBlurInlineSubmit(iname);
         }}
-        disabled={[istartReadOnly, iendReadOnly]}
+        disabled={[
+          _.isEmpty(mvalue[0])? undefined: istartReadOnly, 
+          _.isEmpty(mvalue[1])? undefined: iendReadOnly
+        ]}
         allowEmpty={[istartEmpty, iendEmpty]}
         />
     );

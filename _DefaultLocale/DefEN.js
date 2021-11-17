@@ -70,7 +70,8 @@ let DefEN = {
     Upload: "上傳"
   },
   Tablizo: {
-    labelRowsPerPage: "Rows Per Page:"
+    labelRowsPerPage: "Rows Per Page:",
+    dataNotFound: "Data not found.",
   },
   Datumizo: {
     All: "All",

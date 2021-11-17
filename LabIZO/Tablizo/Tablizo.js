@@ -524,6 +524,8 @@ class Tablizo extends Component {
   };
 
   GridNoRowsOverlay = () => {
+    let {lang} = this.props;
+    let dataNotFound = LocaleX.Get("__IZO.Tablizo.dataNotFound", {}, lang);
     return (
       <GridOverlay>
         <VStack>
@@ -531,7 +533,7 @@ class Tablizo extends Component {
           <Box width='250px'>
             <img src='/Images/data-not-found.svg' alt='nodata' />
           </Box>
-          <Typography>Data not found</Typography>
+          <Typography>{dataNotFound}</Typography>
           <Spacer />
         </VStack>
       </GridOverlay>

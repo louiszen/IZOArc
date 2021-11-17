@@ -3,7 +3,6 @@ import { LocaleConfig } from '__SYSDefault/Locale';
 
 import { Accessor, store } from '.';
 
-
 class LocaleX {
 
   /**
@@ -12,18 +11,18 @@ class LocaleX {
    * @param {*} mapping replace @[field] to value
    * @returns 
    */
-  static Get(accessor, mapping = {}){
-    let langO = LocaleConfig.find(o => o.code === store.lang);
+  static Get(accessor, mapping = {}, lang = store.lang){
+    let langO = LocaleConfig.find(o => o.code === lang);
     let lib = langO.lib;
 
     let str = Accessor.Get(lib, accessor);
     if(!_.isEmpty(str) && !_.isString(str)) {
-      console.warn("Not Type of String <" + store.lang + ">: " + accessor);
+      console.warn("Not Type of String <" + lang + ">: " + accessor);
       return str;
     }
 
     if(_.isEmpty(str)){
-      console.warn("No locale ID <" + store.lang + ">: " + accessor);
+      console.warn("No locale ID <" + lang + ">: " + accessor);
       return str;
     }
     
@@ -41,16 +40,16 @@ class LocaleX {
    * @param {*} mapping 
    * @returns 
    */
-  static Parse(obj, mapping = {}){
+  static Parse(obj, mapping = {}, lang = store.lang){
     let str = "";
     if(_.isString(obj)){
       str = obj;
     }else{
-      if(!obj[store.lang]){
-        console.warn("No locale Key <" + store.lang + ">");
+      if(!obj[lang]){
+        console.warn("No locale Key <" + lang + ">");
         return str;
       }
-      str = obj[store.lang];
+      str = obj[lang];
     }
     
     _.map(mapping, (o, i) => {

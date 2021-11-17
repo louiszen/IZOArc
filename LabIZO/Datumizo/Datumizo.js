@@ -63,7 +63,7 @@ class Datumizo extends Component {
    *      buttons?: [String],
    *      readOnly?: Boolean,
    *      onSubmit?: String | (formProps) => Void,
-   *      Custom?: function (_, _, onQuit, onQuitRefresh, renderFormizo, addOns) => JSX,
+   *      Custom?: function (docID, doc, onQuit, onQuitRefresh, renderFormizo, addOns) => JSX,
    *      QuitReload?: Boolean | false,
    *      onSuccess?: (payload) => {},
    *      onFail?: (payload) => {},
