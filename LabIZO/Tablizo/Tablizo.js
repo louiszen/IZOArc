@@ -15,6 +15,7 @@ import { Accessor, Authority, ColorX, store } from "IZOArc/STATIC";
 import { IZOTheme } from "__SYSDefault/Theme";
 import { LocaleX } from "IZOArc/STATIC";
 import locale from "./_locale";
+import { SITEBASE } from "__SYSDefault/Domain";
 
 /**
  * Tablizo - displaying rows of data
@@ -531,7 +532,7 @@ class Tablizo extends Component {
         <VStack>
           <Spacer />
           <Box width='250px'>
-            <img src='/Images/data-not-found.svg' alt='nodata' />
+            <img src={SITEBASE + 'Images/data-not-found.svg'} alt='nodata' />
           </Box>
           <Typography>{dataNotFound}</Typography>
           <Spacer />

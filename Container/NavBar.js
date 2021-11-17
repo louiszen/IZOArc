@@ -17,6 +17,7 @@ import Accessizo from 'IZOArc/LabIZO/Accessizo';
 import { CompanyDis, IZOFontFamily, IZOTheme, NavbarDis, ProjectDis } from '__SYSDefault/Theme';
 import { LocaleConfig } from '__SYSDefault/Locale';
 import LocaleX from 'IZOArc/STATIC/LocaleX';
+import { SITEBASE } from '__SYSDefault/Domain';
 
 class NavBar extends Component {
 
@@ -101,7 +102,7 @@ class NavBar extends Component {
           marginTop: 0,
           opacity: 0.15,
           }}>
-          <img src={"/Images/izo.png"} alt="elain" draggable={false}/>
+          <img src={SITEBASE + "Images/izo.png"} alt="elain" draggable={false}/>
         </Box>
       </HStack>
     )

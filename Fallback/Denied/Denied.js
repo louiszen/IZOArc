@@ -4,6 +4,7 @@ import { Typography } from '@material-ui/core';
 
 import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
 import { Accessor, LocaleX } from 'IZOArc/STATIC';
+import { SITEBASE } from '__SYSDefault/Domain';
 
 class Denied extends Component {
 
@@ -34,7 +35,7 @@ class Denied extends Component {
       <VStack spacing={15}>
         <Spacer/>
         <HStack width="15vw">
-          <img src="/Images/denied.svg" alt="not-found" style={{width: "100%"}}/> 
+          <img src={SITEBASE + "Images/denied.svg"} alt="not-found" style={{width: "100%"}}/> 
         </HStack>
         <Typography style={{fontSize: 20, fontWeight: "bold"}}>
           {LocaleX.Get("__IZO.System.AccessDenied")}
