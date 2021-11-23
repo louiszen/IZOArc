@@ -106,6 +106,13 @@ class AppStore {
     });
   }
 
+  onlyUsernamePassword(){
+    return  (!_.isArray(this.server.Authentication) && this.server.Authentication === "Username-Password") 
+      || (_.isArray(this.server.Authentication) 
+        && this.server.Authentication.length === 1 
+        && this.server.Authentication[0] === "Username-Password");
+  }
+
   Alert(message, severity = "info"){
     runInAction(() => {
       this.alert = {

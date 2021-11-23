@@ -7,7 +7,20 @@ let DefEN = {
     form: {
       username: "User ID",
       password: "Password"
-    }
+    },
+    Methods: {
+      UsernamePassword: "Username-Password",
+      Window: "Window Authentication",
+      GitHub: "GitHub",
+      Facebook: "Facebook",
+      Instagram: "Instagram",
+      Twitter: "Twitter",
+      Google: "Google",
+      LinkedIn: "LinkedIn"
+
+    },
+    WhichMethod: "Choose the Authentication Method:",
+    OtherMethod: "Try other authentication method."
   },
   NavBar: {
     LoggedInAs: "Logged in as ",

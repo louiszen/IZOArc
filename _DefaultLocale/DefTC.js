@@ -7,7 +7,19 @@ let DefTC = {
     form: {
       username: "User ID",
       password: "密碼"
-    }
+    },
+    Methods: {
+      UsernamePassword: "用戶名-密碼",
+      Window: "Window 驗證",
+      GitHub: "GitHub",
+      Facebook: "Facebook",
+      Instagram: "Instagram",
+      Twitter: "Twitter",
+      Google: "Google",
+      LinkedIn: "LinkedIn"
+    },
+    WhichMethod: "選擇認證方法:",
+    OtherMethod: "嘗試其他認證方法"
   },
   NavBar: {
     LoggedInAs: "登入帳號",

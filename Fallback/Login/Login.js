@@ -3,6 +3,7 @@ import { withRouter } from 'react-router';
 
 import { observer } from 'mobx-react';
 import axios from 'axios';
+import _ from 'lodash';
 import { Box, IconButton, Link, Typography, Tooltip } from '@material-ui/core';
 
 import schema from './schema';
@@ -16,9 +17,9 @@ import { VStack, HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
 import { StyledButton, StyledLinearProgress } from 'IZOArc/LabIZO/Stylizo';
 import { Language } from '@material-ui/icons';
 import { LocaleConfig } from '__SYSDefault/Locale';
-import { FirstPage } from '__SYSDefault/Config';
+import { FirstPage, StartDate } from '__SYSDefault/Config';
 import { CheckUserNameAPI, SignInAPI } from '__SYSDefault/SysAPI';
-
+import { Password, Window, GitHub, Facebook, Instagram, Twitter, Google, LinkedIn} from '@mui/icons-material';
 class Login extends Component {
 
   static propTypes = {
@@ -34,7 +35,7 @@ class Login extends Component {
     this.state = {
       username: "",
       userDisplayName: "",
-      page: "user",
+      page: "method",
       loading: false,
       errorMsg: ""
     };
@@ -42,7 +43,11 @@ class Login extends Component {
   }
 
   componentDidMount(){
-    this._setAllStates();
+    this._setAllStates(() => {
+      if(store.onlyUsernamePassword()){
+        this.toUser();
+      }
+    });
   }
 
   componentDidUpdate(prevProps, prevState){
@@ -159,7 +164,7 @@ class Login extends Component {
 
           if(!store.isInitialized()){
             this.setState({
-              page: "user",
+              page: "method",
               loading: false
             });
           }
@@ -288,9 +293,17 @@ class Login extends Component {
     );
   }
 
-  backToUser = () => {
+  toUser = () => {
     this.setState({
       page: "user",
+      username: "",
+      userDisplayName: ""
+    });
+  }
+
+  toMethod = () => {
+    this.setState({
+      page: "method",
       username: "",
       userDisplayName: ""
     });
@@ -301,34 +314,158 @@ class Login extends Component {
     switch(page){
       default: case "user": return LocaleX.Get("__IZO.Login.HeaderMessage");
       case "password": return (
-        <Link onClick={() => this.backToUser()}>
+        <Link onClick={() => this.toUser()}>
           {LocaleX.Get("__IZO.Login.Not") + " " + userDisplayName + " ?"}
+        </Link>
+      );
+      case "method": return LocaleX.Get("__IZO.Login.WhichMethod");
+    }
+  }
+
+  renderOtherAuth(){
+    if(!store.onlyUsernamePassword()){
+      return (
+        <Link onClick={() => this.toMethod()}>
+          {LocaleX.Get("__IZO.Login.OtherMethod")}
         </Link>
       );
     }
   }
 
-  renderInside(){
+  renderLoginBox(){
     return (
       <VStack width="100%">
         <Spacer/>
-          <HStack>
-            <VStack spacing={10}>
-              <HStack marginY={3} width={1}>
-                {this.renderHeaderMessage()}
-                <Spacer/>
-              </HStack>
-              <Box width="300px" style={{background: "white"}}>
-                {this.renderForm()}
-              </Box>
-              <HStack>
-                {this.renderLocale()}
-                <Spacer/>
-              </HStack>
-            </VStack>
-            <Spacer/>
-          </HStack>
+        <HStack>
+          <VStack spacing={10}>
+            <HStack marginY={3} width={1}>
+              {this.renderHeaderMessage()}
+              <Spacer/>
+            </HStack>
+            <Box width="300px" style={{background: "white"}}>
+              {this.renderForm()}
+            </Box>
+            <HStack>
+              {this.renderOtherAuth()}
+              <Spacer/>
+            </HStack>
+          </VStack>
+          <Spacer/>
+        </HStack>
         <Spacer/>
+      </VStack>
+    );
+  }
+
+  renderMethodButton(icon, caption, func){
+    let {loading} = this.state;
+    return (
+      <StyledButton onClick={() => {if(func){ func(); }}}
+        theme={{
+          label: "white",
+          background: loading? ColorX.GetColorCSS(IZOTheme.btnHover) : ColorX.GetColorCSS(IZOTheme.menuFG),
+          hover: {
+            background: ColorX.GetColorCSS(IZOTheme.btnHover)
+          },
+          borderRadius: "0px", 
+          textTransform: "none",
+          width: 300
+        }}>
+        <HStack spacing={20}>
+          {icon}
+          <Spacer/>
+          <Typography>
+            {caption}
+          </Typography>
+          <Spacer/>
+        </HStack>
+      </StyledButton>
+    )
+  }
+
+  renderMethod(o){
+    switch(o){
+      default: 
+      case "Username-Password": 
+        return this.renderMethodButton(
+          <Password/>, 
+          LocaleX.Get("__IZO.Login.Methods.UsernamePassword"), 
+          this.toUser);
+      case "Window": 
+        return this.renderMethodButton(
+          <Window/>, 
+          LocaleX.Get("__IZO.Login.Methods.Window"), 
+          () => {});
+      case "GitHub": 
+        return this.renderMethodButton(
+          <GitHub/>, 
+          LocaleX.Get("__IZO.Login.Methods.GitHub"), 
+          () => {});
+      case "Facebook": 
+        return this.renderMethodButton(
+          <Facebook/>, 
+          LocaleX.Get("__IZO.Login.Methods.Facebook"), 
+          () => {});
+      case "Instagram": 
+        return this.renderMethodButton(
+          <Instagram/>, 
+          LocaleX.Get("__IZO.Login.Methods.Instagram"), 
+          () => {});
+      case "Twitter": 
+        return this.renderMethodButton(
+          <Twitter/>, 
+          LocaleX.Get("__IZO.Login.Methods.Twitter"), 
+          () => {});
+      case "Google": 
+        return this.renderMethodButton(
+          <Google/>, 
+          LocaleX.Get("__IZO.Login.Methods.Google"), 
+          () => {});
+      case "LinkedIn": 
+        return this.renderMethodButton(
+          <LinkedIn/>, 
+          LocaleX.Get("__IZO.Login.Methods.LinkedIn"), 
+          () => {});
+    }
+  }
+
+  renderAuthenticationMethods(){
+    let methods = _.isArray(store.server.Authentication)? store.server.Authentication : [store.server.Authentication];
+    return (
+      <VStack width="100%">
+        <Spacer/>
+        <HStack>
+          <VStack spacing={10}>
+            <HStack marginY={3} width={1}>
+              {this.renderHeaderMessage()}
+              <Spacer/>
+            </HStack>
+            <VStack spacing={5}>
+              {_.map(methods, (o, i) => {
+                return this.renderMethod(o);
+              })}
+            </VStack>
+          </VStack>
+          <Spacer/>
+        </HStack>
+        <Spacer/>
+      </VStack>
+    );
+  }
+
+  renderInside(){
+    let {page} = this.state;
+    return (
+      <VStack spacing={5} width="70%" height="100%">
+        <HStack marginY={1}>
+          {this.renderLocale()}
+          <Spacer/>
+        </HStack>
+        {
+          page === "method"?
+          this.renderAuthenticationMethods():
+          this.renderLoginBox()
+        }
       </VStack>
     );
   }
@@ -352,7 +489,7 @@ class Login extends Component {
           {"Backend Version: " + store.server.backendVersion}
         </Typography>
         <Typography style={style}>
-          {"Start Date: " + process.env.REACT_APP_STARTDATE}
+          {"Start Date: " + StartDate}
         </Typography>
         <Typography style={style}>
           {"Domain: " + DOMAIN}
