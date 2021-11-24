@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropsType from 'prop-types';
 
 import { HStack } from 'IZOArc/LabIZO/Stackizo';
 import { Accessor, STORE, ColorX, LocaleX } from 'IZOArc/STATIC';
@@ -14,7 +13,7 @@ import { Language } from '@material-ui/icons';
 /**
  * @augments {Component<Props, State>}
  */
-class LangToggler extends Component {
+class BLangToggler extends Component {
 
   static propTypes = {
 
@@ -34,7 +33,7 @@ class LangToggler extends Component {
   }
 
   componentDidUpdate(prevProps, prevState){
-    if(!Accessor.IsIdentical(prevProps, this.props, Object.keys(LangToggler.defaultProps))){
+    if(!Accessor.IsIdentical(prevProps, this.props, Object.keys(BLangToggler.defaultProps))){
       this._setAllStates();
     }
   }
@@ -79,4 +78,4 @@ class LangToggler extends Component {
 
 }
 
-export default LangToggler;
+export default BLangToggler;

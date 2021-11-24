@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 
 import { observer } from 'mobx-react';
-import axios from 'axios';
 import _ from 'lodash';
 import { Box, Link, Typography } from '@material-ui/core';
 
@@ -12,13 +11,13 @@ import { DOMAIN } from '__SYSDefault/Domain';
 import Version from '__SYSDefault/Version';
 
 import Formizo from 'IZOArc/LabIZO/Formizo';
-import { Accessor, STORE, ColorX, Env, LocaleX } from 'IZOArc/STATIC';
+import { Accessor, STORE, ColorX, LocaleX } from 'IZOArc/STATIC';
 import { VStack, HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
 import { StyledButton, StyledLinearProgress } from 'IZOArc/LabIZO/Stylizo';
 import { FirstPage, StartDate } from '__SYSDefault/Config';
-import { CheckUserNameAPI, SignInAPI } from '__SYSDefault/SysAPI';
 import { Password, Window, GitHub, Facebook, Instagram, Twitter, Google, LinkedIn} from '@mui/icons-material';
-import { LangToggler } from 'IZOArc/BLOCKS';
+import { BLangToggler } from 'IZOArc/BLOCKS';
+import { SLogin } from 'IZOArc/API';
 class Login extends Component {
 
   static propTypes = {
@@ -72,84 +71,43 @@ class Login extends Component {
   }
 
   _CheckUser = (formProps) => {
-
-    let url = DOMAIN + CheckUserNameAPI;
-    let req = {
-      ...formProps
-    };
-
     this.setState({
       loading: true
     }, async () => {
-      try {
-        let res = await axios.post(url, req);
-        console.log(res);
-        let {Success, payload} = res.data;
-        if(Success){
-          if(payload.hasUser){
-            this.setState({
-              page: 'password',
-              loading: false,
-              username: formProps.username,
-              userDisplayName: payload.UserDisplayName
-            });
-          }else{
-            STORE.Alert(LocaleX.Get("__IZO.Alert.UserNotFound"), "error");
-            this.setState({
-              loading: false
-            });
-          }
-        }
-      }catch(e){
-        STORE.Alert(LocaleX.Get("__IZO.Alert.CannotConnect"), "error");
+      let res = await SLogin.CheckUser(formProps);
+      let {Success, payload} = res;
+      if(Success){
+        this.setState({
+          page: 'password',
+          loading: false,
+          username: formProps.username,
+          userDisplayName: payload.UserDisplayName
+        });
+      }else{
         this.setState({
           loading: false
         });
       }
     });
-  
   }
 
-  _SignInByUP = (formProps) => {
+  _SignInByUP = async (formProps) => {
     console.log("_signIn");
 
     let {username} = this.state;
-    let url = DOMAIN + SignInAPI;
-
-    let req = {
-      username: username,
-      method: "Username-Password",
+    let formPropsMod = {
+      username,
       ...formProps
     };
 
     this.setState({
       loading: true
     }, async () => {
-      try {
-        let res = await axios.post(url, req);
-
-        let {Success, payload} = res.data;
-        if(Success === true){
-          console.log(payload);
-          STORE.setUser(payload);
-          STORE.Alert(LocaleX.Get("__IZO.Alert.SuccessLogin"), "success");
-          await Env.CheckInitialized();
-
-          if(!STORE.isInitialized()){
-            this.setState({
-              page: "method",
-              loading: false
-            });
-          }
-          
-        }else{
-          STORE.Alert(LocaleX.Get("__IZO.IncorrectPassword"), "error");
-          this.setState({
-            loading: false
-          });
-        }
-      }catch(e){
-        STORE.Alert(LocaleX.Get("__IZO.Alert.CannotConnect"), "error");
+      let res = await SLogin.SignIn("Username-Password", formPropsMod);
+      let {Success} = res;
+      if(Success){
+        this.redirectToFirstPage();
+      }else{
         this.setState({
           loading: false
         });
@@ -157,7 +115,7 @@ class Login extends Component {
     });
   }
 
-  redirectToDashboard = () => {
+  redirectToFirstPage = () => {
     if(STORE.isInitialized){
       setTimeout(() => {
         this.props.history.push(FirstPage);
@@ -333,7 +291,7 @@ class Login extends Component {
   renderMethodButton(icon, caption, func){
     let {loading} = this.state;
     return (
-      <StyledButton onClick={() => {if(func){ func(); }}}
+      <StyledButton key={caption} onClick={() => {if(func){ func(); }}}
         theme={{
           label: "white",
           background: loading? ColorX.GetColorCSS(IZOTheme.btnHover) : ColorX.GetColorCSS(IZOTheme.menuFG),
@@ -431,7 +389,7 @@ class Login extends Component {
     return (
       <VStack spacing={5} width="70%" height="100%">
         <HStack marginY={1}>
-          <LangToggler/>
+          <BLangToggler/>
           <Spacer/>
         </HStack>
         {

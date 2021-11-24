@@ -17,7 +17,7 @@ import Accessizo from 'IZOArc/LabIZO/Accessizo';
 import { CompanyDis, IZOFontFamily, IZOTheme, NavbarDis, ProjectDis } from '__SYSDefault/Theme';
 import LocaleX from 'IZOArc/STATIC/LocaleX';
 import { SITEBASE } from '__SYSDefault/Domain';
-import { LangToggler } from 'IZOArc/BLOCKS';
+import { BLangToggler } from 'IZOArc/BLOCKS';
 
 class NavBar extends Component {
 
@@ -165,7 +165,7 @@ class NavBar extends Component {
           {this.renderLogin()}
           {this.renderCompany()}
           <Spacer/>
-          <LangToggler/>
+          <BLangToggler/>
           {this.renderVersion()}
           {this.renderProject()}
           {this.renderIcon()}

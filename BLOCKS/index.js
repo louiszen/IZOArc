@@ -1,1 +1,1 @@
-export {default as LangToggler} from "./LangToggler";
+export {default as BLangToggler} from "./BLangToggler";

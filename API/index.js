@@ -1,1 +1,1 @@
-export {default as LoginAPI} from './LoginAPI';
+export {default as SLogin} from './SLogin';
