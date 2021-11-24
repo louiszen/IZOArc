@@ -15,10 +15,17 @@ import { Accessor, STORE, ColorX, LocaleX } from 'IZOArc/STATIC';
 import { VStack, HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
 import { StyledButton, StyledLinearProgress } from 'IZOArc/LabIZO/Stylizo';
 import { FirstPage, StartDate } from '__SYSDefault/Config';
-import { Password, Window, GitHub, Facebook, Instagram, Twitter, Google, LinkedIn} from '@mui/icons-material';
+import { Password, Window, GitHub, Facebook, Instagram, Twitter, Google, LinkedIn, Sms, Email} from '@mui/icons-material';
 import { BLangToggler } from 'IZOArc/BLOCKS';
 import { SLogin } from 'IZOArc/API';
 class Login extends Component {
+
+  /**
+   * @typedef {("Username-Password" 
+   *  | "MSAL" | "SMSOTP" | "EmailOTP"
+   *  | "GitHub" | "Facebook" | "Instagram"
+   *  | "Twitter" | "Google" | "LinkedIn")} authMethod
+   */
 
   static propTypes = {
 
@@ -35,6 +42,10 @@ class Login extends Component {
       userDisplayName: "",
       page: "method",
       loading: false,
+      /**
+       * @type {authMethod}
+       */
+      method: null,
       errorMsg: ""
     };
     
@@ -77,12 +88,43 @@ class Login extends Component {
       let res = await SLogin.CheckUser(formProps);
       let {Success, payload} = res;
       if(Success){
+        this.toPassword(formProps.username, payload.UserDisplayName);
+      }else{
         this.setState({
-          page: 'password',
-          loading: false,
-          username: formProps.username,
-          userDisplayName: payload.UserDisplayName
+          loading: false
         });
+      }
+    });
+  }
+
+  _SignIn = async (formProps) => {
+    let {method} = this.state;
+    switch(method){
+      default: return {Success: false};
+      case "Username-Password":
+        return await this._SignInByUP(formProps);
+      case "SMSOTP":
+        return await this._SignInWithOTP(formProps);
+    }
+  }
+
+  _SignInWithOTP = async (formProps) => {
+    console.log("_SignInWithOTP");
+    let {username, method} = this.state;
+    if(method !== "EmailOTP" && method !== "SMSOTP") return;
+
+    let formPropsMod = {
+      username,
+      ...formProps
+    };
+
+    this.setState({
+      loading: true
+    }, async () => {
+      let res = await SLogin.SignIn(method, formPropsMod);
+      let {Success} = res;
+      if(Success){
+        this.toOTP();
       }else{
         this.setState({
           loading: false
@@ -92,9 +134,9 @@ class Login extends Component {
   }
 
   _SignInByUP = async (formProps) => {
-    console.log("_signIn");
-
-    let {username} = this.state;
+    console.log("_SignInByUP");
+    let {username, method} = this.state;
+    if(method !== "Username-Password") return;
     let formPropsMod = {
       username,
       ...formProps
@@ -103,7 +145,7 @@ class Login extends Component {
     this.setState({
       loading: true
     }, async () => {
-      let res = await SLogin.SignIn("Username-Password", formPropsMod);
+      let res = await SLogin.SignIn(method, formPropsMod);
       let {Success} = res;
       if(Success){
         this.redirectToFirstPage();
@@ -224,11 +266,12 @@ class Login extends Component {
     );
   }
 
-  toUser = () => {
+  toUser = (o) => {
     this.setState({
       page: "user",
       username: "",
-      userDisplayName: ""
+      userDisplayName: "",
+      method: o
     });
   }
 
@@ -236,8 +279,22 @@ class Login extends Component {
     this.setState({
       page: "method",
       username: "",
-      userDisplayName: ""
+      userDisplayName: "",
+      method: null
     });
+  }
+
+  toPassword = (username, UserDisplayName) => {
+    this.setState({
+      page: 'password',
+      loading: false,
+      username: username,
+      userDisplayName: UserDisplayName
+    });
+  }
+
+  toOTP = () => {
+
   }
 
   renderHeaderMessage(){
@@ -314,6 +371,10 @@ class Login extends Component {
     )
   }
 
+  /**
+   * @param {authMethod} o 
+   * @returns 
+   */
   renderMethod(o){
     switch(o){
       default: return;
@@ -321,7 +382,17 @@ class Login extends Component {
         return this.renderMethodButton(
           <Password/>, 
           LocaleX.Get("__IZO.Login.Methods.UsernamePassword"), 
-          this.toUser);
+          () => this.toUser(o));
+      case "SMSOTP":
+        return this.renderMethodButton(
+          <Sms/>, 
+          LocaleX.Get("__IZO.Login.Methods.UsernamePassword2FSMS"), 
+          () => this.toUser(o));
+      case "EmailOTP":
+        return this.renderMethodButton(
+          <Email/>, 
+          LocaleX.Get("__IZO.Login.Methods.UsernamePassword2FEmail"), 
+          () => this.toUser(o));
       case "MSAL": 
         return this.renderMethodButton(
           <Window/>, 

@@ -9,7 +9,9 @@ let DefTC = {
       password: "密碼"
     },
     Methods: {
-      UsernamePassword: "用戶名-密碼",
+      UsernamePassword: "密碼認證",
+      UsernamePassword2FSMS: "一般密碼 + SMS雙重認證",
+      UsernamePassword2FEmail: "一般密碼 + Email雙重認證",
       MSAL: "Window 驗證",
       GitHub: "GitHub",
       Facebook: "Facebook",

@@ -10,6 +10,8 @@ let DefEN = {
     },
     Methods: {
       UsernamePassword: "Username-Password",
+      UsernamePassword2FSMS: "Password + SMS OTP",
+      UsernamePassword2FEmail: "Password + Email OTP",
       MSAL: "Window Authentication",
       GitHub: "GitHub",
       Facebook: "Facebook",

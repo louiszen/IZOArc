@@ -6,7 +6,13 @@ import { CheckUserNameAPI, SignInAPI } from '__SYSDefault/SysAPI';
 class SLogin {
 
   /**
-   * 
+   * @typedef {("Username-Password" 
+   *  | "MSAL" | "SMSOTP" | "EmailOTP"
+   *  | "GitHub" | "Facebook" | "Instagram"
+   *  | "Twitter" | "Google" | "LinkedIn")} authMethod
+   */
+
+  /**
    * @param {*} formProps 
    */
   static CheckUser = async (formProps) => {
@@ -41,16 +47,22 @@ class SLogin {
   }
 
   /**
-   * @typedef {("Username-Password" | "MSAL")} authMethod
    * @param {authMethod} method 
    * @param {*} formProps 
    * @returns 
    */
   static SignIn = async (method, formProps) => {
     switch(method){
-      default: case "Username-Password":
+      default: return {Success: false, payload: "Invalid Authentication Method."};
+      case "Username-Password":
       return await SLogin.SignInByUP(method, formProps);
+      case "SMSOTP": case "EmailOTP":
+      return await SLogin.SignInAndRequestOTP(method, formProps);
     }
+  }
+
+  static SignInAndRequestOTP = async (method, formProps) => {
+    
   }
 
   static SignInByUP = async (method, formProps) => {
