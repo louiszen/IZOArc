@@ -22,7 +22,7 @@ import { StartUp } from '__SYSDefault/StartUp';
 import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
 import { SnackAlert, StyledButton, StyledLinearProgress } from 'IZOArc/LabIZO/Stylizo';
 import { StyledIconButton } from 'IZOArc/LabIZO/Stylizo';
-import { ColorX, LocaleX, store } from 'IZOArc/STATIC';
+import { ColorX, LocaleX, STORE } from 'IZOArc/STATIC';
 import { EnvInfoAPI } from '__SYSDefault/SysAPI';
 
 class Container extends Component {
@@ -51,34 +51,34 @@ class Container extends Component {
 
   componentDidUpdate(prevProps, prevState){
   
-    when(() => this.state.snackOpen !== !_.isEmpty(store.alert), 
+    when(() => this.state.snackOpen !== !_.isEmpty(STORE.alert), 
       () => {
         this.setState({
-          snackOpen: !_.isEmpty(store.alert)
+          snackOpen: !_.isEmpty(STORE.alert)
         });
       }
     );
 
-    when(() => this.state.loadingOpen !== store.loading,
+    when(() => this.state.loadingOpen !== STORE.loading,
       () => {
         this.setState({
-          loadingOpen: store.loading
+          loadingOpen: STORE.loading
         });
       }
     );
 
-    when(() => this.state.dialogOpen !== !_.isEmpty(store.ask),
+    when(() => this.state.dialogOpen !== !_.isEmpty(STORE.ask),
       () => {
         this.setState({
-          dialogOpen: !_.isEmpty(store.ask)
+          dialogOpen: !_.isEmpty(STORE.ask)
         });
       }
     );
 
-    when(() => this.state.backdropOpen !== !_.isEmpty(store.backdrop),
+    when(() => this.state.backdropOpen !== !_.isEmpty(STORE.backdrop),
       () => {
         this.setState({
-          backdropOpen: !_.isEmpty(store.backdrop)
+          backdropOpen: !_.isEmpty(STORE.backdrop)
         });
       }
     );
@@ -89,11 +89,11 @@ class Container extends Component {
       let isLogin = (location && location.pathname) === "/Login";
       let isTest = location && location.pathname && location.pathname.startsWith("/Test/");
 
-      if(loginSys && !isPublic && !isLogin && !isTest && (!store.isLoggedIn() || !store.isInitialized())){
+      if(loginSys && !isPublic && !isLogin && !isTest && (!STORE.isLoggedIn() || !STORE.isInitialized())){
         this.AutoLogout();
       }
 
-      if(loginSys && (isPublic || isLogin) && store.isLoggedIn() && store.isInitialized()){
+      if(loginSys && (isPublic || isLogin) && STORE.isLoggedIn() && STORE.isInitialized()){
         this.AutoLogin();
       }
     }
@@ -114,14 +114,14 @@ class Container extends Component {
   AutoLogin = () => {
     setTimeout(() => {
       this.props.history.push(FirstPage);
-      store.Alert(LocaleX.Get("__IZO.Alert.AutoLogin"), "success");
+      STORE.Alert(LocaleX.Get("__IZO.Alert.AutoLogin"), "success");
     }, 1000);
   }
 
   AutoLogout = () => {
     setTimeout(() => {
-      store.Alert(LocaleX.Get("__IZO.Alert.Unauthorized"), "warn");
-      store.clearUser();
+      STORE.Alert(LocaleX.Get("__IZO.Alert.Unauthorized"), "warn");
+      STORE.clearUser();
       this.props.history.push('/Login');
     }, 1000);
   }
@@ -133,16 +133,16 @@ class Container extends Component {
       let rtn = await axios.post(url);
       console.log(EnvInfoAPI, rtn.data);
       if(rtn.data.Success === true){
-        store.setServer(rtn.data.payload);
+        STORE.setServer(rtn.data.payload);
       }else{
-        store.Alert(LocaleX.Get("__IZO.Alert.InternalServerError"), "error");
+        STORE.Alert(LocaleX.Get("__IZO.Alert.InternalServerError"), "error");
       }
     }catch{
       let {location} = this.props;
       let isPublic = (location && location.pathname) === "/";
       let isTest = location && location.pathname && location.pathname.startsWith("/Test/");
 
-      store.Alert(LocaleX.Get("__IZO.Alert.CannotConnect"), "error");
+      STORE.Alert(LocaleX.Get("__IZO.Alert.CannotConnect"), "error");
       if(!isPublic && !isTest){
         this.AutoLogout();
       }
@@ -154,33 +154,33 @@ class Container extends Component {
       snackOpen: false
     }, () => {
       setTimeout(() => {
-        store.clearAlert()
+        STORE.clearAlert()
       }, 1000);
     });
   }
 
   _onOK = async () => {
-    if(store.ask.onConfirm && _.isFunction(store.ask.onConfirm)){
-      store.SetAskLoading(true);
-      let res = await store.ask.onConfirm();
-      if (store.ask.autoClose){
-        store.SetAskLoading(false);
+    if(STORE.ask.onConfirm && _.isFunction(STORE.ask.onConfirm)){
+      STORE.SetAskLoading(true);
+      let res = await STORE.ask.onConfirm();
+      if (STORE.ask.autoClose){
+        STORE.SetAskLoading(false);
         if(!res || res.Success === undefined || (res && res.Success)){
-          store.clearAsk();
+          STORE.clearAsk();
         }
       }
     }else{
-      store.clearAsk();
+      STORE.clearAsk();
     }
   }
 
   _onCancel = async () => {
-    if(store.ask.onCancel && _.isFunction(store.ask.onCancel)){
-      store.SetAskLoading(true);
-      await store.ask.onCancel();
-      store.SetAskLoading(false);
+    if(STORE.ask.onCancel && _.isFunction(STORE.ask.onCancel)){
+      STORE.SetAskLoading(true);
+      await STORE.ask.onCancel();
+      STORE.SetAskLoading(false);
     }
-    store.clearAsk();
+    STORE.clearAsk();
   }
 
   renderButtons(){
@@ -197,7 +197,7 @@ class Container extends Component {
           }
         }}
         onClick={this._onOK} 
-        disabled={store.ask.loading}
+        disabled={STORE.ask.loading}
         >
         <i className="fas fa-check"/><div className="formizo-h-m">{LocaleX.Get("__IZO.Formizo.Confirm")}</div>
       </StyledButton>,
@@ -212,13 +212,13 @@ class Container extends Component {
           }
         }} 
         onClick={this._onCancel} 
-        disabled={store.ask.loading}
+        disabled={STORE.ask.loading}
         >
         <i className="fas fa-ban"/><div className="formizo-h-m">{LocaleX.Get("__IZO.Formizo.Cancel")}</div>
       </StyledButton>,
     }
 
-    return _.map(store.ask.buttons, (o, i) => {
+    return _.map(STORE.ask.buttons, (o, i) => {
       if(_.isString(o) && buttonsJSX[o])
         return buttonsJSX[o];
       else{
@@ -228,8 +228,8 @@ class Container extends Component {
   }
 
   renderBackDrop(justifyContent = "center"){
-    if(store.backdrop){
-      let {render, addOns} = store.backdrop;
+    if(STORE.backdrop){
+      let {render, addOns} = STORE.backdrop;
       return (
         <VStack width="100%" justifyContent={justifyContent}>
           {_.isFunction(render) && render(addOns)}
@@ -239,11 +239,11 @@ class Container extends Component {
   }
 
   renderDialog(){
-    let title = store.ask.title;
+    let title = STORE.ask.title;
     if(_.isString(title)){
       title = htmlParser(title);
     }
-    let message = store.ask.message;
+    let message = STORE.ask.message;
     if(_.isString(message)){
       message = htmlParser(message);
     }
@@ -265,8 +265,8 @@ class Container extends Component {
               {title}
             </Box>
             <Spacer/>
-            { store.ask.showCloseIcon && 
-              <StyledIconButton onClick={() => store.clearAsk()}
+            { STORE.ask.showCloseIcon && 
+              <StyledIconButton onClick={() => STORE.clearAsk()}
                 theme={{label: ColorX.GetColorCSS(IZOTheme.menuFG), width: 24}}>
                 <Close/>
               </StyledIconButton>
@@ -280,11 +280,11 @@ class Container extends Component {
           </Box>
           <StyledLinearProgress 
             theme={{
-              bar: ColorX.GetColorCSS(IZOTheme.menuFG, store.ask.loading? 0.5 : 0.0),
-              background: ColorX.GetColorCSS(IZOTheme.menuFG, store.ask.loading? 0.2 : 0.0)
+              bar: ColorX.GetColorCSS(IZOTheme.menuFG, STORE.ask.loading? 0.5 : 0.0),
+              background: ColorX.GetColorCSS(IZOTheme.menuFG, STORE.ask.loading? 0.2 : 0.0)
               }}/>
-          {store.ask.inner && store.ask.inner(store.ask.loading)}
-          {store.ask.buttons && store.ask.buttons.length > 0 &&
+          {STORE.ask.inner && STORE.ask.inner(STORE.ask.loading)}
+          {STORE.ask.buttons && STORE.ask.buttons.length > 0 &&
             <HStack marginTop={2}>
               {this.renderButtons()}
             </HStack> 
@@ -295,8 +295,8 @@ class Container extends Component {
   }
 
   SnackDuration = () => {
-    if(!store.alert || !store.alert.severity) return 3000;
-    switch(store.alert.severity){
+    if(!STORE.alert || !STORE.alert.severity) return 3000;
+    switch(STORE.alert.severity){
       default: case "success": return 3000;
       case "warn": case "warning": return 6000;
       case "info": return 4000;
@@ -310,7 +310,7 @@ class Container extends Component {
     let isPublic = (location && location.pathname) === "/";
     let isLogin = (location && location.pathname) === "/Login";
     let isTest = (location && location.pathname).startsWith("/Test/");
-    let isContained = hasContainer && !isPublic && !isTest && !isLogin && store.isLoggedIn();
+    let isContained = hasContainer && !isPublic && !isTest && !isLogin && STORE.isLoggedIn();
 
     return (
       <Box className="container" height="100%">
@@ -325,8 +325,8 @@ class Container extends Component {
         </Box>
         <Snackbar open={snackOpen} autoHideDuration={this.SnackDuration()} onClose={this.closeSnack}>
           <SnackAlert 
-            message={store.alert && store.alert.message}
-            severity={store.alert && store.alert.severity} 
+            message={STORE.alert && STORE.alert.message}
+            severity={STORE.alert && STORE.alert.severity} 
             onClose={this.closeSnack}/>
         </Snackbar>
         <Backdrop open={loadingOpen} style={{zIndex: 500, color: ColorX.GetColorCSS(IZOTheme.menuFG)}}>
@@ -335,7 +335,7 @@ class Container extends Component {
         <Backdrop open={dialogOpen} style={{zIndex: 500, color: ColorX.GetColorCSS(IZOTheme.menuFG)}}>
           {this.renderDialog()}
         </Backdrop>
-        <Backdrop open={backdropOpen} style={{zIndex: 500, color: ColorX.GetColorCSS(IZOTheme.menuFG)}} onClick={() => store.clearBackdrop()}>
+        <Backdrop open={backdropOpen} style={{zIndex: 500, color: ColorX.GetColorCSS(IZOTheme.menuFG)}} onClick={() => STORE.clearBackdrop()}>
           {this.renderBackDrop()}
         </Backdrop>
         {isContained && <Footer/>}

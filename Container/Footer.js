@@ -7,7 +7,7 @@ import { DOMAIN } from '__SYSDefault/Domain';
 
 import Accessizo from 'IZOArc/LabIZO/Accessizo';
 import { HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
-import { Accessor, store, ColorX, BrowserX } from 'IZOArc/STATIC';
+import { Accessor, STORE, ColorX, BrowserX } from 'IZOArc/STATIC';
 
 class Footer extends Component {
 
@@ -53,7 +53,7 @@ class Footer extends Component {
       fontSize: 9
     };
     return (
-      <Accessizo reqLevel={0} user={store.user}>
+      <Accessizo reqLevel={0} user={STORE.user}>
         <HStack height={15} style={{
           position: "fixed", 
           paddingLeft: 40,

@@ -10,7 +10,7 @@ import MenuButtonList from './MenuButtonList';
 
 import Accessizo from 'IZOArc/LabIZO/Accessizo';
 import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
-import { Accessor, store } from 'IZOArc/STATIC';
+import { Accessor, STORE } from 'IZOArc/STATIC';
 import { StyledButton } from 'IZOArc/LabIZO/Stylizo';
 import { HMarquee } from 'IZOArc/LabIZO/Animatizo';
 import theme from './theme';
@@ -118,7 +118,7 @@ class MenuButton extends Component {
       <StyledButton theme={btnTheme}>
         <HStack padding={1} width="140px">
           <HMarquee width="90px">
-            <Typography style={{fontSize: 14, opacity: store.mini? 0: 1, whiteSpace: "nowrap"}}>
+            <Typography style={{fontSize: 14, opacity: STORE.mini? 0: 1, whiteSpace: "nowrap"}}>
               {icaption}
             </Typography>
           </HMarquee>
@@ -175,7 +175,7 @@ class MenuButton extends Component {
         reqLevel={reqLevel}
         reqGroup={reqGroup}
         reqRole={reqRole}
-        user={store.user}>
+        user={STORE.user}>
           {this.renderInner()}
       </Accessizo>
     );

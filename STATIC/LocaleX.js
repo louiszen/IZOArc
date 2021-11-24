@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { LocaleConfig } from '__SYSDefault/Locale';
 
-import { Accessor, store } from '.';
+import { Accessor, STORE } from '.';
 
 class LocaleX {
 
@@ -11,7 +11,7 @@ class LocaleX {
    * @param {*} mapping replace @[field] to value
    * @returns 
    */
-  static Get(accessor, mapping = {}, lang = store.lang){
+  static Get(accessor, mapping = {}, lang = STORE.lang){
     let langO = LocaleConfig.find(o => o.code === lang);
     let lib = langO.lib;
 
@@ -40,7 +40,7 @@ class LocaleX {
    * @param {*} mapping 
    * @returns 
    */
-  static Parse(obj, mapping = {}, lang = store.lang){
+  static Parse(obj, mapping = {}, lang = STORE.lang){
     let str = "";
     if(_.isString(obj)){
       str = obj;

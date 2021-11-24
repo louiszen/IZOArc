@@ -6,7 +6,7 @@ import _ from 'lodash';
 import { Box, Tooltip } from '@material-ui/core';
 import { VerticalSplit } from '@material-ui/icons';
 
-import { Accessor, ColorX, LocaleX, store } from 'IZOArc/STATIC';
+import { Accessor, ColorX, LocaleX, STORE } from 'IZOArc/STATIC';
 import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
 import StyledIconButton from 'IZOArc/LabIZO/Stylizo/StyledIconButton';
 
@@ -62,14 +62,14 @@ class Menu extends Component {
         reqRole={reqRole}
         submenu={submenu}
         disabled={disabled}
-        mini={store.mini}
+        mini={STORE.mini}
         zIndex={50}
         />
     );
   }
 
   toggleMini(){
-    store.toggleMini();
+    STORE.toggleMini();
   }
 
   renderButtons(){
@@ -111,8 +111,8 @@ class Menu extends Component {
     return (
       <HStack style={{paddingRight: 7}}>
         <Spacer/>
-        <StyledIconButton theme={store.mini? minitheme : theme} onClick={() => this.toggleMini()}>
-          <Tooltip title={LocaleX.Get(store.mini? "__IZO.MenuBar.ShowLabels" : "__IZO.MenuBar.HideLabels") || ""} aria-label="label" arrow={true} placement="right">
+        <StyledIconButton theme={STORE.mini? minitheme : theme} onClick={() => this.toggleMini()}>
+          <Tooltip title={LocaleX.Get(STORE.mini? "__IZO.MenuBar.ShowLabels" : "__IZO.MenuBar.HideLabels") || ""} aria-label="label" arrow={true} placement="right">
             <VerticalSplit/>
           </Tooltip>
         </StyledIconButton>
@@ -123,7 +123,7 @@ class Menu extends Component {
 
   render(){
     return (
-      <Box className={"menu " + (store.mini? "mini" : "")} width="140px" height="100%" bgcolor={ColorX.GetColorCSS(IZOTheme.menuBG)} position="fixed" zIndex="300">
+      <Box className={"menu " + (STORE.mini? "mini" : "")} width="140px" height="100%" bgcolor={ColorX.GetColorCSS(IZOTheme.menuBG)} position="fixed" zIndex="300">
         <VStack width="100%" style={{paddingTop: "50px"}}>
           {this.renderPin()}
           <VStack width="100%" style={{paddingTop: "40px"}}>

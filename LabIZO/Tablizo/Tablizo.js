@@ -10,7 +10,7 @@ import CellExpand from "./_gears/CellExpand";
 
 import { StyledLinearProgress, StyledIconButton } from "IZOArc/LabIZO/Stylizo";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
-import { Accessor, Authority, ColorX, store } from "IZOArc/STATIC";
+import { Accessor, Authority, ColorX, STORE } from "IZOArc/STATIC";
 
 import { IZOTheme } from "__SYSDefault/Theme";
 import { LocaleX } from "IZOArc/STATIC";
@@ -123,7 +123,7 @@ class Tablizo extends Component {
 
     density: "standard",
 
-    store: {},
+    STORE: {},
     datagridProps: {},
     lang: "EN"
   };
@@ -332,7 +332,7 @@ class Tablizo extends Component {
                     if (o.func) {
                       o.func(Accessor.Get(param.row, rowIdAccessor), param.row);
                     } else {
-                      store && store.Alert("Function is not implemented.", "warn");
+                      STORE && STORE.Alert("Function is not implemented.", "warn");
                     }
                   }}
                 >

@@ -1,5 +1,5 @@
 export {default as Accessor} from './Accessor';
-export {default as store} from './AppStore';
+export {default as STORE} from './AppStore';
 export {default as Authority} from './Authority';
 export {default as BrowserX} from './BrowserX';
 export {default as ColorX} from './ColorX';

@@ -24,10 +24,10 @@ class AppStore {
     let firstRun = true;
 
     autorun(() => {
-      // on load check if there's an existing store on 
-      // localStorage and extend the store
+      // on load check if there's an existing STORE on 
+      // localStorage and extend the STORE
       if (firstRun) {
-        let existingStore = window.localStorage.getItem('store');
+        let existingStore = window.localStorage.getItem('STORE');
   
         if (existingStore) {
           set(this, JSON.parse(existingStore));
@@ -37,7 +37,7 @@ class AppStore {
       // from then on serialize and save to localStorage
       let serializedThis = toJS(this);
       window.localStorage.setItem(
-        'store', 
+        'STORE', 
         JSON.stringify(serializedThis)
       );
     });
@@ -249,5 +249,5 @@ class AppStore {
 
 }
 
-const store = new AppStore();
-export default store;
+const STORE = new AppStore();
+export default STORE;

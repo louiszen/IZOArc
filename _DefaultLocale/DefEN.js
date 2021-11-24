@@ -10,7 +10,7 @@ let DefEN = {
     },
     Methods: {
       UsernamePassword: "Username-Password",
-      Window: "Window Authentication",
+      MSAL: "Window Authentication",
       GitHub: "GitHub",
       Facebook: "Facebook",
       Instagram: "Instagram",

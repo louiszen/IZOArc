@@ -1,6 +1,6 @@
 import _ from "lodash";
 import Accessor from "./Accessor";
-import store from "./AppStore";
+import STORE from "./AppStore";
 
 class Authority {
 
@@ -55,27 +55,27 @@ class Authority {
   }
 
   static IsAccessibleQ(reqAuth = "", reqLevel = Number.MAX_SAFE_INTEGER, reqFunc = "", reqGroup = "", reqRole = ""){
-    return this.IsAccessible(store.user, reqAuth, reqLevel, reqFunc, reqGroup, reqRole);
+    return this.IsAccessible(STORE.user, reqAuth, reqLevel, reqFunc, reqGroup, reqRole);
   }
 
   static AuthCheckQ(reqAuth){
-    return this.AuthCheck(store.user.authority, reqAuth);
+    return this.AuthCheck(STORE.user.authority, reqAuth);
   }
 
   static LevelCheckQ(reqLevel){
-    return this.LevelCheck(store.user.level, reqLevel);
+    return this.LevelCheck(STORE.user.level, reqLevel);
   }
 
   static FuncCheckQ(reqAuth, reqFunc){
-    return this.FuncCheck(store.user.authority, reqAuth, reqFunc);
+    return this.FuncCheck(STORE.user.authority, reqAuth, reqFunc);
   }
 
   static GroupCheckQ(reqGroup){
-    return this.GroupCheck(store.user.groups, reqGroup);
+    return this.GroupCheck(STORE.user.groups, reqGroup);
   }
 
   static RoleCheckQ(reqRole){
-    return this.RoleCheck(store.user.role, reqRole);
+    return this.RoleCheck(STORE.user.role, reqRole);
   }
 
   static Require(reqAuth = "", reqLevel = Number.MAX_SAFE_INTEGER, reqFunc = [], reqGroup = "", reqRole = ""){

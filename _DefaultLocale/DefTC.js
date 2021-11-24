@@ -10,7 +10,7 @@ let DefTC = {
     },
     Methods: {
       UsernamePassword: "用戶名-密碼",
-      Window: "Window 驗證",
+      MSAL: "Window 驗證",
       GitHub: "GitHub",
       Facebook: "Facebook",
       Instagram: "Instagram",

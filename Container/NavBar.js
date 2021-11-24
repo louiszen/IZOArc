@@ -3,21 +3,21 @@ import { withRouter } from 'react-router';
 
 import { observer } from 'mobx-react';
 
-import { ExitToAppOutlined, Language } from '@material-ui/icons';
+import { ExitToAppOutlined } from '@material-ui/icons';
 import { Box, IconButton, Typography, Tooltip } from '@material-ui/core';
 
 import './Container.css';
 import Version from '__SYSDefault/Version';
 import IZOVersion from '../version';
 
-import { Accessor, ColorX, store } from 'IZOArc/STATIC';
+import { Accessor, ColorX, STORE } from 'IZOArc/STATIC';
 import { HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
 import Accessizo from 'IZOArc/LabIZO/Accessizo';
 
 import { CompanyDis, IZOFontFamily, IZOTheme, NavbarDis, ProjectDis } from '__SYSDefault/Theme';
-import { LocaleConfig } from '__SYSDefault/Locale';
 import LocaleX from 'IZOArc/STATIC/LocaleX';
 import { SITEBASE } from '__SYSDefault/Domain';
+import { LangToggler } from 'IZOArc/BLOCKS';
 
 class NavBar extends Component {
 
@@ -57,35 +57,9 @@ class NavBar extends Component {
   }
 
   _Logout = () => {
-    store.clearUser();
+    STORE.clearUser();
     this.props.history.push("/");
-    store.Alert(LocaleX.Get("__IZO.Alert.SuccessLogout"), "success");
-  }
-
-  _ToggleLanguage = () => {
-    let max = LocaleConfig.length;
-    let idx = LocaleConfig.findIndex(o => o.code === store.lang);
-    idx += 1;
-    if(idx >= max) idx = 0;
-    let newLang = LocaleConfig[idx].code;
-    store.setLang(newLang);
-  }
-
-  renderLocale(){
-    let langO = LocaleConfig.find(o => o.code === store.lang);
-    let langLabel = langO.caption;
-    return (
-      <HStack width="fit-content" marginX={5}>
-        <Tooltip title={LocaleX.Get("__IZO.NavBar.SwitchLang")} arrow={true} placement="bottom">
-          <IconButton style={{color: ColorX.GetColorCSS(IZOTheme.menuFG, 1)}} size="small" onClick={() => this._ToggleLanguage()}>
-            <Language/>
-          </IconButton>
-        </Tooltip>
-        <Typography style={{width: 60, marginLeft: 5, fontFamily: IZOFontFamily, fontSize: 14, fontWeight: "bold", color: ColorX.GetColorCSS(IZOTheme.menuFG)}}>
-          {langLabel}
-        </Typography>
-      </HStack>
-    );
+    STORE.Alert(LocaleX.Get("__IZO.Alert.SuccessLogout"), "success");
   }
 
   renderIZO(){
@@ -120,10 +94,10 @@ class NavBar extends Component {
           {LocaleX.Get("__IZO.NavBar.LoggedInAs")}
         </Typography>
         <Typography style={{marginLeft: 10, marginRight: 5, fontFamily: IZOFontFamily, fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.8)}}>
-          {store.user && store.user.UserDisplayName}
+          {STORE.user && STORE.user.UserDisplayName}
         </Typography>
         <Typography style={{marginLeft: 5, marginRight: 5, fontFamily: IZOFontFamily, fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.8)}}>
-          {store.user && ("[" + store.user.role + "]")}
+          {STORE.user && ("[" + STORE.user.role + "]")}
         </Typography>
       </HStack>
     );
@@ -131,7 +105,7 @@ class NavBar extends Component {
 
   renderVersion(){
     return (
-      <Accessizo reqLevel={0} user={store.user}>
+      <Accessizo reqLevel={0} user={STORE.user}>
         <Typography style={{fontFamily: IZOFontFamily, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.3)}}>
           {"v" + Version}
         </Typography>
@@ -191,7 +165,7 @@ class NavBar extends Component {
           {this.renderLogin()}
           {this.renderCompany()}
           <Spacer/>
-          {this.renderLocale()}
+          <LangToggler/>
           {this.renderVersion()}
           {this.renderProject()}
           {this.renderIcon()}

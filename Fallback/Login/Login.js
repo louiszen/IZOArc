@@ -4,22 +4,21 @@ import { withRouter } from 'react-router';
 import { observer } from 'mobx-react';
 import axios from 'axios';
 import _ from 'lodash';
-import { Box, IconButton, Link, Typography, Tooltip } from '@material-ui/core';
+import { Box, Link, Typography } from '@material-ui/core';
 
 import schema from './schema';
-import { IZOTheme, GateDis, IZOFontFamily } from '__SYSDefault/Theme';
+import { IZOTheme, GateDis } from '__SYSDefault/Theme';
 import { DOMAIN } from '__SYSDefault/Domain';
 import Version from '__SYSDefault/Version';
 
 import Formizo from 'IZOArc/LabIZO/Formizo';
-import { Accessor, store, ColorX, Env, LocaleX } from 'IZOArc/STATIC';
+import { Accessor, STORE, ColorX, Env, LocaleX } from 'IZOArc/STATIC';
 import { VStack, HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
 import { StyledButton, StyledLinearProgress } from 'IZOArc/LabIZO/Stylizo';
-import { Language } from '@material-ui/icons';
-import { LocaleConfig } from '__SYSDefault/Locale';
 import { FirstPage, StartDate } from '__SYSDefault/Config';
 import { CheckUserNameAPI, SignInAPI } from '__SYSDefault/SysAPI';
 import { Password, Window, GitHub, Facebook, Instagram, Twitter, Google, LinkedIn} from '@mui/icons-material';
+import { LangToggler } from 'IZOArc/BLOCKS';
 class Login extends Component {
 
   static propTypes = {
@@ -44,7 +43,7 @@ class Login extends Component {
 
   componentDidMount(){
     this._setAllStates(() => {
-      if(store.onlyUsernamePassword()){
+      if(STORE.onlyUsernamePassword()){
         this.toUser();
       }
     });
@@ -72,32 +71,6 @@ class Login extends Component {
     this.MountForm = callbacks;
   }
 
-  _ToggleLanguage = () => {
-    let max = LocaleConfig.length;
-    let idx = LocaleConfig.findIndex(o => o.code === store.lang);
-    idx += 1;
-    if(idx >= max) idx = 0;
-    let newLang = LocaleConfig[idx].code;
-    store.setLang(newLang);
-  }
-
-  renderLocale(){
-    let langO = LocaleConfig.find(o => o.code === store.lang);
-    let langLabel = langO.caption;
-    return (
-      <HStack width="fit-content" marginRight={5}>
-        <Tooltip title={LocaleX.Get("__IZO.NavBar.SwitchLang")} arrow={true} placement="bottom">
-          <IconButton style={{color: ColorX.GetColorCSS(IZOTheme.menuFG, 1)}} size="small" onClick={() => this._ToggleLanguage()}>
-            <Language/>
-          </IconButton>
-        </Tooltip>
-        <Typography style={{width: 60, marginLeft: 5, fontFamily: IZOFontFamily, fontSize: 14, fontWeight: "bold", color: ColorX.GetColorCSS(IZOTheme.menuFG)}}>
-          {langLabel}
-        </Typography>
-      </HStack>
-    );
-  }
-
   _CheckUser = (formProps) => {
 
     let url = DOMAIN + CheckUserNameAPI;
@@ -114,7 +87,6 @@ class Login extends Component {
         let {Success, payload} = res.data;
         if(Success){
           if(payload.hasUser){
-
             this.setState({
               page: 'password',
               loading: false,
@@ -122,14 +94,14 @@ class Login extends Component {
               userDisplayName: payload.UserDisplayName
             });
           }else{
-            store.Alert(LocaleX.Get("__IZO.Alert.UserNotFound"), "error");
+            STORE.Alert(LocaleX.Get("__IZO.Alert.UserNotFound"), "error");
             this.setState({
               loading: false
             });
           }
         }
       }catch(e){
-        store.Alert(LocaleX.Get("__IZO.Alert.CannotConnect"), "error");
+        STORE.Alert(LocaleX.Get("__IZO.Alert.CannotConnect"), "error");
         this.setState({
           loading: false
         });
@@ -138,7 +110,7 @@ class Login extends Component {
   
   }
 
-  _Login = (formProps) => {
+  _SignInByUP = (formProps) => {
     console.log("_signIn");
 
     let {username} = this.state;
@@ -146,6 +118,7 @@ class Login extends Component {
 
     let req = {
       username: username,
+      method: "Username-Password",
       ...formProps
     };
 
@@ -158,11 +131,11 @@ class Login extends Component {
         let {Success, payload} = res.data;
         if(Success === true){
           console.log(payload);
-          store.setUser(payload);
-          store.Alert(LocaleX.Get("__IZO.Alert.SuccessLogin"), "success");
+          STORE.setUser(payload);
+          STORE.Alert(LocaleX.Get("__IZO.Alert.SuccessLogin"), "success");
           await Env.CheckInitialized();
 
-          if(!store.isInitialized()){
+          if(!STORE.isInitialized()){
             this.setState({
               page: "method",
               loading: false
@@ -170,13 +143,13 @@ class Login extends Component {
           }
           
         }else{
-          store.Alert(LocaleX.Get("__IZO.IncorrectPassword"), "error");
+          STORE.Alert(LocaleX.Get("__IZO.IncorrectPassword"), "error");
           this.setState({
             loading: false
           });
         }
       }catch(e){
-        store.Alert(LocaleX.Get("__IZO.Alert.CannotConnect"), "error");
+        STORE.Alert(LocaleX.Get("__IZO.Alert.CannotConnect"), "error");
         this.setState({
           loading: false
         });
@@ -185,10 +158,10 @@ class Login extends Component {
   }
 
   redirectToDashboard = () => {
-    if(store.isInitialized){
+    if(STORE.isInitialized){
       setTimeout(() => {
         this.props.history.push(FirstPage);
-        store.isLoading(false);
+        STORE.isLoading(false);
       }, 1000);
     }
   }
@@ -275,7 +248,7 @@ class Login extends Component {
         onSubmit={
           page === "user"? 
           this._CheckUser 
-          : this._Login
+          : this._SignInByUP
         }
         onMounted={this.onMountForm}
         fieldStyle="standard"
@@ -323,7 +296,7 @@ class Login extends Component {
   }
 
   renderOtherAuth(){
-    if(!store.onlyUsernamePassword()){
+    if(!STORE.onlyUsernamePassword()){
       return (
         <Link onClick={() => this.toMethod()}>
           {LocaleX.Get("__IZO.Login.OtherMethod")}
@@ -385,16 +358,16 @@ class Login extends Component {
 
   renderMethod(o){
     switch(o){
-      default: 
+      default: return;
       case "Username-Password": 
         return this.renderMethodButton(
           <Password/>, 
           LocaleX.Get("__IZO.Login.Methods.UsernamePassword"), 
           this.toUser);
-      case "Window": 
+      case "MSAL": 
         return this.renderMethodButton(
           <Window/>, 
-          LocaleX.Get("__IZO.Login.Methods.Window"), 
+          LocaleX.Get("__IZO.Login.Methods.MSAL"), 
           () => {});
       case "GitHub": 
         return this.renderMethodButton(
@@ -430,7 +403,7 @@ class Login extends Component {
   }
 
   renderAuthenticationMethods(){
-    let methods = _.isArray(store.server.Authentication)? store.server.Authentication : [store.server.Authentication];
+    let methods = _.isArray(STORE.server.Authentication)? STORE.server.Authentication : [STORE.server.Authentication];
     return (
       <VStack width="100%">
         <Spacer/>
@@ -458,7 +431,7 @@ class Login extends Component {
     return (
       <VStack spacing={5} width="70%" height="100%">
         <HStack marginY={1}>
-          {this.renderLocale()}
+          <LangToggler/>
           <Spacer/>
         </HStack>
         {
@@ -471,7 +444,7 @@ class Login extends Component {
   }
 
   renderEnv(){
-    let env = Accessor.Get(store.server, "Env");
+    let env = Accessor.Get(STORE.server, "Env");
     let envStr = env? env.toUpperCase() : "";
     let style = {
       color: ColorX.GetColorCSS("grey", 0.5), 
@@ -486,7 +459,7 @@ class Login extends Component {
           {"UI Version: " + Version}
         </Typography>
         <Typography style={style}>
-          {"Backend Version: " + store.server.backendVersion}
+          {"Backend Version: " + STORE.server.backendVersion}
         </Typography>
         <Typography style={style}>
           {"Start Date: " + StartDate}

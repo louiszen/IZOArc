@@ -45,7 +45,7 @@ class Test extends Component {
 
   render(){
     return (
-      <Datumizo lang={store.lang}
+      <Datumizo lang={STORE.lang}
         
         />
     );

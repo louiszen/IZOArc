@@ -1,4 +1,4 @@
-import store from './AppStore';
+import STORE from './AppStore';
 import axios from 'axios';
 
 import { DOMAIN } from '__SYSDefault/Domain';
@@ -11,33 +11,33 @@ class Env {
     let url = DOMAIN + CheckInitAPI;
 
     let payloadOut = {
-      JWT: store.user.JWT
+      JWT: STORE.user.JWT
     };
 
     try{
-      store.isLoading(true);
+      STORE.isLoading(true);
       let res = await axios.post(url, payloadOut);
       let {Success, payload} = res.data;
 
       if(Success){
         if(!payload){
-          store.Alert("The project is not initialized. \n Please follow the steps to initialize it.", "info");
-          store.isLoading(false);
-          store.setInitialized(false);
+          STORE.Alert("The project is not initialized. \n Please follow the steps to initialize it.", "info");
+          STORE.isLoading(false);
+          STORE.setInitialized(false);
         }else{
-          store.isLoading(false);
-          store.setInitialized(true);
+          STORE.isLoading(false);
+          STORE.setInitialized(true);
         }
       }else{
-        store.setInitialized(false);
-        store.isLoading(false);
+        STORE.setInitialized(false);
+        STORE.isLoading(false);
       }
       
     }catch(e){
       console.log(e);
-      store.Alert("Cannot connect to server", "error");
-      store.setInitialized(false);
-      store.isLoading(false);
+      STORE.Alert("Cannot connect to server", "error");
+      STORE.setInitialized(false);
+      STORE.isLoading(false);
     }
   }
 

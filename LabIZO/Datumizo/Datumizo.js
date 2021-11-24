@@ -15,7 +15,7 @@ import Inner from "./_gears/Inner";
 import Formizo from "IZOArc/LabIZO/Formizo";
 import Tablizo from "IZOArc/LabIZO/Tablizo";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
-import { Accessor, Authority, ColorX, ErrorX, LocaleX, store } from "IZOArc/STATIC";
+import { Accessor, Authority, ColorX, ErrorX, LocaleX, STORE } from "IZOArc/STATIC";
 import { StyledButton } from "IZOArc/LabIZO/Stylizo";
 
 /**
@@ -545,7 +545,7 @@ class Datumizo extends Component {
     upload.append("schema", JSON.stringify(payloadOut.schema || {}));
     upload.append("addOns", JSON.stringify(payloadOut.addOns || {}));
     upload.append("replace", JSON.stringify(payloadOut.replace || {}));
-    upload.append("JWT", store.user.JWT);
+    upload.append("JWT", STORE.user.JWT);
     if (payloadOut.data.upload) {
       upload.append("upload", payloadOut.data.upload, payloadOut.data.upload.name);
     }
@@ -579,7 +579,7 @@ class Datumizo extends Component {
       }
     } else {
       return () => {
-        store.Alert(LocaleX.Get("__IZO.Alert.FuncNotImplement", {func: func}), "warn");
+        STORE.Alert(LocaleX.Get("__IZO.Alert.FuncNotImplement", {func: func}), "warn");
       };
     }
   };
@@ -599,7 +599,7 @@ class Datumizo extends Component {
             middle: true,
           },
         ]}
-        onCancel={() => store.clearAsk()}
+        onCancel={() => STORE.clearAsk()}
         buttons={[]}
         fieldStyle='grid'
         onChange={(formValue, name, value) => this.Import.onSubmit(name, value)}
@@ -613,7 +613,7 @@ class Datumizo extends Component {
       let { base, addOns } = this.props;
       let url = DOMAIN + base.Connect.DBInfo;
       let payloadOut = {
-        JWT: store.user.JWT,
+        JWT: STORE.user.JWT,
         addOns: addOns,
       };
       try {
@@ -645,7 +645,7 @@ class Datumizo extends Component {
 
       if (serverSidePagination) {
         payloadOut = {
-          JWT: store.user.JWT,
+          JWT: STORE.user.JWT,
           data: {
             skip: nav.curPage * nav.pageSize,
             limit: nav.pageSize,
@@ -655,7 +655,7 @@ class Datumizo extends Component {
         };
       } else {
         payloadOut = {
-          JWT: store.user.JWT,
+          JWT: STORE.user.JWT,
           data: {
             selector: nav.selector,
           },
@@ -709,7 +709,7 @@ class Datumizo extends Component {
       let { base, addOns } = this.props;
       let url = DOMAIN + base.Connect.Get;
       let payloadOut = {
-        JWT: store.user.JWT,
+        JWT: STORE.user.JWT,
         data: {
           docID: docID,
         },
@@ -751,7 +751,7 @@ class Datumizo extends Component {
     },
 
     onError: (e) => {
-      store.Alert(ErrorX.Handle(e), "error");
+      STORE.Alert(ErrorX.Handle(e), "error");
     },
   };
 
@@ -767,7 +767,7 @@ class Datumizo extends Component {
         content = content(id, row);
       }
 
-      store.Ask(title, content, async () => {
+      STORE.Ask(title, content, async () => {
         return await this.Delete.onSubmit(id, row);
       });
     },
@@ -782,16 +782,16 @@ class Datumizo extends Component {
         data: {
           ...row,
         },
-        JWT: store.user.JWT,
+        JWT: STORE.user.JWT,
         addOns: addOns,
       };
 
       try {
         console.log(base.operations?.Delete?.url, payloadOut);
 
-        store.isLoading(true);
+        STORE.isLoading(true);
         let res = await axios.post(url, payloadOut);
-        store.isLoading(false);
+        STORE.isLoading(false);
 
         console.log(base.operations?.Delete?.url, res.data);
 
@@ -813,7 +813,7 @@ class Datumizo extends Component {
           return { Success: false };
         }
       } catch (e) {
-        store.isLoading(false);
+        STORE.isLoading(false);
         if (base.operations?.Delete?.onFail) {
           base.operations?.Delete?.onFail(e);
         } else {
@@ -825,14 +825,14 @@ class Datumizo extends Component {
 
     onSuccess: (payload) => {
       let { base } = this.props;
-      store.Alert(base.operations?.Delete?.success, "success");
+      STORE.Alert(base.operations?.Delete?.success, "success");
       this._fetchData();
     },
 
     onFail: (payload) => {
       let { base } = this.props;
       let msg = base.operations?.Delete?.fail + (payload.message || "");
-      store.Alert(msg, "error");
+      STORE.Alert(msg, "error");
     },
   };
 
@@ -848,7 +848,7 @@ class Datumizo extends Component {
         content = content(id, row);
       }
 
-      store.Ask(title, content, async () => {
+      STORE.Ask(title, content, async () => {
         return await this.Duplicate.onSubmit(id, row);
       });
     },
@@ -863,16 +863,16 @@ class Datumizo extends Component {
         data: {
           ...row,
         },
-        JWT: store.user.JWT,
+        JWT: STORE.user.JWT,
         addOns: addOns,
       };
 
       try {
         console.log(base.operations?.Duplicate?.url, payloadOut);
 
-        store.isLoading(true);
+        STORE.isLoading(true);
         let res = await axios.post(url, payloadOut);
-        store.isLoading(false);
+        STORE.isLoading(false);
 
         console.log(base.operations?.Duplicate?.url, res.data);
 
@@ -894,7 +894,7 @@ class Datumizo extends Component {
           return { Success: false };
         }
       } catch (e) {
-        store.isLoading(false);
+        STORE.isLoading(false);
         if (base.operations?.Duplicate?.onFail) {
           base.operations?.Duplicate?.onFail(e);
         } else {
@@ -906,14 +906,14 @@ class Datumizo extends Component {
 
     onSuccess: (payload) => {
       let { base } = this.props;
-      store.Alert(base.operations?.Duplicate?.success, "success");
+      STORE.Alert(base.operations?.Duplicate?.success, "success");
       this._fetchData();
     },
 
     onFail: (payload) => {
       let { base } = this.props;
       let msg = base.operations?.Duplicate?.fail + (payload.message || "");
-      store.Alert(msg, "error");
+      STORE.Alert(msg, "error");
     },
   };
 
@@ -945,7 +945,7 @@ class Datumizo extends Component {
         data: {
           ...formProps,
         },
-        JWT: store.user.JWT,
+        JWT: STORE.user.JWT,
         addOns: addOns,
       };
 
@@ -957,9 +957,9 @@ class Datumizo extends Component {
       try {
         console.log(base.operations?.Add?.url, payloadOut);
 
-        store.isLoading(true);
+        STORE.isLoading(true);
         let res = await axios.post(url, payloadOut);
-        store.isLoading(false);
+        STORE.isLoading(false);
 
         console.log(base.operations?.Add?.url, res.data);
 
@@ -980,7 +980,7 @@ class Datumizo extends Component {
           }
         }
       } catch (e) {
-        store.isLoading(false);
+        STORE.isLoading(false);
         if (base.operations?.Add?.onFail) {
           base.operations?.Add?.onFail(e);
         } else {
@@ -991,14 +991,14 @@ class Datumizo extends Component {
 
     onSuccess: (payload) => {
       let { base } = this.props;
-      store.Alert(base.operations?.Add?.success, "success");
+      STORE.Alert(base.operations?.Add?.success, "success");
       this._fetchData();
     },
 
     onFail: (payload) => {
       let { base } = this.props;
       let msg = base.operations?.Add?.fail + (payload.message || "");
-      store.Alert(msg, "error");
+      STORE.Alert(msg, "error");
     },
   };
 
@@ -1027,7 +1027,7 @@ class Datumizo extends Component {
         data: {
           ...formProps,
         },
-        JWT: store.user.JWT,
+        JWT: STORE.user.JWT,
         addOns: addOns,
       };
 
@@ -1039,9 +1039,9 @@ class Datumizo extends Component {
       try {
         console.log(base.operations?.Add?.url, payloadOut);
 
-        store.isLoading(true);
+        STORE.isLoading(true);
         let res = await axios.post(url, payloadOut);
-        store.isLoading(false);
+        STORE.isLoading(false);
 
         console.log(base.operations?.Add?.url, res.data);
 
@@ -1062,7 +1062,7 @@ class Datumizo extends Component {
           }
         }
       } catch (e) {
-        store.isLoading(false);
+        STORE.isLoading(false);
         if (base.operations?.Add?.onFail) {
           base.operations?.Add?.onFail(e);
         } else {
@@ -1073,14 +1073,14 @@ class Datumizo extends Component {
 
     onSuccess: (payload) => {
       let { base } = this.props;
-      store.Alert(base.operations?.Add?.success, "success");
+      STORE.Alert(base.operations?.Add?.success, "success");
       this._fetchData();
     },
 
     onFail: (payload) => {
       let { base } = this.props;
       let msg = base.operations?.Add?.fail + (payload.message || "");
-      store.Alert(msg, "error");
+      STORE.Alert(msg, "error");
     },
   };
 
@@ -1107,7 +1107,7 @@ class Datumizo extends Component {
           ...doc,
           ...formProps,
         },
-        JWT: store.user.JWT,
+        JWT: STORE.user.JWT,
         addOns: addOns,
       };
 
@@ -1118,9 +1118,9 @@ class Datumizo extends Component {
       try {
         console.log(base.operations?.Edit?.url, payloadOut);
 
-        store.isLoading(true);
+        STORE.isLoading(true);
         let res = await axios.post(url, payloadOut);
-        store.isLoading(false);
+        STORE.isLoading(false);
 
         console.log(base.operations?.Edit?.url, res.data);
 
@@ -1141,7 +1141,7 @@ class Datumizo extends Component {
           }
         }
       } catch (e) {
-        store.isLoading(false);
+        STORE.isLoading(false);
         if (base.operations?.Edit?.onFail) {
           base.operations?.Edit?.onFail(e);
         } else {
@@ -1152,14 +1152,14 @@ class Datumizo extends Component {
 
     onSuccess: (payload) => {
       let { base } = this.props;
-      store.Alert(base.operations?.Edit?.success, "success");
+      STORE.Alert(base.operations?.Edit?.success, "success");
       this._fetchData();
     },
 
     onFail: (payload) => {
       let { base } = this.props;
       let msg = base.operations?.Edit?.fail + (payload.message || "");
-      store.Alert(msg, "error");
+      STORE.Alert(msg, "error");
     },
   };
 
@@ -1185,7 +1185,7 @@ class Datumizo extends Component {
     onClick: async () => {
       let { base, addOns } = this.state;
       if (!base.operations?.Export || !base.operations?.Export?.url) {
-        store.Alert(LocaleX.Get("__IZO.Alert.ExportNotImplement"), "warn");
+        STORE.Alert(LocaleX.Get("__IZO.Alert.ExportNotImplement"), "warn");
         return;
       }
       let url = DOMAIN + base.operations?.Export?.url;
@@ -1194,7 +1194,7 @@ class Datumizo extends Component {
       let schema = this.flatExcelSchema(base.operations?.Export?.schema, Infinity);
 
       let payloadOut = {
-        JWT: store.user.JWT,
+        JWT: STORE.user.JWT,
         data: {
           selected: selected,
           format: null,
@@ -1208,14 +1208,14 @@ class Datumizo extends Component {
       let options = {
         responseType: "blob", //!important
       };
-      store.isLoading(true);
+      STORE.isLoading(true);
       try {
         let res = await axios.post(url, payloadOut, options);
-        store.isLoading(false);
+        STORE.isLoading(false);
         const blob = new Blob([res.data], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
         fileDownload(blob, base.exportDoc + ".xlsx");
       } catch (e) {
-        store.isLoading(false);
+        STORE.isLoading(false);
         if (base.operations?.Export?.onFail) {
           base.operations?.Export?.onFail(e);
         } else {
@@ -1225,9 +1225,9 @@ class Datumizo extends Component {
     },
 
     onFail: (payload) => {
-      store.isLoading(false);
-      store.Alert(ErrorX.Handle(payload), "error");
-      store.clearAsk();
+      STORE.isLoading(false);
+      STORE.Alert(ErrorX.Handle(payload), "error");
+      STORE.clearAsk();
     },
   };
 
@@ -1235,12 +1235,12 @@ class Datumizo extends Component {
     onClick: () => {
       let { base } = this.props;
       if(!this.MountTablizo){
-        store.Alert(LocaleX.Get("__IZO.Alert.NoRowsSelect"), "warn");
+        STORE.Alert(LocaleX.Get("__IZO.Alert.NoRowsSelect"), "warn");
         return;
       }
       let selected = this.MountTablizo.GetSelectedRows();
       if (selected.length <= 0) {
-        store.Alert(LocaleX.Get("__IZO.Alert.NoRowsSelect"), "warn");
+        STORE.Alert(LocaleX.Get("__IZO.Alert.NoRowsSelect"), "warn");
         return;
       }
 
@@ -1254,7 +1254,7 @@ class Datumizo extends Component {
         content = base.operations?.DeleteBulk?.content(selected.length);
       }
 
-      store.Ask(title, content, async () => {
+      STORE.Ask(title, content, async () => {
         return await this.DeleteBulk.onSubmit();
       });
     },
@@ -1262,14 +1262,14 @@ class Datumizo extends Component {
     onSubmit: async () => {
       let { base, addOns } = this.state;
       if (!base.operations?.DeleteBulk || !base.operations?.DeleteBulk?.url) {
-        store.Alert("DeleteBulk Not Implemented.", "warn");
+        STORE.Alert("DeleteBulk Not Implemented.", "warn");
         return;
       }
       let url = DOMAIN + base.operations?.DeleteBulk?.url;
       let selected = this.MountTablizo.GetSelectedRows();
 
       let payloadOut = {
-        JWT: store.user.JWT,
+        JWT: STORE.user.JWT,
         data: {
           selected: selected,
         },
@@ -1279,9 +1279,9 @@ class Datumizo extends Component {
       try {
         console.log(base.operations?.DeleteBulk?.url, payloadOut);
 
-        store.isLoading(true);
+        STORE.isLoading(true);
         let res = await axios.post(url, payloadOut);
-        store.isLoading(false);
+        STORE.isLoading(false);
 
         console.log(base.operations?.DeleteBulk?.url, res.data);
 
@@ -1303,7 +1303,7 @@ class Datumizo extends Component {
           return { Success: false };
         }
       } catch (e) {
-        store.isLoading(false);
+        STORE.isLoading(false);
         if (base.operations?.DeleteBulk?.onFail) {
           base.operations?.DeleteBulk?.onFail(e);
         } else {
@@ -1315,14 +1315,14 @@ class Datumizo extends Component {
 
     onSuccess: (payload) => {
       let { base } = this.props;
-      store.Alert(base.operations?.DeleteBulk?.success, "success");
+      STORE.Alert(base.operations?.DeleteBulk?.success, "success");
       this._fetchData();
     },
 
     onFail: (payload) => {
       let { base } = this.props;
       let msg = base.operations?.DeleteBulk?.fail + (payload.message || "");
-      store.Alert(msg, "error");
+      STORE.Alert(msg, "error");
     },
   };
 
@@ -1330,7 +1330,7 @@ class Datumizo extends Component {
     onClick: () => {
       let { base } = this.state;
       if (!base.operations?.Import || !base.operations?.Import?.url) {
-        store.Alert(LocaleX.Get("__IZO.Alert.ImportNotImplement"), "warn");
+        STORE.Alert(LocaleX.Get("__IZO.Alert.ImportNotImplement"), "warn");
         return;
       }
       let title = base.operations?.Import?.title;
@@ -1343,7 +1343,7 @@ class Datumizo extends Component {
         content = content();
       }
 
-      store.Form(title, content 
+      STORE.Form(title, content 
         || (base.operations?.Import?.replace? 
           LocaleX.Get("__IZO.Datumizo.ReplaceAllCaution")
           : "") + LocaleX.Get("__IZO.Datumizo.FileSizeLimit"),
@@ -1351,7 +1351,7 @@ class Datumizo extends Component {
     },
 
     onSubmit: async (name, value, callback) => {
-      store.SetAskLoading(true);
+      STORE.SetAskLoading(true);
       console.log("submit Import");
       console.log(name, value);
       let { base, addOns } = this.state;
@@ -1363,7 +1363,7 @@ class Datumizo extends Component {
         },
         schema: this.flatExcelSchema(base.operations?.Import?.schema, Infinity) || [],
         replace: base.operations?.Import?.replace || false,
-        JWT: store.user.JWT,
+        JWT: STORE.user.JWT,
         addOns: addOns,
       };
 
@@ -1374,7 +1374,7 @@ class Datumizo extends Component {
 
         console.log(base.operations?.Import?.url, res.data);
 
-        store.SetAskLoading(false);
+        STORE.SetAskLoading(false);
         let { Success, payload } = res.data;
 
         if (Success === true) {
@@ -1402,26 +1402,26 @@ class Datumizo extends Component {
     onSuccess: (payload) => {
       if (!_.isEmpty(payload.error)) {
         let msg = _.map(payload.error, (o, i) => "ID (" + o.id + "): " + o.error);
-        store.Alert("Import Successfully with warning: \n" + msg.join("\n"), "warn");
+        STORE.Alert("Import Successfully with warning: \n" + msg.join("\n"), "warn");
       } else {
-        store.Alert("Import Successfully.", "success");
+        STORE.Alert("Import Successfully.", "success");
       }
-      store.clearAsk();
+      STORE.clearAsk();
       this._fetchData();
     },
 
     onFail: (payload) => {
       let { base } = this.props;
       let msg = base.operations?.Import?.fail + (payload.message || "");
-      store.Alert(msg, "error");
-      store.clearAsk();
+      STORE.Alert(msg, "error");
+      STORE.clearAsk();
     },
   };
 
   Sync = {
     onClick: () => {
       let { base } = this.state;
-      store.Ask(base.operations?.Sync?.title, base.operations?.Sync?.content, async () => {
+      STORE.Ask(base.operations?.Sync?.title, base.operations?.Sync?.content, async () => {
         return await this.Sync.onSubmit();
       });
     },
@@ -1433,16 +1433,16 @@ class Datumizo extends Component {
 
       let url = DOMAIN + base.operations?.Sync?.url;
       let payloadOut = {
-        JWT: store.user.JWT,
+        JWT: STORE.user.JWT,
         addOns: addOns,
       };
 
       try {
         console.log(base.operations?.Sync?.url, payloadOut);
 
-        store.isLoading(true);
+        STORE.isLoading(true);
         let res = await axios.post(url, payloadOut);
-        store.isLoading(false);
+        STORE.isLoading(false);
 
         console.log(base.operations?.Sync?.url, res.data);
 
@@ -1464,7 +1464,7 @@ class Datumizo extends Component {
           return { Success: false };
         }
       } catch (e) {
-        store.isLoading(false);
+        STORE.isLoading(false);
         if (base.operations?.Sync?.onFail) {
           base.operations?.Sync?.onFail(e);
         } else {
@@ -1476,14 +1476,14 @@ class Datumizo extends Component {
 
     onSuccess: (payload) => {
       let { base } = this.props;
-      store.Alert(base.operations?.Sync?.success, "success");
+      STORE.Alert(base.operations?.Sync?.success, "success");
       this._fetchData();
     },
 
     onFail: (payload) => {
       let { base } = this.props;
       let msg = base.operations?.Sync?.fail + (payload.message || "");
-      store.Alert(msg, "error");
+      STORE.Alert(msg, "error");
     },
   };
 
@@ -1567,7 +1567,7 @@ class Datumizo extends Component {
                 if (this._Redirect(o.func, "onClick", false)) {
                   this._Redirect(o.func, "onClick", false)();
                 } else {
-                  store && store.Alert("Function is not implemented.", "warn");
+                  STORE && STORE.Alert("Function is not implemented.", "warn");
                 }
               }}
               theme={theme}
@@ -1610,7 +1610,7 @@ class Datumizo extends Component {
         ibase={ibase}
         onSubmit={this._Redirect(ibase?.onSubmit || mode, "onSubmit", true)}
         addOns={addOns}
-        user={store.user}
+        user={STORE.user}
         showIDOnTop={base.showIDOnTop || false}
         formizo={base.formizo || {}}
       />
@@ -1667,7 +1667,7 @@ class Datumizo extends Component {
           onPageChange={this._onPageChange}
           onPageSizeChange={this._onPageSizeChange}
           defaultPageSize={nav.pageSize}
-          user={store.user}
+          user={STORE.user}
           addOns={addOns}
           lang={lang}
           {...tablizo}
