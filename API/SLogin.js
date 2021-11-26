@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Env, LocaleX, STORE } from 'IZOArc/STATIC';
 import { DOMAIN } from '__SYSDefault/Domain';
 import { CheckUserNameAPI, SignInAPI } from '__SYSDefault/SysAPI';
+import crypto from 'crypto';
 
 class SLogin {
 
@@ -69,9 +70,15 @@ class SLogin {
     
     let url = DOMAIN + SignInAPI;
 
+    let {username, password} = formProps;
+
+    let hash = crypto.createHash('sha256');
+    console.log(hash);
+
     let req = {
       method: method,
-      ...formProps
+      username: username,
+      password: hash.update(password).digest("hex")
     };
   
     try {

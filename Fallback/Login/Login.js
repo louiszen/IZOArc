@@ -85,11 +85,18 @@ class Login extends Component {
     this.setState({
       loading: true
     }, async () => {
-      let res = await SLogin.CheckUser(formProps);
-      let {Success, payload} = res;
-      if(Success){
-        this.toPassword(formProps.username, payload.UserDisplayName);
-      }else{
+      try{
+        let res = await SLogin.CheckUser(formProps);
+        let {Success, payload} = res;
+        if(Success){
+          this.toPassword(formProps.username, payload.UserDisplayName);
+        }else{
+          this.setState({
+            loading: false
+          });
+        }
+      }catch{
+        STORE.Alert(LocaleX.Get("__IZO.Alert.CannotConnect"), "error");
         this.setState({
           loading: false
         });
