@@ -40,6 +40,7 @@ class Login extends Component {
     this.state = {
       username: "",
       userDisplayName: "",
+      password: "",
       page: "method",
       loading: false,
       /**
@@ -106,6 +107,7 @@ class Login extends Component {
 
   _SignIn = async (formProps) => {
     let {method} = this.state;
+    console.log("Login Method: " + method);
     switch(method){
       default: return {Success: false};
       case "Username-Password":
@@ -129,9 +131,9 @@ class Login extends Component {
       loading: true
     }, async () => {
       let res = await SLogin.SignIn(method, formPropsMod);
-      let {Success} = res;
+      let {Success, payload} = res;
       if(Success){
-        this.toOTP();
+        this.toOTP(payload.key);
       }else{
         this.setState({
           loading: false
@@ -255,7 +257,7 @@ class Login extends Component {
         onSubmit={
           page === "user"? 
           this._CheckUser 
-          : this._SignInByUP
+          : this._SignIn
         }
         onMounted={this.onMountForm}
         fieldStyle="standard"
@@ -300,8 +302,13 @@ class Login extends Component {
     });
   }
 
-  toOTP = () => {
-
+  toOTP = (key) => {
+    console.log(key);
+    this.setState({
+      page: 'otp',
+      loading: false,
+      OTPkey: key
+    })
   }
 
   renderHeaderMessage(){

@@ -64,6 +64,37 @@ class SLogin {
 
   static SignInAndRequestOTP = async (method, formProps) => {
     
+    let url = DOMAIN + SignInAPI;
+
+    let {username, password} = formProps;
+
+    let hash = crypto.createHash('sha256');
+    let req = {
+      method: method,
+      username: username,
+      password: hash.update(password).digest("hex")
+    };
+
+    try {
+      let res = await axios.post(url, req);
+
+      let {Success, payload} = res.data;
+      if(Success === true){
+        console.log(payload);
+        return {
+          Success: true,
+          payload: payload
+        };
+        
+      }else{
+        STORE.Alert(LocaleX.Get("__IZO.Alert.IncorrectPassword"), "error");
+        return {Success: false};
+      }
+    }catch(e){
+      STORE.Alert(LocaleX.Get("__IZO.Alert.CannotConnect"), "error");
+      return {Success: false};
+    }
+
   }
 
   static SignInByUP = async (method, formProps) => {
@@ -73,8 +104,6 @@ class SLogin {
     let {username, password} = formProps;
 
     let hash = crypto.createHash('sha256');
-    console.log(hash);
-
     let req = {
       method: method,
       username: username,
