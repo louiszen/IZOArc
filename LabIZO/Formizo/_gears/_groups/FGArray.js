@@ -146,7 +146,9 @@ class FGArray extends Component {
     let newItem = {};
     let arraySchema = this.getArraySchema();
     _.map(arraySchema, (o, i) => {
-      if(_.isEmpty(o.name)){
+      if(_.isUndefined(o.name)){
+        
+      }else if(_.isEmpty(o.name)){
         newItem = "";
       }else{
         newItem[o.name] = null;
@@ -457,7 +459,7 @@ class FGArray extends Component {
               {this.getDisplayIdx(i)}
               {ischema.reordering && this.renderOrderingButton(i, arraySize)}
               <Spacer/>
-              {this.renderDeleteButton(i)}
+              {ischema.canDelete && this.renderDeleteButton(i)}
             </HStack>
           </VStack>
         </OutlinedBox>

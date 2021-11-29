@@ -105,7 +105,7 @@
 ### ***`date/daterange`** Specific*
 | Props | Type | Required | Default | Description |
 | :---|:---:|:---:|:---:|:---|
-| dateFormat | `String` || `"DD/MM/YYYY HH:mm"` | date format stored |
+| dateFormat | `String` || `"iso"` | date format stored |
 | dateType | `String` || `date` | type of date input `time, date, datetime, week, month, quarter, month, year` |
 | disabledDate | `(current) => Boolean` || `null` | Disabled time range |
 <br/>

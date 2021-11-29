@@ -105,7 +105,13 @@ class FFDateRange extends Component {
   _handleReturn = (value, dateFormat) => {
     console.log(value, dateFormat);
     if(_.isNull(value) || _.isUndefined(value)) return value;
-    if(dateFormat === "moment"){
+    let idateformat = dateFormat || "iso";
+
+    if(idateformat === "iso"){
+      if(moment.isMoment(value)){
+        return value.toISOString();
+      }
+    }else if(idateformat === "moment"){
       if(moment.isMoment(value)) return value;
       return moment(value, "DD/MM/YYYY HH:mm");
     }
@@ -118,8 +124,17 @@ class FFDateRange extends Component {
       _onFieldFocus, _onFieldBlur, readOnly} = this.state;
     if(!ischema) return null;
     let ivalue = Accessor.Get(formValue, iname);
-    let idateformat = ischema.dateFormat || "moment";
-    let mvalue = ivalue ? _.map(ivalue, (o, i) => moment(o, idateformat)) : ["", ""];
+    let idateformat = ischema.dateFormat || "iso";
+    let mvalue = ivalue ? _.map(ivalue, (o, i) => {
+      if(idateformat === "iso"){
+        return moment(o);
+      }else if (idateformat === "moment"){
+        return o;
+      }else{
+        moment(o, idateformat);
+      }
+      
+    }) : ["", ""];
     
     let ireadOnly = ischema.readOnly || readOnly;
     let istartReadOnly = ischema.startReadOnly || ireadOnly;
