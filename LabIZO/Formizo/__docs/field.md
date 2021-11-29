@@ -140,6 +140,7 @@
 | selectDisable | `String` || `""` | Accessor from selectRef for the option accessibility |
 | selectDirection | `String` || `"column"` | The flex direction of the options |
 | selectAlignment | `String` || `"flex-start"` | The justifyContent of the buttons |
+| fieldFormat | `<code>"array" &#124; "object" </code>` || `"array"` | Checkbox field value format, object: {[val]: Boolean} // array: ["val"] |
 <br/>
 
 ### ***Style***

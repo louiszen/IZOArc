@@ -566,7 +566,8 @@ let select = [
     selectRef: "selectRef",
     selectCap: "cap",
     selectVal: "val",
-    selectDirection: "column"
+    selectDirection: "column",
+    fieldFormat: "array"
   },
   {
     label: "Simple AutoComplete",

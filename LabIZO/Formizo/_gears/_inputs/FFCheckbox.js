@@ -97,6 +97,20 @@ class FFCheckbox extends Component {
     });
   }
 
+  onChecked = (oname, checked) => {
+    let {formValue, iname, _onValueChange, ischema} = this.state;
+    let ivalue = Accessor.Get(formValue, iname) || [];
+
+    if(checked && !ivalue.includes(oname)){
+      ivalue.push(oname);
+      _onValueChange(iname, ivalue, ischema.validate);
+    }else if(!checked && ivalue.includes(oname)){
+      ivalue = ivalue.filter(o => o !== oname);
+      _onValueChange(iname, ivalue, ischema.validate);
+    }
+
+  }
+
   renderOption(ivalue){
     let {ischema, addOns, iname, _onValueChange} = this.state;
     let options;
@@ -124,8 +138,14 @@ class FFCheckbox extends Component {
       }
       let disabled = ischema.selectDisable && Accessor.Get(o, ischema.selectDisable);
 
-      let ovalue = Accessor.Get(ivalue, val) || false;
+      let ovalue = undefined;
       let oname = iname + "." + val;
+      if(ischema.fieldFormat === "object"){
+        ovalue = Accessor.Get(ivalue, val) || false;
+      }else{
+        ovalue = ivalue.includes(val);
+      }
+
       return (        
         <FormControlLabel 
           key={oname} 
@@ -135,10 +155,14 @@ class FFCheckbox extends Component {
             <Checkbox 
               color="primary" 
               checked={ovalue} 
-              onChange={(e) => 
-                _onValueChange(oname, 
-                  e.target.checked, ischema.validate)
-              } 
+              onChange={(e) => {
+                if(ischema.fieldFormat === "object"){
+                  _onValueChange(oname, 
+                    e.target.checked, ischema.validate)
+                }else{
+                  this.onChecked(val, e.target.checked)
+                }
+              }} 
               name="" />}
           label={cap}
         />
