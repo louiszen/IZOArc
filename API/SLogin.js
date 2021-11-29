@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Env, LocaleX, STORE } from 'IZOArc/STATIC';
 import { DOMAIN } from '__SYSDefault/Domain';
-import { CheckUserNameAPI, SignInAPI } from '__SYSDefault/SysAPI';
+import { CheckUserNameAPI, SignInAPI, VerifyOTPAPI } from '__SYSDefault/SysAPI';
 import crypto from 'crypto';
 
 class SLogin {
@@ -128,6 +128,46 @@ class SLogin {
         
       }else{
         STORE.Alert(LocaleX.Get("__IZO.Alert.IncorrectPassword"), "error");
+        return {Success: false};
+      }
+    }catch(e){
+      STORE.Alert(LocaleX.Get("__IZO.Alert.CannotConnect"), "error");
+      return {Success: false};
+    }
+  }
+
+  static VerifyOTP = async (method, formProps) => {
+
+    let url = DOMAIN + VerifyOTPAPI;
+
+    let {username, key, otp} = formProps;
+
+    let hash = crypto.createHash('sha256');
+    let req = {
+      method: method,
+      username: username,
+      key: key,
+      otp: otp
+    };
+  
+    try {
+      let res = await axios.post(url, req);
+
+      let {Success, payload} = res.data;
+      if(Success === true){
+        console.log(payload);
+        STORE.setUser(payload);
+        STORE.Alert(LocaleX.Get("__IZO.Alert.SuccessLogin"), "success");
+        await Env.CheckInitialized();
+
+        if(!STORE.isInitialized()){
+          return {Success: false};
+        }
+
+        return {Success: true};
+        
+      }else{
+        STORE.Alert(LocaleX.Get("__IZO.Alert.InvalidOTP"), "error");
         return {Success: false};
       }
     }catch(e){

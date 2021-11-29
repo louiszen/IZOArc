@@ -6,7 +6,8 @@ let DefEN = {
     Login: "Login",
     form: {
       username: "User ID",
-      password: "Password"
+      password: "Password",
+      EnterOTP: "One-Time Password (OTP)"
     },
     Methods: {
       UsernamePassword: "Username-Password",
@@ -22,7 +23,8 @@ let DefEN = {
 
     },
     WhichMethod: "Choose the Authentication Method:",
-    OtherMethod: "Try other authentication method."
+    OtherMethod: "Try other authentication method.",
+    EnterOTP: "6-digit OTP has been sent to your mobile:"
   },
   NavBar: {
     LoggedInAs: "Logged in as ",
@@ -51,7 +53,8 @@ let DefEN = {
     NoRowsSelect: "No rows are selected.",
     FuncNotImplement: "Preset function (@func) Not Implemented",
     ExportNotImplement: "Export Not Implemented.",
-    ImportNotImplement: "Import Not Implemented."
+    ImportNotImplement: "Import Not Implemented.",
+    InvalidOTP: "OTP is invalid or expired."
   },
   System: {
     BnR: "Backup & Restore",

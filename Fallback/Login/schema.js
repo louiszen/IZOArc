@@ -19,9 +19,19 @@ const loginPassword = [
   },
 ];
 
+const loginOTP = [
+  {
+    label: () => LocaleX.Get("__IZO.Login.form.EnterOTP"),
+    name: "otp",
+    format: "password",
+    autoFocus: true,
+  },
+];
+
 let schema = {
   loginName,
-  loginPassword
+  loginPassword,
+  loginOTP
 };
 
 export default schema;

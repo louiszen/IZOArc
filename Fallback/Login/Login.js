@@ -82,6 +82,30 @@ class Login extends Component {
     this.MountForm = callbacks;
   }
 
+  _VerifyOTP = (formProps) => {
+    console.log("_VerifyOTP");
+    let {username, method, OTPkey} = this.state;
+    let formPropsMod = {
+      username,
+      key: OTPkey,
+      ...formProps
+    };
+
+    this.setState({
+      loading: true
+    }, async () => {
+      let res = await SLogin.VerifyOTP(method, formPropsMod);
+      let {Success} = res;
+      if(Success){
+        this.redirectToFirstPage();
+      }else{
+        this.setState({
+          loading: false
+        });
+      }
+    });
+  }
+
   _CheckUser = (formProps) => {
     this.setState({
       loading: true
@@ -237,6 +261,36 @@ class Login extends Component {
     );
   }
 
+  _Redirect = (formProps) => {
+    let {page} = this.state;
+    switch(page){
+      default: 
+      case "user": return this._CheckUser(formProps);
+      case "password": return this._SignIn(formProps);
+      case "otp": return this._VerifyOTP(formProps);
+    }
+  }
+
+  _SelectSchema = () => {
+    let {page} = this.state;
+    switch(page){
+      default: 
+      case "user": return schema.loginName;
+      case "password": return schema.loginPassword;
+      case "otp": return schema.loginOTP;
+    }
+  }
+
+  renderFormButton(){
+    let {page} = this.state;
+    switch(page){
+      default: 
+      case "user": return this.renderNextButton();
+      case "password": return this.renderLoginButton();
+      case "otp": return this.renderLoginButton();
+    }
+  }
+
   renderForm(){
     let {page, loading} = this.state;
 
@@ -244,21 +298,10 @@ class Login extends Component {
       <Formizo
         formID="login"
         height={"95px"}
-        schema={ 
-          page === "user"? 
-          schema.loginName 
-          : schema.loginPassword}
-        buttons={[
-          page === "user"? 
-          this.renderNextButton() 
-          : this.renderLoginButton()
-        ]}
+        schema={this._SelectSchema()}
+        buttons={[this.renderFormButton()]}
         buttonPadding={0}
-        onSubmit={
-          page === "user"? 
-          this._CheckUser 
-          : this._SignIn
-        }
+        onSubmit={this._Redirect}
         onMounted={this.onMountForm}
         fieldStyle="standard"
         fieldSize="small"
@@ -321,6 +364,7 @@ class Login extends Component {
         </Link>
       );
       case "method": return LocaleX.Get("__IZO.Login.WhichMethod");
+      case "otp": return LocaleX.Get("__IZO.Login.EnterOTP");
     }
   }
 

@@ -6,7 +6,8 @@ let DefTC = {
     Login: "登入",
     form: {
       username: "User ID",
-      password: "密碼"
+      password: "密碼",
+      EnterOTP: "一次性密碼 (OTP)"
     },
     Methods: {
       UsernamePassword: "密碼認證",
@@ -21,7 +22,8 @@ let DefTC = {
       LinkedIn: "LinkedIn"
     },
     WhichMethod: "選擇認證方法:",
-    OtherMethod: "嘗試其他認證方法"
+    OtherMethod: "嘗試其他認證方法",
+    EnterOTP: "一次性密碼已發送到您的手機:"
   },
   NavBar: {
     LoggedInAs: "登入帳號",
@@ -50,7 +52,8 @@ let DefTC = {
     NoRowsSelect: "沒有選取項目",
     FuncNotImplement: "預設功能(@func)暫未開放",
     ExportNotImplement: "暫未開放導出功能",
-    ImportNotImplement: "暫未開放導入功能"
+    ImportNotImplement: "暫未開放導入功能",
+    InvalidOTP: "OTP 無效或已過期。"
   },
   System: {
     BnR: "備份和恢復",
