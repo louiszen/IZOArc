@@ -142,7 +142,6 @@ class SLogin {
 
     let {username, key, otp} = formProps;
 
-    let hash = crypto.createHash('sha256');
     let req = {
       method: method,
       username: username,

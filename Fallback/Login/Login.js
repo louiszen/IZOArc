@@ -292,7 +292,7 @@ class Login extends Component {
   }
 
   renderForm(){
-    let {page, loading} = this.state;
+    let {loading} = this.state;
 
     return (
       <Formizo
