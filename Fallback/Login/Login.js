@@ -55,7 +55,7 @@ class Login extends Component {
   componentDidMount(){
     this._setAllStates(() => {
       if(STORE.onlyUsernamePassword()){
-        this.toUser();
+        this.toUser("Username-Password");
       }
     });
   }
