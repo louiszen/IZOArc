@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import { LinearProgress, withStyles } from '@material-ui/core';
+import PropsType from "prop-types";
+import { LinearProgress, withStyles } from "@material-ui/core";
 
-import MUIUtils from './_gears/MUIUtils';
+import MUIUtils from "./_gears/MUIUtils";
 
-import { Accessor, ColorX } from 'IZOArc/STATIC';
+import { Accessor, ColorX } from "IZOArc/STATIC";
 
 const styles = {
   root:{

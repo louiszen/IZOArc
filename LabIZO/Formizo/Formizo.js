@@ -417,12 +417,13 @@ class Formizo extends Component {
     _.map(schema, (o, i) => {
       if(_.isFunction(o)){
         let subschema = this.getInnerSchema(o);
+        console.log(subschema);
         _.map(subschema, (v, w) => {
           if(_.isArray(v)){
             _.map(v, (j, k) => {
               let id = "inner_" + i + "_" + w + "_" + k;
               blocks.push(this.renderBlock(j, id));
-            })
+            });
           } else {
             let id = "inner_" + i + "_" + w;
             blocks.push(this.renderBlock(v, id));
@@ -434,12 +435,12 @@ class Formizo extends Component {
             _.map(v, (j, k) => {
               let id = "inner_" + i + "_" + w + "_" + k;
               blocks.push(this.renderBlock(j, id));
-            })
+            });
           } else {
             let id = "inner_" + i + "_" + w;
             blocks.push(this.renderBlock(v, id));
           }
-        })
+        });
       } else {
         blocks.push(this.renderBlock(o, i));
       }
@@ -454,7 +455,7 @@ class Formizo extends Component {
       <FItem
         key={id}
         ischema={schema}
-        preAccessor=''
+        preAccessor=""
         _onValueChange={this._onValueChange}
         _onBlurInlineSubmit={this._onBlurInlineSubmit}
         _onInlineSubmit={this._onInlineSubmit}
@@ -479,8 +480,8 @@ class Formizo extends Component {
             boxShadow: ColorX.GetBoxShadowCSS("grey"),
             width: buttonWidth 
           }} onClick={this._onCancel}>
-          <i className='fas fa-check' />
-          <div className='formizo-h-m'>{LocaleX.Get("__IZO.Formizo.OK")}</div>
+          <i className="fas fa-check" />
+          <div className="formizo-h-m">{LocaleX.Get("__IZO.Formizo.OK")}</div>
         </StyledButton>
       ),
       Submit: (
@@ -491,8 +492,8 @@ class Formizo extends Component {
             boxShadow: ColorX.GetBoxShadowCSS("grey"),
             width: buttonWidth
              }} onClick={this._onSubmit}>
-          <i className='fas fa-paper-plane' />
-          <div className='formizo-h-m'>{LocaleX.Get("__IZO.Formizo.Submit")}</div>
+          <i className="fas fa-paper-plane" />
+          <div className="formizo-h-m">{LocaleX.Get("__IZO.Formizo.Submit")}</div>
         </StyledButton>
       ),
       Cancel: (
@@ -503,8 +504,8 @@ class Formizo extends Component {
             boxShadow: ColorX.GetBoxShadowCSS("grey"),
             width: buttonWidth 
             }} onClick={this._onCancel}>
-          <i className='fas fa-ban' />
-          <div className='formizo-h-m'>{LocaleX.Get("__IZO.Formizo.Cancel")}</div>
+          <i className="fas fa-ban" />
+          <div className="formizo-h-m">{LocaleX.Get("__IZO.Formizo.Cancel")}</div>
         </StyledButton>
       ),
       Clear: (
@@ -515,8 +516,8 @@ class Formizo extends Component {
             boxShadow: ColorX.GetBoxShadowCSS("grey"),
             width: buttonWidth 
             }} onClick={this._onClear}>
-          <i className='fas fa-undo' />
-          <div className='formizo-h-m'>{LocaleX.Get("__IZO.Formizo.Clear")}</div>
+          <i className="fas fa-undo" />
+          <div className="formizo-h-m">{LocaleX.Get("__IZO.Formizo.Clear")}</div>
         </StyledButton>
       ),
       Revert: (
@@ -527,8 +528,8 @@ class Formizo extends Component {
             boxShadow: ColorX.GetBoxShadowCSS("grey"),
             width: buttonWidth 
             }} onClick={this._onRevert}>
-          <i className='fas fa-history' />
-          <div className='formizo-h-m'>{LocaleX.Get("__IZO.Formizo.Revert")}</div>
+          <i className="fas fa-history" />
+          <div className="formizo-h-m">{LocaleX.Get("__IZO.Formizo.Revert")}</div>
         </StyledButton>
       ),
       Login: (
@@ -539,8 +540,8 @@ class Formizo extends Component {
             boxShadow: ColorX.GetBoxShadowCSS("grey"),
             width: buttonWidth 
             }} onClick={this._onSubmit}>
-          <i className='fas fa-sign-in-alt' />
-          <div className='formizo-h-m'>{LocaleX.Get("__IZO.Formizo.Login")}</div>
+          <i className="fas fa-sign-in-alt" />
+          <div className="formizo-h-m">{LocaleX.Get("__IZO.Formizo.Login")}</div>
         </StyledButton>
       ),
       Logout: (
@@ -551,8 +552,8 @@ class Formizo extends Component {
             boxShadow: ColorX.GetBoxShadowCSS("grey"),
             width: buttonWidth 
             }} onClick={this._onSubmit}>
-          <i className='fas fa-sign-out-alt' />
-          <div className='formizo-h-m'>{LocaleX.Get("__IZO.Formizo.Logout")}</div>
+          <i className="fas fa-sign-out-alt" />
+          <div className="formizo-h-m">{LocaleX.Get("__IZO.Formizo.Logout")}</div>
         </StyledButton>
       ),
     };
@@ -569,7 +570,7 @@ class Formizo extends Component {
     let { buttons, buttonAlign, buttonPadding } = this.state;
     return (
       <VStack>
-        <VStack alignItems={"flex-start"} padding='0 5px' width='100%' flexGrow={1} overflow={"auto"}>
+        <VStack alignItems={"flex-start"} padding="0 5px" width="100%" flexGrow={1} overflow={"auto"}>
           {this.renderSchema()}
           <Spacer/>
         </VStack>
@@ -588,7 +589,7 @@ class Formizo extends Component {
   render() {
     let { formID, width, height } = this.props;
     return (
-      <Box width={width} height={height} overflow='auto'>
+      <Box width={width} height={height} overflow="auto">
         <form id={formID} style={{ width: "100%", height: "100%" }} onBlur={() => this._onBlurAutoSubmit()} noValidate onSubmit={(e) => this._onSubmit(e)}>
           {this.renderForm()}
         </form>

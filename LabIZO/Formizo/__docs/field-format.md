@@ -40,8 +40,8 @@
   //text specific
   mask?: String   //text mask
   alwaysShowMask?: Boolean | true,
-  maskChar?: String | ' ',
-  formatChars? Object | {'9': '[0-9]','a': '[A-Za-z]','*': '[A-Za-z0-9]'},
+  maskChar?: String | " ",
+  formatChars? Object | {"9": "[0-9]","a": "[A-Za-z]","*": "[A-Za-z0-9]"},
 
   //file specific
   accept?: String,    // for upload file

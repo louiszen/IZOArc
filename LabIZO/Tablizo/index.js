@@ -1,1 +1,1 @@
-export { default } from './Tablizo';
+export { default } from "./Tablizo";

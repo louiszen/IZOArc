@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import { Typography } from '@material-ui/core';
+import { Typography } from "@material-ui/core";
 
-import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
-import { Accessor, LocaleX } from 'IZOArc/STATIC';
-import { SITEBASE } from '__SYSDefault/Domain';
+import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
+import { Accessor, LocaleX } from "IZOArc/STATIC";
+import { SITEBASE } from "__SYSDefault/Domain";
 
 class Denied extends Component {
 

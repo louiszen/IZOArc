@@ -1,7 +1,7 @@
-import _ from 'lodash';
-import {makeAutoObservable, runInAction} from 'mobx';
-import { toJS, autorun, set } from 'mobx';
-import BrowserX from './BrowserX';
+import _ from "lodash";
+import {makeAutoObservable, runInAction} from "mobx";
+import { toJS, autorun, set } from "mobx";
+import BrowserX from "./BrowserX";
 
 class AppStore {
 
@@ -24,10 +24,10 @@ class AppStore {
     let firstRun = true;
 
     autorun(() => {
-      // on load check if there's an existing STORE on 
+      // on load check if there"s an existing STORE on 
       // localStorage and extend the STORE
       if (firstRun) {
-        let existingStore = window.localStorage.getItem('STORE');
+        let existingStore = window.localStorage.getItem("STORE");
   
         if (existingStore) {
           set(this, JSON.parse(existingStore));
@@ -37,7 +37,7 @@ class AppStore {
       // from then on serialize and save to localStorage
       let serializedThis = toJS(this);
       window.localStorage.setItem(
-        'STORE', 
+        "STORE", 
         JSON.stringify(serializedThis)
       );
     });
@@ -60,7 +60,7 @@ class AppStore {
       this.config = {};
       this.save = {};
       this.backdrop = null;
-    })
+    });
   }
 
   setBrowser(){
@@ -173,7 +173,7 @@ class AppStore {
       this.backdrop = {
         render: backdrop, 
         addOns: addOns
-      }
+      };
     });
   }
 

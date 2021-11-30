@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import _ from 'lodash';
+import PropsType from "prop-types";
+import _ from "lodash";
 
-import { Accessor } from 'IZOArc/STATIC';
-import { Box, Typography } from '@material-ui/core';
+import { Accessor } from "IZOArc/STATIC";
+import { Box, Typography } from "@material-ui/core";
 
 /**
  * Stack children components horizontally
@@ -66,7 +66,7 @@ class HStack extends Component {
           return this.renderChildren(v);
         });
       }else if(_.isString(o)){
-        return <Typography key={i}>{o}</Typography>
+        return <Typography key={i}>{o}</Typography>;
       }else if(!React.isValidElement(o)){
         console.log(o);
         //return o;
@@ -87,6 +87,7 @@ class HStack extends Component {
   }
 
   render(){
+    // eslint-disable-next-line no-unused-vars
     let {children, spacing, ...other} = this.props;
     return (
       <Box 

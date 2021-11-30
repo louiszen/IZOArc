@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
-import { Accessor } from 'IZOArc/STATIC';
-import { SITEBASE } from '__SYSDefault/Domain';
+import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
+import { Accessor } from "IZOArc/STATIC";
+import { SITEBASE } from "__SYSDefault/Domain";
 
 class NoMatch extends Component {
 

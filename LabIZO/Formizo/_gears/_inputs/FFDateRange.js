@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import _ from 'lodash';
-import moment from 'moment';
-import { DatePicker } from 'antd';
-import { FormControl, FormHelperText, FormLabel } from '@material-ui/core';
+import PropsType from "prop-types";
+import _ from "lodash";
+import moment from "moment";
+import { DatePicker } from "antd";
+import { FormControl, FormHelperText, FormLabel } from "@material-ui/core";
 
-import 'antd/dist/antd.css';
+import "antd/dist/antd.css";
 
-import { Accessor } from 'IZOArc/STATIC';
-import { HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
-import { OutlinedBox } from 'IZOArc/LabIZO/Stylizo';
+import { Accessor } from "IZOArc/STATIC";
+import { HStack, Spacer } from "IZOArc/LabIZO/Stackizo";
+import { OutlinedBox } from "IZOArc/LabIZO/Stylizo";
 
 const { RangePicker } = DatePicker;
 
@@ -149,7 +149,7 @@ class FFDateRange extends Component {
         showTime={itype === "datetime"}
         onChange={(moments) => {
           _onValueChange(iname, 
-            _.map(moments, (o, i) => this._handleReturn(o, idateformat)), ischema.validate)
+            _.map(moments, (o, i) => this._handleReturn(o, idateformat)), ischema.validate);
         }}
         onFocus={(e) => {
           _onFieldFocus();

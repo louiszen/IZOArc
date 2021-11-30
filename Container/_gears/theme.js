@@ -36,7 +36,7 @@ const disabledTheme = {
     background: ColorX.GetColorCSS("black"),
   },
   ...Tail
-}
+};
 
 const submenuTheme = {
   color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.6),
@@ -46,7 +46,7 @@ const submenuTheme = {
     background: ColorX.GetColorCSS("pureWhite"),
   },
   ...Tail
-}
+};
 
 const inPageSubmenuTheme = {
   background: ColorX.GetColorCSS("pureWhite"),
@@ -64,6 +64,6 @@ let theme = {
   disabledTheme,
   submenuTheme,
   inPageSubmenuTheme
-}
+};
 
 export default theme;

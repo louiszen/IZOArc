@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import _ from 'lodash';
-import { AutoComplete } from 'antd';
+import PropsType from "prop-types";
+import _ from "lodash";
+import { AutoComplete } from "antd";
 
-import { Accessor } from 'IZOArc/STATIC';
+import { Accessor } from "IZOArc/STATIC";
 
 /**
  * @augments {Component<Props, State>}
@@ -148,7 +148,7 @@ class FFAutoComplete extends Component {
     let ioptions = _.map(options, (o, i) => {
       return {
         value: Accessor.Get(o, ischema.selectCap)
-      }
+      };
     });
     return (
       <AutoComplete
@@ -159,7 +159,7 @@ class FFAutoComplete extends Component {
         placeholder={ischema.placeholder || "Suggested FAQ"}
         filterOption={(inputValue, option) => {
           if(!option) return false;
-          return option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+          return option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1;
         }}
         style={{
           width: ischema.width,

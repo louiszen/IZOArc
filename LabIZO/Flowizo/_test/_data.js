@@ -1,9 +1,9 @@
 const data = [
   {
     id: "1",
-    type: 'Tube_Src', // input node
+    type: "Tube_Src", // input node
     data: { 
-      inner: 'Input Node'
+      inner: "Input Node"
     },
     position: { x: 100, y: 100 },
   },
@@ -28,7 +28,7 @@ const data = [
   },
   {
     id: "4",
-    type: 'Tube_End', // output node
+    type: "Tube_End", // output node
     data: {},
     position: { x: 350, y: 350 },
   }

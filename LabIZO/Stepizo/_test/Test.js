@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import schema from './_schema';
+import schema from "./_schema";
 
-import Stepizo from 'IZOArc/LabIZO/Stepizo';
-import { Accessor } from 'IZOArc/STATIC';
-import { VStack } from 'IZOArc/LabIZO/Stackizo';
+import Stepizo from "IZOArc/LabIZO/Stepizo";
+import { Accessor } from "IZOArc/STATIC";
+import { VStack } from "IZOArc/LabIZO/Stackizo";
 
 class Test extends Component {
 
@@ -40,7 +40,7 @@ class Test extends Component {
   _onStepChange = (step) => {
     this.setState({
       activeStep: step
-    })
+    });
   }
 
   onMountStepizo = (callbacks) => {

@@ -270,7 +270,7 @@ class ColorX {
       __colors.push({
         percent: Math.fround(100 / section * i),
         color: ColorX.HSL2RGB(startHue + ((endH - startHue)  / section * i) % 360, a)
-      })
+      });
     });
     return ColorX.linearGradientToCSS(deg, __colors, a);
   }

@@ -137,8 +137,8 @@ class FFPassword extends Component {
           startAdornment={ischema.before}
           endAdornment={[
             ischema.after,
-            <InputAdornment position='end' key='showPassword'>
-              <IconButton className='formizo-h-m' aria-label='toggle password visibility' onClick={() => this.togglePassword()} edge='end'>
+            <InputAdornment position="end" key="showPassword">
+              <IconButton className="formizo-h-m" aria-label="toggle password visibility" onClick={() => this.togglePassword()} edge="end">
                 {showPassword ? <Visibility /> : <VisibilityOff />}
               </IconButton>
             </InputAdornment>,
@@ -191,8 +191,8 @@ class FFPassword extends Component {
           startAdornment: ischema.before,
           endAdornment: [
             ischema.after,
-            <InputAdornment position='end' key='showpassword'>
-              <IconButton className='formizo-h-m' aria-label='toggle password visibility' onClick={() => this.togglePassword()} edge='end'>
+            <InputAdornment position="end" key="showpassword">
+              <IconButton className="formizo-h-m" aria-label="toggle password visibility" onClick={() => this.togglePassword()} edge="end">
                 {showPassword ? <Visibility /> : <VisibilityOff />}
               </IconButton>
             </InputAdornment>,

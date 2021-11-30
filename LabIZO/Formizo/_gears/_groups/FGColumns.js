@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import _ from 'lodash';
+import PropsType from "prop-types";
+import _ from "lodash";
 
-import FItem from '../FItem';
+import FItem from "../FItem";
 
-import { Accessor } from 'IZOArc/STATIC';
-import { HStack, VStack } from 'IZOArc/LabIZO/Stackizo';
+import { Accessor } from "IZOArc/STATIC";
+import { HStack, VStack } from "IZOArc/LabIZO/Stackizo";
 
 class FGColumns extends Component {
 
@@ -67,6 +67,7 @@ class FGColumns extends Component {
   }
 
   renderSchema(page){
+    // eslint-disable-next-line no-unused-vars
     let {ischema, ...other} = this.props;
     let pageSchema = this.getPageSchema(page);
     return _.map(pageSchema, (o, i) => {

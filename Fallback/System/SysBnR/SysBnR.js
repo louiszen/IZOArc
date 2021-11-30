@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import _ from 'lodash';
-import moment from 'moment';
-import axios from 'axios';
-import { Typography } from '@material-ui/core';
-import { SaveOutlined } from '@material-ui/icons';
+import _ from "lodash";
+import moment from "moment";
+import axios from "axios";
+import { Typography } from "@material-ui/core";
+import { SaveOutlined } from "@material-ui/icons";
 
-import schema from './schema';
-import { DOMAIN } from '__SYSDefault/Domain';
+import schema from "./schema";
+import { DOMAIN } from "__SYSDefault/Domain";
 
-import Tablizo from 'IZOArc/LabIZO/Tablizo';
-import Accessizo from 'IZOArc/LabIZO/Accessizo';
-import { Accessor, ColorX, STORE, ErrorX, LocaleX } from 'IZOArc/STATIC';
-import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
-import { StyledButton } from 'IZOArc/LabIZO/Stylizo';
-import { observer } from 'mobx-react';
-import { BnRBackup, BnRDBInclude, BnRDelete, BnRInfo, BnRRestore } from '__SYSDefault/SysAPI';
+import Tablizo from "IZOArc/LabIZO/Tablizo";
+import Accessizo from "IZOArc/LabIZO/Accessizo";
+import { Accessor, ColorX, STORE, ErrorX, LocaleX } from "IZOArc/STATIC";
+import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
+import { StyledButton } from "IZOArc/LabIZO/Stylizo";
+import { observer } from "mobx-react";
+import { BnRBackup, BnRDBInclude, BnRDelete, BnRInfo, BnRRestore } from "__SYSDefault/SysAPI";
 
 class SysBnR extends Component {
 
@@ -57,7 +57,7 @@ class SysBnR extends Component {
   }
 
   _dateStrToMomemt = (str) => {
-    return moment(str, "YYYYMMDDHHmmss")
+    return moment(str, "YYYYMMDDHHmmss");
   }
 
   _momentToDisplay = (obj) => {
@@ -98,13 +98,13 @@ class SysBnR extends Component {
           LastBackup: LastBackup,
           Backups: Backups,
           includeDB: include
-        })
+        });
       } else {
-        STORE.Alert(LocaleX.Get("__IZO.Alert.ServerReturnError"), "error")
+        STORE.Alert(LocaleX.Get("__IZO.Alert.ServerReturnError"), "error");
       }
     } catch (e) {
       console.log(e);
-      STORE.Alert(LocaleX.Get("__IZO.Alert.CannotConnect"), "error")
+      STORE.Alert(LocaleX.Get("__IZO.Alert.CannotConnect"), "error");
     }
   }
 

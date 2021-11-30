@@ -1,1 +1,1 @@
-export {default} from './Formizo';
+export {default} from "./Formizo";

@@ -1,1 +1,1 @@
-export { default as HMarquee } from './HMarquee';
+export { default as HMarquee } from "./HMarquee";

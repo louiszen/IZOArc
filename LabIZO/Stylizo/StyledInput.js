@@ -1,28 +1,28 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import { Input } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import PropsType from "prop-types";
+import { Input } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
 
-import MUIUtils from './_gears/MUIUtils';
+import MUIUtils from "./_gears/MUIUtils";
 
-import { Accessor, ColorX } from 'IZOArc/STATIC';
+import { Accessor, ColorX } from "IZOArc/STATIC";
 
 const styles = {
   root:{
-    '&:hover:before': {
+    "&:hover:before": {
       borderBottomColor: MUIUtils.getImportantMappedProps(ColorX.GetColorCSS, "theme.lineHover", "theme.line", "theme.input"),
     },
-    '&:before': {
+    "&:before": {
       borderBottomColor: MUIUtils.getMappedProps(ColorX.GetColorCSS, "theme.lineBefore", "theme.line", "theme.input"),
     },
-    '&:after': {
+    "&:after": {
       borderBottomColor: MUIUtils.getMappedProps(ColorX.GetColorCSS, "theme.lineAfter", "theme.line", "theme.input"),
     },
     color: MUIUtils.getMappedProps(ColorX.GetColorCSS, "theme.text", "theme.input"),
     backgroundColor: MUIUtils.getMappedProps(ColorX.GetBGColorCSS, "theme.background")
   },
-}
+};
 
 /**
  * Styled Input Field

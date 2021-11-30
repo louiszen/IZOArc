@@ -1,1 +1,1 @@
-export {default as SLogin} from './SLogin';
+export {default as SLogin} from "./SLogin";

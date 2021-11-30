@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import { HStack } from 'IZOArc/LabIZO/Stackizo';
-import { Accessor, STORE, ColorX, LocaleX } from 'IZOArc/STATIC';
-import { IZOTheme, IZOFontFamily } from '__SYSDefault/Theme';
+import { HStack } from "IZOArc/LabIZO/Stackizo";
+import { Accessor, STORE, ColorX, LocaleX } from "IZOArc/STATIC";
+import { IZOTheme, IZOFontFamily } from "__SYSDefault/Theme";
 
-import { LocaleConfig } from '__SYSDefault/Locale';
+import { LocaleConfig } from "__SYSDefault/Locale";
 
-import { IconButton, Typography, Tooltip } from '@material-ui/core';
-import { Language } from '@material-ui/icons';
+import { IconButton, Typography, Tooltip } from "@material-ui/core";
+import { Language } from "@material-ui/icons";
 
 
 /**
@@ -51,6 +51,7 @@ class BLangToggler extends Component {
   }
 
   _ToggleLanguage = () => {
+    console.log("_ToggleLanguage");
     let max = LocaleConfig.length;
     let idx = LocaleConfig.findIndex(o => o.code === STORE.lang);
     idx += 1;

@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
+import PropsType from "prop-types";
 
-import { Accessor, Authority } from 'IZOArc/STATIC';
+import { Accessor, Authority } from "IZOArc/STATIC";
 
 /**
  * Accessizo - Control access with IZO authority tree

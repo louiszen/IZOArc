@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from "lodash";
 
 const Rules = {
   required: value => !_.isEmpty(value) || _.isNumber(value),
@@ -14,7 +14,7 @@ const ErrorMsg = {
   number: "Must be a number",
   plain: "No spaces and special characters except _",
   plainSpace: "No special characters except _",
-}
+};
 
 let validates = {
   Rules,

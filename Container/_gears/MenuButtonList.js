@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import _ from 'lodash';
+import PropsType from "prop-types";
+import _ from "lodash";
 
-import MenuButton from './MenuButton';
+import MenuButton from "./MenuButton";
 
-import { Accessor, ColorX } from 'IZOArc/STATIC';
-import { VStack } from 'IZOArc/LabIZO/Stackizo';
+import { Accessor, ColorX } from "IZOArc/STATIC";
+import { VStack } from "IZOArc/LabIZO/Stackizo";
 
 class MenuButtonList extends Component {
 

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Accessor } from 'IZOArc/STATIC';
+import React, { Component } from "react";
+import { Accessor } from "IZOArc/STATIC";
 
 /**
  * @augments {Component<Props, State>}

@@ -47,8 +47,8 @@
 | :---|:---:|:---:|:---:|:---|
 | mask | <code>String</code> ||| Applying mask to the text input |
 | alwaysShowMask | `Boolean` || `true` | Always show the mask |
-| maskChar | `char` || `'_'` | mask character for the mask |
-| formatChars | `Object` || `{'9': '[0-9]','a': '[A-Za-z]','*': '[A-Za-z0-9]'}`| mask mapping for regex |
+| maskChar | `char` || `"_"` | mask character for the mask |
+| formatChars | `Object` || `{"9": "[0-9]","a": "[A-Za-z]","*": "[A-Za-z0-9]"}`| mask mapping for regex |
 <br/>
 
 ### ***`file`** Specific*

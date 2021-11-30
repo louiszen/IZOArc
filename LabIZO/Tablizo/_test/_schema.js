@@ -23,10 +23,10 @@ let simple = [
     transform: "datetime",
     reqFunc: "Add"
   }
-]
+];
 
 let test = {
   simple
-}
+};
 
 export default test;

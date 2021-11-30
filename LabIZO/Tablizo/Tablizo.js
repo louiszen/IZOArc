@@ -336,7 +336,7 @@ class Tablizo extends Component {
                     }
                   }}
                 >
-                  <Tooltip title={caption} arrow={true} placement='top'>
+                  <Tooltip title={caption} arrow={true} placement="top">
                     {o.icon}
                   </Tooltip>
                 </StyledIconButton>
@@ -370,7 +370,7 @@ class Tablizo extends Component {
           if(_.isArray(v)){
             _.map(v, (j, k) => {
               cols.push(this.getColumn(j));
-            })
+            });
           } else {
             cols.push(this.getColumn(v));
           }
@@ -378,7 +378,7 @@ class Tablizo extends Component {
       } else if(_.isArray(o)){
         _.map(o, (v, w) => {
           cols.push(this.getColumn(v));
-        })
+        });
       } else {
         cols.push(this.getColumn(o));
       }
@@ -531,8 +531,8 @@ class Tablizo extends Component {
       <GridOverlay>
         <VStack>
           <Spacer />
-          <Box width='250px'>
-            <img src={SITEBASE + 'Images/data-not-found.svg'} alt='nodata' />
+          <Box width="250px">
+            <img src={SITEBASE + "Images/data-not-found.svg"} alt="nodata" />
           </Box>
           <Typography>{dataNotFound}</Typography>
           <Spacer />

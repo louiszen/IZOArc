@@ -1,1 +1,1 @@
-export { default } from './Datumizo';
+export { default } from "./Datumizo";

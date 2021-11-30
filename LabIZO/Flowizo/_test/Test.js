@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { Accessor } from 'IZOArc/STATIC';
+import React, { Component } from "react";
+import { Accessor } from "IZOArc/STATIC";
 
-import data from './_data';
-import Flowizo from '../Flowizo';
-import { VStack, HStack } from 'IZOArc/LabIZO/Stackizo';
-import { StyledButton } from 'IZOArc/LabIZO/Stylizo';
-import addOns from './_addOns';
+import data from "./_data";
+import Flowizo from "../Flowizo";
+import { VStack, HStack } from "IZOArc/LabIZO/Stackizo";
+import { StyledButton } from "IZOArc/LabIZO/Stylizo";
+import addOns from "./_addOns";
 
 /**
  * @augments {Component<Props, State>}
@@ -55,7 +55,7 @@ class Test extends Component {
     console.log("onDataUpdated");
     this.setState({
       flowizoData: data
-    })
+    });
   }
 
   addQ = () => {

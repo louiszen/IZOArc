@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import _ from 'lodash';
-import moment from 'moment';
-import { DatePicker, TimePicker } from 'antd';
-import { FormControl, FormHelperText, FormLabel } from '@material-ui/core';
+import PropsType from "prop-types";
+import _ from "lodash";
+import moment from "moment";
+import { DatePicker, TimePicker } from "antd";
+import { FormControl, FormHelperText, FormLabel } from "@material-ui/core";
 
-import 'antd/dist/antd.css';
+import "antd/dist/antd.css";
 
-import { Accessor } from 'IZOArc/STATIC';
-import { HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
-import { OutlinedBox } from 'IZOArc/LabIZO/Stylizo';
+import { Accessor } from "IZOArc/STATIC";
+import { HStack, Spacer } from "IZOArc/LabIZO/Stackizo";
+import { OutlinedBox } from "IZOArc/LabIZO/Stylizo";
 
 /**
  * @augments {Component<Props, State>}
@@ -170,7 +170,7 @@ class FFDate extends Component {
         value={dpvalue}        
         onChange={(v) => {
           _onValueChange(iname, 
-            this._handleReturn(v, idateformat), ischema.validate)
+            this._handleReturn(v, idateformat), ischema.validate);
         }}
         onFocus={(e) => {
           _onFieldFocus();

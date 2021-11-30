@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import _ from 'lodash';
-import { FormControl, FormHelperText, FormLabel, MenuItem, Select, Tooltip, Typography } from '@material-ui/core';
+import PropsType from "prop-types";
+import _ from "lodash";
+import { FormControl, FormHelperText, FormLabel, MenuItem, Select, Tooltip, Typography } from "@material-ui/core";
 
-import { Accessor } from 'IZOArc/STATIC';
-import { OutlinedBox } from 'IZOArc/LabIZO/Stylizo';
-import { HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
+import { Accessor } from "IZOArc/STATIC";
+import { OutlinedBox } from "IZOArc/LabIZO/Stylizo";
+import { HStack, Spacer } from "IZOArc/LabIZO/Stackizo";
 
 /**
  * @augments {Component<Props, State>}

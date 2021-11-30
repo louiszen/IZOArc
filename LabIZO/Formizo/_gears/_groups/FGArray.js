@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 
-import PropsType from 'prop-types';
-import _ from 'lodash';
-import { Add, ArrowDownward, ArrowUpward, Delete } from '@material-ui/icons';
-import { Box, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
+import PropsType from "prop-types";
+import _ from "lodash";
+import { Add, ArrowDownward, ArrowUpward, Delete } from "@material-ui/icons";
+import { Box, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 
-import FItem from '../FItem';
+import FItem from "../FItem";
 
-import { Accessor, ColorX } from 'IZOArc/STATIC';
-import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
-import { OutlinedBox, StyledIconButton } from 'IZOArc/LabIZO/Stylizo';
-import { IZOTheme } from '__SYSDefault/Theme';
+import { Accessor, ColorX } from "IZOArc/STATIC";
+import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
+import { OutlinedBox, StyledIconButton } from "IZOArc/LabIZO/Stylizo";
+import { IZOTheme } from "__SYSDefault/Theme";
 
 class FGArray extends Component {
 
@@ -147,7 +147,7 @@ class FGArray extends Component {
     let arraySchema = this.getArraySchema();
     _.map(arraySchema, (o, i) => {
       if(_.isUndefined(o.name)){
-        
+        //empty block
       }else if(_.isEmpty(o.name)){
         newItem = "";
       }else{
@@ -207,7 +207,7 @@ class FGArray extends Component {
         <TableCell key={"index"} style={{textAlign: "center", padding: 5}}>
           {"#"}
         </TableCell>
-      )
+      );
     }
 
     if(ischema.reordering){
@@ -215,7 +215,7 @@ class FGArray extends Component {
         <TableCell key={"reordering"} style={{textAlign: "center", padding: 5}}>
           {""}
         </TableCell>
-      )
+      );
     }
 
     _.map(arraySchema, (o, i) => {
@@ -229,7 +229,7 @@ class FGArray extends Component {
     if(!ireadOnly && ischema.canDelete){
       rtn.push(
         <TableCell key={"delete"} style={{position: "sticky", top: 0, zIndex: 10, padding: 5}}></TableCell>
-      )
+      );
     }
 
     return rtn;

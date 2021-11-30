@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { Accessor, ColorX } from 'IZOArc/STATIC';
-import PropsType from 'prop-types';
-import { Handle } from 'react-flow-renderer';
-import { Box, Typography } from '@material-ui/core';
-import { AllOutOutlined} from '@material-ui/icons';
-import { HStack } from 'IZOArc/LabIZO/Stackizo';
-import _ from 'lodash';
+import React, { Component } from "react";
+import { Accessor, ColorX } from "IZOArc/STATIC";
+import PropsType from "prop-types";
+import { Handle } from "react-flow-renderer";
+import { Box, Typography } from "@material-ui/core";
+import { AllOutOutlined} from "@material-ui/icons";
+import { HStack } from "IZOArc/LabIZO/Stackizo";
+import _ from "lodash";
 
 /**
  * @augments {Component<Props, State>}
@@ -50,7 +50,7 @@ class Tube_Src extends Component {
   renderInner(){
     let {data, id} = this.props;
     if(_.isFunction(data.inner)){
-      return data.inner(id)
+      return data.inner(id);
     }else if (_.isString(data.inner)){
       return (
         <HStack>

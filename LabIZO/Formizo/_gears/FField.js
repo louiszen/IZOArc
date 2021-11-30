@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import { Grid, Box, Typography, Tooltip } from '@material-ui/core';
+import PropsType from "prop-types";
+import { Grid, Box, Typography, Tooltip } from "@material-ui/core";
 
 import {FFText, FFHidden, FFPassword, FFNumber,
   FFBool, FFTextarea, FFSelect, FFDate, 
-  FFDateRange, FFUpload, FFSlider} from './_inputs';
+  FFDateRange, FFUpload, FFSlider} from "./_inputs";
   
-import { Accessor } from 'IZOArc/STATIC';
-import { StyledButton } from 'IZOArc/LabIZO/Stylizo';
-import { HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
-import FFRichText from './_inputs/FFRichText';
-import FFSelectTable from './_inputs/FFSelectTable';
+import { Accessor } from "IZOArc/STATIC";
+import { StyledButton } from "IZOArc/LabIZO/Stylizo";
+import { HStack, Spacer } from "IZOArc/LabIZO/Stackizo";
+import FFRichText from "./_inputs/FFRichText";
+import FFSelectTable from "./_inputs/FFSelectTable";
 
-import _ from 'lodash';
+import _ from "lodash";
 
 class FField extends Component {
 
@@ -299,7 +299,7 @@ class FField extends Component {
         _onFieldBlur={this._onFieldBlur}
         {...this.props}
         />
-    )
+    );
   }
 
   renderDateRange(){
@@ -314,7 +314,7 @@ class FField extends Component {
         _onFieldBlur={this._onFieldBlur}
         {...this.props}
         />
-    )
+    );
   }
 
   renderUpload(){
@@ -329,7 +329,7 @@ class FField extends Component {
         _onFieldBlur={this._onFieldBlur}
         {...this.props}
         />
-    )
+    );
   }
 
   renderSelectTable(){
@@ -351,33 +351,33 @@ class FField extends Component {
     let {format} = ischema;
     if(!format) return null;
     switch(format){
-      case 'display': case 'custom': 
+      case "display": case "custom": 
         return this.renderDisplay();
-      case 'text':
+      case "text":
         return this.renderText();
-      case 'textarea':
+      case "textarea":
         return this.renderTextarea();
-      case 'hidden':
+      case "hidden":
         return this.renderHidden();
-      case 'number':
+      case "number":
         return this.renderNumber();
-      case 'password':
+      case "password":
         return this.renderPassword();
-      case 'bool':
+      case "bool":
         return this.renderBool();
-      case 'select':
+      case "select":
         return this.renderSelect();
-      case 'date':
+      case "date":
         return this.renderDate();
-      case 'daterange':
+      case "daterange":
         return this.renderDateRange();
-      case 'file':
+      case "file":
         return this.renderUpload();
-      case 'slider':
+      case "slider":
         return this.renderSlider();
-      case 'richtext':
+      case "richtext":
         return this.renderRichText();
-      case 'selectTable':
+      case "selectTable":
         return this.renderSelectTable();
       default:
     }
@@ -388,7 +388,7 @@ class FField extends Component {
       _onInlineSubmit, _onInlineRevert} = this.state;
     
     let {format} = ischema;
-    if(format === 'display' || format === 'hidden') return null;
+    if(format === "display" || format === "hidden") return null;
 
     if(enableInlineSubmit){
       return [
@@ -454,7 +454,7 @@ class FField extends Component {
             </Grid>
           }
         </Grid>
-      )
+      );
     }else{
       if(enableInlineSubmit){
         return [

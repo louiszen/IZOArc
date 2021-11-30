@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import _ from 'lodash';
-import { FormControl, FormHelperText } from '@material-ui/core';
+import PropsType from "prop-types";
+import _ from "lodash";
+import { FormControl, FormHelperText } from "@material-ui/core";
 
-import { Accessor } from 'IZOArc/STATIC';
-import { StyledInput, StyledTextField } from 'IZOArc/LabIZO/Stylizo';
+import { Accessor } from "IZOArc/STATIC";
+import { StyledInput, StyledTextField } from "IZOArc/LabIZO/Stylizo";
 
 /**
  * @augments {Component<Props, State>}
@@ -184,7 +184,7 @@ class FFTextarea extends Component {
         }}
         onBlur={(e) => {
           _onFieldBlur();
-          _onBlurInlineSubmit(iname)
+          _onBlurInlineSubmit(iname);
         }}
         name={iname}
         variant={ifieldStyle}

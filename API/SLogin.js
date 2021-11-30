@@ -1,8 +1,8 @@
-import axios from 'axios';
-import { Env, LocaleX, STORE } from 'IZOArc/STATIC';
-import { DOMAIN } from '__SYSDefault/Domain';
-import { CheckUserNameAPI, SignInAPI, VerifyOTPAPI } from '__SYSDefault/SysAPI';
-import crypto from 'crypto';
+import axios from "axios";
+import { Env, LocaleX, STORE } from "IZOArc/STATIC";
+import { DOMAIN } from "__SYSDefault/Domain";
+import { CheckUserNameAPI, SignInAPI, VerifyOTPAPI } from "__SYSDefault/SysAPI";
+import crypto from "crypto";
 
 class SLogin {
 
@@ -68,7 +68,7 @@ class SLogin {
 
     let {username, password} = formProps;
 
-    let hash = crypto.createHash('sha256');
+    let hash = crypto.createHash("sha256");
     let req = {
       method: method,
       username: username,
@@ -103,7 +103,7 @@ class SLogin {
 
     let {username, password} = formProps;
 
-    let hash = crypto.createHash('sha256');
+    let hash = crypto.createHash("sha256");
     let req = {
       method: method,
       username: username,

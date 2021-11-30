@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import { Typography } from '@material-ui/core';
+import { Typography } from "@material-ui/core";
 
-import { IZOTheme } from '__SYSDefault/Theme';
-import { DOMAIN } from '__SYSDefault/Domain';
+import { IZOTheme } from "__SYSDefault/Theme";
+import { DOMAIN } from "__SYSDefault/Domain";
 
-import Accessizo from 'IZOArc/LabIZO/Accessizo';
-import { HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
-import { Accessor, STORE, ColorX, BrowserX } from 'IZOArc/STATIC';
+import Accessizo from "IZOArc/LabIZO/Accessizo";
+import { HStack, Spacer } from "IZOArc/LabIZO/Stackizo";
+import { Accessor, STORE, ColorX, BrowserX } from "IZOArc/STATIC";
 
 class Footer extends Component {
 

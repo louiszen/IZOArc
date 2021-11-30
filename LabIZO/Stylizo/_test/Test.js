@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import { Delete } from '@material-ui/icons';
+import { Delete } from "@material-ui/icons";
 
-import OutlinedBox from '../OutlinedBox';
-import StyledTextField from '../StyledTextField';
-import StyledIconButton from '../StyledIconButton';
+import OutlinedBox from "../OutlinedBox";
+import StyledTextField from "../StyledTextField";
+import StyledIconButton from "../StyledIconButton";
 
-import { Accessor } from 'IZOArc/STATIC';
-import { HStack, VStack } from 'IZOArc/LabIZO/Stackizo';
-import { StyledButton, StyledCircularProgress, StyledInput, StyledLinearProgress } from 'IZOArc/LabIZO/Stylizo';
+import { Accessor } from "IZOArc/STATIC";
+import { HStack, VStack } from "IZOArc/LabIZO/Stackizo";
+import { StyledButton, StyledCircularProgress, StyledInput, StyledLinearProgress } from "IZOArc/LabIZO/Stylizo";
 
 class Test extends Component {
 

@@ -30,7 +30,7 @@ Array of values.
 ```jsx
 {
   label: String,
-  name: '' | String,    // if empty, the accessor will only call accessor.{n}
+  name: "" | String,    // if empty, the accessor will only call accessor.{n}
   canAdd?: Boolean | false,
   canDelete?: Boolean | false,
   width?: Number | String | "100%",
@@ -44,7 +44,7 @@ Array of values.
   array: [
     {
       //simple
-      name: '' | String, //if empty, the accessor will only call accessor.{n}
+      name: "" | String, //if empty, the accessor will only call accessor.{n}
     } | group
   ] | (formValue, addOns, index) => []
 }
@@ -52,7 +52,7 @@ Array of values.
 | Props | Type | Required | Default | Description |
 | :---|:---:|:---:|:---:|:---|
 | label | `String` | ✔ || The label that describes the array field |
-| name | `String` | ✔ || The accessor that used for this array, cannot be '' at the uppermost nest, if '', the accessor will automatically be accessor.{n}, n is the numerical index |
+| name | `String` | ✔ || The accessor that used for this array, cannot be "" at the uppermost nest, if "", the accessor will automatically be accessor.{n}, n is the numerical index |
 | width | <code> Number &#124; String </code> || "100%" | The width of the cell |
 | maxHeight | <code> Number &#124; String </code> || "500px" | The maximum expand height of the array list |
 | canAdd | `Boolean` || `false` | Whether user can add elements into the array |
@@ -104,7 +104,7 @@ Fields can be folded and controlled by value in the form
 | Props | Type | Required | Default | Description |
 | :---|:---:|:---:|:---:|:---|
 | label | `String` | ✔ || The label that describes the array field |
-| control | `String` | ✔ || The accessor that used for this array, cannot be '' at the uppermost nest |
+| control | `String` | ✔ || The accessor that used for this array, cannot be "" at the uppermost nest |
 | inverse | `Boolean` || `false` | Inverse the control |
 | controlFunc | `(doc, field) => Boolean` ||| The function for determine fold if the control field is not boolean or straight forward |
 | foldStyle | `String` || `outlined` | The style of the container `outlined, none`|

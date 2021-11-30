@@ -1,5 +1,5 @@
-import moment from 'moment';
-import axios from 'axios';
+import moment from "moment";
+import axios from "axios";
 
 class ZTime {
 
@@ -38,7 +38,7 @@ class ZTime {
   static StartOfYear(momentO = this.Now()){
     var m = this.Moment(momentO);
     if(!m) return null;
-    return m.startOf('year');
+    return m.startOf("year");
   }
 
   /**
@@ -48,7 +48,7 @@ class ZTime {
   static EndOfYear(momentO = this.Now()){
     var m = this.Moment(momentO);
     if(!m) return null;
-    return m.endOf('year');
+    return m.endOf("year");
   }
 
   /**
@@ -58,7 +58,7 @@ class ZTime {
   static StartOfMonth(momentO = this.Now()){
     var m = this.Moment(momentO);
     if(!m) return null;
-    return m.startOf('month');
+    return m.startOf("month");
   }
 
   /**
@@ -68,7 +68,7 @@ class ZTime {
   static EndOfMonth(momentO = this.Now()){
     var m = this.Moment(momentO);
     if(!m) return null;
-    return m.endOf('month');
+    return m.endOf("month");
   }
 
   /**
@@ -78,7 +78,7 @@ class ZTime {
   static StartOfWeek(momentO = this.Now()){
     var m = this.Moment(momentO);
     if(!m) return null;
-    return m.startOf('week');
+    return m.startOf("week");
   }
 
   /**
@@ -88,7 +88,7 @@ class ZTime {
   static EndOfWeek(momentO = this.Now()){
     var m = this.Moment(momentO);
     if(!m) return null;
-    return m.endOf('week');
+    return m.endOf("week");
   }
 
   /**
@@ -98,7 +98,7 @@ class ZTime {
   static StartOfDay(momentO = this.Now()){
     var m = this.Moment(momentO);
     if(!m) return null;
-    return m.startOf('day');
+    return m.startOf("day");
   }
 
   /**
@@ -108,7 +108,7 @@ class ZTime {
   static EndOfDay(momentO = this.Now()){
     var m = this.Moment(momentO);
     if(!m) return null;
-    return m.endOf('day');
+    return m.endOf("day");
   }
 
   /**
@@ -251,7 +251,7 @@ class ZTime {
         Short: ["일", "이", "삼", "사", "오", "육", "칠", "팔", "구", "십", "십일", "십이"],
         Full: ["일월", "이월", "삼월", "사월", "오월", "육월", "칠월", "팔월", "구월", "십월", "십일월", "십이월"]
       }
-    }
+    };
 
     var m = this.Moment(momentO);
     if(!m) return "";
@@ -293,7 +293,7 @@ class ZTime {
         Short: ["일", "월", "화", "수", "목", "금", "토"],
         Full: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"]
       }
-    }
+    };
 
     var m = this.Moment(momentO);
     if(!m) return "";
@@ -353,7 +353,7 @@ class ZTime {
       let result;
       regex.lastIndex = 0;
       while ((result = regex.exec(data)) != null) {
-        phList.push(moment(result[1], 'YYYYMMDD').format('YYYY-MM-DD'));
+        phList.push(moment(result[1], "YYYYMMDD").format("YYYY-MM-DD"));
       }
       return phList;
     }catch(e){

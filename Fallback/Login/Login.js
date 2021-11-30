@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router';
+import React, { Component } from "react";
+import { withRouter } from "react-router";
 
-import { observer } from 'mobx-react';
-import _ from 'lodash';
-import { Box, Link, Typography } from '@material-ui/core';
+import { observer } from "mobx-react";
+import _ from "lodash";
+import { Box, Link, Typography } from "@material-ui/core";
 
-import schema from './schema';
-import { IZOTheme, GateDis } from '__SYSDefault/Theme';
-import { DOMAIN } from '__SYSDefault/Domain';
-import Version from '__SYSDefault/Version';
+import schema from "./schema";
+import { IZOTheme, GateDis } from "__SYSDefault/Theme";
+import { DOMAIN } from "__SYSDefault/Domain";
+import Version from "__SYSDefault/Version";
 
-import Formizo from 'IZOArc/LabIZO/Formizo';
-import { Accessor, STORE, ColorX, LocaleX } from 'IZOArc/STATIC';
-import { VStack, HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
-import { StyledButton, StyledLinearProgress } from 'IZOArc/LabIZO/Stylizo';
-import { FirstPage, StartDate } from '__SYSDefault/Config';
-import { Password, Window, GitHub, Facebook, Instagram, Twitter, Google, LinkedIn, Sms, Email} from '@mui/icons-material';
-import { BLangToggler } from 'IZOArc/BLOCKS';
-import { SLogin } from 'IZOArc/API';
+import Formizo from "IZOArc/LabIZO/Formizo";
+import { Accessor, STORE, ColorX, LocaleX } from "IZOArc/STATIC";
+import { VStack, HStack, Spacer } from "IZOArc/LabIZO/Stackizo";
+import { StyledButton, StyledLinearProgress } from "IZOArc/LabIZO/Stylizo";
+import { FirstPage, StartDate } from "__SYSDefault/Config";
+import { Password, Window, GitHub, Facebook, Instagram, Twitter, Google, LinkedIn, Sms, Email} from "@mui/icons-material";
+import { BLangToggler } from "IZOArc/BLOCKS";
+import { SLogin } from "IZOArc/API";
 class Login extends Component {
 
   /**
@@ -338,7 +338,7 @@ class Login extends Component {
 
   toPassword = (username, UserDisplayName) => {
     this.setState({
-      page: 'password',
+      page: "password",
       loading: false,
       username: username,
       userDisplayName: UserDisplayName
@@ -348,10 +348,10 @@ class Login extends Component {
   toOTP = (key) => {
     console.log(key);
     this.setState({
-      page: 'otp',
+      page: "otp",
       loading: false,
       OTPkey: key
-    })
+    });
   }
 
   renderHeaderMessage(){
@@ -426,7 +426,7 @@ class Login extends Component {
           <Spacer/>
         </HStack>
       </StyledButton>
-    )
+    );
   }
 
   /**

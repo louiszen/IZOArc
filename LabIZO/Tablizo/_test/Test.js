@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import { Delete } from '@material-ui/icons';
+import { Delete } from "@material-ui/icons";
 
-import schema from './_schema';
-import data from './_data'; 
+import schema from "./_schema";
+import data from "./_data"; 
 
-import Tablizo from 'IZOArc/LabIZO/Tablizo';
-import { VStack } from 'IZOArc/LabIZO/Stackizo';
-import { Accessor } from 'IZOArc/STATIC';
+import Tablizo from "IZOArc/LabIZO/Tablizo";
+import { VStack } from "IZOArc/LabIZO/Stackizo";
+import { Accessor } from "IZOArc/STATIC";
 
 class Test extends Component {
 

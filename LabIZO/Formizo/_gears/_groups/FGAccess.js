@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import _ from 'lodash';
+import PropsType from "prop-types";
+import _ from "lodash";
 
-import FItem from '../FItem';
+import FItem from "../FItem";
 
-import Accessizo from 'IZOArc/LabIZO/Accessizo';
-import { Accessor } from 'IZOArc/STATIC';
+import Accessizo from "IZOArc/LabIZO/Accessizo";
+import { Accessor } from "IZOArc/STATIC";
 
 class FGAccess extends Component {
 
@@ -69,6 +69,7 @@ class FGAccess extends Component {
   }
 
   renderSchema(){
+    // eslint-disable-next-line no-unused-vars
     let {ischema, ...other} = this.props;
     let schema = this.getAccessizoSchema();
 

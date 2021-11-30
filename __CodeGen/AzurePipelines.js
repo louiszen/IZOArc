@@ -4,7 +4,7 @@ const Fs = require("./Fs");
 
 ( async () => {
   let id = process.argv[2].toLowerCase();
-  let pipeline = `name: '$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)'
+  let pipeline = `name: "$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)"
 trigger:
 - none
 
@@ -14,9 +14,9 @@ resources:
 
 variables:
 - name: dockerRegistryServiceConnection
-  value: 'gammondev ACR connection'
+  value: "gammondev ACR connection"
 - name: imageRepository
-  value: '${id}-web-dev'
+  value: "${id}-web-dev"
 - name: tag
   value: "$(Build.BuildNumber)"
 - name: vmImageName
@@ -40,7 +40,7 @@ stages:
       steps:
         - checkout: self  # identifier for your repository resource
           clean: false  # if true, execute \`execute git clean -ffdx && git reset --hard HEAD\` before fetching
-          submodules: true # set to 'true' for a single level of submodules or 'recursive' to get submodules of submodules; defaults to not checking out submodules
+          submodules: true # set to "true" for a single level of submodules or "recursive" to get submodules of submodules; defaults to not checking out submodules
         - task: Docker@2
           displayName: Build and push an image to container registry
           inputs:

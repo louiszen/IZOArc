@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
+import PropsType from "prop-types";
 
-import FFDropdown from './FFDropdown';
-import FFCheckbox from './FFCheckbox';
-import FFRadio from './FFRadio';
-import FFAutoComplete from './FFAutoComplete';
+import FFDropdown from "./FFDropdown";
+import FFCheckbox from "./FFCheckbox";
+import FFRadio from "./FFRadio";
+import FFAutoComplete from "./FFAutoComplete";
 
-import { Accessor } from 'IZOArc/STATIC';
+import { Accessor } from "IZOArc/STATIC";
 
 /**
  * @augments {Component<Props, State>}

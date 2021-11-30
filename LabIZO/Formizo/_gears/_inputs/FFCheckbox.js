@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import _ from 'lodash';
+import PropsType from "prop-types";
+import _ from "lodash";
 import { Checkbox, FormControl, FormControlLabel, FormGroup, 
-  FormHelperText, FormLabel } from '@material-ui/core';
+  FormHelperText, FormLabel } from "@material-ui/core";
 
-import { Accessor } from 'IZOArc/STATIC';
-import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
-import { OutlinedBox } from 'IZOArc/LabIZO/Stylizo';
+import { Accessor } from "IZOArc/STATIC";
+import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
+import { OutlinedBox } from "IZOArc/LabIZO/Stylizo";
 
 /**
  * @augments {Component<Props, State>}
@@ -158,9 +158,9 @@ class FFCheckbox extends Component {
               onChange={(e) => {
                 if(ischema.fieldFormat === "object"){
                   _onValueChange(oname, 
-                    e.target.checked, ischema.validate)
+                    e.target.checked, ischema.validate);
                 }else{
-                  this.onChecked(val, e.target.checked)
+                  this.onChecked(val, e.target.checked);
                 }
               }} 
               name="" />}

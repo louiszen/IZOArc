@@ -10,7 +10,7 @@ class ZRichText {
   }
 
   static ToHTML(obj){
-    return obj.toString('html');
+    return obj.toString("html");
   }
 
 }

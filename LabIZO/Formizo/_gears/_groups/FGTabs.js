@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import _ from 'lodash';
-import { Paper, Tab, Tabs } from '@material-ui/core';
+import PropsType from "prop-types";
+import _ from "lodash";
+import { Paper, Tab, Tabs } from "@material-ui/core";
 
-import FItem from '../FItem';
+import FItem from "../FItem";
 
-import { Accessor, Authority } from 'IZOArc/STATIC';
-import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
-import { Typography } from 'antd';
+import { Accessor, Authority } from "IZOArc/STATIC";
+import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
+import { Typography } from "antd";
 
 class FGTabs extends Component {
 
@@ -79,6 +79,7 @@ class FGTabs extends Component {
   }
 
   renderSchema(page){
+    // eslint-disable-next-line no-unused-vars
     let {ischema, ...other} = this.props;
     let pageSchema = this.getPageSchema(page);
     let rtn = [];
@@ -91,7 +92,7 @@ class FGTabs extends Component {
               ischema={v}
               {...other}/>
           );
-        })
+        });
       }else{
         rtn.push(
           <FItem
@@ -124,7 +125,7 @@ class FGTabs extends Component {
         let label = o.label;
         let icon = o.icon;
         if(o.noTransform){
-          label = <Typography style={{textTransform: 'none'}}>{o.label}</Typography>
+          label = <Typography style={{textTransform: "none"}}>{o.label}</Typography>;
         }
         switch(o.iconPos){
           case "top": default: 

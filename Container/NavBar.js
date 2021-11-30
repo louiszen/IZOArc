@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router';
+import React, { Component } from "react";
+import { withRouter } from "react-router";
 
-import { observer } from 'mobx-react';
+import { observer } from "mobx-react";
 
-import { ExitToAppOutlined } from '@material-ui/icons';
-import { Box, IconButton, Typography, Tooltip } from '@material-ui/core';
+import { ExitToAppOutlined } from "@material-ui/icons";
+import { Box, IconButton, Typography, Tooltip } from "@material-ui/core";
 
-import './Container.css';
-import Version from '__SYSDefault/Version';
-import IZOVersion from '../version';
+import "./Container.css";
+import Version from "__SYSDefault/Version";
+import IZOVersion from "../version";
 
-import { Accessor, ColorX, STORE } from 'IZOArc/STATIC';
-import { HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
-import Accessizo from 'IZOArc/LabIZO/Accessizo';
+import { Accessor, ColorX, STORE } from "IZOArc/STATIC";
+import { HStack, Spacer } from "IZOArc/LabIZO/Stackizo";
+import Accessizo from "IZOArc/LabIZO/Accessizo";
 
-import { CompanyDis, IZOFontFamily, IZOTheme, NavbarDis, ProjectDis } from '__SYSDefault/Theme';
-import LocaleX from 'IZOArc/STATIC/LocaleX';
-import { SITEBASE } from '__SYSDefault/Domain';
-import { BLangToggler } from 'IZOArc/BLOCKS';
+import { CompanyDis, IZOFontFamily, IZOTheme, NavbarDis, ProjectDis } from "__SYSDefault/Theme";
+import LocaleX from "IZOArc/STATIC/LocaleX";
+import { SITEBASE } from "__SYSDefault/Domain";
+import { BLangToggler } from "IZOArc/BLOCKS";
 
 class NavBar extends Component {
 
@@ -79,7 +79,7 @@ class NavBar extends Component {
           <img src={SITEBASE + "Images/izo.png"} alt="elain" draggable={false}/>
         </Box>
       </HStack>
-    )
+    );
   }
 
   renderLogin(){

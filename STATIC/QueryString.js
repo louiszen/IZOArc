@@ -9,9 +9,9 @@ class QueryString {
 
     let rtn = {};
 
-    let qSSplited = qS.split('&');
+    let qSSplited = qS.split("&");
     _.map(qSSplited, (o, i) => {
-      let splited = qS.split('=');
+      let splited = qS.split("=");
       if(splited.length === 2){
         Accessor.Set(rtn, splited[0], splited[1]);
       }

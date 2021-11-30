@@ -1,15 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import _ from 'lodash';
-import ReactJson from 'react-json-view';
-import { Box, Button } from '@material-ui/core';
+import _ from "lodash";
+import ReactJson from "react-json-view";
+import { Box, Button } from "@material-ui/core";
 
-import schema from './_schema';
-import data from './_data';
+import schema from "./_schema";
+import data from "./_data";
 
-import Formizo from 'IZOArc/LabIZO/Formizo';
-import { Accessor } from 'IZOArc/STATIC';
-import { HStack, VStack } from 'IZOArc/LabIZO/Stackizo';
+import Formizo from "IZOArc/LabIZO/Formizo";
+import { Accessor, STORE } from "IZOArc/STATIC";
+import { HStack, VStack } from "IZOArc/LabIZO/Stackizo";
+import { BLangToggler } from "IZOArc/BLOCKS";
+import { observer } from "mobx-react";
 
 class Test extends Component {
 
@@ -103,8 +105,10 @@ class Test extends Component {
 
   render(){
     let {tab, value, test, type, vtype} = this.state;
+    console.log(STORE.lang);
     return (
       <VStack overflow={"scroll"} style={{background: "aliceblue"}}>
+        <BLangToggler/>
         {this.renderButtons(test, this.onChangeTab, "primary", tab)}
         {this.renderButtons(type, this.onChangeType, "secondary", vtype)}
         <HStack alignItems="flex-start" flexGrow={1} overflow={"scroll"}>
@@ -150,4 +154,4 @@ class Test extends Component {
 
 }
 
-export default Test;
+export default observer(Test);

@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import _ from 'lodash';
-import { v1 } from 'uuid';
-import { CloudUpload } from '@material-ui/icons';
-import { FormHelperText, FormLabel, Typography } from '@material-ui/core';
+import PropsType from "prop-types";
+import _ from "lodash";
+import { v1 } from "uuid";
+import { CloudUpload } from "@material-ui/icons";
+import { FormHelperText, FormLabel, Typography } from "@material-ui/core";
 
-import { Accessor, ColorX, LocaleX } from 'IZOArc/STATIC';
-import { HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
-import { OutlinedBox, StyledButton } from 'IZOArc/LabIZO/Stylizo';
+import { Accessor, ColorX, LocaleX } from "IZOArc/STATIC";
+import { HStack, Spacer } from "IZOArc/LabIZO/Stackizo";
+import { OutlinedBox, StyledButton } from "IZOArc/LabIZO/Stylizo";
 
 /**
  * @augments {Component<Props, State>}
@@ -174,14 +174,14 @@ class FFUpload extends Component {
           id={uuid}
           onChange={(e) => {
             _onValueChange(iname, 
-              e.target.files[0], ischema.validate)
+              e.target.files[0], ischema.validate);
           }}
           onFocus={(e) => {
             _onFieldFocus();
           }}
           onBlur={(e) => {
             _onFieldBlur();
-            _onBlurInlineSubmit(iname)
+            _onBlurInlineSubmit(iname);
           }}
           multiple={false}
           type="file"

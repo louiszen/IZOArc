@@ -1,1 +1,1 @@
-export { default } from './Stepizo';
+export { default } from "./Stepizo";

@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import _ from 'lodash';
-import { Typography } from '@material-ui/core';
+import PropsType from "prop-types";
+import _ from "lodash";
+import { Typography } from "@material-ui/core";
 
-import './animatizo.css';
+import "./animatizo.css";
 
-import { Accessor } from 'IZOArc/STATIC';
+import { Accessor } from "IZOArc/STATIC";
 
 /**
  * Horizontal Marquee for overflow text
@@ -107,7 +107,7 @@ class HMarquee extends Component {
           return this.renderChildren(v);
         });
       }else if(_.isString(o)){
-        return <Typography key={i} style={style}>{o}</Typography>
+        return <Typography key={i} style={style}>{o}</Typography>;
       }else if(!React.isValidElement(o)){
         console.log(o);
         //return o;
@@ -137,7 +137,7 @@ class HMarquee extends Component {
     };
 
     return (
-      <div style={style} ref={(e) => {this.element = e}}>
+      <div style={style} ref={(e) => {this.element = e;}}>
         {this.renderChildren(children)}
       </div>
     );

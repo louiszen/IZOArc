@@ -53,24 +53,24 @@ The item that represents a group of simple fields or have some special functiona
 ```jsx
 {
   label: String,
-  name: '' | String,    // if empty, the accessor will only call accessor.{n}
+  name: "" | String,    // if empty, the accessor will only call accessor.{n}
   canAdd?: Boolean | false,
   canDelete?: Boolean | false,
   array: [
     {
       //simple
-      name: '' | String, //if empty, the accessor will only call accessor.n
+      name: "" | String, //if empty, the accessor will only call accessor.n
     } | 
     {
       //nested array
       label: String,
-      name: '' | String,    
+      name: "" | String,    
       canAdd?: Boolean | false,
       canDelete?: Boolean | false,
       array: [
         {
           //simple
-          name: '' | String, 
+          name: "" | String, 
         }
       ]
     }

@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import _ from 'lodash';
-import {Box} from '@material-ui/core';
+import PropsType from "prop-types";
+import _ from "lodash";
+import {Box} from "@material-ui/core";
 
-import FField from './FField';
+import FField from "./FField";
 import {FGAccess, FGInline, FGArray, 
-  FGFold, FGCollapse, FGTabs, FGColumns} from './_groups';
+  FGFold, FGCollapse, FGTabs, FGColumns} from "./_groups";
 
-import { Accessor } from 'IZOArc/STATIC';
+import { Accessor } from "IZOArc/STATIC";
 
 class FItem extends Component {
 

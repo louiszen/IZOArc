@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import _ from 'lodash';
-import { v1 } from 'uuid';
-import { Box, Typography } from '@material-ui/core';
-import { ArrowBack } from '@material-ui/icons';
+import PropsType from "prop-types";
+import _ from "lodash";
+import { v1 } from "uuid";
+import { Box, Typography } from "@material-ui/core";
+import { ArrowBack } from "@material-ui/icons";
 
-import { Accessor, ColorX } from 'IZOArc/STATIC';
-import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
-import { StyledButton } from 'IZOArc/LabIZO/Stylizo';
-import Formizo from 'IZOArc/LabIZO/Formizo';
+import { Accessor, ColorX } from "IZOArc/STATIC";
+import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
+import { StyledButton } from "IZOArc/LabIZO/Stylizo";
+import Formizo from "IZOArc/LabIZO/Formizo";
 
-import { IZOTheme } from '__SYSDefault/Theme';
+import { IZOTheme } from "__SYSDefault/Theme";
 
 class Inner extends Component {
 
@@ -158,7 +158,7 @@ class Inner extends Component {
   renderContent(){
     let {ibase, docID, doc, onQuit, onQuitRefresh, addOns, onSubmit, user, formizo} = this.props;
     if(_.isFunction(ibase.Custom)){
-      return ibase.Custom(docID, doc, onQuit, onQuitRefresh, () => {return this.renderFormizo()}, addOns, ibase, onSubmit, user, formizo);
+      return ibase.Custom(docID, doc, onQuit, onQuitRefresh, () => {return this.renderFormizo();}, addOns, ibase, onSubmit, user, formizo);
     }else{
       return this.renderFormizo();
     }

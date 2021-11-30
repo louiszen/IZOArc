@@ -9,10 +9,10 @@ let simple = [
   {
     label: "Step 3",
   },
-]
+];
 
 let test = {
   simple
-}
+};
 
 export default test;

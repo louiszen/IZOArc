@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import _ from 'lodash';
-import { Checkbox, FormControlLabel, Switch } from '@material-ui/core';
-import { Favorite, FavoriteBorder } from '@material-ui/icons';
+import PropsType from "prop-types";
+import _ from "lodash";
+import { Checkbox, FormControlLabel, Switch } from "@material-ui/core";
+import { Favorite, FavoriteBorder } from "@material-ui/icons";
 
-import { Accessor } from 'IZOArc/STATIC';
+import { Accessor } from "IZOArc/STATIC";
 
 /**
  * @augments {Component<Props, State>}
@@ -141,7 +141,7 @@ class FFBool extends Component {
           onChange={(e) => 
             _onValueChange(iname, 
               e.target.checked, ischema.validate)} 
-          inputProps={{ 'aria-label': 'primary checkbox' }}
+          inputProps={{ "aria-label": "primary checkbox" }}
           disabled={ireadOnly}
           />
       );
@@ -156,7 +156,7 @@ class FFBool extends Component {
               onChange={(e) => 
                 _onValueChange(iname, 
                   e.target.checked, ischema.validate)} 
-              inputProps={{ 'aria-label': 'primary checkbox' }}
+              inputProps={{ "aria-label": "primary checkbox" }}
               disabled={ireadOnly}
               />
           }

@@ -28,7 +28,7 @@ let addOns = {
     "C"
   ],
   TESTLABEL: "XXXXXXX"
-}
+};
 
 let defaultV = {
   /*
@@ -115,11 +115,11 @@ let defaultV = {
     }
   ]
   */
-}
+};
 
 let test = {
   addOns,
   defaultV
-}
+};
 
 export default test;

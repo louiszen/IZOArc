@@ -1,7 +1,10 @@
-import React from 'react';
-import HStack from 'IZOArc/LabIZO/Stackizo/HStack';
-//import { ZRichText } from 'IZOArc/STATIC';
-import _ from 'lodash';
+import React from "react";
+import HStack from "IZOArc/LabIZO/Stackizo/HStack";
+import { LocaleX } from "IZOArc/STATIC";
+//import { Typography } from "@mui/material";
+import _ from "lodash";
+
+//import { IZOFontFamily } from "__SYSDefault/Theme";
 
 let ITEMS = [
   "All worker of the team wear safety harness with lanyard (Each lifeline is only for one worker)",
@@ -13,7 +16,7 @@ let ITEMS = [
   "Safety net at the workplace is in good condition",
   "Working at AC Platform, mobile temporary fall arrest system should be adopted",
   "Others"
-]
+];
 
 let simple = [
   {
@@ -210,7 +213,7 @@ let simple = [
       }
     ]
   }))
-]
+];
 
 /*
 let simple = [
@@ -1115,7 +1118,7 @@ let datetime = [
     dateType: "year"
   },
   */
-]
+];
 
 let columns = [
   {
@@ -1288,7 +1291,349 @@ let columns = [
       }
     ]
   }
-]
+];
+
+let func = [
+  (formProps, addOns) => [{
+    label: LocaleX.Parse({
+      EN: "Job No.",
+      TC: "項目編號"
+    }),
+    name: "jobNo",
+    format: "text",
+    validate: ["required"]
+  }],
+  /*
+  {
+    inline: [
+      {
+        label: () => LocaleX.Parse({
+          EN: "Name of Permit-to-work In-charge",
+          TC: "負責人姓名"
+        }),
+        name: "PTWIC.Name",
+        format: "text",
+        validate: ["required"]
+      },
+      {
+        label: () => LocaleX.Parse({
+          EN: "Post of Permit-to-work In-charge",
+          TC: "負責人職位"
+        }),
+        name: "PTWIC.Post",
+        format: "text",
+        validate: ["required"]
+      }
+    ]
+  },
+  {
+    width: 400,
+    header: () => 
+    (
+      <Typography style={{
+        fontFamily: IZOFontFamily,
+        fontSize: 18
+      }}>
+        {
+          LocaleX.Parse({
+            EN: "Type of Hot Work to be Undertaken:",
+            TC: "熱工序種類"
+          })
+        }
+      </Typography>
+    ),
+  },
+  {
+    inline: [
+      {
+        label: "",
+        name: "hotworktype",
+        format: "select",
+        selectStyle: "checkbox",
+        selectDirection: "row",
+        width: 500,
+        selectRef: [
+          {
+            cap: () => LocaleX.Parse({
+              EN: "Arc Welding",
+              TC: "電焊"
+            }),
+            val: "arcWelding"
+          },
+          {
+            cap: () => LocaleX.Parse({
+              EN: "Flame Cutting",
+              TC: "氣焊"
+            }),
+            val: "flameCutting"
+          }
+        ],
+        selectCap: "cap",
+        selectVal: "val"
+      },
+      {
+        label: () => LocaleX.Parse({
+          EN: "Other",
+          TC: "其他"
+        }),
+        name: "hotworktypeOther.selected",
+        format: "bool",
+        width: 200
+      },
+      {
+        control: "hotworktypeOther.selected",
+        fold: [
+          {
+            label: "",
+            name: "hotworktypeOther.value",
+            format: "text"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    label: () => LocaleX.Parse({
+      EN: "Duration of Work",
+      TC: "申請日期及時間 "
+    }),
+    name: "duration",
+    format: "daterange",
+    validate: ["required"]
+  },
+  {
+    label: () => LocaleX.Parse({
+      EN: "Safety Precaution Taken",
+      TC: "安全預防措施"
+    }),
+    name: "precaution",
+    format: "select", 
+    selectStyle: "checkbox",
+    selectDirection: "row",
+    selectRef: [
+      {
+        cap: () => LocaleX.Parse({
+          EN: "Fire Blanket",
+          TC: "防火毯"
+        }),
+        val: "fireBlanket"
+      },
+      {
+        cap: () => LocaleX.Parse({
+          EN: "Weld Yazha",
+          TC: "焊矢篼"
+        }),
+        val: "weldYazha"
+      },
+      {
+        cap: () => LocaleX.Parse({
+          EN: "Shading board / cloth",
+          TC: "遮光板 / 布"
+        }),
+        val: "shading"
+      }
+    ],
+    selectCap: "cap",
+    selectVal: "val"
+  },
+  {
+    label: () => LocaleX.Parse({
+      EN: "Gas welding inspection",
+      TC: "氣焊檢查"
+    }),
+    name: "gasWeldingInspection",
+    format: "select", 
+    selectStyle: "checkbox",
+    selectDirection: "column",
+    selectRef: [
+      {
+        cap: () => LocaleX.Parse({
+          EN: "Vertical placement and stabilization of wind coal cylinders",
+          TC: "風煤樽垂直擺放及穏固 "
+        }),
+        val: "stablilization"
+      },
+      {
+        cap: () => LocaleX.Parse({
+          EN: "Keep the wind and coal throat away from heat and flames",
+          TC: "風煤喉遠離熱源及火焰"
+        }),
+        val: "keepAwayHeat"
+      },
+      {
+        cap: () => LocaleX.Parse({
+          EN: "The ventilating and coal bottle pipes are firmly connected and there is no gas leakage",
+          TC: "風煤樽喉接駁穏固及沒有氣體洩漏"
+        }),
+        val: "leakage"
+      }
+    ],
+    selectCap: "cap",
+    selectVal: "val"
+  },
+  {
+    label: () => LocaleX.Parse({
+      EN: "Welding inspection",
+      TC: "電焊檢查"
+    }),
+    name: "weldingInspection",
+    format: "select", 
+    selectStyle: "checkbox",
+    selectDirection: "column",
+    selectRef: [
+      {
+        cap: () => LocaleX.Parse({
+          EN: "Welder input wire connection position",
+          TC: "焊機輸入線接駁位"
+        }),
+        val: "position"
+      },
+      {
+        cap: () => LocaleX.Parse({
+          EN: "Output wire (bonding wire and ground wire)",
+          TC: "輸出線 (焊線及地線)"
+        }),
+        val: "outputWire"
+      },
+      {
+        cap: () => LocaleX.Parse({
+          EN: "Welding tongs",
+          TC: "焊鉗"
+        }),
+        val: "tongs"
+      },
+      {
+        cap: () => LocaleX.Parse({
+          EN: "Ground clamp / clamp",
+          TC: "地線夾 / 鉗"
+        }),
+        val: "clamp"
+      }
+    ],
+    selectCap: "cap",
+    selectVal: "val"
+  },
+  {
+    label: () => LocaleX.Parse({
+      EN: "Construction",
+      TC: "施工"
+    }),
+    name: "construction",
+    arrayStyle: "card",
+    canAdd: true,
+    canDelete: true,
+    array: [
+      {
+        label: () => LocaleX.Parse({
+          EN: "Construction Date",
+          TC: "施工日期"
+        }),
+        name: "date",
+        format: "date"
+      },
+      {
+        label: () => LocaleX.Parse({
+          EN: "Fire Fighting Equipment in the vicinity",
+          TC: "提供滅火筒"
+        }),
+        name: "fireFightingEq",
+        format: "bool"
+      },
+      {
+        label: () => LocaleX.Parse({
+          EN: "All Flammable Materials Removed from the vicinity",
+          TC: "易燃物品遠離燒焊範圍 "
+        }),
+        name: "removeFlammable",
+        format: "bool"
+      },
+      {
+        label: () => LocaleX.Parse({
+          EN: "Sufficient Ventilation at Working Location",
+          TC: "足夠通風"
+        }),
+        name: "ventilation",
+        format: "bool"
+      },
+      {
+        label: () => LocaleX.Parse({
+          EN: "All Workers Wear Suitable PPE",
+          TC: "工人使用安全防護用品"
+        }),
+        name: "ppe",
+        format: "bool"
+      },
+      {
+        label: () => LocaleX.Parse({
+          EN: "All Workers involved in flame cutting received recognized training",
+          TC: "工人接安全訓練 "
+        }),
+        name: "training",
+        format: "bool"
+      },
+      {
+        header: () => <Typography style={{fontWeight: "bold"}}>{LocaleX.Parse({
+          EN: "Confirmation of application",
+          TC: "申請許可証確認"
+        })}</Typography>
+      },
+      {
+        label: () => LocaleX.Parse({
+          EN: "I have personally checked all above-mentioned items and I hereby certify that the information provided is correct and true",
+          TC: "本人證明以上情況經由本人檢查及以上細節部份都是正確或已經被實施"
+        }),
+        name: "confirmApply",
+        format: "bool"
+      },
+      {
+        header: () => <Typography style={{fontWeight: "bold"}}>{LocaleX.Parse({
+          EN: "Part 2 Approval: (to be completed by the GECCL PSER or his delegate)",
+          TC: "第二部份: 簽發許可証 (由金門負責人填寫)"
+        })}</Typography>
+      },
+      {
+        label: () => LocaleX.Parse({
+          EN: "I hereby certified that I satisfied myself the requirements are complied with and approve this permit-to-work certificate within time frame as specified.",
+          TC: "本人證明以上情況經由本人檢查以及以上細節部份都是正確或已經被實施"
+        }),
+        name: "confirmApprove",
+        format: "bool",
+        readOnly: true
+      },
+      {
+        header: () => <Typography style={{fontWeight: "bold"}}>{LocaleX.Parse({
+          EN: "Part 3 Acknowledgement: (to be filled by the Permit-to-work In-charge)",
+          TC: "第三部份: 簽收許可証 (由負責人填寫)"
+        })}</Typography>
+      },
+      {
+        label: () => LocaleX.Parse({
+          EN: "I have read and understood this permit-to-work and will undertake the hot work in accordance with the conditions stated in this permit.",
+          TC: "本人證明以上情況經由本人檢查以及確保所有熱工序必須跟從此許可証進行"
+        }),
+        name: "confirmAcknowledge",
+        format: "bool",
+        readOnly: true
+      },
+      {
+        header: () => <Typography style={{fontWeight: "bold"}}>{LocaleX.Parse({
+          EN: "Part 4 Completion: (to be filled by the Permit-to-work In-charge)",
+          TC: "第四部份: 完成工作 (由負責人填寫)"
+        })}</Typography>
+      },
+      {
+        label: () => LocaleX.Parse({
+          EN: "The work has been completed and any ignition source was removed.",
+          TC: "工作已經完成及所有火種已搬離現場"
+        }),
+        name: "confirmComplete",
+        format: "bool",
+        readOnly: true
+      }
+    ]
+  }
+  */
+];
 
 let test = {
   simple,
@@ -1303,7 +1648,8 @@ let test = {
   tabs,
   datetime,
   columns,
-  select
-}
+  select,
+  func
+};
 
 export default test;

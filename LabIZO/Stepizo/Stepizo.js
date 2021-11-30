@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import _ from 'lodash';
-import { Step, StepButton, Stepper } from '@material-ui/core';
+import PropsType from "prop-types";
+import _ from "lodash";
+import { Step, StepButton, Stepper } from "@material-ui/core";
 
-import { Accessor } from 'IZOArc/STATIC';
+import { Accessor } from "IZOArc/STATIC";
 
 /**
  * Stepizo - step tabs

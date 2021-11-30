@@ -1,29 +1,29 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router';
+import React, { Component } from "react";
+import { withRouter } from "react-router";
 
-import { when } from 'mobx';
-import { observer } from 'mobx-react';
-import _ from 'lodash';
-import axios from 'axios';
-import htmlParser from 'html-react-parser';
-import { Close } from '@material-ui/icons';
-import { Backdrop, Box, CircularProgress, Snackbar } from '@material-ui/core';
+import { when } from "mobx";
+import { observer } from "mobx-react";
+import _ from "lodash";
+import axios from "axios";
+import htmlParser from "html-react-parser";
+import { Close } from "@material-ui/icons";
+import { Backdrop, Box, CircularProgress, Snackbar } from "@material-ui/core";
 
-import Footer from './Footer';
-import Menu from './Menu';
-import NavBar from './NavBar';
-import './Container.css';
+import Footer from "./Footer";
+import Menu from "./Menu";
+import NavBar from "./NavBar";
+import "./Container.css";
 
-import { IZOTheme } from '__SYSDefault/Theme';
-import { DOMAIN } from '__SYSDefault/Domain';
-import { FirstPage, hasContainer, loginSys, serverCheck } from '__SYSDefault/Config';
-import { StartUp } from '__SYSDefault/StartUp';
+import { IZOTheme } from "__SYSDefault/Theme";
+import { DOMAIN } from "__SYSDefault/Domain";
+import { FirstPage, hasContainer, loginSys, serverCheck } from "__SYSDefault/Config";
+import { StartUp } from "__SYSDefault/StartUp";
 
-import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
-import { SnackAlert, StyledButton, StyledLinearProgress } from 'IZOArc/LabIZO/Stylizo';
-import { StyledIconButton } from 'IZOArc/LabIZO/Stylizo';
-import { ColorX, LocaleX, STORE } from 'IZOArc/STATIC';
-import { EnvInfoAPI } from '__SYSDefault/SysAPI';
+import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
+import { SnackAlert, StyledButton, StyledLinearProgress } from "IZOArc/LabIZO/Stylizo";
+import { StyledIconButton } from "IZOArc/LabIZO/Stylizo";
+import { ColorX, LocaleX, STORE } from "IZOArc/STATIC";
+import { EnvInfoAPI } from "__SYSDefault/SysAPI";
 
 class Container extends Component {
 
@@ -35,7 +35,7 @@ class Container extends Component {
       dialogOpen: false,
       backdropOpen: false,
       buttonWidth: "100px"
-    }
+    };
   }
 
   componentDidMount(){
@@ -122,7 +122,7 @@ class Container extends Component {
     setTimeout(() => {
       STORE.Alert(LocaleX.Get("__IZO.Alert.Unauthorized"), "warn");
       STORE.clearUser();
-      this.props.history.push('/Login');
+      this.props.history.push("/Login");
     }, 1000);
   }
 
@@ -154,7 +154,7 @@ class Container extends Component {
       snackOpen: false
     }, () => {
       setTimeout(() => {
-        STORE.clearAlert()
+        STORE.clearAlert();
       }, 1000);
     });
   }
@@ -216,7 +216,7 @@ class Container extends Component {
         >
         <i className="fas fa-ban"/><div className="formizo-h-m">{LocaleX.Get("__IZO.Formizo.Cancel")}</div>
       </StyledButton>,
-    }
+    };
 
     return _.map(STORE.ask.buttons, (o, i) => {
       if(_.isString(o) && buttonsJSX[o])

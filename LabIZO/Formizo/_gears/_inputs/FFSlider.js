@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import _ from 'lodash';
+import PropsType from "prop-types";
+import _ from "lodash";
 
-import { Accessor } from 'IZOArc/STATIC';
+import { Accessor } from "IZOArc/STATIC";
 
 import { Slider } from "@material-ui/core";
 
@@ -105,10 +105,10 @@ class FFSlider extends Component {
     let ireadOnly = ischema.readOnly || readOnly;
     return (
       <Slider
-        key='slidebar'
+        key="slidebar"
         style={{ width: "50%" }}
         onChange={(event, newValue) => {
-          _onValueChange(iname, newValue, ischema.validate)
+          _onValueChange(iname, newValue, ischema.validate);
         }}
         defaultValue={ischema.defaultValue}
         step={ischema.step || 1}

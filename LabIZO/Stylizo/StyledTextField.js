@@ -1,44 +1,44 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import { TextField } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import PropsType from "prop-types";
+import { TextField } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
 
-import MUIUtils from './_gears/MUIUtils';
+import MUIUtils from "./_gears/MUIUtils";
 
-import { Accessor, ColorX } from 'IZOArc/STATIC';
+import { Accessor, ColorX } from "IZOArc/STATIC";
 
 const styles = {
   root:{
-    '& label.Mui-focused': {
+    "& label.Mui-focused": {
       color: MUIUtils.getMappedProps(ColorX.GetColorCSS, "theme.label", "theme.input"),
     },
-    '& .MuiInput-underline:before': {
+    "& .MuiInput-underline:before": {
       borderBottomColor: MUIUtils.getMappedProps(ColorX.GetColorCSS, "theme.lineBefore", "theme.line", "theme.field"),
     },
-    '& .MuiInput-underline:after': {
+    "& .MuiInput-underline:after": {
       borderBottomColor: MUIUtils.getMappedProps(ColorX.GetColorCSS, "theme.lineAfter", "theme.line", "theme.field"),
     },
-    '& .MuiInput-underline:hover:before': {
+    "& .MuiInput-underline:hover:before": {
       borderBottomColor: MUIUtils.getMappedProps(ColorX.GetColorCSS, "theme.lineHover", "theme.line", "theme.field"),
     },
-    '& .MuiInput-underline:hover:after': {
+    "& .MuiInput-underline:hover:after": {
       borderBottomColor: MUIUtils.getMappedProps(ColorX.GetColorCSS, "theme.lineHover", "theme.line", "theme.field"),
     },
-    '& .MuiInput-underline:invalid': {
+    "& .MuiInput-underline:invalid": {
       borderBottomColor: MUIUtils.getMappedProps(ColorX.GetColorCSS, "theme.lineError", "theme.line", "theme.field"),
     },
-    '& .MuiInput-underline:disabled': {
+    "& .MuiInput-underline:disabled": {
       borderBottomColor: MUIUtils.getMappedProps(ColorX.GetColorCSS, "theme.lineDisabled", "theme.line", "theme.field"),
     },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
         borderColor: MUIUtils.getMappedProps(ColorX.GetColorCSS, "theme.box", "theme.field"),
       },
-      '&:hover fieldset': {
+      "&:hover fieldset": {
         borderColor: MUIUtils.getMappedProps(ColorX.GetColorCSS, "theme.boxHover", "theme.field"),
       },
-      '&.Mui-focused fieldset': {
+      "&.Mui-focused fieldset": {
         borderColor: MUIUtils.getMappedProps(ColorX.GetColorCSS, "theme.boxFocused", "theme.field"),
       },
     },
@@ -46,7 +46,7 @@ const styles = {
     backgroundColor: MUIUtils.getMappedProps(ColorX.GetBGColorCSS, "theme.background")
   },
   
-}
+};
 
 /**
  * Styled Text Fields

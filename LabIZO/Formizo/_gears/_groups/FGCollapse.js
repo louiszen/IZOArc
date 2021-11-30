@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import _ from 'lodash';
-import { Collapse } from '@material-ui/core';
-import { KeyboardArrowDown, KeyboardArrowRight } from '@material-ui/icons';
+import PropsType from "prop-types";
+import _ from "lodash";
+import { Collapse } from "@material-ui/core";
+import { KeyboardArrowDown, KeyboardArrowRight } from "@material-ui/icons";
 
-import FItem from '../FItem';
+import FItem from "../FItem";
 
-import { Accessor } from 'IZOArc/STATIC';
-import { HStack, VStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
-import { OutlinedBox, StyledButton } from 'IZOArc/LabIZO/Stylizo';
+import { Accessor } from "IZOArc/STATIC";
+import { HStack, VStack, Spacer } from "IZOArc/LabIZO/Stackizo";
+import { OutlinedBox, StyledButton } from "IZOArc/LabIZO/Stylizo";
 
 class FGCollapse extends Component {
 
@@ -75,6 +75,7 @@ class FGCollapse extends Component {
   }
 
   renderSchema(){
+    // eslint-disable-next-line no-unused-vars
     let {ischema, ...other} = this.props;
     let collapseSchema = this.getCollapseSchema();
     return _.map(collapseSchema, (o, i) => {

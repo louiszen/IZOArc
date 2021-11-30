@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import _ from 'lodash';
-import { IconButton, Typography } from '@material-ui/core';
-import { Check, Close, ErrorOutlined, InfoOutlined, ReportProblemOutlined } from '@material-ui/icons';
+import PropsType from "prop-types";
+import _ from "lodash";
+import { IconButton, Typography } from "@material-ui/core";
+import { Check, Close, ErrorOutlined, InfoOutlined, ReportProblemOutlined } from "@material-ui/icons";
 
-import { Accessor, ColorX } from 'IZOArc/STATIC';
-import { HStack, VStack } from 'IZOArc/LabIZO/Stackizo';
+import { Accessor, ColorX } from "IZOArc/STATIC";
+import { HStack, VStack } from "IZOArc/LabIZO/Stackizo";
 
 /**
  * Snack Alert for IZO Container
@@ -83,14 +83,14 @@ class SnackAlert extends Component {
       <IconButton onClick={() => this._close()} size="small" style={{color: "white"}}>
         <Close fontSize="small"/>
       </IconButton>
-    )
+    );
       
   }
 
   renderInside(){
     let {message} = this.props;
     if(!_.isEmpty(message)){
-      let msgs = message.toString().split('\n');
+      let msgs = message.toString().split("\n");
       let jsx = [];
       _.map(msgs, (o, i) => {
         jsx.push(<Typography style={{fontSize: 14}} key={i}>{o}</Typography>);
@@ -108,7 +108,7 @@ class SnackAlert extends Component {
   }
 
   render(){
-    let {severity, message, ...other} = this.props;
+    let {message, ...other} = this.props;
     return (
       <HStack
         color="white"

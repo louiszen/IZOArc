@@ -5,7 +5,7 @@ import _ from "lodash";
 import axios from "axios";
 import fileDownload from "js-file-download";
 import { Add, CloudDownload, CloudUpload, Delete, DeleteForever, Edit, GetApp, InfoOutlined, Publish, Assessment} from "@material-ui/icons";
-import { ContentCopy } from '@mui/icons-material';
+import { ContentCopy } from "@mui/icons-material";
 import { Box, Slide, Typography } from "@material-ui/core";
 
 import { IZOTheme } from "__SYSDefault/Theme";
@@ -601,7 +601,7 @@ class Datumizo extends Component {
         ]}
         onCancel={() => STORE.clearAsk()}
         buttons={[]}
-        fieldStyle='grid'
+        fieldStyle="grid"
         onChange={(formValue, name, value) => this.Import.onSubmit(name, value)}
         readOnly={readOnly}
       />
@@ -922,11 +922,11 @@ class Datumizo extends Component {
       let {base} = this.props;
       let defDoc = {};
       if(_.isFunction(base.operations?.Add?.defaultDoc)){
-        defDoc = base.operations?.Add?.defaultDoc()
+        defDoc = base.operations?.Add?.defaultDoc();
       }else{
-        defDoc = base.operations?.Add?.defaultDoc || {}
+        defDoc = base.operations?.Add?.defaultDoc || {};
       }
-      console.log(base)
+      console.log(base);
       this.setState({
         inEdit: true,
         mode: "Add",
@@ -1620,11 +1620,11 @@ class Datumizo extends Component {
   renderSlide(){
     let { inEdit } = this.state;
     return (
-      <Slide direction='up' in={inEdit} mountOnEnter unmountOnExit>
+      <Slide direction="up" in={inEdit} mountOnEnter unmountOnExit>
         <VStack
-          width='100%'
-          paddingTop='30px'
-          paddingLeft='40px'
+          width="100%"
+          paddingTop="30px"
+          paddingLeft="40px"
           style={{
             background: "#f9ffff",
             zIndex: 1,
@@ -1650,8 +1650,8 @@ class Datumizo extends Component {
     if(!base.noDefaultTable){
       return (
         <Tablizo
-          width='100%'
-          height='100%'
+          width="100%"
+          height="100%"
           onMounted={this.onMountTablizo}
           schema={base.Connect.schema}
           data={table.data}
@@ -1678,7 +1678,7 @@ class Datumizo extends Component {
 
   renderGridView(){
     return (
-      <VStack width='100%'>
+      <VStack width="100%">
         {this.renderButtons()}
         {this.renderTable()}
       </VStack>
@@ -1701,7 +1701,7 @@ class Datumizo extends Component {
     if (!base) return <div />;
     return (
       <Box style={{ width: "100%"}} flexGrow={base.noDefaultTable? undefined: 1}>
-        <VStack width='100%' padding={1} alignItems="flex-start"> 
+        <VStack width="100%" padding={1} alignItems="flex-start"> 
           {this.renderInject()}
           {this.renderGridView()}
         </VStack>

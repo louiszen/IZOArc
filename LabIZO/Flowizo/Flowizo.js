@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { Accessor, ColorX } from 'IZOArc/STATIC';
-import PropsType from 'prop-types';
+import React, { Component } from "react";
+import { Accessor, ColorX } from "IZOArc/STATIC";
+import PropsType from "prop-types";
 
 import ReactFlow, { 
   ControlButton, 
@@ -9,13 +9,13 @@ import ReactFlow, {
   removeElements,
   isNode,
   MiniMap
-} from 'react-flow-renderer';
+} from "react-flow-renderer";
 
-import nodeTypes from './_gears/CustomNodes';
-import edgeTypes from './_gears/CustomEdges';
-import { Box } from '@material-ui/core';
-import _ from 'lodash';
-import { v1 } from 'uuid';
+import nodeTypes from "./_gears/CustomNodes";
+import edgeTypes from "./_gears/CustomEdges";
+import { Box } from "@material-ui/core";
+import _ from "lodash";
+import { v1 } from "uuid";
 
 /**
  * @augments {Component<Props, State>}
@@ -142,7 +142,7 @@ class Flowizo extends Component {
     return  {
       onDelete: this._onDelete,
       onValueChange: this._onValueChange
-    }
+    };
   }
 
   _getAddOns = () => {
@@ -169,7 +169,7 @@ class Flowizo extends Component {
   }
 
   _onValueChange = (id, name, value, validate) => {
-    console.log("_onValueChange")
+    console.log("_onValueChange");
 
     let newData = this.state.data;
     for(let i=0; i<newData.length; i++){
@@ -218,8 +218,8 @@ class Flowizo extends Component {
   addNewEdge = ({source, sourceHandle, target, targetHandle}) => {
     let strokeColor = ColorX.GetColorCSS("black", 0.75);
     switch(sourceHandle){
-      case 'yes': strokeColor = ColorX.GetColorCSS("green", 0.75); break;
-      case 'no': strokeColor = ColorX.GetColorCSS("red", 0.75); break;
+      case "yes": strokeColor = ColorX.GetColorCSS("green", 0.75); break;
+      case "no": strokeColor = ColorX.GetColorCSS("red", 0.75); break;
       default: break;
     }
     
@@ -317,7 +317,7 @@ class Flowizo extends Component {
   }
 
   _onNodeDragStop = (param, node) => {
-    console.log("_onNodeDragStop")
+    console.log("_onNodeDragStop");
     let id = node.id;
     let newData = this.state.data;
     for(let i=0; i<newData.length; i++){

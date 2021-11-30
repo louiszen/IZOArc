@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import { Box, CircularProgress, Typography, withStyles } from '@material-ui/core';
+import PropsType from "prop-types";
+import { Box, CircularProgress, Typography, withStyles } from "@material-ui/core";
 
-import MUIUtils from './_gears/MUIUtils';
+import MUIUtils from "./_gears/MUIUtils";
 
-import { Accessor, ColorX } from 'IZOArc/STATIC';
+import { Accessor, ColorX } from "IZOArc/STATIC";
 
 const styles = {
   root: {
@@ -91,11 +91,11 @@ class StyledCircularProgress extends Component {
             justifyContent="center"
           >
             <Typography style={{fontSize: 9, color: theme.label || "black"}}>
-              {value.toFixed(dp) + '%'}
+              {value.toFixed(dp) + "%"}
             </Typography>
           </Box>
         </Box>
-      )
+      );
     }
     return (
       <Box>

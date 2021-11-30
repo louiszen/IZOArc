@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import { observer } from 'mobx-react';
-import _ from 'lodash';
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import { observer } from "mobx-react";
+import _ from "lodash";
 
-import { Box, Tooltip } from '@material-ui/core';
-import { VerticalSplit } from '@material-ui/icons';
+import { Box, Tooltip } from "@material-ui/core";
+import { VerticalSplit } from "@material-ui/icons";
 
-import { Accessor, ColorX, LocaleX, STORE } from 'IZOArc/STATIC';
-import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
-import StyledIconButton from 'IZOArc/LabIZO/Stylizo/StyledIconButton';
+import { Accessor, ColorX, LocaleX, STORE } from "IZOArc/STATIC";
+import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
+import StyledIconButton from "IZOArc/LabIZO/Stylizo/StyledIconButton";
 
-import { IZOTheme } from '__SYSDefault/Theme';
-import { MenuConfig } from '__SYSDefault/Menu';
+import { IZOTheme } from "__SYSDefault/Theme";
+import { MenuConfig } from "__SYSDefault/Menu";
 
-import MenuButton from './_gears/MenuButton';
+import MenuButton from "./_gears/MenuButton";
 
-import './Container.css';
+import "./Container.css";
 
 class Menu extends Component {
 

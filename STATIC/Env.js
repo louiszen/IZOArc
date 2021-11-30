@@ -1,8 +1,8 @@
-import STORE from './AppStore';
-import axios from 'axios';
+import STORE from "./AppStore";
+import axios from "axios";
 
-import { DOMAIN } from '__SYSDefault/Domain';
-import { CheckInitAPI } from '__SYSDefault/SysAPI';
+import { DOMAIN } from "__SYSDefault/Domain";
+import { CheckInitAPI } from "__SYSDefault/SysAPI";
 
 class Env {
 

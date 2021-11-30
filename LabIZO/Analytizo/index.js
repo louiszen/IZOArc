@@ -1,1 +1,1 @@
-export { default as Pieizo } from './Pieizo/Pieizo';
+export { default as Pieizo } from "./Pieizo/Pieizo";

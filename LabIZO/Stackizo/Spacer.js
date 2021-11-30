@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import { Box } from '@material-ui/core';
+import PropsType from "prop-types";
+import { Box } from "@material-ui/core";
 
-import { Accessor } from 'IZOArc/STATIC';
+import { Accessor } from "IZOArc/STATIC";
 
 /**
  * Flex grow spacer for alignment

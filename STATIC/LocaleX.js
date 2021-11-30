@@ -1,7 +1,7 @@
-import _ from 'lodash';
-import { LocaleConfig } from '__SYSDefault/Locale';
+import _ from "lodash";
+import { LocaleConfig } from "__SYSDefault/Locale";
 
-import { Accessor, STORE } from '.';
+import { Accessor, STORE } from ".";
 
 class LocaleX {
 

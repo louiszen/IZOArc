@@ -1,1 +1,1 @@
-export {default} from './Msgizo';
+export {default} from "./Msgizo";

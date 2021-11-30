@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 
-import PropsType from 'prop-types';
-import _ from 'lodash';
-import { observer } from 'mobx-react';
-import { Typography, Tooltip } from '@material-ui/core';
+import PropsType from "prop-types";
+import _ from "lodash";
+import { observer } from "mobx-react";
+import { Typography, Tooltip } from "@material-ui/core";
 
-import MenuButtonList from './MenuButtonList';
+import MenuButtonList from "./MenuButtonList";
 
-import Accessizo from 'IZOArc/LabIZO/Accessizo';
-import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
-import { Accessor, STORE } from 'IZOArc/STATIC';
-import { StyledButton } from 'IZOArc/LabIZO/Stylizo';
-import { HMarquee } from 'IZOArc/LabIZO/Animatizo';
-import theme from './theme';
-import { v1 } from 'uuid';
+import Accessizo from "IZOArc/LabIZO/Accessizo";
+import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
+import { Accessor, STORE } from "IZOArc/STATIC";
+import { StyledButton } from "IZOArc/LabIZO/Stylizo";
+import { HMarquee } from "IZOArc/LabIZO/Animatizo";
+import theme from "./theme";
+import { v1 } from "uuid";
 
 class MenuButton extends Component {
 
@@ -155,9 +155,9 @@ class MenuButton extends Component {
     let {path, disabled} = this.props;
       return (
         <HStack style={{width: "100%", position: "relative"}}
-          onClick={(e) => {e.stopPropagation(); if(!disabled){this._onClick(path)}}}
-          onMouseEnter={() => {this.openNestedMenu()}}
-          onMouseLeave={() => {this.closeNestedMenu()}}
+          onClick={(e) => {e.stopPropagation(); if(!disabled){this._onClick(path);}}}
+          onMouseEnter={() => {this.openNestedMenu();}}
+          onMouseLeave={() => {this.closeNestedMenu();}}
           >
           {this.renderButton()}
           {this.renderNested()}

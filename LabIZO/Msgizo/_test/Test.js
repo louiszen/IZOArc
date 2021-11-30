@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import Accessor from 'IZOArc/STATIC/Accessor';
-/* import PropsType from 'prop-types';
+import React, { Component } from "react";
+import Accessor from "IZOArc/STATIC/Accessor";
+/* import PropsType from "prop-types";
 
-import schema from './_schema';
-import data from './_data'; */
+import schema from "./_schema";
+import data from "./_data"; */
 
-import Msgizo from 'IZOArc/LabIZO/Msgizo';
+import Msgizo from "IZOArc/LabIZO/Msgizo";
 
 class Test extends Component {
 

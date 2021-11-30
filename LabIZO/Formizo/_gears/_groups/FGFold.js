@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import _ from 'lodash';
-import { Collapse } from '@material-ui/core';
+import PropsType from "prop-types";
+import _ from "lodash";
+import { Collapse } from "@material-ui/core";
 
-import FItem from '../FItem';
+import FItem from "../FItem";
 
-import { Accessor } from 'IZOArc/STATIC';
+import { Accessor } from "IZOArc/STATIC";
 
 class FGFold extends Component {
 
@@ -87,6 +87,7 @@ class FGFold extends Component {
   }
 
   renderSchema(){
+    // eslint-disable-next-line no-unused-vars
     let {ischema, ...other} = this.props;
     let foldSchema = this.getFoldSchema();
     return _.map(foldSchema, (o, i) => {

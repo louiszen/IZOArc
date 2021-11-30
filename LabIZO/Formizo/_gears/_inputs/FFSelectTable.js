@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { Accessor } from 'IZOArc/STATIC';
-import PropsType from 'prop-types';
-import Tablizo from 'IZOArc/LabIZO/Tablizo';
-import { HStack, Spacer, VStack } from 'IZOArc/LabIZO/Stackizo';
-import { Typography } from '@material-ui/core';
-import _ from 'lodash';
+import React, { Component } from "react";
+import { Accessor } from "IZOArc/STATIC";
+import PropsType from "prop-types";
+import Tablizo from "IZOArc/LabIZO/Tablizo";
+import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
+import { Typography } from "@material-ui/core";
+import _ from "lodash";
 
 /**
  * @augments {Component<Props, State>}

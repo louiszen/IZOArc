@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
+import PropsType from "prop-types";
 import InputLabel from "@material-ui/core/InputLabel";
 import NotchedOutline from "@material-ui/core/OutlinedInput/NotchedOutline";
 import { withStyles } from "@material-ui/core/styles";
 
-import MUIUtils from './_gears/MUIUtils';
+import MUIUtils from "./_gears/MUIUtils";
 
-import { Accessor, ColorX } from 'IZOArc/STATIC';
+import { Accessor, ColorX } from "IZOArc/STATIC";
 import { HStack } from "IZOArc/LabIZO/Stackizo";
 
 const styles = {

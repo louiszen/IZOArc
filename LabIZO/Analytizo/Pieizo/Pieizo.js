@@ -26,9 +26,9 @@ class Pieizo extends Component {
     height: "100%",
 
     title: "Test",
-    titleAlign: "left", //'inherit'| 'left'| 'center'| 'right'| 'justify'
+    titleAlign: "left", //"inherit"| "left"| "center"| "right"| "justify"
     titleColor: "initial", //material ui default colors
-    titleVariant: "h3", //'h1'| 'h2'| 'h3'| 'h4'| 'h5'| 'h6'| 'subtitle1'| 'subtitle2'| 'body1'| 'body2'| 'caption'| 'button'| 'overline'| 'srOnly'| 'inherit'
+    titleVariant: "h3", //"h1"| "h2"| "h3"| "h4"| "h5"| "h6"| "subtitle1"| "subtitle2"| "body1"| "body2"| "caption"| "button"| "overline"| "srOnly"| "inherit"
     titleStyle: {}, //override the default styles
     data: [],
 
@@ -106,8 +106,8 @@ class Pieizo extends Component {
 
     return (
       <Legend
-        layout='vertical'
-        align='right'
+        layout="vertical"
+        align="right"
         verticalAlign={"top"}
         wrapperStyle={this.props.legendWrapperStyle}
         formatter={(value, entry) => {
@@ -140,10 +140,10 @@ class Pieizo extends Component {
     return (
       <VStack width={width} height={height}>
         {this.renderTitle()}
-        <ResponsiveContainer width='100%' height='100%'>
+        <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             {this.rederTooltip()}
-            <Pie data={data} innerRadius={innerRadius} outerRadius={outerRadius} fill='#8884d8' paddingAngle={5} dataKey={schema.dataKey} cx={cx} cy={cy}>
+            <Pie data={data} innerRadius={innerRadius} outerRadius={outerRadius} fill="#8884d8" paddingAngle={5} dataKey={schema.dataKey} cx={cx} cy={cy}>
               {data.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={pieColor[index % pieColor.length]} />
               ))}

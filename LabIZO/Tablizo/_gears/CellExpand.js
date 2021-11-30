@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import { Paper, Popper, Typography } from '@material-ui/core';
+import PropsType from "prop-types";
+import { Paper, Popper, Typography } from "@material-ui/core";
 
-import { Accessor } from 'IZOArc/STATIC';
+import { Accessor } from "IZOArc/STATIC";
 
 class CellExpand extends Component {
 
@@ -60,7 +60,7 @@ class CellExpand extends Component {
             showFullCell: true,
             showPopper: isCurrentlyOverflown,
             anchorEl: this.cellDiv
-          })
+          });
         }
       }, 500);
     });

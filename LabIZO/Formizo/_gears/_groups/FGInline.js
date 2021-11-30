@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import PropsType from 'prop-types';
-import _ from 'lodash';
-import { Box } from '@material-ui/core';
+import PropsType from "prop-types";
+import _ from "lodash";
+import { Box } from "@material-ui/core";
 
-import FItem from '../FItem';
+import FItem from "../FItem";
 
-import { Accessor } from 'IZOArc/STATIC';
-import { HStack, Spacer } from 'IZOArc/LabIZO/Stackizo';
+import { Accessor } from "IZOArc/STATIC";
+import { HStack, Spacer } from "IZOArc/LabIZO/Stackizo";
 
 class FGInline extends Component {
 
@@ -61,6 +61,7 @@ class FGInline extends Component {
   }
 
   renderSchema(){
+    // eslint-disable-next-line no-unused-vars
     let {ischema, ...other} = this.props;
     let inlineSchema = this.getInlineSchema();
     return _.map(inlineSchema, (o, i) => {

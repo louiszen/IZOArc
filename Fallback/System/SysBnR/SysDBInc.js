@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import { Cancel, CheckCircle } from '@material-ui/icons';
-import { IconButton, Tooltip } from '@material-ui/core';
+import { Cancel, CheckCircle } from "@material-ui/icons";
+import { IconButton, Tooltip } from "@material-ui/core";
 
-import { Accessor, ColorX, LocaleX } from 'IZOArc/STATIC';
-import { HStack } from 'IZOArc/LabIZO/Stackizo';
-import { observer } from 'mobx-react';
+import { Accessor, ColorX, LocaleX } from "IZOArc/STATIC";
+import { HStack } from "IZOArc/LabIZO/Stackizo";
+import { observer } from "mobx-react";
 
 class SysDBInc extends Component {
 

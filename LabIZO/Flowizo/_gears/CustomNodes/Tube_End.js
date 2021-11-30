@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { Accessor, ColorX } from 'IZOArc/STATIC';
-import PropsType from 'prop-types';
-import { Handle } from 'react-flow-renderer';
-import { Box } from '@material-ui/core';
-import { Cancel, PlayForWork } from '@material-ui/icons';
-import { VStack } from 'IZOArc/LabIZO/Stackizo';
-import { FFDropdown } from 'IZOArc/LabIZO/Formizo/_gears/_inputs';
+import React, { Component } from "react";
+import { Accessor, ColorX } from "IZOArc/STATIC";
+import PropsType from "prop-types";
+import { Handle } from "react-flow-renderer";
+import { Box } from "@material-ui/core";
+import { Cancel, PlayForWork } from "@material-ui/icons";
+import { VStack } from "IZOArc/LabIZO/Stackizo";
+import { FFDropdown } from "IZOArc/LabIZO/Formizo/_gears/_inputs";
 
 /**
  * @augments {Component<Props, State>}
