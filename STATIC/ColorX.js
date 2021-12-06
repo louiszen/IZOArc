@@ -2,14 +2,27 @@ import _ from "lodash";
 
 class ColorX {
 
+  /**
+   * @typedef {{
+   *  r: Number,
+   *  g: Number,
+   *  b: Number,
+   *  a: Number
+   * }} color
+   */
+
+  /**
+   * @type {Object<string, color>}
+   */
   static __staticColor = {
     transparent: {r: 0, g: 0, b: 0, a: 0},
     aliceblue: {r: 240, g: 248, b: 255, a: 1},
-    pureWhite: {r: 255, g: 255, b: 255, a: 1},
-    pureDark: {r: 0, g: 0, b: 0, a: 1},
-    bgDark: {r: 29, g: 25, b: 25, a: 1},
+    
+    //company
     elainOrange: {r: 242, g: 132, b: 62, a: 1},
     elainOrangeDark: {r: 142, g: 67, b: 35, a: 1},
+
+    //cell color fg
     black: {r: 29, g: 29, b: 29, a: 1},
     white: {r: 255, g: 255, b: 255, a: 1},
     green: {r: 85, g: 136, b: 38, a: 1},
@@ -19,11 +32,11 @@ class ColorX {
     blue: {r: 74, g: 98, b: 136, a: 1},
     purple: {r: 171, g: 84, b: 211, a: 1},
     grey: {r: 80, g: 80, b: 80, a: 1},
-    greyOut: {r: 160, g: 160, b: 160, a: 1},
-    lightGrey: {r: 220, g: 220, b: 220, a: 1},
     orange: {r: 212, g: 120, b: 0, a: 1},
-    warning: {r: 255, g: 220, b: 0, a: 1},
+    
+    //cell color bg
     bgTransparent: {r: 0, g: 0, b: 0, a: 0},
+    bgDark: {r: 29, g: 25, b: 25, a: 1},
     bgBlack: {r: 29, g: 29, b: 29, a: 1},
     bgWhite: {r: 255, g: 255, b: 255, a: 1},
     bgGreen: {r: 198, g: 239, b: 206, a: 1},
@@ -35,15 +48,37 @@ class ColorX {
     bgGrey: {r: 197, g: 197, b: 197, a: 1},
     bgOrange: {r: 255, g: 220, b: 191, a: 1},
     bgLightBlue: {r: 175, g: 214, b: 250, a: 1},
-    darkBox: {r: 60, g: 60, b: 60, a: 1},
+
+    //alert
     Success: {r: 76, g: 175, b: 80, a: 1},
     Warn: {r: 255, g: 152, b: 0, a: 1},
     Info: {r: 33, g: 150, b: 243, a: 1},
     Error: {r: 244, g: 67, b: 54, a: 1},
+
+    //special meaning
+    warning: {r: 255, g: 220, b: 0, a: 1},
+
+    //light | dark
     lightRed: {r: 200, g: 0, b: 0, a: 1},
-    darkRed: {r: 140, g: 1, b: 8, a: 1}
+    darkBox: {r: 60, g: 60, b: 60, a: 1},
+    darkRed: {r: 140, g: 1, b: 8, a: 1},
+    greyOut: {r: 160, g: 160, b: 160, a: 1},
+    lightGrey: {r: 220, g: 220, b: 220, a: 1},
+
+    //pure
+    pureRed: {r: 255, g: 0, b: 0, a: 1},
+    pureGreen: {r: 0, g: 255, b: 0, a: 1},
+    pureBlue: {r: 0, g: 0, b: 255, a: 1},
+    pureWhite: {r: 255, g: 255, b: 255, a: 1},
+    pureDark: {r: 0, g: 0, b: 0, a: 1},
   };
 
+  /**
+   * @type {Object.<string, [{
+   *  percent: Number,
+   *  color: color
+   * }]}
+   */
   static __gradient = {
     fantasticBlue: [
       {
@@ -58,44 +93,16 @@ class ColorX {
         percent: 100,
         color: {r: 31, g: 103, b: 176, a: 1}
       },
-    ],
-    green: [
-      {
-        percent: 0,
-        color: {r: 0, g: 255, b: 0, a: 1}
-      },
-      {
-        percent: 50,
-        color: {r: 0, g: 255, b: 0, a: 0}
-      },
-      {
-        percent: 100,
-        color: {r: 0, g: 255, b: 0, a: 0}
-      }
-    ],
-    red: [
-      {
-        percent: 0,
-        color: {r: 255, g: 0, b: 0, a: 1}
-      },
-      {
-        percent: 50,
-        color: {r: 255, g: 0, b: 0, a: 0}
-      },
-      {
-        percent: 100,
-        color: {r: 255, g: 0, b: 0, a: 0}
-      }
     ]
   }
 
   /**
-   * Get the color from the mapping
+   * 
    * @param {String} name 
    * @param {Number} a 
-   * @returns 
+   * @returns {color}
    */
-  static GetColorCSS(name, a = undefined){
+  static GetColor(name, a = undefined){
     if(!name) return undefined;
 
     if(_.isString(name)){
@@ -103,14 +110,25 @@ class ColorX {
         return undefined;
       }
       if(a === null || a === undefined){
-        return ColorX.toCSS(ColorX.__staticColor[name]);
+        return ColorX.__staticColor[name];
       }
-      return ColorX.toCSS({...ColorX.__staticColor[name], a});
+      return {...ColorX.__staticColor[name], a};
     }
 
     if(_.isObject(name)){
-      return ColorX.toCSS({...name, a}); 
+      return {...name, a}; 
     }
+  }
+
+  /**
+   * Get the color from the mapping
+   * @param {String} name 
+   * @param {Number} a 
+   * @returns
+   */
+  static GetColorCSS(name, a = undefined){
+    let color = ColorX.GetColor(name, a);
+    return ColorX.toCSS(color);
   }
 
   /**
@@ -169,13 +187,50 @@ class ColorX {
   }
 
   /**
+   * 
+   * @param {String} name 
+   * @param {Number} brightness 
+   * @param {Number} glow 
+   * @returns 
+   */
+  static GetLEDLight(name, brightness = 1, glow = 50){
+    let color = ColorX.GetColor(name);
+    return ColorX.GetLEDLightByColor(color, brightness, glow);
+  }
+
+  /**
+   * 
+   * @param {color} color 
+   * @param {Number} brightness 
+   * @param {Number} glow  
+   * @returns 
+   */
+  static GetLEDLightByColor(color, brightness = 1, glow = 50){
+    let gradient = [
+      {
+        percent: 0,
+        color: {...color, a: brightness}
+      },
+      {
+        percent: glow,
+        color: {...color, a: 0}
+      },
+      {
+        percent: 100,
+        color: {...color, a: 0}
+      }
+    ];
+    return ColorX.radialGradientToCSS("circle at center", gradient); 
+  }
+
+  /**
    * Get the radial gradient mapping
    * @param {String} name
    * @param {String} mode 
    * @param {Number} a 
    * @returns 
    */
-  static GetRadialGradientCSS(name, mode, a = undefined){
+  static GetRadialGradientCSS(name, mode = "circle at center", a = undefined){
     if(!name) return undefined;
     if(!ColorX.__gradient[name]) {
       console.warn("Gradient " + name + " not found.");
@@ -187,7 +242,7 @@ class ColorX {
   /**
    * Get Linear gradient CSS token 
    * @param {Number} deg 
-   * @param {Array} colors 
+   * @param {[color]} colors 
    * @param {Number} a 
    * @returns 
    */
@@ -201,7 +256,7 @@ class ColorX {
   /**
    * Get Radial Gradient CSS token
    * @param {String} mode 
-   * @param {Array} colors 
+   * @param {[color]} colors 
    * @param {Number} a 
    * @returns 
    */
@@ -214,7 +269,7 @@ class ColorX {
 
   /**
    * Get Gradient CSS token
-   * @param {Array} colors 
+   * @param {[color]} colors 
    * @param {Number} a 
    * @returns 
    */
@@ -227,6 +282,15 @@ class ColorX {
     return str;
   }
 
+  /**
+   * 
+   * @param {{
+   *   percent: Number,
+   *   color: color
+   * }} param0 
+   * @param {Number} a 
+   * @returns 
+   */
   static partToCSS({percent, color}, a = undefined){
     if(a) return ColorX.toCSS({...color}, a) + " " + percent + "%";
     return ColorX.toCSS({...color}) + " " + percent + "%";
@@ -354,10 +418,12 @@ class ColorX {
 
   /**
    * RGBA object to CSS string
-   * @param {{r: Number, g: Number, b: Number, a:Number}} param0 
+   * @param {color} color 
    * @returns 
    */
-  static toCSS({r, g, b, a}){
+  static toCSS(color){
+    if(!color) return "";
+    let {r, g, b, a} = color;
     return "rgba("+ r + "," + g + "," + b + "," + ((a === null || a === undefined)? 1: a) + ")";
   }
 
