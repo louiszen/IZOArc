@@ -6,7 +6,8 @@ const Rules = {
   email: value => !value || /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value),
   number: value => !value || !isNaN(Number(value)),
   plain: value => !value || /^[a-zA-Z0-9_]+$/i.test(value),
-  plainSpace: value => !value || /^[a-zA-Z0-9_ ]+$/i.test(value)
+  plainSpace: value => !value || /^[a-zA-Z0-9_ -]+$/i.test(value),
+  plainLower: value => !value || /^[a-z0-9_]+$/.test(value)
 };
 
 const ErrorMsg = {
@@ -21,7 +22,7 @@ const ErrorMsg = {
   number: () => LocaleX.Parse({
     EN: "Must be a number",
     TC: "必需為數字"
-  }) ,
+  }),
   plain: () => LocaleX.Parse({
     EN: "No spaces or special characters except _",
     TC: "不可包含除 _ 外 空格 或 特殊子元",
@@ -29,6 +30,10 @@ const ErrorMsg = {
   plainSpace: () => LocaleX.Parse({
     EN: "No special characters except space or _",
     TC: "不可包含除 空格 或 _ 外特殊子元",
+  }),
+  plainLower: () => LocaleX.Parse({
+    EN: "Must be in lowercase, no spaces or special characters except _",
+    TC: "只接受小寫字母，不可包含除 _ 外 空格 或 特殊子元",
   }),
 };
 

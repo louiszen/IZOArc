@@ -58,6 +58,34 @@ class ColorX {
         percent: 100,
         color: {r: 31, g: 103, b: 176, a: 1}
       },
+    ],
+    green: [
+      {
+        percent: 0,
+        color: {r: 0, g: 255, b: 0, a: 1}
+      },
+      {
+        percent: 50,
+        color: {r: 0, g: 255, b: 0, a: 0}
+      },
+      {
+        percent: 100,
+        color: {r: 0, g: 255, b: 0, a: 0}
+      }
+    ],
+    red: [
+      {
+        percent: 0,
+        color: {r: 255, g: 0, b: 0, a: 1}
+      },
+      {
+        percent: 50,
+        color: {r: 255, g: 0, b: 0, a: 0}
+      },
+      {
+        percent: 100,
+        color: {r: 255, g: 0, b: 0, a: 0}
+      }
     ]
   }
 
@@ -200,7 +228,8 @@ class ColorX {
   }
 
   static partToCSS({percent, color}, a = undefined){
-    return ColorX.toCSS({...color, a}) + " " + percent + "%";
+    if(a) return ColorX.toCSS({...color}, a) + " " + percent + "%";
+    return ColorX.toCSS({...color}) + " " + percent + "%";
   }
 
   /**

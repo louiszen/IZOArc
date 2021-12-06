@@ -15,7 +15,7 @@ import Inner from "./_gears/Inner";
 import Formizo from "IZOArc/LabIZO/Formizo";
 import Tablizo from "IZOArc/LabIZO/Tablizo";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
-import { Accessor, Authority, ColorX, ErrorX, LocaleX, STORE } from "IZOArc/STATIC";
+import { Accessor, Authority, ColorX, ErrorX, LocaleX, STORE, ZFunc } from "IZOArc/STATIC";
 import { StyledButton } from "IZOArc/LabIZO/Stylizo";
 
 /**
@@ -825,13 +825,13 @@ class Datumizo extends Component {
 
     onSuccess: (payload) => {
       let { base } = this.props;
-      STORE.Alert(base.operations?.Delete?.success, "success");
+      STORE.Alert(ZFunc.IfFuncExec(base.operations?.Delete?.success), "success");
       this._fetchData();
     },
 
     onFail: (payload) => {
       let { base } = this.props;
-      let msg = base.operations?.Delete?.fail + (payload.message || "");
+      let msg = ZFunc.IfFuncExec(base.operations?.Delete?.fail) + (payload.message || "");
       STORE.Alert(msg, "error");
     },
   };
@@ -906,13 +906,13 @@ class Datumizo extends Component {
 
     onSuccess: (payload) => {
       let { base } = this.props;
-      STORE.Alert(base.operations?.Duplicate?.success, "success");
+      STORE.Alert(ZFunc.IfFuncExec(base.operations?.Duplicate?.success), "success");
       this._fetchData();
     },
 
     onFail: (payload) => {
       let { base } = this.props;
-      let msg = base.operations?.Duplicate?.fail + (payload.message || "");
+      let msg = ZFunc.IfFuncExec(base.operations?.Duplicate?.fail) + (payload.message || "");
       STORE.Alert(msg, "error");
     },
   };
@@ -991,13 +991,13 @@ class Datumizo extends Component {
 
     onSuccess: (payload) => {
       let { base } = this.props;
-      STORE.Alert(base.operations?.Add?.success, "success");
+      STORE.Alert(ZFunc.IfFuncExec(base.operations?.Add?.success), "success");
       this._fetchData();
     },
 
     onFail: (payload) => {
       let { base } = this.props;
-      let msg = base.operations?.Add?.fail + (payload.message || "");
+      let msg = ZFunc.IfFuncExec(base.operations?.Add?.fail) + (payload.message || "");
       STORE.Alert(msg, "error");
     },
   };
@@ -1073,13 +1073,13 @@ class Datumizo extends Component {
 
     onSuccess: (payload) => {
       let { base } = this.props;
-      STORE.Alert(base.operations?.Add?.success, "success");
+      STORE.Alert(ZFunc.IfFuncExec(base.operations?.Add?.success), "success");
       this._fetchData();
     },
 
     onFail: (payload) => {
       let { base } = this.props;
-      let msg = base.operations?.Add?.fail + (payload.message || "");
+      let msg = ZFunc.IfFuncExec(base.operations?.Add?.fail) + (payload.message || "");
       STORE.Alert(msg, "error");
     },
   };
@@ -1152,13 +1152,13 @@ class Datumizo extends Component {
 
     onSuccess: (payload) => {
       let { base } = this.props;
-      STORE.Alert(base.operations?.Edit?.success, "success");
+      STORE.Alert(ZFunc.IfFuncExec(base.operations?.Edit?.success), "success");
       this._fetchData();
     },
 
     onFail: (payload) => {
       let { base } = this.props;
-      let msg = base.operations?.Edit?.fail + (payload.message || "");
+      let msg = ZFunc.IfFuncExec(base.operations?.Edit?.fail) + (payload.message || "");
       STORE.Alert(msg, "error");
     },
   };
@@ -1315,13 +1315,13 @@ class Datumizo extends Component {
 
     onSuccess: (payload) => {
       let { base } = this.props;
-      STORE.Alert(base.operations?.DeleteBulk?.success, "success");
+      STORE.Alert(ZFunc.IfFuncExec(base.operations?.DeleteBulk?.success), "success");
       this._fetchData();
     },
 
     onFail: (payload) => {
       let { base } = this.props;
-      let msg = base.operations?.DeleteBulk?.fail + (payload.message || "");
+      let msg = ZFunc.IfFuncExec(base.operations?.DeleteBulk?.fail) + (payload.message || "");
       STORE.Alert(msg, "error");
     },
   };
@@ -1333,15 +1333,9 @@ class Datumizo extends Component {
         STORE.Alert(LocaleX.Get("__IZO.Alert.ImportNotImplement"), "warn");
         return;
       }
-      let title = base.operations?.Import?.title;
-      if(_.isFunction(title)){
-        title = title();
-      }
+      let title = ZFunc.IfFuncExec(base.operations?.Import?.title);
 
-      let content = base.operations?.Import?.content;
-      if(_.isFunction(content)){
-        content = content();
-      }
+      let content = ZFunc.IfFuncExec(base.operations?.Import?.content);
 
       STORE.Form(title, content 
         || (base.operations?.Import?.replace? 
@@ -1412,7 +1406,7 @@ class Datumizo extends Component {
 
     onFail: (payload) => {
       let { base } = this.props;
-      let msg = base.operations?.Import?.fail + (payload.message || "");
+      let msg = ZFunc.IfFuncExec(base.operations?.Import?.fail) + (payload.message || "");
       STORE.Alert(msg, "error");
       STORE.clearAsk();
     },
@@ -1476,13 +1470,13 @@ class Datumizo extends Component {
 
     onSuccess: (payload) => {
       let { base } = this.props;
-      STORE.Alert(base.operations?.Sync?.success, "success");
+      STORE.Alert(ZFunc.IfFuncExec(base.operations?.Sync?.success), "success");
       this._fetchData();
     },
 
     onFail: (payload) => {
       let { base } = this.props;
-      let msg = base.operations?.Sync?.fail + (payload.message || "");
+      let msg = ZFunc.IfFuncExec(base.operations?.Sync?.fail) + (payload.message || "");
       STORE.Alert(msg, "error");
     },
   };

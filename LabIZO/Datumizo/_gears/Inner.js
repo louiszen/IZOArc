@@ -100,7 +100,7 @@ class Inner extends Component {
         onSubmit={onSubmit}
         addOns={addOns}
         user={user}
-        {...formizo}
+        {...(ibase.formizo || formizo)}
         />
     );
   }
