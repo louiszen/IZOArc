@@ -205,6 +205,10 @@ class FFDate extends Component {
     let ireadOnly = ischema.readOnly || readOnly;
 
     let ierror = Accessor.Get(formError, iname);
+    if(_.isFunction(ierror)){
+      ierror = ierror();
+    }
+    
     let helperText = ischema.helperText;
     if(errorsShowOnHelperText){
       helperText = ierror;

@@ -392,7 +392,11 @@ class Formizo extends Component {
     _.map(criteria, (o, i) => {
       if (!Validation.Rules[o](value)) {
         if (_.isEmpty(error)) {
-          error = Validation.ErrorMsg[o];
+          if(_.isFunction(Validation.ErrorMsg[o])){
+            error = Validation.ErrorMsg[o]();
+          }else{
+            error = Validation.ErrorMsg[o];
+          }
         }
       }
     });

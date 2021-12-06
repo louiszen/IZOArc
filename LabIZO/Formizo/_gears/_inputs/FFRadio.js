@@ -173,6 +173,10 @@ class FFRadio extends Component {
     let ierror = Accessor.Get(formError, iname);
     let ireadOnly = ischema.readOnly || readOnly;
 
+    if(_.isFunction(ierror)){
+      ierror = ierror();
+    }
+
     let helperText = ischema.helperText;
     if(errorsShowOnHelperText){
       helperText = ierror;

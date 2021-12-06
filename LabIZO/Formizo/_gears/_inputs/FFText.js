@@ -110,6 +110,10 @@ class FFText extends Component {
     let ierror = Accessor.Get(formError, iname);
     let ireadOnly = ischema.readOnly || readOnly;
 
+    if(_.isFunction(ierror)){
+      ierror = ierror();
+    }
+
     let helperText = ischema.helperText;
     if (errorsShowOnHelperText) {
       helperText = ierror;
@@ -158,6 +162,10 @@ class FFText extends Component {
     let ivalue = Accessor.Get(formValue, iname) || "";
     let ierror = Accessor.Get(formError, iname);
     let ireadOnly = ischema.readOnly || readOnly;
+
+    if(_.isFunction(ierror)){
+      ierror = ierror();
+    }
 
     let helperText = ischema.helperText;
     if (errorsShowOnHelperText) {

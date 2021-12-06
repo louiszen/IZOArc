@@ -1,3 +1,4 @@
+import { LocaleX } from "IZOArc/STATIC";
 import _ from "lodash";
 
 const Rules = {
@@ -9,11 +10,26 @@ const Rules = {
 };
 
 const ErrorMsg = {
-  required: "Required",
-  email: "Invalid email address",
-  number: "Must be a number",
-  plain: "No spaces and special characters except _",
-  plainSpace: "No special characters except _",
+  required: () => LocaleX.Parse({
+    EN: "Required",
+    TC: "必需填寫"
+  }),
+  email: () => LocaleX.Parse({
+    EN: "Invalid email address",
+    TC: "無效的Email格式"
+  }),
+  number: () => LocaleX.Parse({
+    EN: "Must be a number",
+    TC: "必需為數字"
+  }) ,
+  plain: () => LocaleX.Parse({
+    EN: "No spaces or special characters except _",
+    TC: "不可包含除 _ 外 空格 或 特殊子元",
+  }),
+  plainSpace: () => LocaleX.Parse({
+    EN: "No special characters except space or _",
+    TC: "不可包含除 空格 或 _ 外特殊子元",
+  }),
 };
 
 let validates = {

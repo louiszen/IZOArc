@@ -111,6 +111,10 @@ class FFPassword extends Component {
     let ierror = Accessor.Get(formError, iname);
     let ireadOnly = ischema.readOnly || readOnly;
 
+    if(_.isFunction(ierror)){
+      ierror = ierror();
+    }
+
     let helperText = ischema.helperText;
     if (errorsShowOnHelperText) {
       helperText = ierror;
@@ -162,6 +166,10 @@ class FFPassword extends Component {
     if (ivalue === undefined || ivalue === null) ivalue = "";
     let ierror = Accessor.Get(formError, iname);
     let ireadOnly = ischema.readOnly || readOnly;
+
+    if(_.isFunction(ierror)){
+      ierror = ierror();
+    }
 
     let helperText = ischema.helperText;
     if (errorsShowOnHelperText) {
