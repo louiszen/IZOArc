@@ -69,6 +69,9 @@ class ColorX {
     pureRed: {r: 255, g: 0, b: 0, a: 1},
     pureGreen: {r: 0, g: 255, b: 0, a: 1},
     pureBlue: {r: 0, g: 0, b: 255, a: 1},
+    pureYellow: {r: 255, g: 255, b: 0, a: 1},
+    pureCyan: {r: 0, g: 255, b: 255, a: 1},
+    pureMagenta: {r: 255, g: 0, b: 255, a: 1},
     pureWhite: {r: 255, g: 255, b: 255, a: 1},
     pureDark: {r: 0, g: 0, b: 0, a: 1},
   };
