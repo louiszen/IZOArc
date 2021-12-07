@@ -107,7 +107,7 @@ class SLogin {
     let req = {
       method: method,
       username: username,
-      password: hash.update(password).digest("hex")
+      password: hash.update(password || "").digest("hex")
     };
   
     try {

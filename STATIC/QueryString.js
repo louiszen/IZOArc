@@ -3,6 +3,11 @@ import Accessor from "./Accessor";
 
 class QueryString {
 
+  /**
+   * 
+   * @param {String} queryString 
+   * @returns {*}
+   */
   static Parse(queryString){
 
     let qS = queryString.slice(1);

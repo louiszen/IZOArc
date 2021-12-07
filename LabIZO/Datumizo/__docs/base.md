@@ -11,7 +11,6 @@
 | schema | `Object` || `{}` | The schema object / document |
 | reqAuth | `String` || `""` | The base required access path |
 | rowIdAccessor | `String` || `"_id"` | The accessor of the ID of the document |
-
 | columnsToolbar | `Boolean` || `true` | Show the columns selector of the table |
 | filterToolbar | `Boolean` || `false` | Show the filter button of the table |
 | densityToolbar | `Boolean` || `true` | Show the density selector of the table |

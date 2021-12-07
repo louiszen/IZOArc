@@ -16,6 +16,7 @@ const loginPassword = [
     name: "password",
     format: "password",
     autoFocus: true,
+    validate: ["required"],
   },
 ];
 
@@ -25,6 +26,7 @@ const loginOTP = [
     name: "otp",
     format: "password",
     autoFocus: true,
+    validate: ["required"],
   },
 ];
 
