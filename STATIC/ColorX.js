@@ -56,7 +56,7 @@ class ColorX {
     Error: {r: 244, g: 67, b: 54, a: 1},
 
     //special meaning
-    warning: {r: 255, g: 220, b: 0, a: 1},
+    Warning: {r: 255, g: 220, b: 0, a: 1},
 
     //light | dark
     lightRed: {r: 200, g: 0, b: 0, a: 1},
