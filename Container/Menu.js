@@ -11,7 +11,7 @@ import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
 import StyledIconButton from "IZOArc/LabIZO/Stylizo/StyledIconButton";
 
 import { IZOTheme } from "__SYSDefault/Theme";
-import { MenuConfig } from "__SYSDefault/Menu";
+import { LowerMenu, MainMenu, UpperMenu } from "__SYSDefault/Menu";
 
 import MenuButton from "./_gears/MenuButton";
 
@@ -72,10 +72,14 @@ class Menu extends Component {
     STORE.toggleMini();
   }
 
-  renderButtons(){
-    return _.map(MenuConfig, (o, i) => {
-      return this.menuButton(o.caption, o.link, o.faIcon, o.auth, o.level, o.group, o.role, o.submenu, o.disabled);
-    });
+  renderButtons(buttons){
+    return (
+      <VStack height="fit-content">
+        {_.map(buttons, (o, i) => {
+            return this.menuButton(o.caption, o.link, o.faIcon, o.auth, o.level, o.group, o.role, o.submenu, o.disabled);
+          })}
+      </VStack>
+    );
   }
 
   renderPin(){
@@ -123,12 +127,16 @@ class Menu extends Component {
 
   render(){
     return (
-      <Box className={"menu " + (STORE.mini? "mini" : "")} width="140px" height="100%" bgcolor={ColorX.GetColorCSS(IZOTheme.menuBG)} position="fixed" zIndex="300">
-        <VStack width="100%" style={{paddingTop: "50px"}}>
+      <Box className={"menu " + (STORE.mini? "mini" : "")} width={140} height="100%" bgcolor={ColorX.GetColorCSS(IZOTheme.menuBG)} position="fixed" zIndex={300}>
+        <VStack width="100%" style={{paddingTop: 50}}>
           {this.renderPin()}
-          <VStack width="100%" style={{paddingTop: "40px"}}>
-            {this.renderButtons()}
+          <VStack width="100%" style={{paddingTop: 40, paddingBottom: 40}}>
+            <VStack spacing={40}>
+              {this.renderButtons(UpperMenu)}
+              {this.renderButtons(MainMenu)}
+            </VStack>
             <Spacer/>
+            {this.renderButtons(LowerMenu)}
           </VStack>
         </VStack>
       </Box>
