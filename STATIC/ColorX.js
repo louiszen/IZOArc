@@ -101,7 +101,7 @@ class ColorX {
 
   /**
    * 
-   * @param {String} name 
+   * @param {String | color} name 
    * @param {Number} a 
    * @returns {color}
    */
@@ -191,24 +191,13 @@ class ColorX {
 
   /**
    * 
-   * @param {String} name 
-   * @param {Number} brightness 
-   * @param {Number} glow 
-   * @returns 
-   */
-  static GetLEDLight(name, brightness = 1, glow = 50){
-    let color = ColorX.GetColor(name);
-    return ColorX.GetLEDLightByColor(color, brightness, glow);
-  }
-
-  /**
-   * 
-   * @param {color} color 
+   * @param {String | color} name 
    * @param {Number} brightness 
    * @param {Number} glow  
    * @returns 
    */
-  static GetLEDLightByColor(color, brightness = 1, glow = 50){
+  static GetLEDLight(name, brightness = 1, glow = 50){
+    let color = ColorX.GetColor(name);
     let gradient = [
       {
         percent: 0,
