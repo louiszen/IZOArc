@@ -314,6 +314,7 @@ class Login extends Component {
           }
         }}
         disabled={{loading}}
+        formPadding="0 5px"
         />
     );
   }

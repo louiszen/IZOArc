@@ -64,6 +64,8 @@ class Formizo extends Component {
     buttonPadding: PropsType.oneOfType([PropsType.number, PropsType.string]),
     buttonWidth: PropsType.oneOfType([PropsType.number, PropsType.string]),
     fieldStyle: PropsType.oneOf(["grid", "standard", "filled", "outlined"]),
+    formPadding: PropsType.oneOfType([PropsType.number, PropsType.string]),
+    formMargin: PropsType.oneOfType([PropsType.number, PropsType.string]),
 
     //grid specific
     labelXS: PropsType.number,
@@ -110,6 +112,8 @@ class Formizo extends Component {
     buttonPadding: 2,
     buttonWidth: 100,
     fieldStyle: "grid",
+    formPadding: "0",
+    formMargin: "0",
 
     labelXS: 3,
     labelPaddingX: 1,
@@ -572,9 +576,10 @@ class Formizo extends Component {
 
   renderForm() {
     let { buttons, buttonAlign, buttonPadding } = this.state;
+    let { formPadding, formMargin } = this.props;
     return (
       <VStack>
-        <VStack alignItems={"flex-start"} padding="0 5px" width="100%" flexGrow={1} overflow={"auto"}>
+        <VStack alignItems={"flex-start"} padding={formPadding} margin={formMargin} width="100%" flexGrow={1} overflow={"auto"}>
           {this.renderSchema()}
           <Spacer/>
         </VStack>

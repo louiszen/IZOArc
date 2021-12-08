@@ -20,44 +20,44 @@ class FField extends Component {
   static propTypes = {
     //data
     ischema: PropsType.object.isRequired,
-    iname: PropsType.string.isRequired,
+    iname: PropsType.string,
     inTable: PropsType.bool,
 
     //root func
     _onValueChange: PropsType.func.isRequired,
-    _onInlineSubmit: PropsType.func.isRequired,
-    _onInlineRevert: PropsType.func.isRequired,
-    _onBlurInlineSubmit: PropsType.func.isRequired,
-    _setHiddenValue: PropsType.func.isRequired,
-    _Validate: PropsType.func.isRequired,
+    _onInlineSubmit: PropsType.func,
+    _onInlineRevert: PropsType.func,
+    _onBlurInlineSubmit: PropsType.func,
+    _setHiddenValue: PropsType.func,
+    _Validate: PropsType.func,
 
     //data
-    addOns: PropsType.object.isRequired,
+    addOns: PropsType.object,
 
     //runtime
     formValue: PropsType.object.isRequired,
-    formError: PropsType.object.isRequired,
+    formError: PropsType.object,
 
     //access
-    user: PropsType.object.isRequired,
+    user: PropsType.object,
 
     //controls
-    enableInlineSubmit: PropsType.bool.isRequired,
-    errorsShowOnHelperText: PropsType.bool.isRequired,
-    readOnly: PropsType.bool.isRequired,
+    enableInlineSubmit: PropsType.bool,
+    errorsShowOnHelperText: PropsType.bool,
+    readOnly: PropsType.bool,
 
     //style
     fieldStyle: PropsType.oneOf([
       "grid", "standard", "filled", "outlined"
-    ]).isRequired,
+    ]),
 
     //grid specific
-    labelXS: PropsType.number.isRequired,
-    labelPaddingX: PropsType.number.isRequired,
-    labelJustify: PropsType.string.isRequired,
-    fieldXS: PropsType.number.isRequired,
-    fieldPaddingX: PropsType.number.isRequired,
-    separator: PropsType.string.isRequired,
+    labelXS: PropsType.number,
+    labelPaddingX: PropsType.number,
+    labelJustify: PropsType.string,
+    fieldXS: PropsType.number,
+    fieldPaddingX: PropsType.number,
+    separator: PropsType.string,
 
     //input style
     fieldSize: PropsType.string,
