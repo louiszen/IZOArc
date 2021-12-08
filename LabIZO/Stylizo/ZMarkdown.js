@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import { Accessor } from "IZOArc/STATIC";
 import PropsType from "prop-types";
-import ReactMarkdown from "react-markdown";
+
+import ReactMarkDown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
 import emoji from "emoji-dictionary";
 import _ from "lodash";
-import remarkParse from 'remark-parse';
-import remarkGfm from 'remark-gfm';
-import remarkRehype from 'remark-rehype';
-import {unified} from 'unified';
-import rehypeStringify from 'rehype-stringify';
-import Badge from "react-bootstrap/Badge";
+
+import "./_css/github-markdown-light.css";
 
 /**
  * @augments {Component<Props, State>}
@@ -17,11 +16,13 @@ import Badge from "react-bootstrap/Badge";
 class ZMarkdown extends Component {
 
   static propTypes = {
-
+    width: PropsType.oneOfType([PropsType.string, PropsType.number]),
+    height: PropsType.oneOfType([PropsType.string, PropsType.number]),
   }
 
   static defaultProps = {
-
+    width: "100%",
+    height: "fit-to-content"
   }
 
   emojiSupport = text => {
@@ -51,26 +52,18 @@ class ZMarkdown extends Component {
   }
 
   render(){
-    let {children} = this.props;
-    let markdown = `
-    ## header1
-    # *header2*
-| Feature    | Support              |
-| ---------: | :------------------- |
-| CommonMark | 100%                 |
-| GFM        | 100% w/ \`remark-gfm\` |
+    let {width, height, children} = this.props;
+    if(!_.isString(children)) return <div/>;
 
-~~strikethrough~~
-
-* [ ] task list
-* [x] checked item
-    `;
-    let emojied = this.emojiSupport(markdown);
+    let emojied = this.emojiSupport(children);
 
     return (
-      <ReactMarkdown>
-        {markdown}
-      </ReactMarkdown> 
+      <div className='markdown-body' style={{width: width, height: height}}>
+        <ReactMarkDown 
+          children={emojied} 
+          skipHtml={false} 
+          remarkPlugins={[[remarkGfm]]}/>
+      </div>
     );
   }
 
