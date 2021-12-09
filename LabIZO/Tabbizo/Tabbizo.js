@@ -35,14 +35,16 @@ class Tabbizo extends Component {
     addOns: PropsType.object,
     tabs: PropsType.array,
     width: PropsType.oneOfType([PropsType.string, PropsType.number]),
-    height: PropsType.oneOfType([PropsType.string, PropsType.number])
+    height: PropsType.oneOfType([PropsType.string, PropsType.number]),
+    panelHeight: PropsType.oneOfType([PropsType.string, PropsType.number]),
   }
 
   static defaultProps = {
     addOns: {},
     tabs: [],
     width: "100%",
-    height: "100%"
+    height: "fit-to-content",
+    panelHeight: "fit-to-content"
   }
 
   constructor(){
@@ -82,10 +84,10 @@ class Tabbizo extends Component {
 
   renderTabPanels(){
     let {selectedTab} = this.state;
-    let {tabs, addOns} = this.props;
+    let {tabs, addOns, panelHeight} = this.props;
     return _.map(tabs, (o, i) => {
       return (
-        <Box key={i} hidden={selectedTab !== i} style={{width: "100%", height: "fit-to-content"}}>
+        <Box key={i} hidden={selectedTab !== i} style={{width: "100%", height: panelHeight}}>
           {_.isFunction(o.render)? o.render(addOns) : o.render}
         </Box>
       );
@@ -131,7 +133,7 @@ class Tabbizo extends Component {
 
   render(){
     let {selectedTab} = this.state;
-    let {width, height} = this.props;
+    let {width, height, panelHeight} = this.props;
     return (
       <VStack width={width} height={height}>
         <Paper position="static" style={{width: "100%", height: "fit-to-content"}}>
@@ -146,7 +148,7 @@ class Tabbizo extends Component {
             {this.renderTabButtons()}
           </Tabs>
         </Paper>
-        <Paper style={{width: "100%", height: "fit-to-content", background: "transparent", padding: "5px"}}>
+        <Paper style={{width: "100%", height: panelHeight, background: "transparent", padding: "5px"}}>
           {this.renderTabPanels()}
         </Paper> 
       </VStack>

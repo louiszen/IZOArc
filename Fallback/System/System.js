@@ -63,7 +63,7 @@ class System extends Component {
   render(){
     if(!Authority.IsAccessibleQ("System")) return <Denied/>;
     return (
-      <Tabbizo tabs={tabs}/>
+      <Tabbizo tabs={tabs} height="100%" panelHeight="100%"/>
     );
   }
 
