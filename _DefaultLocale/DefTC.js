@@ -53,7 +53,11 @@ let DefTC = {
     FuncNotImplement: "預設功能(@func)暫未開放",
     ExportNotImplement: "暫未開放導出功能",
     ImportNotImplement: "暫未開放導入功能",
-    InvalidOTP: "OTP 無效或已過期。"
+    InvalidOTP: "OTP 無效或已過期。",
+    AskLogout: {
+      title: "登出",
+      message: "你是否確認登出?"
+    }
   },
   System: {
     BnR: "備份和恢復",

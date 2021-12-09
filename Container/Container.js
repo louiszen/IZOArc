@@ -34,7 +34,7 @@ class Container extends Component {
       loadingOpen: false,
       dialogOpen: false,
       backdropOpen: false,
-      buttonWidth: "100px"
+      buttonWidth: "100%"
     };
   }
 
@@ -187,28 +187,30 @@ class Container extends Component {
     let {buttonWidth} = this.state;
     let buttonsJSX = {
       "OK":
-      <StyledButton className={"formizo-h-m"} key={0} theme={{
+      <StyledButton key={0} theme={{
           color: "green", 
-          background:"white",
+          background: "transparent",
           width: buttonWidth,
+          borderRadius: "0 0 0 5px",
+          margin: "0",
           disabled: {
-            color: ColorX.GetColorCSS("grey"),
-            background: ColorX.GetColorCSS("lightGrey")
+            color: ColorX.GetColorCSS("grey")
           }
         }}
         onClick={this._onOK} 
         disabled={STORE.ask.loading}
         >
-        <i className="fas fa-check"/><div className="formizo-h-m">{LocaleX.Get("__IZO.Formizo.Confirm")}</div>
+        <i className="fas fa-check"/>
+        <div className="formizo-h-m">{LocaleX.Get("__IZO.Formizo.Confirm")}</div>
       </StyledButton>,
       "Cancel":
-      <StyledButton className={"formizo-h-m"} key={2} theme={{
+      <StyledButton key={2} theme={{
           color: "red", 
-          background:"white", 
+          background: ColorX.GetColorCSS("transparent"), 
           width: buttonWidth,
+          borderRadius: "0 0 5px 0",
           disabled: {
-            color: ColorX.GetColorCSS("grey"),
-            background: ColorX.GetColorCSS("lightGrey")
+            color: ColorX.GetColorCSS("grey")
           }
         }} 
         onClick={this._onCancel} 
@@ -249,11 +251,12 @@ class Container extends Component {
     }
 
     return (
-      <Box bgcolor={ColorX.GetColorCSS("darkBox")}
-        padding={2}
+      <Box bgcolor={ColorX.GetColorCSS(IZOTheme.popupBG)}
         borderRadius={5} 
-        boxShadow={"0px 0px 2px 2px " + ColorX.GetColorCSS(IZOTheme.menuFG, 0.2)}
-        minWidth={250}
+        boxShadow={"0px 0px 2px 2px " + ColorX.GetColorCSS(IZOTheme.popupFG, 0.2)}
+        minWidth={300}
+        maxWidth={420}
+        color={ColorX.GetColorCSS(IZOTheme.popupFG)}
         >
         <VStack width="100%">
           <HStack>
@@ -261,13 +264,16 @@ class Container extends Component {
               fontWeight="bold" 
               textAlign="left" 
               width="100%"
-              marginBottom={1}>
+              marginBottom={1}
+              padding={1}
+              bgcolor={ColorX.GetColorCSS(IZOTheme.popupTitleBG)}
+              color={ColorX.GetColorCSS(IZOTheme.popupTitleFG)}>
               {title}
             </Box>
             <Spacer/>
             { STORE.ask.showCloseIcon && 
               <StyledIconButton onClick={() => STORE.clearAsk()}
-                theme={{label: ColorX.GetColorCSS(IZOTheme.menuFG), width: 24}}>
+                theme={{label: ColorX.GetColorCSS(IZOTheme.popupFG), width: 24}}>
                 <Close/>
               </StyledIconButton>
             }
@@ -275,20 +281,23 @@ class Container extends Component {
           <Box fontSize="normal" 
             textAlign="left" 
             width="100%"
-            marginY={1}>
+            marginY={1}
+            padding={1}>
             {message}
           </Box>
           <StyledLinearProgress 
             theme={{
-              bar: ColorX.GetColorCSS(IZOTheme.menuFG, STORE.ask.loading? 0.5 : 0.0),
-              background: ColorX.GetColorCSS(IZOTheme.menuFG, STORE.ask.loading? 0.2 : 0.0)
+              bar: ColorX.GetColorCSS(IZOTheme.popupFG, STORE.ask.loading? 0.5 : 0.0),
+              background: ColorX.GetColorCSS(IZOTheme.popupFG, STORE.ask.loading? 0.2 : 0.0)
               }}/>
           {STORE.ask.inner && STORE.ask.inner(STORE.ask.loading)}
           {STORE.ask.buttons && STORE.ask.buttons.length > 0 &&
-            <HStack marginTop={2}>
-              {this.renderButtons()}
-            </HStack> 
-          }
+          <HStack 
+            marginTop={2}
+            bgcolor={ColorX.GetColorCSS(IZOTheme.popupBtnBG)}
+            spacing={0}>
+            {this.renderButtons()}
+          </HStack>}
         </VStack>
       </Box>
     );

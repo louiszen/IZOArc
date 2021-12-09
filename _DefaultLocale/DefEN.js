@@ -54,7 +54,11 @@ let DefEN = {
     FuncNotImplement: "Preset function (@func) Not Implemented",
     ExportNotImplement: "Export Not Implemented.",
     ImportNotImplement: "Import Not Implemented.",
-    InvalidOTP: "OTP is invalid or expired."
+    InvalidOTP: "OTP is invalid or expired.",
+    AskLogout: {
+      title: "Logout",
+      message: "Are you confirm to logout?"
+    }
   },
   System: {
     BnR: "Backup & Restore",

@@ -119,7 +119,10 @@ class ColorX {
     }
 
     if(_.isObject(name)){
-      return {...name, a}; 
+      if(a){
+        return {...name, a}; 
+      }
+      return {...name}; 
     }
   }
 

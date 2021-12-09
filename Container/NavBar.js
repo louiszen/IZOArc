@@ -56,10 +56,17 @@ class NavBar extends Component {
     }), callback);
   }
 
-  _Logout = () => {
-    STORE.clearUser();
-    this.props.history.push("/");
-    STORE.Alert(LocaleX.Get("__IZO.Alert.SuccessLogout"), "success");
+  _Logout = {
+    onClick: () => {
+      STORE.Ask(LocaleX.Get("__IZO.Alert.AskLogout.title"), 
+        LocaleX.Get("__IZO.Alert.AskLogout.message"),
+        this._Logout.onConfirm);
+    },
+    onConfirm: () => {
+      STORE.clearUser();
+      this.props.history.push("/");
+      STORE.Alert(LocaleX.Get("__IZO.Alert.SuccessLogout"), "success");
+    }
   }
 
   renderIZO(){
@@ -150,7 +157,7 @@ class NavBar extends Component {
   renderLogout(){
     return (
       <Tooltip title={LocaleX.Get("__IZO.NavBar.Logout")} arrow={true} placement="bottom">
-        <IconButton style={{color: ColorX.GetColorCSS(IZOTheme.menuFG, 1)}} size="small" onClick={() => this._Logout()}>
+        <IconButton style={{color: ColorX.GetColorCSS(IZOTheme.menuFG, 1)}} size="small" onClick={() => this._Logout.onClick()}>
           <ExitToAppOutlined/>
         </IconButton>
       </Tooltip>

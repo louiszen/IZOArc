@@ -10,10 +10,13 @@ import _ from "lodash";
 
 import "./_css/github-markdown-light.css";
 
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import * as theme from "react-syntax-highlighter/dist/esm/styles/prism";
+
 /**
  * @augments {Component<Props, State>}
  */
-class ZMarkdown extends Component {
+class BMarkdown extends Component {
 
   static propTypes = {
     width: PropsType.oneOfType([PropsType.string, PropsType.number]),
@@ -22,7 +25,8 @@ class ZMarkdown extends Component {
 
   static defaultProps = {
     width: "100%",
-    height: "fit-to-content"
+    height: "fit-to-content",
+    codeTheme: "vs"
   }
 
   emojiSupport = text => {
@@ -34,7 +38,7 @@ class ZMarkdown extends Component {
   }
 
   componentDidUpdate(prevProps, prevState){
-    if(!Accessor.IsIdentical(prevProps, this.props, Object.keys(ZMarkdown.defaultProps))){
+    if(!Accessor.IsIdentical(prevProps, this.props, Object.keys(BMarkdown.defaultProps))){
       this._setAllStates();
     }
   }
@@ -52,17 +56,34 @@ class ZMarkdown extends Component {
   }
 
   render(){
-    let {width, height, children} = this.props;
+    let {width, height, children, codeTheme} = this.props;
     if(!_.isString(children)) return <div/>;
-
     let emojied = this.emojiSupport(children);
 
     return (
-      <div className='markdown-body' style={{width: width, height: height}}>
+      <div className="markdown-body" style={{width: width, height: height}}>
         <ReactMarkDown 
           children={emojied} 
           skipHtml={false} 
-          remarkPlugins={[[remarkGfm]]}/>
+          remarkPlugins={[[remarkGfm]]}
+          components={{
+            code({node, inline, className, children, ...props}) {
+              const match = /language-(\w+)/.exec(className || "");
+              return !inline && match ? (
+                <SyntaxHighlighter
+                  children={String(children).replace(/\n$/, "")}
+                  style={theme[codeTheme]}
+                  language={match[1]}
+                  PreTag="div"
+                  {...props}
+                />
+              ) : (
+                <code className={className} {...props}>
+                  {children}
+                </code>
+              );
+            }
+          }}/>
       </div>
     );
   }
@@ -70,4 +91,4 @@ class ZMarkdown extends Component {
 
 }
 
-export default ZMarkdown;
+export default BMarkdown;
