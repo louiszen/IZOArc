@@ -55,7 +55,7 @@ class SysDBInc extends Component {
     let {included} = this.props;
     return (
       <HStack>
-        <Tooltip title={included? LocaleX.Get("__IZO.BnR.Exclude") : LocaleX.Get("__IZO.BnR.Include")} arrow={true} placement="top">
+        <Tooltip title={included? LocaleX.GetIZO("BnR.Exclude") : LocaleX.GetIZO("BnR.Include")} arrow={true} placement="top">
           <IconButton
             onClick={() => {this._onToggle(!included);}}
             style={{color: ColorX.GetColorCSS(included ? "green" : "lightGrey")}}>

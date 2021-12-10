@@ -33,14 +33,14 @@ class SLogin {
             payload: payload
           };
         }else{
-          STORE.Alert(LocaleX.Get("__IZO.Alert.UserNotFound"), "error");
+          STORE.Alert(LocaleX.GetIZO("Alert.UserNotFound"), "error");
           return {
             Success: false,
           };
         }
       }
     }catch(e){
-      STORE.Alert(LocaleX.Get("__IZO.Alert.CannotConnect"), "error");
+      STORE.Alert(LocaleX.GetIZO("Alert.CannotConnect"), "error");
       return {
         Success: false,
       };
@@ -87,11 +87,11 @@ class SLogin {
         };
         
       }else{
-        STORE.Alert(LocaleX.Get("__IZO.Alert.IncorrectPassword"), "error");
+        STORE.Alert(LocaleX.GetIZO("Alert.IncorrectPassword"), "error");
         return {Success: false};
       }
     }catch(e){
-      STORE.Alert(LocaleX.Get("__IZO.Alert.CannotConnect"), "error");
+      STORE.Alert(LocaleX.GetIZO("Alert.CannotConnect"), "error");
       return {Success: false};
     }
 
@@ -117,7 +117,7 @@ class SLogin {
       if(Success === true){
         console.log(payload);
         STORE.setUser(payload);
-        STORE.Alert(LocaleX.Get("__IZO.Alert.SuccessLogin"), "success");
+        STORE.Alert(LocaleX.GetIZO("Alert.SuccessLogin"), "success");
         await Env.CheckInitialized();
 
         if(!STORE.isInitialized()){
@@ -127,11 +127,11 @@ class SLogin {
         return {Success: true};
         
       }else{
-        STORE.Alert(LocaleX.Get("__IZO.Alert.IncorrectPassword"), "error");
+        STORE.Alert(LocaleX.GetIZO("Alert.IncorrectPassword"), "error");
         return {Success: false};
       }
     }catch(e){
-      STORE.Alert(LocaleX.Get("__IZO.Alert.CannotConnect"), "error");
+      STORE.Alert(LocaleX.GetIZO("Alert.CannotConnect"), "error");
       return {Success: false};
     }
   }
@@ -156,7 +156,7 @@ class SLogin {
       if(Success === true){
         console.log(payload);
         STORE.setUser(payload);
-        STORE.Alert(LocaleX.Get("__IZO.Alert.SuccessLogin"), "success");
+        STORE.Alert(LocaleX.GetIZO("Alert.SuccessLogin"), "success");
         await Env.CheckInitialized();
 
         if(!STORE.isInitialized()){
@@ -166,11 +166,11 @@ class SLogin {
         return {Success: true};
         
       }else{
-        STORE.Alert(LocaleX.Get("__IZO.Alert.InvalidOTP"), "error");
+        STORE.Alert(LocaleX.GetIZO("Alert.InvalidOTP"), "error");
         return {Success: false};
       }
     }catch(e){
-      STORE.Alert(LocaleX.Get("__IZO.Alert.CannotConnect"), "error");
+      STORE.Alert(LocaleX.GetIZO("Alert.CannotConnect"), "error");
       return {Success: false};
     }
   }

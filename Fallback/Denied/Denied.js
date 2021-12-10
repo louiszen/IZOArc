@@ -38,7 +38,7 @@ class Denied extends Component {
           <img src={SITEBASE + "Images/denied.svg"} alt="not-found" style={{width: "100%"}}/> 
         </HStack>
         <Typography style={{fontSize: 20, fontWeight: "bold"}}>
-          {LocaleX.Get("__IZO.System.AccessDenied")}
+          {LocaleX.GetIZO("System.AccessDenied")}
         </Typography>
         <Spacer/>
       </VStack>

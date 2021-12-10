@@ -114,13 +114,13 @@ class Container extends Component {
   AutoLogin = () => {
     setTimeout(() => {
       this.props.history.push(FirstPage);
-      STORE.Alert(LocaleX.Get("__IZO.Alert.AutoLogin"), "success");
+      STORE.Alert(LocaleX.GetIZO("Alert.AutoLogin"), "success");
     }, 1000);
   }
 
   AutoLogout = () => {
     setTimeout(() => {
-      STORE.Alert(LocaleX.Get("__IZO.Alert.Unauthorized"), "warn");
+      STORE.Alert(LocaleX.GetIZO("Alert.Unauthorized"), "warn");
       STORE.clearUser();
       this.props.history.push("/Login");
     }, 1000);
@@ -135,14 +135,14 @@ class Container extends Component {
       if(rtn.data.Success === true){
         STORE.setServer(rtn.data.payload);
       }else{
-        STORE.Alert(LocaleX.Get("__IZO.Alert.InternalServerError"), "error");
+        STORE.Alert(LocaleX.GetIZO("Alert.InternalServerError"), "error");
       }
     }catch{
       let {location} = this.props;
       let isPublic = (location && location.pathname) === "/";
       let isTest = location && location.pathname && location.pathname.startsWith("/Test/");
 
-      STORE.Alert(LocaleX.Get("__IZO.Alert.CannotConnect"), "error");
+      STORE.Alert(LocaleX.GetIZO("Alert.CannotConnect"), "error");
       if(!isPublic && !isTest){
         this.AutoLogout();
       }
@@ -201,7 +201,7 @@ class Container extends Component {
         disabled={STORE.ask.loading}
         >
         <i className="fas fa-check"/>
-        <div className="formizo-h-m">{LocaleX.Get("__IZO.Formizo.Confirm")}</div>
+        <div className="formizo-h-m">{LocaleX.GetIZO("Formizo.Confirm")}</div>
       </StyledButton>,
       "Cancel":
       <StyledButton key={2} theme={{
@@ -216,7 +216,7 @@ class Container extends Component {
         onClick={this._onCancel} 
         disabled={STORE.ask.loading}
         >
-        <i className="fas fa-ban"/><div className="formizo-h-m">{LocaleX.Get("__IZO.Formizo.Cancel")}</div>
+        <i className="fas fa-ban"/><div className="formizo-h-m">{LocaleX.GetIZO("Formizo.Cancel")}</div>
       </StyledButton>,
     };
 

@@ -489,7 +489,7 @@ class Formizo extends Component {
             width: buttonWidth 
           }} onClick={this._onCancel}>
           <i className="fas fa-check" />
-          <div className="formizo-h-m">{LocaleX.Get("__IZO.Formizo.OK")}</div>
+          <div className="formizo-h-m">{LocaleX.GetIZO("Formizo.OK")}</div>
         </StyledButton>
       ),
       Submit: (
@@ -501,7 +501,7 @@ class Formizo extends Component {
             width: buttonWidth
              }} onClick={this._onSubmit}>
           <i className="fas fa-paper-plane" />
-          <div className="formizo-h-m">{LocaleX.Get("__IZO.Formizo.Submit")}</div>
+          <div className="formizo-h-m">{LocaleX.GetIZO("Formizo.Submit")}</div>
         </StyledButton>
       ),
       Cancel: (
@@ -513,7 +513,7 @@ class Formizo extends Component {
             width: buttonWidth 
             }} onClick={this._onCancel}>
           <i className="fas fa-ban" />
-          <div className="formizo-h-m">{LocaleX.Get("__IZO.Formizo.Cancel")}</div>
+          <div className="formizo-h-m">{LocaleX.GetIZO("Formizo.Cancel")}</div>
         </StyledButton>
       ),
       Clear: (
@@ -525,7 +525,7 @@ class Formizo extends Component {
             width: buttonWidth 
             }} onClick={this._onClear}>
           <i className="fas fa-undo" />
-          <div className="formizo-h-m">{LocaleX.Get("__IZO.Formizo.Clear")}</div>
+          <div className="formizo-h-m">{LocaleX.GetIZO("Formizo.Clear")}</div>
         </StyledButton>
       ),
       Revert: (
@@ -537,7 +537,7 @@ class Formizo extends Component {
             width: buttonWidth 
             }} onClick={this._onRevert}>
           <i className="fas fa-history" />
-          <div className="formizo-h-m">{LocaleX.Get("__IZO.Formizo.Revert")}</div>
+          <div className="formizo-h-m">{LocaleX.GetIZO("Formizo.Revert")}</div>
         </StyledButton>
       ),
       Login: (
@@ -549,7 +549,7 @@ class Formizo extends Component {
             width: buttonWidth 
             }} onClick={this._onSubmit}>
           <i className="fas fa-sign-in-alt" />
-          <div className="formizo-h-m">{LocaleX.Get("__IZO.Formizo.Login")}</div>
+          <div className="formizo-h-m">{LocaleX.GetIZO("Formizo.Login")}</div>
         </StyledButton>
       ),
       Logout: (
@@ -561,7 +561,7 @@ class Formizo extends Component {
             width: buttonWidth 
             }} onClick={this._onSubmit}>
           <i className="fas fa-sign-out-alt" />
-          <div className="formizo-h-m">{LocaleX.Get("__IZO.Formizo.Logout")}</div>
+          <div className="formizo-h-m">{LocaleX.GetIZO("Formizo.Logout")}</div>
         </StyledButton>
       ),
     };

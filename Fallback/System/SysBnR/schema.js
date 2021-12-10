@@ -9,11 +9,11 @@ import { ColorX, LocaleX } from "IZOArc/STATIC";
 
 const database = [
   {
-    label: () => LocaleX.Get("__IZO.BnR.Databases"),
+    label: () => LocaleX.GetIZO("BnR.Databases"),
     name: "name"
   },
   {
-    label: () => LocaleX.Get("__IZO.BnR.Included"),
+    label: () => LocaleX.GetIZO("BnR.Included"),
     name: "included",
     width: 115,
     Cell: (row, field, addOns) => {
@@ -24,7 +24,7 @@ const database = [
 
 const restore = [
   {
-    label: () => LocaleX.Get("__IZO.BnR.Version"),
+    label: () => LocaleX.GetIZO("BnR.Version"),
     name: "name"
   },
   {
@@ -51,7 +51,7 @@ const restore = [
             <HStack spacing={5}>
               <Restore fontSize="small"/>
               <Typography style={{fontSize: 12}}>
-                {LocaleX.Get("__IZO.System.Restore")}
+                {LocaleX.GetIZO("System.Restore")}
               </Typography>
             </HStack>            
           </StyledButton>

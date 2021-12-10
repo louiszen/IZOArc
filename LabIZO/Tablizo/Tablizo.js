@@ -526,7 +526,7 @@ class Tablizo extends Component {
 
   GridNoRowsOverlay = () => {
     let {lang} = this.props;
-    let dataNotFound = LocaleX.Get("__IZO.Tablizo.dataNotFound", {}, lang);
+    let dataNotFound = LocaleX.GetIZO("Tablizo.dataNotFound", {}, lang);
     return (
       <GridOverlay>
         <VStack>
@@ -578,7 +578,7 @@ class Tablizo extends Component {
           filterModel={filterModel}
           disableColumnReorder={true}
           localeText={localText}
-          labelRowsPerPage={LocaleX.Get("__IZO.Tablizo.labelRowsPerPage")}
+          labelRowsPerPage={LocaleX.GetIZO("Tablizo.labelRowsPerPage")}
           {...datagridProps}
         />
       </Box>

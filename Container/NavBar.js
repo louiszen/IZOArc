@@ -58,14 +58,14 @@ class NavBar extends Component {
 
   _Logout = {
     onClick: () => {
-      STORE.Ask(LocaleX.Get("__IZO.Alert.AskLogout.title"), 
-        LocaleX.Get("__IZO.Alert.AskLogout.message"),
+      STORE.Ask(LocaleX.GetIZO("Alert.AskLogout.title"), 
+        LocaleX.GetIZO("Alert.AskLogout.message"),
         this._Logout.onConfirm);
     },
     onConfirm: () => {
       STORE.clearUser();
       this.props.history.push("/");
-      STORE.Alert(LocaleX.Get("__IZO.Alert.SuccessLogout"), "success");
+      STORE.Alert(LocaleX.GetIZO("Alert.SuccessLogout"), "success");
     }
   }
 
@@ -98,7 +98,7 @@ class NavBar extends Component {
           color: ColorX.GetColorCSS(IZOTheme.menuFG, 1),
           textAlign: "right"
           }}>
-          {LocaleX.Get("__IZO.NavBar.LoggedInAs")}
+          {LocaleX.GetIZO("NavBar.LoggedInAs")}
         </Typography>
         <Typography style={{marginLeft: 10, marginRight: 5, fontFamily: IZOFontFamily, fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.8)}}>
           {STORE.user && STORE.user.UserDisplayName}
@@ -156,7 +156,7 @@ class NavBar extends Component {
 
   renderLogout(){
     return (
-      <Tooltip title={LocaleX.Get("__IZO.NavBar.Logout")} arrow={true} placement="bottom">
+      <Tooltip title={LocaleX.GetIZO("NavBar.Logout")} arrow={true} placement="bottom">
         <IconButton style={{color: ColorX.GetColorCSS(IZOTheme.menuFG, 1)}} size="small" onClick={() => this._Logout.onClick()}>
           <ExitToAppOutlined/>
         </IconButton>

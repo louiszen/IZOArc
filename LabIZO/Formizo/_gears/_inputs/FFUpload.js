@@ -131,7 +131,7 @@ class FFUpload extends Component {
             <HStack spacing={5}>
               <CloudUpload/>
               <Typography style={{fontSize:14, fontWeight: 500}}>
-                {LocaleX.Get("__IZO.Formizo.Upload")}
+                {LocaleX.GetIZO("Formizo.Upload")}
               </Typography>
             </HStack>
           </StyledButton>

@@ -121,7 +121,7 @@ class Login extends Component {
           });
         }
       }catch{
-        STORE.Alert(LocaleX.Get("__IZO.Alert.CannotConnect"), "error");
+        STORE.Alert(LocaleX.GetIZO("Alert.CannotConnect"), "error");
         this.setState({
           loading: false
         });
@@ -218,7 +218,7 @@ class Login extends Component {
           }}
           disabled={loading}>
           <HStack>
-            <div>{LocaleX.Get("__IZO.Login.Next")}</div>
+            <div>{LocaleX.GetIZO("Login.Next")}</div>
             <Spacer/>
             <i className="fas fa-arrow-right"/>
           </HStack>
@@ -249,7 +249,7 @@ class Login extends Component {
           }}
           disabled={loading}>
           <HStack>
-            <div>{LocaleX.Get("__IZO.Login.Login")}</div>
+            <div>{LocaleX.GetIZO("Login.Login")}</div>
             <Spacer/>
             <i className="fas fa-arrow-right"/>
           </HStack>
@@ -358,14 +358,14 @@ class Login extends Component {
   renderHeaderMessage(){
     let {page, userDisplayName} = this.state;
     switch(page){
-      default: case "user": return LocaleX.Get("__IZO.Login.HeaderMessage");
+      default: case "user": return LocaleX.GetIZO("Login.HeaderMessage");
       case "password": return (
         <Link onClick={() => this.toUser()}>
-          {LocaleX.Get("__IZO.Login.Not") + " " + userDisplayName + " ?"}
+          {LocaleX.GetIZO("Login.Not") + " " + userDisplayName + " ?"}
         </Link>
       );
-      case "method": return LocaleX.Get("__IZO.Login.WhichMethod");
-      case "otp": return LocaleX.Get("__IZO.Login.EnterOTP");
+      case "method": return LocaleX.GetIZO("Login.WhichMethod");
+      case "otp": return LocaleX.GetIZO("Login.EnterOTP");
     }
   }
 
@@ -373,7 +373,7 @@ class Login extends Component {
     if(!STORE.onlyUsernamePassword()){
       return (
         <Link onClick={() => this.toMethod()}>
-          {LocaleX.Get("__IZO.Login.OtherMethod")}
+          {LocaleX.GetIZO("Login.OtherMethod")}
         </Link>
       );
     }
@@ -440,52 +440,52 @@ class Login extends Component {
       case "Username-Password": 
         return this.renderMethodButton(
           <Password/>, 
-          LocaleX.Get("__IZO.Login.Methods.UsernamePassword"), 
+          LocaleX.GetIZO("Login.Methods.UsernamePassword"), 
           () => this.toUser(o));
       case "SMSOTP":
         return this.renderMethodButton(
           <Sms/>, 
-          LocaleX.Get("__IZO.Login.Methods.UsernamePassword2FSMS"), 
+          LocaleX.GetIZO("Login.Methods.UsernamePassword2FSMS"), 
           () => this.toUser(o));
       case "EmailOTP":
         return this.renderMethodButton(
           <Email/>, 
-          LocaleX.Get("__IZO.Login.Methods.UsernamePassword2FEmail"), 
+          LocaleX.GetIZO("Login.Methods.UsernamePassword2FEmail"), 
           () => this.toUser(o));
       case "MSAL": 
         return this.renderMethodButton(
           <Window/>, 
-          LocaleX.Get("__IZO.Login.Methods.MSAL"), 
+          LocaleX.GetIZO("Login.Methods.MSAL"), 
           () => {});
       case "GitHub": 
         return this.renderMethodButton(
           <GitHub/>, 
-          LocaleX.Get("__IZO.Login.Methods.GitHub"), 
+          LocaleX.GetIZO("Login.Methods.GitHub"), 
           () => {});
       case "Facebook": 
         return this.renderMethodButton(
           <Facebook/>, 
-          LocaleX.Get("__IZO.Login.Methods.Facebook"), 
+          LocaleX.GetIZO("Login.Methods.Facebook"), 
           () => {});
       case "Instagram": 
         return this.renderMethodButton(
           <Instagram/>, 
-          LocaleX.Get("__IZO.Login.Methods.Instagram"), 
+          LocaleX.GetIZO("Login.Methods.Instagram"), 
           () => {});
       case "Twitter": 
         return this.renderMethodButton(
           <Twitter/>, 
-          LocaleX.Get("__IZO.Login.Methods.Twitter"), 
+          LocaleX.GetIZO("Login.Methods.Twitter"), 
           () => {});
       case "Google": 
         return this.renderMethodButton(
           <Google/>, 
-          LocaleX.Get("__IZO.Login.Methods.Google"), 
+          LocaleX.GetIZO("Login.Methods.Google"), 
           () => {});
       case "LinkedIn": 
         return this.renderMethodButton(
           <LinkedIn/>, 
-          LocaleX.Get("__IZO.Login.Methods.LinkedIn"), 
+          LocaleX.GetIZO("Login.Methods.LinkedIn"), 
           () => {});
     }
   }

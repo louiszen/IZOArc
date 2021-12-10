@@ -65,7 +65,7 @@ class BLangToggler extends Component {
     let langLabel = langO.caption;
     return (
       <HStack width="fit-content" marginRight={5}>
-        <Tooltip title={LocaleX.Get("__IZO.NavBar.SwitchLang")} arrow={true} placement="bottom">
+        <Tooltip title={LocaleX.GetIZO("NavBar.SwitchLang")} arrow={true} placement="bottom">
           <IconButton style={{color: ColorX.GetColorCSS(IZOTheme.menuFG, 1)}} size="small" onClick={() => this._ToggleLanguage()}>
             <Language/>
           </IconButton>

@@ -100,17 +100,17 @@ class SysBnR extends Component {
           includeDB: include
         });
       } else {
-        STORE.Alert(LocaleX.Get("__IZO.Alert.ServerReturnError"), "error");
+        STORE.Alert(LocaleX.GetIZO("Alert.ServerReturnError"), "error");
       }
     } catch (e) {
       console.log(e);
-      STORE.Alert(LocaleX.Get("__IZO.Alert.CannotConnect"), "error");
+      STORE.Alert(LocaleX.GetIZO("Alert.CannotConnect"), "error");
     }
   }
 
   _Backup = {
     onClick: () => {
-      STORE.Ask(LocaleX.Get("__IZO.System.Backup"), LocaleX.Get("__IZO.System.BackupSystem"), this._Backup.onSubmit);
+      STORE.Ask(LocaleX.GetIZO("System.Backup"), LocaleX.GetIZO("System.BackupSystem"), this._Backup.onSubmit);
     }, 
     onSubmit: async () => {
       let url = DOMAIN + BnRBackup;
@@ -124,7 +124,7 @@ class SysBnR extends Component {
 
         let {Success} = res.data;
         if (Success === true) {
-          STORE.Alert(LocaleX.Get("__IZO.Alert.BackupSuccess"), "success");
+          STORE.Alert(LocaleX.GetIZO("Alert.BackupSuccess"), "success");
           this._GetInfo();
         } else {
           this._Backup.onError(res.data);
@@ -158,7 +158,7 @@ class SysBnR extends Component {
         this._GetInfo();
 
       }else{
-        STORE.Alert(LocaleX.Get("__IZO.Alert.UpdateError"), "error");
+        STORE.Alert(LocaleX.GetIZO("Alert.UpdateError"), "error");
       }
     }catch(e){
       STORE.Alert(ErrorX.Handle(e), "error");
@@ -169,7 +169,7 @@ class SysBnR extends Component {
     onClick: (datestr) => {
       let mObj = this._dateStrToMomemt(datestr);
       let str = this._momentToDisplay(mObj);
-      STORE.Ask(LocaleX.Get("__IZO.System.Restore"), LocaleX.Get("__IZO.System.RestoreTo", {str: str}), async () => {
+      STORE.Ask(LocaleX.GetIZO("System.Restore"), LocaleX.GetIZO("System.RestoreTo", {str: str}), async () => {
         await this._Restore.onSubmit(datestr);
       });
     }, 
@@ -189,7 +189,7 @@ class SysBnR extends Component {
         console.log(BnRRestore, res.data);
         let {Success} = res.data;
         if (Success === true) {
-          STORE.Alert(LocaleX.Get("__IZO.Alert.RestoreSuccess", {str: str}), "success");
+          STORE.Alert(LocaleX.GetIZO("Alert.RestoreSuccess", {str: str}), "success");
           this._GetInfo();
         } else {
           this._Restore.onError(res.data);
@@ -207,7 +207,7 @@ class SysBnR extends Component {
     onClick: (datestr) => {
       let mObj = this._dateStrToMomemt(datestr);
       let str = this._momentToDisplay(mObj);
-      STORE.Ask(LocaleX.Get("__IZO.System.Delete"), LocaleX.Get("__IZO.System.DeleteBackup", {str: str}), async () => {
+      STORE.Ask(LocaleX.GetIZO("System.Delete"), LocaleX.GetIZO("System.DeleteBackup", {str: str}), async () => {
         await this._Delete.onSubmit(datestr);
       });
     }, 
@@ -227,7 +227,7 @@ class SysBnR extends Component {
         console.log(BnRDelete, res.data);
         let {Success} = res.data;
         if (Success === true) {
-          STORE.Alert(str + " " + LocaleX.Get("__IZO.Alert.DeleteSuccess"), "success");
+          STORE.Alert(str + " " + LocaleX.GetIZO("Alert.DeleteSuccess"), "success");
           this._GetInfo();
         } else {
           this._Delete.onError(res.data);
@@ -258,15 +258,15 @@ class SysBnR extends Component {
             <HStack spacing={5}>
               <SaveOutlined/>
               <Typography>
-                {LocaleX.Get("__IZO.System.Backup")}
+                {LocaleX.GetIZO("System.Backup")}
               </Typography>
             </HStack>            
         </StyledButton>
         <Typography>
-          {LocaleX.Get("__IZO.System.LastBackup")}
+          {LocaleX.GetIZO("System.LastBackup")}
         </Typography>
         <Typography style={{fontWeight: "bold"}}>
-          {LastBackup || LocaleX.Get("__IZO.System.NoBackup")}
+          {LastBackup || LocaleX.GetIZO("System.NoBackup")}
         </Typography>
       </HStack>
     );

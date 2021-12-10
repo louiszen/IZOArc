@@ -30,10 +30,10 @@ class SysUser extends Component {
   constructor(){
     super();
     this.state = {
-      title: () => LocaleX.Get("__IZO.UAC.PageTitle"),
+      title: () => LocaleX.GetIZO("UAC.PageTitle"),
       serverSidePagination: false, 
       base: {
-        title: () => LocaleX.Get("__IZO.UAC.Title"),
+        title: () => LocaleX.GetIZO("UAC.Title"),
         exportDoc: "users",
         schema: schema,
         reqAuth: "System.User",
@@ -63,45 +63,45 @@ class SysUser extends Component {
 
         operations: {
           Add: {
-            title: () => LocaleX.Get("__IZO.UAC.Add.title"),
+            title: () => LocaleX.GetIZO("UAC.Add.title"),
             url: datalink.Request.Add,
-            success: () => LocaleX.Get("__IZO.UAC.Add.success"),
-            fail: () => LocaleX.Get("__IZO.UAC.Add.fail"),
+            success: () => LocaleX.GetIZO("UAC.Add.success"),
+            fail: () => LocaleX.GetIZO("UAC.Add.fail"),
             schema: schema.Add,
             buttons: ["Clear", "Submit"],
             onSubmit: "Add"
           },
           Delete: {
-            title: () => LocaleX.Get("__IZO.UAC.Delete.title"),
-            content: () => LocaleX.Get("__IZO.UAC.Delete.content"),
+            title: () => LocaleX.GetIZO("UAC.Delete.title"),
+            content: () => LocaleX.GetIZO("UAC.Delete.content"),
             url: datalink.Request.Delete,
-            success: () => LocaleX.Get("__IZO.UAC.Delete.success"),
-            fail: () => LocaleX.Get("__IZO.UAC.Delete.fail"),
+            success: () => LocaleX.GetIZO("UAC.Delete.success"),
+            fail: () => LocaleX.GetIZO("UAC.Delete.fail"),
             onSubmit: "Delete"
           },
           Edit: {
-            title: () => LocaleX.Get("__IZO.UAC.Edit.title"),
+            title: () => LocaleX.GetIZO("UAC.Edit.title"),
             url: datalink.Request.Edit,
-            success: () => LocaleX.Get("__IZO.UAC.Edit.success"),
-            fail: () => LocaleX.Get("__IZO.UAC.Edit.fail"),
+            success: () => LocaleX.GetIZO("UAC.Edit.success"),
+            fail: () => LocaleX.GetIZO("UAC.Edit.fail"),
             schema: schema.Edit,
             buttons: ["Revert", "Submit"],
             onSubmit: "Edit"
           },
           Info: {
-            title: () => LocaleX.Get("__IZO.UAC.Info.title"),
+            title: () => LocaleX.GetIZO("UAC.Info.title"),
             url: datalink.Request.Info,
-            success: () => LocaleX.Get("__IZO.UAC.Info.success"),
-            fail: () => LocaleX.Get("__IZO.UAC.Info.fail"),
+            success: () => LocaleX.GetIZO("UAC.Info.success"),
+            fail: () => LocaleX.GetIZO("UAC.Info.fail"),
             schema: schema.Info,
             readOnly: true
           },
           Import: {
-            title: () => LocaleX.Get("__IZO.UAC.Import.title"),
+            title: () => LocaleX.GetIZO("UAC.Import.title"),
             content: "",
             url: datalink.Request.Import,
-            success: () => LocaleX.Get("__IZO.UAC.Import.success"),
-            fail: () => LocaleX.Get("__IZO.UAC.Import.fail"),
+            success: () => LocaleX.GetIZO("UAC.Import.success"),
+            fail: () => LocaleX.GetIZO("UAC.Import.fail"),
             schema: schema.ImportFormat,
             replace: false
           },
@@ -110,26 +110,26 @@ class SysUser extends Component {
             schema: schema.Export,
           },
           DeleteBulk: {
-            title: (n) => LocaleX.Get("__IZO.UAC.DeleteBulk.title", {n: n}),
-            content: () => LocaleX.Get("__IZO.UAC.DeleteBulk.content"),
+            title: (n) => LocaleX.GetIZO("UAC.DeleteBulk.title", {n: n}),
+            content: () => LocaleX.GetIZO("UAC.DeleteBulk.content"),
             url: datalink.Request.DeleteBulk,
-            success: () => LocaleX.Get("__IZO.UAC.DeleteBulk.success"),
-            fail: () => LocaleX.Get("__IZO.UAC.DeleteBulk.fail"),
+            success: () => LocaleX.GetIZO("UAC.DeleteBulk.success"),
+            fail: () => LocaleX.GetIZO("UAC.DeleteBulk.fail"),
             onSubmit: "DeleteBulk",
           },
         },
 
         buttons: {
           inline: [
-            { icon: "edit", func: "Edit", caption: () => LocaleX.Get("__IZO.UAC.ButtonCaption.Edit"), reqFunc: "Edit" },
-            { icon: "info", func: "Info", caption: () => LocaleX.Get("__IZO.UAC.ButtonCaption.Info") },
-            { icon: "delete", func: "Delete", caption: () => LocaleX.Get("__IZO.UAC.ButtonCaption.Delete"), reqFunc: "Delete" },
+            { icon: "edit", func: "Edit", caption: () => LocaleX.GetIZO("UAC.ButtonCaption.Edit"), reqFunc: "Edit" },
+            { icon: "info", func: "Info", caption: () => LocaleX.GetIZO("UAC.ButtonCaption.Info") },
+            { icon: "delete", func: "Delete", caption: () => LocaleX.GetIZO("UAC.ButtonCaption.Delete"), reqFunc: "Delete" },
           ],
-          left: [{ icon: "add", func: "Add", caption: () => LocaleX.Get("__IZO.UAC.ButtonCaption.Add"), reqFunc: "Add" }],
+          left: [{ icon: "add", func: "Add", caption: () => LocaleX.GetIZO("UAC.ButtonCaption.Add"), reqFunc: "Add" }],
           right: [
-            { icon: "deletebulk", func: "DeleteBulk", caption: (n) => LocaleX.Get("__IZO.UAC.ButtonCaption.DeleteBulk", {n: n}), reqFunc: "Delete", theme: "caution" },
-            { icon: "export", func: "Export", caption: (n) => LocaleX.Get("__IZO.UAC.ButtonCaption.Export", {n: n === 0? LocaleX.Get("__IZO.Datumizo.All") : n}), reqFunc: "Export" },
-            { icon: "import", func: "Import", caption: () => LocaleX.Get("__IZO.UAC.ButtonCaption.Import"), reqFunc: "Import" },
+            { icon: "deletebulk", func: "DeleteBulk", caption: (n) => LocaleX.GetIZO("UAC.ButtonCaption.DeleteBulk", {n: n}), reqFunc: "Delete", theme: "caution" },
+            { icon: "export", func: "Export", caption: (n) => LocaleX.GetIZO("UAC.ButtonCaption.Export", {n: n === 0? LocaleX.GetIZO("Datumizo.All") : n}), reqFunc: "Export" },
+            { icon: "import", func: "Import", caption: () => LocaleX.GetIZO("UAC.ButtonCaption.Import"), reqFunc: "Import" },
           ],
         },
       }

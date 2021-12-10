@@ -579,7 +579,7 @@ class Datumizo extends Component {
       }
     } else {
       return () => {
-        STORE.Alert(LocaleX.Get("__IZO.Alert.FuncNotImplement", {func: func}), "warn");
+        STORE.Alert(LocaleX.GetIZO("Alert.FuncNotImplement", {func: func}), "warn");
       };
     }
   };
@@ -591,7 +591,7 @@ class Datumizo extends Component {
         schema={[
           {
             name: "upload",
-            label: () => LocaleX.Get("__IZO.Datumizo.UploadFile"),
+            label: () => LocaleX.GetIZO("Datumizo.UploadFile"),
             format: "file",
             accept: base.operations?.Import?.accept || ".xlsx, xls",
             noLabelGrid: true,
@@ -1185,7 +1185,7 @@ class Datumizo extends Component {
     onClick: async () => {
       let { base, addOns } = this.state;
       if (!base.operations?.Export || !base.operations?.Export?.url) {
-        STORE.Alert(LocaleX.Get("__IZO.Alert.ExportNotImplement"), "warn");
+        STORE.Alert(LocaleX.GetIZO("Alert.ExportNotImplement"), "warn");
         return;
       }
       let url = DOMAIN + base.operations?.Export?.url;
@@ -1235,12 +1235,12 @@ class Datumizo extends Component {
     onClick: () => {
       let { base } = this.props;
       if(!this.MountTablizo){
-        STORE.Alert(LocaleX.Get("__IZO.Alert.NoRowsSelect"), "warn");
+        STORE.Alert(LocaleX.GetIZO("Alert.NoRowsSelect"), "warn");
         return;
       }
       let selected = this.MountTablizo.GetSelectedRows();
       if (selected.length <= 0) {
-        STORE.Alert(LocaleX.Get("__IZO.Alert.NoRowsSelect"), "warn");
+        STORE.Alert(LocaleX.GetIZO("Alert.NoRowsSelect"), "warn");
         return;
       }
 
@@ -1330,7 +1330,7 @@ class Datumizo extends Component {
     onClick: () => {
       let { base } = this.state;
       if (!base.operations?.Import || !base.operations?.Import?.url) {
-        STORE.Alert(LocaleX.Get("__IZO.Alert.ImportNotImplement"), "warn");
+        STORE.Alert(LocaleX.GetIZO("Alert.ImportNotImplement"), "warn");
         return;
       }
       let title = ZFunc.IfFuncExec(base.operations?.Import?.title);
@@ -1339,8 +1339,8 @@ class Datumizo extends Component {
 
       STORE.Form(title, content 
         || (base.operations?.Import?.replace? 
-          LocaleX.Get("__IZO.Datumizo.ReplaceAllCaution")
-          : "") + LocaleX.Get("__IZO.Datumizo.FileSizeLimit"),
+          LocaleX.GetIZO("Datumizo.ReplaceAllCaution")
+          : "") + LocaleX.GetIZO("Datumizo.FileSizeLimit"),
         this._importForm, this.Import.onSubmit);
     },
 

@@ -6,7 +6,7 @@ import SysUser from "./SysUser/SysUser";
 
 const tabs = [
   {
-    label: () => LocaleX.Get("__IZO.System.BnR"),
+    label: () => LocaleX.GetIZO("System.BnR"),
     icon: <Sync/>,
     reqAuth: "System.BnR",
     render: <SysBnR/>,
@@ -15,7 +15,7 @@ const tabs = [
     alignment: "left"
   },
   {
-    label: () => LocaleX.Get("__IZO.System.UAC"),
+    label: () => LocaleX.GetIZO("System.UAC"),
     icon: <Group/>,
     reqAuth: "System.User",
     render: <SysUser/>,

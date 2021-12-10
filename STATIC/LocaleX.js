@@ -5,6 +5,10 @@ import { Accessor, STORE } from ".";
 
 class LocaleX {
 
+  static GetIZO(accessor, mapping = {}, lang = STORE.lang){
+    return this.Get("__IZO." + accessor, mapping, lang = STORE.lang);
+  }
+
   /**
    * Get Locale String from LocaleConfig
    * @param {String} accessor 
