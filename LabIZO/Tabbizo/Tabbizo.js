@@ -43,8 +43,8 @@ class Tabbizo extends Component {
     addOns: {},
     tabs: [],
     width: "100%",
-    height: "fit-to-content",
-    panelHeight: "fit-to-content"
+    height: "100%",
+    panelHeight: "100%"
   }
 
   constructor(){

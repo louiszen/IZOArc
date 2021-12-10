@@ -65,7 +65,7 @@ class Tablizo extends Component {
     pageSizeOption: PropsType.arrayOf(PropsType.number),
 
     //authority
-    user: PropsType.object,
+    user: PropsType.object.isRequired,
 
     //addOns
     addOns: PropsType.object,
