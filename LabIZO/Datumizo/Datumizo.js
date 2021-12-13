@@ -49,7 +49,7 @@ class Datumizo extends Component {
    *  Connect: {
    *    DBInfo: String,
    *    List: String,
-   *    schema: [schema]
+   *    schema: [schema],
    *  },
    *
    *  operations: {
@@ -62,6 +62,7 @@ class Datumizo extends Component {
    *      schema?: [schema],
    *      buttons?: [String],
    *      readOnly?: Boolean,
+   *      propsMod?: function (formProps) => formProps,
    *      onSubmit?: String | (formProps) => Void,
    *      Custom?: function (docID, doc, onQuit, onQuitRefresh, renderFormizo, addOns) => JSX,
    *      QuitReload?: Boolean | false,
@@ -157,6 +158,10 @@ class Datumizo extends Component {
   }
 
   static propTypes = {
+    //basic
+    width: PropsType.oneOfType([PropsType.string, PropsType.number]),
+    height: PropsType.oneOfType([PropsType.string, PropsType.number]),
+
     //config
     base: PropsType.shape({
       exportDoc: PropsType.string,
@@ -167,11 +172,13 @@ class Datumizo extends Component {
       noDefaultTable: PropsType.bool,
 
       tablizo: PropsType.shape({
-        ...Tablizo.propTypes
+        ...Tablizo.propTypes,
+        user: PropsType.object
       }),
 
       formizo: PropsType.shape({
-        ...Formizo.propTypes
+        ...Formizo.propTypes,
+        user: PropsType.object
       }), 
 
       operations: PropsType.objectOf(PropsType.shape(this.operationsPropsType)),
@@ -198,6 +205,8 @@ class Datumizo extends Component {
   };
 
   static defaultProps = {
+    width: "100%",
+    height: undefined,
     base: {},
     inject: null,
     addOns: {},
@@ -941,6 +950,10 @@ class Datumizo extends Component {
       let { base, addOns, docID } = this.props;
       let url = DOMAIN + base.operations?.Add?.url;
 
+      if(base.operations?.Add?.propsMod){
+        formProps = await base.operations?.Add?.propsMod(formProps);
+      }
+
       let payloadOut = {
         data: {
           ...formProps,
@@ -1101,6 +1114,10 @@ class Datumizo extends Component {
       let { doc } = this.state;
 
       let url = DOMAIN + base.operations?.Edit?.url;
+
+      if(base.operations?.Edit?.propsMod){
+        formProps = await base.operations?.Edit?.propsMod(formProps);
+      }
 
       let payloadOut = {
         data: {
@@ -1690,14 +1707,26 @@ class Datumizo extends Component {
     }
   }
 
+  renderInjectRight(){
+    let {injectRight} = this.props;
+    let {table, loading} = this.state;
+    if (injectRight){
+      if(_.isFunction(injectRight)){
+        return injectRight(table, loading);
+      }
+      return injectRight;
+    }
+  }
+
   render() {
-    let { base } = this.props;
+    let { base, width, height } = this.props;
     if (!base) return <div />;
     return (
-      <Box style={{ width: "100%"}} flexGrow={base.noDefaultTable? undefined: 1}>
+      <Box style={{ width: width, height: height}} flexGrow={base.noDefaultTable? undefined: 1}>
         <VStack width="100%" padding={1} alignItems="flex-start"> 
           {this.renderInject()}
           {this.renderGridView()}
+          {this.renderInjectRight()}
         </VStack>
         {this.renderSlide()}
       </Box>

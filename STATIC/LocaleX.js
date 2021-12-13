@@ -46,6 +46,7 @@ class LocaleX {
    */
   static Parse(obj, mapping = {}, lang = STORE.lang){
     let str = "";
+    if(!obj) return "";
     if(_.isString(obj)){
       str = obj;
     }else{

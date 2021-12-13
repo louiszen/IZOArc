@@ -28,7 +28,8 @@ let DefTC = {
   NavBar: {
     LoggedInAs: "登入帳號",
     SwitchLang: "English",
-    Logout: "登出"
+    Logout: "登出",
+    Reload: "重新載入"
   },
   MenuBar: {
     System: "系統設定",
@@ -57,7 +58,9 @@ let DefTC = {
     AskLogout: {
       title: "登出",
       message: "你是否確認登出?"
-    }
+    },
+    SuccessRenew: "登入資料已重整",
+    FailRenew: "登入資料重整失敗"
   },
   System: {
     BnR: "備份和恢復",

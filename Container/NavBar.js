@@ -18,6 +18,8 @@ import { CompanyDis, IZOFontFamily, IZOTheme, NavbarDis, ProjectDis } from "__SY
 import LocaleX from "IZOArc/STATIC/LocaleX";
 import { SITEBASE } from "__SYSDefault/Domain";
 import { BLangToggler } from "IZOArc/BLOCKS";
+import { Cached } from "@mui/icons-material";
+import SLogin from "../API/SLogin";
 
 class NavBar extends Component {
 
@@ -69,6 +71,10 @@ class NavBar extends Component {
     }
   }
 
+  ReloadAuth = async () => {
+    await SLogin.RenewAuth();
+  }
+
   renderIZO(){
     return (
       <HStack width="fit-content">
@@ -103,9 +109,14 @@ class NavBar extends Component {
         <Typography style={{marginLeft: 10, marginRight: 5, fontFamily: IZOFontFamily, fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.8)}}>
           {STORE.user && STORE.user.UserDisplayName}
         </Typography>
-        <Typography style={{marginLeft: 5, marginRight: 5, fontFamily: IZOFontFamily, fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.8)}}>
-          {STORE.user && ("[" + STORE.user.role + "]")}
+        <Typography style={{width: 70, marginLeft: 5, marginRight: 5, fontFamily: IZOFontFamily, fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.8)}}>
+          {STORE.user && ("[" + LocaleX.Parse(STORE.user.roleName) + "]")}
         </Typography>
+        <Tooltip title={LocaleX.GetIZO("NavBar.Reload")}>
+          <IconButton size="small" style={{color: ColorX.GetColorCSS(IZOTheme.menuFG, 1)}} onClick={() => this.ReloadAuth()}>
+            <Cached/>
+          </IconButton>
+        </Tooltip>
       </HStack>
     );
   }
@@ -147,7 +158,7 @@ class NavBar extends Component {
       <HStack position="absolute" style={CompanyDis.style}>
         {CompanyDis.preRender}
         <Box style={CompanyDis.imgStyle}>
-          <img src={CompanyDis.src} alt="elain" draggable={false}/>
+          <img src={CompanyDis.src} alt="company" draggable={false}/>
         </Box>
         {CompanyDis.postRender}
       </HStack>

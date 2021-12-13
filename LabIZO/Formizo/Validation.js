@@ -7,6 +7,7 @@ const Rules = {
   number: value => !value || !isNaN(Number(value)),
   plain: value => !value || /^[a-zA-Z0-9_]+$/i.test(value),
   plainSpace: value => !value || /^[a-zA-Z0-9_ -]+$/i.test(value),
+  plainAt: value => !value || /^[a-zA-Z0-9_@]+$/i.test(value),
   plainLower: value => !value || /^[a-z0-9_]+$/.test(value)
 };
 
@@ -26,6 +27,10 @@ const ErrorMsg = {
   plain: () => LocaleX.Parse({
     EN: "No spaces or special characters except _",
     TC: "不可包含除 _ 外 空格 或 特殊子元",
+  }),
+  plainAt: () => LocaleX.Parse({
+    EN: "No special characters except @ or _",
+    TC: "不可包含除 @ 或 _ 外特殊子元",
   }),
   plainSpace: () => LocaleX.Parse({
     EN: "No special characters except space or _",

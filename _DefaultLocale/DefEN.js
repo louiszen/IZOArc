@@ -29,7 +29,8 @@ let DefEN = {
   NavBar: {
     LoggedInAs: "Logged in as ",
     SwitchLang: "中文",
-    Logout: "Logout"
+    Logout: "Logout",
+    Reload: "Reload"
   },
   MenuBar: {
     System: "System",
@@ -58,7 +59,9 @@ let DefEN = {
     AskLogout: {
       title: "Logout",
       message: "Are you confirm to logout?"
-    }
+    },
+    SuccessRenew: "Login Restored Successfully.",
+    FailRenew: "Login Restored Fails"
   },
   System: {
     BnR: "Backup & Restore",
