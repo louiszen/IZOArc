@@ -4,7 +4,7 @@ import PropsType from "prop-types";
 import _ from "lodash";
 import axios from "axios";
 import fileDownload from "js-file-download";
-import { Add, CloudDownload, CloudUpload, Delete, DeleteForever, Edit, GetApp, InfoOutlined, Publish, Assessment} from "@material-ui/icons";
+import { Add, CloudDownload, CloudUpload, Delete, DeleteForever, Edit, GetApp, InfoOutlined, Publish, Assessment, Cached} from "@material-ui/icons";
 import { ContentCopy } from "@mui/icons-material";
 import { Box, Slide, Typography } from "@material-ui/core";
 
@@ -17,6 +17,7 @@ import Tablizo from "IZOArc/LabIZO/Tablizo";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
 import { Accessor, Authority, ColorX, ErrorX, LocaleX, STORE, ZFunc } from "IZOArc/STATIC";
 import { StyledButton } from "IZOArc/LabIZO/Stylizo";
+import { IconButton } from "@mui/material";
 
 /**
  * Datumizo - display documents with tables and controls
@@ -32,6 +33,7 @@ class Datumizo extends Component {
    * 
    *  noDefaultButtons?: false,
    *  noDefaultTable?: false,
+   *  refreshButton?: "none" | "left" | "right",
    * 
    *  tablizo: {
    *    columnsToolbar?: Boolean,
@@ -170,6 +172,7 @@ class Datumizo extends Component {
       showSelector: PropsType.bool,
       noDefaultButtons: PropsType.bool,
       noDefaultTable: PropsType.bool,
+      refreshButton: PropsType.oneOf(["none", "left", "right"]),
 
       tablizo: PropsType.shape({
         ...Tablizo.propTypes,
@@ -326,7 +329,7 @@ class Datumizo extends Component {
     return this.state.docID;
   }
 
-  _fetchData = () => {
+  _fetchData = (callback) => {
     let { serverSidePagination, onLoad } = this.props;
     this.setState(
       {
@@ -338,6 +341,7 @@ class Datumizo extends Component {
         }
         await this.Connect.Data();
         if (onLoad) onLoad();
+        if (callback) callback();
       }
     );
   };
@@ -1599,9 +1603,11 @@ class Datumizo extends Component {
     if(!base.noDefaultButtons){
       return (
         <HStack marginBottom={1}>
+          {base.refreshButton === "left" && this.renderRefresh()}
           {this.renderTableButtons(base.buttons.left, true)}
           <Spacer />
           {this.renderTableButtons(base.buttons.right, false)}
+          {base.refreshButton === "right" && this.renderRefresh()}
         </HStack>
       );
     }
@@ -1716,6 +1722,20 @@ class Datumizo extends Component {
       }
       return injectRight;
     }
+  }
+
+  renderRefresh(){
+    let { base } = this.props;
+    return (
+      <IconButton onClick={() => this._fetchData()} size="small" 
+        style={{
+          marginLeft: base.refreshButton === "right"? 10 : 5,
+          marginRight: base.refreshButton === "left"? 10 : 5,
+        }}
+        >
+        <Cached/>
+      </IconButton>
+    );
   }
 
   render() {

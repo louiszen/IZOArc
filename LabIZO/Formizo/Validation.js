@@ -26,7 +26,7 @@ const ErrorMsg = {
   }),
   plain: () => LocaleX.Parse({
     EN: "No spaces or special characters except _",
-    TC: "不可包含除 _ 外 空格 或 特殊子元",
+    TC: "不可包含除 _ 外特殊子元",
   }),
   plainAt: () => LocaleX.Parse({
     EN: "No special characters except @ or _",
@@ -38,7 +38,7 @@ const ErrorMsg = {
   }),
   plainLower: () => LocaleX.Parse({
     EN: "Must be in lowercase, no spaces or special characters except _",
-    TC: "只接受小寫字母，不可包含除 _ 外 空格 或 特殊子元",
+    TC: "只接受小寫字母，不可包含除 _ 外特殊子元",
   }),
 };
 
