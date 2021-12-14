@@ -1,0 +1,88 @@
+import React, { Component } from "react";
+import { Accessor } from "IZOArc/STATIC";
+import PropsType from "prop-types";
+import { VStack } from "IZOArc/LabIZO/Stackizo";
+import AuthTreeBlock from "./AuthTreeBlock";
+
+import _ from "lodash";
+
+/**
+ * @augments {Component<Props, State>}
+ */
+class AuthTreeNode extends Component {
+
+  static propTypes = {
+    projID: PropsType.string,
+    tree: PropsType.object,
+    ctrl: PropsType.object,
+    refCtrl: PropsType.object,
+    level: PropsType.string,
+    onCtrlSet: PropsType.func
+  }
+
+  static defaultProps = {
+    projID: "",
+    tree: {},
+    ctrl: {},
+    refCtrl: {},
+    level: "",
+    onCtrlSet: () => {}
+  }
+
+  constructor(){
+    super();
+    this.state = {};
+  }
+
+  componentDidMount(){
+    this._setAllStates();
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    if(!Accessor.IsIdentical(prevProps, this.props, Object.keys(AuthTreeNode.defaultProps))){
+      this._setAllStates();
+    }
+  }
+
+  componentWillUnmount() {
+    this.setState = (state, callback) => {
+      return;
+    };
+  }
+
+  _setAllStates = (callback) => {
+    this.setState((state, props) => ({
+      ...props,
+    }), callback);
+  }
+
+  renderBlockList(){
+    let {tree, ctrl, level, projID, onCtrlSet, refCtrl} = this.props;
+    return _.map(tree, (o, i) => {
+      let nextlevel = level + (level === ""? i : ("." + i)); 
+      return (
+        <AuthTreeBlock
+          key={i}
+          tree={o}
+          ctrl={ctrl}
+          refCtrl={refCtrl}
+          level={nextlevel}
+          projID={projID}
+          nodeKey={i}
+          onCtrlSet={onCtrlSet}
+          />
+      );
+    });
+  }
+
+  render(){
+    return (
+      <VStack height="fit-content" alignItems="flex-start" width="100%">
+        {this.renderBlockList()}
+      </VStack>
+    );
+  }
+
+}
+
+export default AuthTreeNode;

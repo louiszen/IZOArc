@@ -17,7 +17,7 @@ import Accessizo from "IZOArc/LabIZO/Accessizo";
 import { CompanyDis, IZOFontFamily, IZOTheme, NavbarDis, ProjectDis } from "__SYSDefault/Theme";
 import LocaleX from "IZOArc/STATIC/LocaleX";
 import { SITEBASE } from "__SYSDefault/Domain";
-import { BLangToggler } from "IZOArc/BLOCKS";
+import { BLangToggler } from "IZOArc/BLOCKS/Ctrls";
 import { Cached } from "@mui/icons-material";
 import SLogin from "../API/SLogin";
 

@@ -10,7 +10,7 @@ import data from "./_data";
 import Formizo from "IZOArc/LabIZO/Formizo";
 import { Accessor, STORE } from "IZOArc/STATIC";
 import { HStack, VStack } from "IZOArc/LabIZO/Stackizo";
-import { BLangToggler } from "IZOArc/BLOCKS";
+import { BLangToggler } from "IZOArc/BLOCKS/Ctrls";
 import { observer } from "mobx-react";
 
 class Test extends Component {

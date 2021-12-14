@@ -16,7 +16,7 @@ import { VStack, HStack, Spacer } from "IZOArc/LabIZO/Stackizo";
 import { StyledButton, StyledLinearProgress } from "IZOArc/LabIZO/Stylizo";
 import { FirstPage, StartDate } from "__SYSDefault/Config";
 import { Password, Window, GitHub, Facebook, Instagram, Twitter, Google, LinkedIn, Sms, Email} from "@mui/icons-material";
-import { BLangToggler } from "IZOArc/BLOCKS";
+import { BLangToggler } from "IZOArc/BLOCKS/Ctrls";
 import { SLogin } from "IZOArc/API";
 class Login extends Component {
 
