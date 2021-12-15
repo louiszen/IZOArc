@@ -4,8 +4,8 @@ import PropsType from "prop-types";
 import _ from "lodash";
 import axios from "axios";
 import fileDownload from "js-file-download";
-import { Add, CloudDownload, CloudUpload, Delete, DeleteForever, Edit, GetApp, InfoOutlined, Publish, Assessment, Cached} from "@material-ui/icons";
-import { ContentCopy } from "@mui/icons-material";
+import { Add, CloudDownload, CloudUpload, Delete, DeleteForever, Edit, GetApp, InfoOutlined, Publish, Assessment} from "@material-ui/icons";
+import { ContentCopy, Refresh } from "@mui/icons-material";
 import { Box, Slide, Typography } from "@material-ui/core";
 
 import { IZOTheme } from "__SYSDefault/Theme";
@@ -295,6 +295,7 @@ class Datumizo extends Component {
             QuitInner: this._QuitInner,
             SoftReload: this._SoftReload,
             GetSelectedRows: this._GetSelectedRows,
+            SetSelectedRows: this._SetSelectedRows,
             Add: this.Add.onClick,
             Delete: this.Delete.onClick, //inline
             Edit: this.Edit.onClick, //inline
@@ -315,6 +316,12 @@ class Datumizo extends Component {
     }
     return [];
   };
+
+  _SetSelectedRows = (rows = []) => {
+    if (this.MountTablizo) {
+      this.MountTablizo.SetSelectedRows(rows);
+    }
+  }
 
   _CustomInner = (mode, docID = undefined, doc = undefined) => {
     this.setState((state, props) => ({
@@ -1733,7 +1740,7 @@ class Datumizo extends Component {
           marginRight: base.refreshButton === "left"? 10 : 5,
         }}
         >
-        <Cached/>
+        <Refresh/>
       </IconButton>
     );
   }

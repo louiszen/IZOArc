@@ -55,6 +55,7 @@ render(){
 | QuitInner || Quit the inner page |
 | SoftReload | `(docID) => void`| Soft reload the corresponding docID row |
 | GetSelectedRows || Get the selected rows doc ID |
+| SetSelectedRows || Set the selected rows doc ID |
 <br/>
 
 ## **Necessary Props**
