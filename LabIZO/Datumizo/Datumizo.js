@@ -173,6 +173,7 @@ class Datumizo extends Component {
       noDefaultButtons: PropsType.bool,
       noDefaultTable: PropsType.bool,
       refreshButton: PropsType.oneOf(["none", "left", "right"]),
+      usePropsData: PropsType.bool,
 
       tablizo: PropsType.shape({
         ...Tablizo.propTypes,
@@ -204,7 +205,8 @@ class Datumizo extends Component {
     //settings
     serverSidePagination: PropsType.bool,
     refreshOnPageChange: PropsType.bool,
-    lang: PropsType.string
+    lang: PropsType.string,
+    data: PropsType.array
   };
 
   static defaultProps = {
@@ -220,7 +222,8 @@ class Datumizo extends Component {
 
     serverSidePagination: false,
     refreshOnPageChange: false,
-    lang: "EN"
+    lang: "EN",
+    data: []
   };
 
   constructor() {
@@ -338,19 +341,50 @@ class Datumizo extends Component {
 
   _fetchData = (callback) => {
     let { serverSidePagination, onLoad } = this.props;
-    this.setState(
-      {
-        loading: true,
-      },
-      async () => {
-        if (serverSidePagination) {
-          await this.Connect.DBInfo();
+    let {base} = this.props;
+    if(base.usePropsData){
+      this.setState(
+        (state, props) => ({
+          table: {
+            ...state.table,
+            data: props.data,
+          },
+        }),
+        () => {
+          let { table, nav } = this.state;
+          let { onDataChange } = this.props;
+          let hasNextPage = false;
+          if (nav.inQuery) {
+            hasNextPage = table.data.length > nav.limit;
+          }
+
+          if (onDataChange) {
+            onDataChange(table.data);
+          }
+          this.setState((state, props) => ({
+            nav: {
+              ...state.nav,
+              hasNextPage: hasNextPage,
+            }
+          }));
         }
-        await this.Connect.Data();
-        if (onLoad) onLoad();
-        if (callback) callback();
-      }
-    );
+      );
+    }else{
+      this.setState(
+        {
+          loading: true,
+        },
+        async () => {
+          if (serverSidePagination) {
+            await this.Connect.DBInfo();
+          }
+          await this.Connect.Data();
+          if (onLoad) onLoad();
+          if (callback) callback();
+        }
+      );
+    }
+    
   };
 
   _SoftReload = (docID) => {
