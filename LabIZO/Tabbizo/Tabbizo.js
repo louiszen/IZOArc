@@ -136,7 +136,7 @@ class Tabbizo extends Component {
     let {width, height, panelHeight} = this.props;
     return (
       <VStack width={width} height={height}>
-        <Paper position="static" style={{width: "100%", height: "fit-to-content"}}>
+        <Paper position="static" style={{width: "100%", height: "fit-content"}}>
           <Tabs value={selectedTab} 
             indicatorColor="primary"
             textColor="primary"

@@ -299,7 +299,7 @@ class Tablizo extends Component {
     }
   };
 
-  _defaultButtons = (buttons) => {
+  _defaultButtons = (buttons, oriSide = true) => {
     let { user, rowIdAccessor } = this.props;
     let btns = [];
 
@@ -314,7 +314,7 @@ class Tablizo extends Component {
         btns.push({
           headerName: "",
           renderHeader: () => <div />,
-          field: "<Button> " + caption,
+          field: "<Button>_" + (oriSide? "s" : "o") + "_" + i,
           sortable: false,
           filterable: false,
           disableColumnMenu: true,
@@ -387,10 +387,10 @@ class Tablizo extends Component {
     cols = _.filter(cols, (o) => o);
 
     //Inline Buttons
-    let btns = this._defaultButtons(inlineButtons);
+    let btns = this._defaultButtons(inlineButtons, true);
 
     //Opposite Inline Buttons
-    let oppositeBtns = this._defaultButtons(inlineButtonsOpposite);
+    let oppositeBtns = this._defaultButtons(inlineButtonsOpposite, false);
 
     let rtn = [];
 
@@ -546,14 +546,14 @@ class Tablizo extends Component {
       this.props;
     let { sortModel, filterModel, selectedRows } = this.state;
     let schema = this.getSchema();
+    let columns = this.getColumns(schema);
     let localText = locale[lang];
-
     return (
       <Box height={height} width={width} overflow={"hidden"}>
         <DataGrid
           rows={data}
           disableSelectionOnClick={!selectionOnClick}
-          columns={this.getColumns(schema)}
+          columns={columns}
           checkboxSelection={showSelector}
           onSelectionModelChange={this._onRowSelected}
           onFilterModelChange={this._onFilterChange}

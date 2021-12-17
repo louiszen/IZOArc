@@ -26,6 +26,7 @@ class Inner extends Component {
     user: PropsType.object,
     showIDOnTop: PropsType.bool,
     formizo: PropsType.object,
+    lang: PropsType.string,
   }
 
   static defaultProps = {
@@ -38,7 +39,8 @@ class Inner extends Component {
     onQuitRefresh: (docID) => {},
     user: null,
     showIDOnTop: true,
-    formizo: {}
+    formizo: {},
+    lang: ""
   }
 
   constructor(){

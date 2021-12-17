@@ -134,6 +134,7 @@
 | selectStyle | `String` || `"dropdown"` | `dropdown, checkbox, radio`|
 | selectRef | `String` || `""` | Accessor from addOns |
 | selectCap | `String` || `""` | Accessor from selectRef for the option caption |
+| selectCapMod | `(*) => String` || `undefined` | Modifier to the extracted caption of selectCap |
 | selectVal | `String` || `""` | Accessor from selectRef for the option value |
 | selectTip | `String` || `""` | Accessor from selectRef for the Tooltip value |
 | showTooltip | `Boolean` ||  `false` | Show tooltip or not |

@@ -1655,7 +1655,7 @@ class Datumizo extends Component {
   }
 
   renderInner() {
-    let { base, addOns } = this.props;
+    let { base, addOns, lang } = this.props;
     let { doc, mode, docID } = this.state;
     
     let ibase = base?.operations[mode];
@@ -1663,6 +1663,7 @@ class Datumizo extends Component {
       <Inner
         onQuit={this._QuitInner}
         onQuitRefresh={this._QuitAndFetch}
+        lang={lang}
         doc={doc}
         docID={docID}
         ibase={ibase}

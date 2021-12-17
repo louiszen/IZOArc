@@ -25,7 +25,7 @@ class BMarkdown extends Component {
 
   static defaultProps = {
     width: "100%",
-    height: "fit-to-content",
+    height: "fit-content",
     codeTheme: "vs"
   }
 

@@ -108,6 +108,11 @@ class FFDropdown extends Component {
       let v = _.isEmpty(ischema.selectVal) ? o : Accessor.Get(o, ischema.selectVal);
       let c = _.isEmpty(ischema.selectCap) ? o : Accessor.Get(o, ischema.selectCap);
       let t = _.isEmpty(ischema.selectTip) ? o : Accessor.Get(o, ischema.selectTip);
+
+      if(ischema.selectCapMod && _.isFunction(ischema.selectCapMod)){
+        c = ischema.selectCapMod(c);
+      }
+
       if(ischema.showTooltip){
         return (
           <MenuItem key={v} 
