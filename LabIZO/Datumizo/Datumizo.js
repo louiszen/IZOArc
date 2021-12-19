@@ -18,6 +18,7 @@ import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
 import { Accessor, Authority, ColorX, ErrorX, LocaleX, STORE, ZFunc } from "IZOArc/STATIC";
 import { StyledButton } from "IZOArc/LabIZO/Stylizo";
 import { IconButton } from "@mui/material";
+import ReqX from "IZOArc/STATIC/ReqX";
 
 /**
  * Datumizo - display documents with tables and controls
@@ -665,142 +666,106 @@ class Datumizo extends Component {
   Connect = {
     DBInfo: async () => {
       let { base, addOns } = this.props;
-      let url = DOMAIN + base.Connect.DBInfo;
-      let payloadOut = {
-        JWT: STORE.user.JWT,
-        addOns: addOns,
-      };
-      try {
-        let res = await axios.post(url, payloadOut);
-        console.log(base.Connect.DBInfo, res.data);
 
-        let { Success, payload } = res.data;
-
-        if (Success === true) {
-          this.setState((state, props) => ({
-            nav: {
-              ...state.nav,
-              totalEntries: payload.doc_count,
-            },
-          }));
-        } else {
-          this.Connect.onError(payload);
-        }
-      } catch (e) {
-        this.Connect.onError(e);
+      let res = await ReqX.SendBE(base.Connect.DBInfo, {}, addOns, null, null, this.Connect.onError);
+      let {Success, payload} = res;
+      if (Success === true) {
+        this.setState((state, props) => ({
+          nav: {
+            ...state.nav,
+            totalEntries: payload.doc_count,
+          },
+        }));
+      } else {
+        this.Connect.onError(payload);
       }
     },
 
     Data: async () => {
       let { base, addOns, serverSidePagination } = this.props;
       let { nav } = this.state;
-      let url = DOMAIN + base.Connect.List;
       let payloadOut = {};
 
       if (serverSidePagination) {
         payloadOut = {
-          JWT: STORE.user.JWT,
-          data: {
-            skip: nav.curPage * nav.pageSize,
-            limit: nav.pageSize,
-            selector: nav.selector,
-          },
-          addOns: addOns,
+          skip: nav.curPage * nav.pageSize,
+          limit: nav.pageSize,
+          selector: nav.selector,
         };
       } else {
         payloadOut = {
-          JWT: STORE.user.JWT,
-          data: {
-            selector: nav.selector,
-          },
-          addOns: addOns,
+          selector: nav.selector
         };
       }
-      try {
-        let res = await axios.post(url, payloadOut);
-        console.log(base.Connect.List, res.data);
 
-        let { Success, payload } = res.data;
-
-        if (Success === true) {
-          this.setState(
-            (state, props) => ({
-              table: {
-                ...state.table,
-                data: payload,
-              },
-            }),
-            () => {
-              let { table, nav } = this.state;
-              let { onDataChange } = this.props;
-              let hasNextPage = false;
-              if (nav.inQuery) {
-                hasNextPage = table.data.length > nav.limit;
-              }
-
-              if (onDataChange) {
-                onDataChange(table.data);
-              }
-              this.setState((state, props) => ({
-                nav: {
-                  ...state.nav,
-                  hasNextPage: hasNextPage,
-                },
-                loading: false,
-              }));
+      let res = await ReqX.SendBE(base.Connect.List, payloadOut, addOns, null, null, this.Connect.onError);
+      let {Success, payload} = res;
+      if(Success){
+        this.setState(
+          (state, props) => ({
+            table: {
+              ...state.table,
+              data: payload,
+            },
+          }),
+          () => {
+            let { table, nav } = this.state;
+            let { onDataChange } = this.props;
+            let hasNextPage = false;
+            if (nav.inQuery) {
+              hasNextPage = table.data.length > nav.limit;
             }
-          );
-        } else {
-          this.Connect.onError(payload);
-        }
-      } catch (e) {
-        this.Connect.onError(e);
+
+            if (onDataChange) {
+              onDataChange(table.data);
+            }
+            this.setState((state, props) => ({
+              nav: {
+                ...state.nav,
+                hasNextPage: hasNextPage,
+              },
+              loading: false,
+            }));
+          }
+        );
+      }else{
+        this.Connect.onError(payload);
       }
     },
 
     //light weight updator
     Get: async (docID) => {
       let { base, addOns } = this.props;
-      let url = DOMAIN + base.Connect.Get;
-      let payloadOut = {
-        JWT: STORE.user.JWT,
-        data: {
-          docID: docID,
-        },
-        addOns: addOns,
-      };
-      try {
-        let res = await axios.post(url, payloadOut);
-        console.log(base.Connect.Get, res.data);
-        let { Success, payload } = res.data;
 
-        if (Success === true) {
-          let newDoc = payload;
-          let oldData = this.state.table.data;
-          let docIdx = oldData.findIndex((o) => o._id === docID);
-          oldData[docIdx] = newDoc;
+      let res = await ReqX.SendBE(base.Connect.Get, {
+        docID: docID
+      }, addOns, null, null, this.Connect.onError);
 
-          this.setState(
-            (state, props) => ({
-              table: {
-                ...state.table,
-                data: oldData,
-              },
-              loading: false,
-            }),
-            () => {
-              let { table } = this.state;
-              let { onDataChange } = this.props;
-              if (onDataChange) {
-                onDataChange(table.data);
-              }
+      let {Success, payload} = res;
+      if(Success){
+        let newDoc = payload;
+        let oldData = this.state.table.data;
+        let docIdx = oldData.findIndex((o) => o._id === docID);
+        oldData[docIdx] = newDoc;
+
+        this.setState(
+          (state, props) => ({
+            table: {
+              ...state.table,
+              data: oldData,
+            },
+            loading: false,
+          }),
+          () => {
+            let { table } = this.state;
+            let { onDataChange } = this.props;
+            if (onDataChange) {
+              onDataChange(table.data);
             }
-          );
-        } else {
-          this.Connect.onError(res.data);
-        }
-      } catch (e) {
-        this.Connect.onError(e);
+          }
+        );
+      }else{
+        this.Connect.onError(payload);
       }
     },
 
@@ -830,48 +795,24 @@ class Datumizo extends Component {
       console.log("submit Delete");
 
       let { base, addOns } = this.props;
-      let url = DOMAIN + base.operations?.Delete?.url;
+      let res = await ReqX.SendBE(base.operations?.Delete?.url,
+        {
+          ...row
+        }, addOns, null, null);
 
-      let payloadOut = {
-        data: {
-          ...row,
-        },
-        JWT: STORE.user.JWT,
-        addOns: addOns,
-      };
-
-      try {
-        console.log(base.operations?.Delete?.url, payloadOut);
-
-        STORE.isLoading(true);
-        let res = await axios.post(url, payloadOut);
-        STORE.isLoading(false);
-
-        console.log(base.operations?.Delete?.url, res.data);
-
-        let { Success, payload } = res.data;
-
-        if (Success === true) {
-          if (base.operations?.Delete?.onSuccess) {
-            base.operations?.Delete?.onSuccess(payload);
-          } else {
-            this.Delete.onSuccess(payload);
-          }
-          return { Success: true };
+      let {Success, payload} = res;
+      if(Success){
+        if (base.operations?.Delete?.onSuccess) {
+          base.operations?.Delete?.onSuccess(payload);
         } else {
-          if (base.operations?.Delete?.onFail) {
-            base.operations?.Delete?.onFail(payload);
-          } else {
-            this.Delete.onFail(payload);
-          }
-          return { Success: false };
+          this.Delete.onSuccess(payload);
         }
-      } catch (e) {
-        STORE.isLoading(false);
+        return { Success: true };
+      }else{
         if (base.operations?.Delete?.onFail) {
-          base.operations?.Delete?.onFail(e);
+          base.operations?.Delete?.onFail(payload);
         } else {
-          this.Delete.onFail(e);
+          this.Delete.onFail(payload);
         }
         return { Success: false };
       }
@@ -911,48 +852,25 @@ class Datumizo extends Component {
       console.log("submit Duplicate");
 
       let { base, addOns } = this.props;
-      let url = DOMAIN + base.operations?.Duplicate?.url;
 
-      let payloadOut = {
-        data: {
+      let res = await ReqX.SendBE(base.operations?.Duplicate?.url, 
+        {
           ...row,
-        },
-        JWT: STORE.user.JWT,
-        addOns: addOns,
-      };
+        }, addOns, null, null);
 
-      try {
-        console.log(base.operations?.Duplicate?.url, payloadOut);
-
-        STORE.isLoading(true);
-        let res = await axios.post(url, payloadOut);
-        STORE.isLoading(false);
-
-        console.log(base.operations?.Duplicate?.url, res.data);
-
-        let { Success, payload } = res.data;
-
-        if (Success === true) {
-          if (base.operations?.Duplicate?.onSuccess) {
-            base.operations?.Duplicate?.onSuccess(payload);
-          } else {
-            this.Duplicate.onSuccess(payload);
-          }
-          return { Success: true };
+      let {Success, payload} = res;
+      if(Success){
+        if (base.operations?.Duplicate?.onSuccess) {
+          base.operations?.Duplicate?.onSuccess(payload);
         } else {
-          if (base.operations?.Duplicate?.onFail) {
-            base.operations?.Duplicate?.onFail(payload);
-          } else {
-            this.Duplicate.onFail(payload);
-          }
-          return { Success: false };
+          this.Duplicate.onSuccess(payload);
         }
-      } catch (e) {
-        STORE.isLoading(false);
+        return { Success: true };
+      } else {
         if (base.operations?.Duplicate?.onFail) {
-          base.operations?.Duplicate?.onFail(e);
+          base.operations?.Duplicate?.onFail(payload);
         } else {
-          this.Duplicate.onFail(e);
+          this.Duplicate.onFail(payload);
         }
         return { Success: false };
       }
@@ -993,56 +911,33 @@ class Datumizo extends Component {
       console.log(formProps);
 
       let { base, addOns, docID } = this.props;
-      let url = DOMAIN + base.operations?.Add?.url;
 
       if(base.operations?.Add?.propsMod){
         formProps = await base.operations?.Add?.propsMod(formProps);
       }
 
-      let payloadOut = {
-        data: {
-          ...formProps,
-        },
-        JWT: STORE.user.JWT,
-        addOns: addOns,
-      };
+      // if(base.operations?.Add?.withFile){
+      //   payloadOut = this._getUploadFormData(payloadOut);
+      // }
 
-      if(base.operations?.Add?.withFile){
-        payloadOut = this._getUploadFormData(payloadOut);
-      }
+      let res = await ReqX.SendBE(base.operations?.Add?.url, 
+        {
+          ...formProps
+        }, addOns, null, null);
 
-
-      try {
-        console.log(base.operations?.Add?.url, payloadOut);
-
-        STORE.isLoading(true);
-        let res = await axios.post(url, payloadOut);
-        STORE.isLoading(false);
-
-        console.log(base.operations?.Add?.url, res.data);
-
-        let { Success, payload } = res.data;
-
-        if (Success === true) {
-          if (base.operations?.Add?.onSuccess) {
-            base.operations?.Add?.onSuccess(payload);
-          } else {
-            this.Add.onSuccess(payload);
-          }
-          this._QuitInner(docID);
+      let {Success, payload} = res;
+      if (Success) {
+        if (base.operations?.Add?.onSuccess) {
+          base.operations?.Add?.onSuccess(payload);
         } else {
-          if (base.operations?.Add?.onFail) {
-            base.operations?.Add?.onFail(payload);
-          } else {
-            this.Add.onFail(payload);
-          }
+          this.Add.onSuccess(payload);
         }
-      } catch (e) {
-        STORE.isLoading(false);
+        this._QuitInner(docID);
+      } else {
         if (base.operations?.Add?.onFail) {
-          base.operations?.Add?.onFail(e);
+          base.operations?.Add?.onFail(payload);
         } else {
-          this.Add.onFail(e);
+          this.Add.onFail(payload);
         }
       }
     },
@@ -1079,52 +974,29 @@ class Datumizo extends Component {
       console.log(formProps);
 
       let { base, addOns, docID } = this.props;
-      let url = DOMAIN + base.operations?.Add?.url;
 
-      let payloadOut = {
-        data: {
-          ...formProps,
-        },
-        JWT: STORE.user.JWT,
-        addOns: addOns,
-      };
+      // if(base.operations?.Add?.withFile){
+      //   payloadOut = this._getUploadFormData(payloadOut);
+      // }
 
-      if(base.operations?.Add?.withFile){
-        payloadOut = this._getUploadFormData(payloadOut);
-      }
+      let res = await ReqX.SendBE(base.operations?.Add?.url, 
+        {
+          ...formProps
+        }, addOns, null, null);
 
-
-      try {
-        console.log(base.operations?.Add?.url, payloadOut);
-
-        STORE.isLoading(true);
-        let res = await axios.post(url, payloadOut);
-        STORE.isLoading(false);
-
-        console.log(base.operations?.Add?.url, res.data);
-
-        let { Success, payload } = res.data;
-
-        if (Success === true) {
-          if (base.operations?.Add?.onSuccess) {
-            base.operations?.Add?.onSuccess(payload);
-          } else {
-            this.Add.onSuccess(payload);
-          }
-          this._QuitInner(docID);
+      let {Success, payload} = res;
+      if (Success === true) {
+        if (base.operations?.Add?.onSuccess) {
+          base.operations?.Add?.onSuccess(payload);
         } else {
-          if (base.operations?.Add?.onFail) {
-            base.operations?.Add?.onFail(payload);
-          } else {
-            this.Add.onFail(payload);
-          }
+          this.Add.onSuccess(payload);
         }
-      } catch (e) {
-        STORE.isLoading(false);
+        this._QuitInner(docID);
+      } else {
         if (base.operations?.Add?.onFail) {
-          base.operations?.Add?.onFail(e);
+          base.operations?.Add?.onFail(payload);
         } else {
-          this.Add.onFail(e);
+          this.Add.onFail(payload);
         }
       }
     },
@@ -1158,56 +1030,33 @@ class Datumizo extends Component {
       let { base, addOns } = this.props;
       let { doc } = this.state;
 
-      let url = DOMAIN + base.operations?.Edit?.url;
-
       if(base.operations?.Edit?.propsMod){
         formProps = await base.operations?.Edit?.propsMod(formProps);
       }
 
-      let payloadOut = {
-        data: {
+      // if(base.operations?.Edit?.withFile){
+      //   payloadOut = this._getUploadFormData(payloadOut);
+      // }
+
+      let res = await ReqX.SendBE(base.operations?.Edit?.url, 
+        {
           ...doc,
           ...formProps,
-        },
-        JWT: STORE.user.JWT,
-        addOns: addOns,
-      };
+        }, addOns, null, null);
 
-      if(base.operations?.Edit?.withFile){
-        payloadOut = this._getUploadFormData(payloadOut);
-      }
-
-      try {
-        console.log(base.operations?.Edit?.url, payloadOut);
-
-        STORE.isLoading(true);
-        let res = await axios.post(url, payloadOut);
-        STORE.isLoading(false);
-
-        console.log(base.operations?.Edit?.url, res.data);
-
-        let { Success, payload } = res.data;
-
-        if (Success === true) {
-          if (base.operations?.Edit?.onSuccess) {
-            base.operations?.Edit?.onSuccess(payload);
-          } else {
-            this.Edit.onSuccess(payload);
-          }
-          this._QuitInner();
+      let {Success, payload} = res;
+      if (Success) {
+        if (base.operations?.Edit?.onSuccess) {
+          base.operations?.Edit?.onSuccess(payload);
         } else {
-          if (base.operations?.Edit?.onSuccess) {
-            base.operations?.Edit?.onFail(payload);
-          } else {
-            this.Edit.onFail(payload);
-          }
+          this.Edit.onSuccess(payload);
         }
-      } catch (e) {
-        STORE.isLoading(false);
-        if (base.operations?.Edit?.onFail) {
-          base.operations?.Edit?.onFail(e);
+        this._QuitInner();
+      } else {
+        if (base.operations?.Edit?.onSuccess) {
+          base.operations?.Edit?.onFail(payload);
         } else {
-          this.Edit.onFail(e);
+          this.Edit.onFail(payload);
         }
       }
     },
@@ -1327,49 +1176,27 @@ class Datumizo extends Component {
         STORE.Alert("DeleteBulk Not Implemented.", "warn");
         return;
       }
-      let url = DOMAIN + base.operations?.DeleteBulk?.url;
       let selected = this.MountTablizo.GetSelectedRows();
 
-      let payloadOut = {
-        JWT: STORE.user.JWT,
-        data: {
+      let res = await ReqX.SendBE(base.operations?.DeleteBulk?.url, 
+        {
           selected: selected,
-        },
-        addOns: addOns,
-      };
+        }, addOns, null, null);
 
-      try {
-        console.log(base.operations?.DeleteBulk?.url, payloadOut);
-
-        STORE.isLoading(true);
-        let res = await axios.post(url, payloadOut);
-        STORE.isLoading(false);
-
-        console.log(base.operations?.DeleteBulk?.url, res.data);
-
-        let { Success, payload } = res.data;
-        if (Success === true) {
-          if (base.operations?.DeleteBulk?.onSuccess) {
-            base.operations?.DeleteBulk?.onSuccess(payload);
-          } else {
-            this.DeleteBulk.onSuccess(payload);
-          }
-          this.MountTablizo.ClearSelected();
-          return { Success: true };
+      let {Success, payload} = res;
+      if (Success) {
+        if (base.operations?.DeleteBulk?.onSuccess) {
+          base.operations?.DeleteBulk?.onSuccess(payload);
         } else {
-          if (base.operations?.DeleteBulk?.onFail) {
-            base.operations?.DeleteBulk?.onFail(payload);
-          } else {
-            this.DeleteBulk.onFail(payload);
-          }
-          return { Success: false };
+          this.DeleteBulk.onSuccess(payload);
         }
-      } catch (e) {
-        STORE.isLoading(false);
+        this.MountTablizo.ClearSelected();
+        return { Success: true };
+      } else {
         if (base.operations?.DeleteBulk?.onFail) {
-          base.operations?.DeleteBulk?.onFail(e);
+          base.operations?.DeleteBulk?.onFail(payload);
         } else {
-          this.DeleteBulk.onFail(e);
+          this.DeleteBulk.onFail(payload);
         }
         return { Success: false };
       }

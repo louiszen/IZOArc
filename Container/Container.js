@@ -4,7 +4,6 @@ import { withRouter } from "react-router";
 import { when } from "mobx";
 import { observer } from "mobx-react";
 import _ from "lodash";
-import axios from "axios";
 import htmlParser from "html-react-parser";
 import { Close } from "@material-ui/icons";
 import { Backdrop, Box, CircularProgress, Snackbar } from "@material-ui/core";
@@ -15,7 +14,6 @@ import NavBar from "./NavBar";
 import "./Container.css";
 
 import { IZOTheme } from "__SYSDefault/Theme";
-import { DOMAIN } from "__SYSDefault/Domain";
 import { FirstPage, hasContainer, loginSys, serverCheck } from "__SYSDefault/Config";
 import { StartUp } from "__SYSDefault/StartUp";
 
@@ -24,6 +22,7 @@ import { SnackAlert, StyledButton, StyledLinearProgress } from "IZOArc/LabIZO/St
 import { StyledIconButton } from "IZOArc/LabIZO/Stylizo";
 import { ColorX, LocaleX, STORE } from "IZOArc/STATIC";
 import { EnvInfoAPI } from "__SYSDefault/SysAPI";
+import ReqX from "IZOArc/STATIC/ReqX";
 
 class Container extends Component {
 
@@ -127,25 +126,24 @@ class Container extends Component {
   }
 
   GetServerDetail = async () => {
-    let url = DOMAIN + EnvInfoAPI;
-    
-    try{
-      let rtn = await axios.post(url);
-      console.log(EnvInfoAPI, rtn.data);
-      if(rtn.data.Success === true){
-        STORE.setServer(rtn.data.payload);
-      }else{
+    let res = await ReqX.SendBE(EnvInfoAPI, {}, {}, null, 
+      () => {
         STORE.Alert(LocaleX.GetIZO("Alert.InternalServerError"), "error");
-      }
-    }catch{
-      let {location} = this.props;
-      let isPublic = (location && location.pathname) === "/";
-      let isTest = location && location.pathname && location.pathname.startsWith("/Test/");
+      },
+      () => {
+        let {location} = this.props;
+        let isPublic = (location && location.pathname) === "/";
+        let isTest = location && location.pathname && location.pathname.startsWith("/Test/");
+  
+        STORE.Alert(LocaleX.GetIZO("Alert.CannotConnect"), "error");
+        if(!isPublic && !isTest){
+          this.AutoLogout();
+        }
+      }, false, true);
 
-      STORE.Alert(LocaleX.GetIZO("Alert.CannotConnect"), "error");
-      if(!isPublic && !isTest){
-        this.AutoLogout();
-      }
+    let {Success, payload} = res;
+    if(Success){
+      STORE.setServer(payload);
     }
   }
 

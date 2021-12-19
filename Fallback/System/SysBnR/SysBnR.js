@@ -2,12 +2,11 @@ import React, { Component } from "react";
 
 import _ from "lodash";
 import moment from "moment";
-import axios from "axios";
+
 import { Typography } from "@material-ui/core";
 import { SaveOutlined } from "@material-ui/icons";
 
 import schema from "./schema";
-import { DOMAIN } from "__SYSDefault/Domain";
 
 import Tablizo from "IZOArc/LabIZO/Tablizo";
 import Accessizo from "IZOArc/LabIZO/Accessizo";
@@ -16,6 +15,7 @@ import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
 import { StyledButton } from "IZOArc/LabIZO/Stylizo";
 import { observer } from "mobx-react";
 import { BnRBackup, BnRDBInclude, BnRDelete, BnRInfo, BnRRestore } from "__SYSDefault/SysAPI";
+import ReqX from "IZOArc/STATIC/ReqX";
 
 class SysBnR extends Component {
 
@@ -65,46 +65,34 @@ class SysBnR extends Component {
   }
 
   _GetInfo = async () => {
-    let url = DOMAIN + BnRInfo;
-    let payloadOut = {
-      JWT: STORE.user.JWT,
-    };
-
-    try{
-      console.log(BnRInfo, payloadOut);
-      let res = await axios.post(url, payloadOut);
-
-      console.log(BnRInfo, res.data);
-
-      let {Success, payload} = res.data;
-      if (Success === true) {
-        let {dbs, LastBackup, Backups, include} = payload;
-        dbs = _.map(dbs, (o, i) => {
-          return {
-            name: o,
-            included: include.includes(o)
-          };
-        });
-
-        Backups = _.map(Backups, (o, i) => {
-          return {
-            _id: o,
-            name: this._momentToDisplay(this._dateStrToMomemt(o))
-          };
-        });
-
-        this.setState({
-          dbs: dbs,
-          LastBackup: LastBackup,
-          Backups: Backups,
-          includeDB: include
-        });
-      } else {
+    let res = await ReqX.SendBE(BnRInfo, {}, {}, null, 
+      () => {
         STORE.Alert(LocaleX.GetIZO("Alert.ServerReturnError"), "error");
-      }
-    } catch (e) {
-      console.log(e);
-      STORE.Alert(LocaleX.GetIZO("Alert.CannotConnect"), "error");
+      });
+
+    let {Success, payload} = res;
+    if(Success){
+      let {dbs, LastBackup, Backups, include} = payload;
+      dbs = _.map(dbs, (o, i) => {
+        return {
+          name: o,
+          included: include.includes(o)
+        };
+      });
+
+      Backups = _.map(Backups, (o, i) => {
+        return {
+          _id: o,
+          name: this._momentToDisplay(this._dateStrToMomemt(o))
+        };
+      });
+
+      this.setState({
+        dbs: dbs,
+        LastBackup: LastBackup,
+        Backups: Backups,
+        includeDB: include
+      });
     }
   }
 
@@ -113,25 +101,16 @@ class SysBnR extends Component {
       STORE.Ask(LocaleX.GetIZO("System.Backup"), LocaleX.GetIZO("System.BackupSystem"), this._Backup.onSubmit);
     }, 
     onSubmit: async () => {
-      let url = DOMAIN + BnRBackup;
-      let payloadOut = {
-        JWT: STORE.user.JWT,
-      };
+      let res = await ReqX.SendBE(BnRBackup, {}, {}, null, null,
+        this._Backup.onError);
 
-      try{
-        let res = await axios.post(url, payloadOut);
-        console.log(BnRBackup, res.data);
-
-        let {Success} = res.data;
-        if (Success === true) {
-          STORE.Alert(LocaleX.GetIZO("Alert.BackupSuccess"), "success");
-          this._GetInfo();
-        } else {
-          this._Backup.onError(res.data);
-        }
-      } catch (e) {
-        this._Backup.onError(e);
-      }
+      let {Success, payload} = res;
+      if(Success){
+        STORE.Alert(LocaleX.GetIZO("Alert.BackupSuccess"), "success");
+        this._GetInfo();
+      }else {
+        this._Backup.onError(payload);
+      }  
     },
     onError: (e) => {
       STORE.Alert(ErrorX.Handle(e), "error");
@@ -139,30 +118,20 @@ class SysBnR extends Component {
   }
 
   _IncToggle = async (dbname, f) => {
-    console.log(dbname, f);
-    let url = DOMAIN + BnRDBInclude;
-    let payloadOut = {
-      JWT: STORE.user.JWT,
-      data: {
-        dbname: dbname,
-        include: f
-      }
-    }; 
 
-    try{
-      let res = await axios.post(url, payloadOut);
-      console.log(BnRDBInclude, res.data);
-      let {Success} = res.data;
-      if (Success === true) {
-
-        this._GetInfo();
-
-      }else{
-        STORE.Alert(LocaleX.GetIZO("Alert.UpdateError"), "error");
-      }
-    }catch(e){
+    await ReqX.SendBE(BnRDBInclude, {
+      dbname: dbname,
+      include: f
+    }, {}, 
+    () => {
+      this._GetInfo();
+    },
+    () => {
+      STORE.Alert(LocaleX.GetIZO("Alert.UpdateError"), "error");
+    },
+    (e) => {
       STORE.Alert(ErrorX.Handle(e), "error");
-    }
+    });
   }
 
   _Restore = {
@@ -176,26 +145,17 @@ class SysBnR extends Component {
     onSubmit: async (datestr) => {
       let mObj = this._dateStrToMomemt(datestr);
       let str = this._momentToDisplay(mObj);
-      let url = DOMAIN + BnRRestore;
-      let payloadOut = {
-        JWT: STORE.user.JWT,
-        data: {
-          datestr: datestr
-        }
-      };
 
-      try{
-        let res = await axios.post(url, payloadOut);
-        console.log(BnRRestore, res.data);
-        let {Success} = res.data;
-        if (Success === true) {
-          STORE.Alert(LocaleX.GetIZO("Alert.RestoreSuccess", {str: str}), "success");
-          this._GetInfo();
-        } else {
-          this._Restore.onError(res.data);
-        }
-      } catch (e) {
-        this._Restore.onError(e);
+      let res = await ReqX.SendBE(BnRRestore, {
+        datestr: datestr
+      }, {}, null, null, this._Restore.onError);
+
+      let {Success, payload} = res;
+      if(Success){
+        STORE.Alert(LocaleX.GetIZO("Alert.RestoreSuccess", {str: str}), "success");
+        this._GetInfo();
+      } else {
+        this._Restore.onError(payload);
       }
     },
     onError: (e) => {
@@ -214,27 +174,18 @@ class SysBnR extends Component {
     onSubmit: async (datestr) => {
       let mObj = this._dateStrToMomemt(datestr);
       let str = this._momentToDisplay(mObj);
-      let url = DOMAIN + BnRDelete;
-      let payloadOut = {
-        JWT: STORE.user.JWT,
-        data: {
-          datestr: datestr
-        }
-      };
+      let res = await ReqX.SendBE(BnRDelete, {
+        datestr: datestr
+      }, {}, null, null, this._Delete.onError);
 
-      try{
-        let res = await axios.post(url, payloadOut);
-        console.log(BnRDelete, res.data);
-        let {Success} = res.data;
-        if (Success === true) {
-          STORE.Alert(str + " " + LocaleX.GetIZO("Alert.DeleteSuccess"), "success");
-          this._GetInfo();
-        } else {
-          this._Delete.onError(res.data);
-        }
-      } catch (e) {
-        this._Delete.onError(e);
+      let {Success, payload} = res;
+      if(Success){
+        STORE.Alert(str + " " + LocaleX.GetIZO("Alert.DeleteSuccess"), "success");
+        this._GetInfo();
+      }else {
+        this._Delete.onError(payload);
       }
+
     },
     onError: (e) => {
       STORE.Alert(ErrorX.Handle(e), "error");

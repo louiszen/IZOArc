@@ -1,8 +1,7 @@
-import axios from "axios";
 import { Env, LocaleX, STORE } from "IZOArc/STATIC";
-import { DOMAIN } from "__SYSDefault/Domain";
 import { CheckUserNameAPI, RenewAuthority, SignInAPI, VerifyOTPAPI } from "__SYSDefault/SysAPI";
 import crypto from "crypto";
+import ReqX from "IZOArc/STATIC/ReqX";
 
 class SLogin {
 
@@ -17,32 +16,16 @@ class SLogin {
    * @param {*} formProps 
    */
   static CheckUser = async (formProps) => {
-    let url = DOMAIN + CheckUserNameAPI;
-    let req = {
+    let res = await ReqX.SendBE(CheckUserNameAPI, {
       ...formProps
-    };
-    try {
-      let res = await axios.post(url, req);
-      console.log(res);
-
-      let {Success, payload} = res.data;
-      if(Success){
-        if(payload.hasUser){
-          return {
-            Success: true,
-            payload: payload
-          };
-        }else{
-          STORE.Alert(LocaleX.GetIZO("Alert.UserNotFound"), "error");
-          return {
-            Success: false,
-          };
-        }
-      }
-    }catch(e){
-      STORE.Alert(LocaleX.GetIZO("Alert.CannotConnect"), "error");
+    }, {}, null, null, undefined, true, true);
+    let {Success, payload} = res;
+    if(Success && payload.hasUser){
+      return res;
+    }else{
+      STORE.Alert(LocaleX.GetIZO("Alert.UserNotFound"), "error");
       return {
-        Success: false,
+        Success: false
       };
     }
   }
@@ -63,9 +46,6 @@ class SLogin {
   }
 
   static SignInAndRequestOTP = async (method, formProps) => {
-    
-    let url = DOMAIN + SignInAPI;
-
     let {username, password} = formProps;
 
     let hash = crypto.createHash("sha256");
@@ -75,135 +55,89 @@ class SLogin {
       password: hash.update(password).digest("hex")
     };
 
-    try {
-      let res = await axios.post(url, req);
-
-      let {Success, payload} = res.data;
-      if(Success === true){
-        console.log(payload);
-        return {
-          Success: true,
-          payload: payload
-        };
-        
-      }else{
-        STORE.Alert(LocaleX.GetIZO("Alert.IncorrectPassword"), "error");
-        return {Success: false};
-      }
-    }catch(e){
-      STORE.Alert(LocaleX.GetIZO("Alert.CannotConnect"), "error");
-      return {Success: false};
-    }
-
+    return await ReqX.SendBE(SignInAPI, req, {}, null, 
+    () => {
+      STORE.Alert(LocaleX.GetIZO("Alert.IncorrectPassword"), "error");
+    }, undefined, true, true);
+    
   }
 
   static SignInByUP = async (method, formProps) => {
-    
-    let url = DOMAIN + SignInAPI;
-
     let {username, password} = formProps;
 
     let hash = crypto.createHash("sha256");
     let req = {
       method: method,
       username: username,
-      password: hash.update(password || "").digest("hex")
+      password: hash.update(password).digest("hex")
     };
-  
-    try {
-      let res = await axios.post(url, req);
 
-      let {Success, payload} = res.data;
-      if(Success === true){
-        console.log(payload);
-        STORE.setUser(payload);
-        STORE.Alert(LocaleX.GetIZO("Alert.SuccessLogin"), "success");
-        await Env.CheckInitialized();
-
-        if(!STORE.isInitialized()){
-          return {Success: false};
-        }
-
-        return {Success: true};
-        
-      }else{
+    let res = await ReqX.SendBE(SignInAPI, req, {}, null, 
+      () => {
         STORE.Alert(LocaleX.GetIZO("Alert.IncorrectPassword"), "error");
+      }, undefined, true, true);
+
+    let {Success, payload} = res;
+    if(Success){
+      STORE.setUser(payload);
+      STORE.Alert(LocaleX.GetIZO("Alert.SuccessLogin"), "success");
+      await Env.CheckInitialized();
+
+      if(!STORE.isInitialized()){
         return {Success: false};
       }
-    }catch(e){
-      STORE.Alert(LocaleX.GetIZO("Alert.CannotConnect"), "error");
+      return {Success: true};
+    }else{
       return {Success: false};
     }
+    
   }
 
   static VerifyOTP = async (method, formProps) => {
-
-    let url = DOMAIN + VerifyOTPAPI;
-
     let {username, key, otp} = formProps;
-
     let req = {
       method: method,
       username: username,
       key: key,
       otp: otp
     };
-  
-    try {
-      let res = await axios.post(url, req);
 
-      let {Success, payload} = res.data;
-      if(Success === true){
-        console.log(payload);
-        STORE.setUser(payload);
-        STORE.Alert(LocaleX.GetIZO("Alert.SuccessLogin"), "success");
-        await Env.CheckInitialized();
-
-        if(!STORE.isInitialized()){
-          return {Success: false};
-        }
-
-        return {Success: true};
-        
-      }else{
+    let res = await ReqX.SendBE(VerifyOTPAPI, req, {}, null, 
+      () => {
         STORE.Alert(LocaleX.GetIZO("Alert.InvalidOTP"), "error");
+      }, undefined, true, true);
+
+    let {Success, payload} = res;
+    if(Success){
+      STORE.setUser(payload);
+      STORE.Alert(LocaleX.GetIZO("Alert.SuccessLogin"), "success");
+      await Env.CheckInitialized();
+
+      if(!STORE.isInitialized()){
         return {Success: false};
       }
-    }catch(e){
-      STORE.Alert(LocaleX.GetIZO("Alert.CannotConnect"), "error");
+      return {Success: true};
+    }else{
       return {Success: false};
     }
   }
 
   static RenewAuth = async () => {
-    let url = DOMAIN + RenewAuthority;
-    let req = {
-      JWT: STORE.user.JWT
-    };
-  
-    try {
-      let res = await axios.post(url, req);
-
-      let {Success, payload} = res.data;
-      if(Success === true){
-        console.log(payload);
-        STORE.setUser(payload);
-        STORE.Alert(LocaleX.GetIZO("Alert.SuccessRenew"), "success");
-        await Env.CheckInitialized();
-
-        if(!STORE.isInitialized()){
-          return {Success: false};
-        }
-
-        return {Success: true};
-        
-      }else{
+    let res = await ReqX.SendBE(RenewAuthority, {}, {}, null, 
+      () => {
         STORE.Alert(LocaleX.GetIZO("Alert.FailRenew"), "error");
+      });
+
+    let {Success, payload} = res;
+    if(Success){
+      STORE.setUser(payload);
+      STORE.Alert(LocaleX.GetIZO("Alert.SuccessRenew"), "success");
+      await Env.CheckInitialized();
+
+      if(!STORE.isInitialized()){
         return {Success: false};
       }
-    }catch(e){
-      STORE.Alert(LocaleX.GetIZO("Alert.CannotConnect"), "error");
-      return {Success: false};
+      return {Success: true};
     }
   }
 
