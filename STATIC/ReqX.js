@@ -1,4 +1,5 @@
 import axios from "axios";
+import { IncObject, InLog, OutLog } from "__SYSDefault/Debug";
 import { DOMAIN } from "__SYSDefault/Domain";
 import { LocaleX, STORE } from ".";
 
@@ -48,11 +49,24 @@ class ReqX {
     };
 
     try {
-      console.log(path, payloadOut);
+      if(OutLog) {
+        if(IncObject){
+          console.log("[OUT]", path, payloadOut);
+        }else{
+          console.log("[OUT]", path);
+        }
+        
+      }
       if(loading) STORE.isLoading(true);
       let res = await axios.post(url, payloadOut);
       if(loading) STORE.isLoading(false);
-      console.log(path, res.data);
+      if(InLog) {
+        if(IncObject){
+          console.log("[IN]", path, res.data);
+        }else{
+          console.log("[IN]", path);
+        }
+      }
 
       let {Success, payload} = res.data;
       if (Success === true) {
