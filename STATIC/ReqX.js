@@ -27,10 +27,12 @@ class ReqX {
    * Standard Request Sending Box
    * @param {String} path 
    * @param {*} data 
+   * @param {*} addOns 
    * @param {Function} success 
    * @param {Function} fail 
    * @param {Function} error 
-   * @param {*} addOns 
+   * @param {Boolean} loading
+   * @param {Boolean} noJWT 
    * @returns {{
    *  Success: Boolean,
    *  payload: *

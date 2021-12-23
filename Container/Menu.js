@@ -84,7 +84,7 @@ class Menu extends Component {
 
   renderPin(){
 
-    let theme = {
+    let baseCSS = {
       padding: "5px !important",
       width: 25,
       height: 25,
@@ -96,20 +96,19 @@ class Menu extends Component {
         background: ColorX.GetColorCSS("transparent"),
       },
       position: "relative"
+    }
+
+    let theme = {
+      ...baseCSS
     };
 
     let minitheme = {
-      padding: "5px !important",
-      width: 25,
-      height: 25,
-      textTransform: "none",
+      ...baseCSS,
       color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.4),
-      background: ColorX.GetColorCSS("transparent"),
       hover: {
         color: ColorX.GetColorCSS(IZOTheme.menuFG),
         background: ColorX.GetColorCSS("transparent"),
-      },
-      position: "relative"
+      }
     };
 
     return (

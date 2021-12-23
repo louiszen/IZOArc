@@ -84,9 +84,9 @@ class Container extends Component {
     
     if(loginSys){
       let {location} = this.props;
-      let isPublic = (location && location.pathname) === "/";
-      let isLogin = (location && location.pathname) === "/Login";
-      let isTest = location && location.pathname && location.pathname.startsWith("/Test/");
+      let isPublic = (location?.pathname) === "/";
+      let isLogin = (location?.pathname) === "/Login";
+      let isTest = location?.pathname?.startsWith("/Test/");
 
       if(loginSys && !isPublic && !isLogin && !isTest && (!STORE.isLoggedIn() || !STORE.isInitialized())){
         this.AutoLogout();
@@ -132,8 +132,8 @@ class Container extends Component {
       },
       () => {
         let {location} = this.props;
-        let isPublic = (location && location.pathname) === "/";
-        let isTest = location && location.pathname && location.pathname.startsWith("/Test/");
+        let isPublic = (location?.pathname) === "/";
+        let isTest = location?.pathname?.startsWith("/Test/");
   
         STORE.Alert(LocaleX.GetIZO("Alert.CannotConnect"), "error");
         if(!isPublic && !isTest){
@@ -187,7 +187,7 @@ class Container extends Component {
       "OK":
       <StyledButton key={0} theme={{
           color: "green", 
-          background: "transparent",
+          background: ColorX.GetColorCSS("transparent"), 
           width: buttonWidth,
           borderRadius: "0 0 0 5px",
           margin: "0",
@@ -214,7 +214,10 @@ class Container extends Component {
         onClick={this._onCancel} 
         disabled={STORE.ask.loading}
         >
-        <i className="fas fa-ban"/><div className="formizo-h-m">{LocaleX.GetIZO("Formizo.Cancel")}</div>
+        <i className="fas fa-ban"/>
+        <div className="formizo-h-m">
+          {LocaleX.GetIZO("Formizo.Cancel")}
+        </div>
       </StyledButton>,
     };
 

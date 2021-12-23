@@ -76,12 +76,18 @@ class NavBar extends Component {
   }
 
   renderIZO(){
+    let fontCSS = {
+      marginLeft: 10, 
+      fontFamily: IZOFontFamily, 
+      fontSize: 14, 
+      color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.3)
+    };
     return (
       <HStack width="fit-content">
-        <Typography style={{marginLeft: 10, fontFamily: IZOFontFamily, fontSize: 14, fontWeight: "bold", color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.3)}}>
+        <Typography style={{...fontCSS, fontWeight: "bold"}}>
           {"IZO"}
         </Typography>
-        <Typography style={{marginLeft: 10, fontFamily: IZOFontFamily, fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.3)}}>
+        <Typography style={fontCSS}>
           {IZOVersion}
         </Typography>
         <Box position="absolute" style={{
@@ -96,6 +102,11 @@ class NavBar extends Component {
   }
 
   renderLogin(){
+    let fontCSS = {
+      fontFamily: IZOFontFamily, 
+      fontSize: 14, 
+      color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.8)
+    };
     return (
       <HStack width="fit-content">
         <Typography style={{
@@ -106,10 +117,10 @@ class NavBar extends Component {
           }}>
           {LocaleX.GetIZO("NavBar.LoggedInAs")}
         </Typography>
-        <Typography style={{marginLeft: 10, marginRight: 5, fontFamily: IZOFontFamily, fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.8)}}>
+        <Typography style={{...fontCSS, marginLeft: 10, marginRight: 5}}>
           {STORE.user && STORE.user.UserDisplayName}
         </Typography>
-        <Typography style={{width: 70, marginLeft: 5, marginRight: 5, fontFamily: IZOFontFamily, fontSize: 14, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.8)}}>
+        <Typography style={{...fontCSS, width: 70, marginLeft: 5, marginRight: 5}}>
           {STORE.user && ("[" + LocaleX.Parse(STORE.user.roleName) + "]")}
         </Typography>
         <Tooltip title={LocaleX.GetIZO("NavBar.Reload")}>
