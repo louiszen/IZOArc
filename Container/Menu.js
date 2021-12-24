@@ -96,7 +96,7 @@ class Menu extends Component {
         background: ColorX.GetColorCSS("transparent"),
       },
       position: "relative"
-    }
+    };
 
     let theme = {
       ...baseCSS

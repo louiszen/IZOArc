@@ -45,6 +45,15 @@ class SLogin {
     }
   }
 
+  /**
+   * 
+   * @param {authMethod} method 
+   * @param {{
+   *  username: String,
+   *  password: String
+   * }} formProps 
+   * @returns 
+   */
   static SignInAndRequestOTP = async (method, formProps) => {
     let {username, password} = formProps;
 
@@ -62,6 +71,15 @@ class SLogin {
     
   }
 
+  /**
+   * 
+   * @param {authMethod} method 
+   * @param {{
+   *  username: String,
+   *  password: String
+   * }} formProps 
+   * @returns 
+   */
   static SignInByUP = async (method, formProps) => {
     let {username, password} = formProps;
 
@@ -93,6 +111,16 @@ class SLogin {
     
   }
 
+  /**
+   * 
+   * @param {authMethod} method 
+   * @param {{
+   *  username: String,
+   *  key: String,
+   *  otp: String
+   * }} formProps 
+   * @returns 
+   */
   static VerifyOTP = async (method, formProps) => {
     let {username, key, otp} = formProps;
     let req = {
@@ -122,6 +150,10 @@ class SLogin {
     }
   }
 
+  /**
+   * Renew authority data
+   * @returns 
+   */
   static RenewAuth = async () => {
     let res = await ReqX.SendBE(RenewAuthority, {}, {}, null, 
       () => {

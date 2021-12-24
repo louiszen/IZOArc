@@ -27,6 +27,13 @@ class LEDz extends Component {
     this._setAllStates();
   }
 
+  shouldComponentUpdate(nextProps, nextState){
+    if(!Accessor.IsIdentical(nextProps, this.props, Object.keys(LEDz.defaultProps))){
+      return true;
+    }
+    return false;
+  }
+
   componentDidUpdate(prevProps, prevState){
     if(!Accessor.IsIdentical(prevProps, this.props, Object.keys(LEDz.defaultProps))){
       this._setAllStates();
@@ -47,6 +54,7 @@ class LEDz extends Component {
 
   render(){
     let {size, color} = this.props;
+    console.log("render", color);
     return (
       <Box style={{
         height: size,
