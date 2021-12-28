@@ -795,6 +795,11 @@ class Datumizo extends Component {
       console.log("submit Delete");
 
       let { base, addOns } = this.props;
+
+      if(base.operations?.Delete?.addOnsMod){
+        addOns = await base.operations?.Delete?.addOnsMod(addOns);
+      }
+
       let res = await ReqX.SendBE(base.operations?.Delete?.url,
         {
           ...row
@@ -803,14 +808,14 @@ class Datumizo extends Component {
       let {Success, payload} = res;
       if(Success){
         if (base.operations?.Delete?.onSuccess) {
-          base.operations?.Delete?.onSuccess(payload);
+          base.operations?.Delete?.onSuccess(payload, this.Delete.onSuccess);
         } else {
           this.Delete.onSuccess(payload);
         }
         return { Success: true };
       }else{
         if (base.operations?.Delete?.onFail) {
-          base.operations?.Delete?.onFail(payload);
+          base.operations?.Delete?.onFail(payload, this.Delete.onFail);
         } else {
           this.Delete.onFail(payload);
         }
@@ -853,6 +858,10 @@ class Datumizo extends Component {
 
       let { base, addOns } = this.props;
 
+      if(base.operations?.Duplicate?.addOnsMod){
+        addOns = await base.operations?.Duplicate?.addOnsMod(addOns);
+      }
+
       let res = await ReqX.SendBE(base.operations?.Duplicate?.url, 
         {
           ...row,
@@ -861,14 +870,14 @@ class Datumizo extends Component {
       let {Success, payload} = res;
       if(Success){
         if (base.operations?.Duplicate?.onSuccess) {
-          base.operations?.Duplicate?.onSuccess(payload);
+          base.operations?.Duplicate?.onSuccess(payload, this.Duplicate.onSuccess);
         } else {
           this.Duplicate.onSuccess(payload);
         }
         return { Success: true };
       } else {
         if (base.operations?.Duplicate?.onFail) {
-          base.operations?.Duplicate?.onFail(payload);
+          base.operations?.Duplicate?.onFail(payload, this.Duplicate.onFail);
         } else {
           this.Duplicate.onFail(payload);
         }
@@ -916,6 +925,10 @@ class Datumizo extends Component {
         formProps = await base.operations?.Add?.propsMod(formProps);
       }
 
+      if(base.operations?.Add?.addOnsMod){
+        addOns = await base.operations?.Add?.addOnsMod(addOns);
+      }
+
       // if(base.operations?.Add?.withFile){
       //   payloadOut = this._getUploadFormData(payloadOut);
       // }
@@ -928,14 +941,14 @@ class Datumizo extends Component {
       let {Success, payload} = res;
       if (Success) {
         if (base.operations?.Add?.onSuccess) {
-          base.operations?.Add?.onSuccess(payload);
+          base.operations?.Add?.onSuccess(payload, this.Add.onSuccess);
         } else {
           this.Add.onSuccess(payload);
         }
         this._QuitInner(docID);
       } else {
         if (base.operations?.Add?.onFail) {
-          base.operations?.Add?.onFail(payload);
+          base.operations?.Add?.onFail(payload, this.Add.onFail);
         } else {
           this.Add.onFail(payload);
         }
@@ -950,7 +963,7 @@ class Datumizo extends Component {
 
     onFail: (payload) => {
       let { base } = this.props;
-      let msg = ZFunc.IfFuncExec(base.operations?.Add?.fail) + (payload.message || "");
+      let msg = ZFunc.IfFuncExec(base.operations?.Add?.fail) + (payload?.message || "");
       STORE.Alert(msg, "error");
     },
   };
@@ -975,6 +988,10 @@ class Datumizo extends Component {
 
       let { base, addOns, docID } = this.props;
 
+      if(base.operations?.Add?.addOnsMod){
+        addOns = await base.operations?.Add?.addOnsMod(addOns);
+      }
+
       // if(base.operations?.Add?.withFile){
       //   payloadOut = this._getUploadFormData(payloadOut);
       // }
@@ -987,14 +1004,14 @@ class Datumizo extends Component {
       let {Success, payload} = res;
       if (Success === true) {
         if (base.operations?.Add?.onSuccess) {
-          base.operations?.Add?.onSuccess(payload);
+          base.operations?.Add?.onSuccess(payload, this.Add.onSuccess);
         } else {
           this.Add.onSuccess(payload);
         }
         this._QuitInner(docID);
       } else {
         if (base.operations?.Add?.onFail) {
-          base.operations?.Add?.onFail(payload);
+          base.operations?.Add?.onFail(payload, this.Add.onFail);
         } else {
           this.Add.onFail(payload);
         }
@@ -1009,7 +1026,7 @@ class Datumizo extends Component {
 
     onFail: (payload) => {
       let { base } = this.props;
-      let msg = ZFunc.IfFuncExec(base.operations?.Add?.fail) + (payload.message || "");
+      let msg = ZFunc.IfFuncExec(base.operations?.Add?.fail) + (payload?.message || "");
       STORE.Alert(msg, "error");
     },
   };
@@ -1034,6 +1051,10 @@ class Datumizo extends Component {
         formProps = await base.operations?.Edit?.propsMod(formProps);
       }
 
+      if(base.operations?.Edit?.addOnsMod){
+        addOns = await base.operations?.Edit?.addOnsMod(addOns);
+      }
+
       // if(base.operations?.Edit?.withFile){
       //   payloadOut = this._getUploadFormData(payloadOut);
       // }
@@ -1047,14 +1068,14 @@ class Datumizo extends Component {
       let {Success, payload} = res;
       if (Success) {
         if (base.operations?.Edit?.onSuccess) {
-          base.operations?.Edit?.onSuccess(payload);
+          base.operations?.Edit?.onSuccess(payload, this.Edit.onSuccess);
         } else {
           this.Edit.onSuccess(payload);
         }
         this._QuitInner();
       } else {
         if (base.operations?.Edit?.onSuccess) {
-          base.operations?.Edit?.onFail(payload);
+          base.operations?.Edit?.onFail(payload, this.Edit.onFail);
         } else {
           this.Edit.onFail(payload);
         }
@@ -1069,7 +1090,7 @@ class Datumizo extends Component {
 
     onFail: (payload) => {
       let { base } = this.props;
-      let msg = ZFunc.IfFuncExec(base.operations?.Edit?.fail) + (payload.message || "");
+      let msg = ZFunc.IfFuncExec(base.operations?.Edit?.fail) + (payload?.message || "");
       STORE.Alert(msg, "error");
     },
   };
@@ -1103,6 +1124,10 @@ class Datumizo extends Component {
       let selected = this.MountTablizo? this.MountTablizo.GetSelectedRows() : [];
 
       let schema = this.flatExcelSchema(base.operations?.Export?.schema, Infinity);
+
+      if(base.operations?.Export?.addOnsMod){
+        addOns = await base.operations?.Export?.addOnsMod(addOns);
+      }
 
       let payloadOut = {
         JWT: STORE.user.JWT,
@@ -1178,6 +1203,10 @@ class Datumizo extends Component {
       }
       let selected = this.MountTablizo.GetSelectedRows();
 
+      if(base.operations?.DeleteBulk?.addOnsMod){
+        addOns = await base.operations?.DeleteBulk?.addOnsMod(addOns);
+      }
+
       let res = await ReqX.SendBE(base.operations?.DeleteBulk?.url, 
         {
           selected: selected,
@@ -1186,7 +1215,7 @@ class Datumizo extends Component {
       let {Success, payload} = res;
       if (Success) {
         if (base.operations?.DeleteBulk?.onSuccess) {
-          base.operations?.DeleteBulk?.onSuccess(payload);
+          base.operations?.DeleteBulk?.onSuccess(payload, this.DeleteBulk.onSuccess);
         } else {
           this.DeleteBulk.onSuccess(payload);
         }
@@ -1194,7 +1223,7 @@ class Datumizo extends Component {
         return { Success: true };
       } else {
         if (base.operations?.DeleteBulk?.onFail) {
-          base.operations?.DeleteBulk?.onFail(payload);
+          base.operations?.DeleteBulk?.onFail(payload, this.DeleteBulk.onFail);
         } else {
           this.DeleteBulk.onFail(payload);
         }
@@ -1210,7 +1239,7 @@ class Datumizo extends Component {
 
     onFail: (payload) => {
       let { base } = this.props;
-      let msg = ZFunc.IfFuncExec(base.operations?.DeleteBulk?.fail) + (payload.message || "");
+      let msg = ZFunc.IfFuncExec(base.operations?.DeleteBulk?.fail) + (payload?.message || "");
       STORE.Alert(msg, "error");
     },
   };
@@ -1239,6 +1268,10 @@ class Datumizo extends Component {
       console.log(name, value);
       let { base, addOns } = this.state;
 
+      if(base.operations?.Import?.addOnsMod){
+        addOns = await base.operations?.Import?.addOnsMod(addOns);
+      }
+
       let url = DOMAIN + base.operations?.Import?.url;
       let payloadOut = {
         data: {
@@ -1262,20 +1295,20 @@ class Datumizo extends Component {
 
         if (Success === true) {
           if (base.operations?.Import?.onSuccess) {
-            base.operations?.Import?.onSuccess(payload);
+            base.operations?.Import?.onSuccess(payload, this.Import.onSuccess);
           } else {
             this.Import.onSuccess(payload);
           }
         } else {
           if (base.operations?.Import?.onFail) {
-            base.operations?.Import?.onFail(payload);
+            base.operations?.Import?.onFail(payload, this.Import.onFail);
           } else {
             this.Import.onFail(payload);
           }
         }
       } catch (e) {
         if (base.operations?.Import?.onFail) {
-          base.operations?.Import?.onFail(e);
+          base.operations?.Import?.onFail(e, this.Import.onFail);
         } else {
           this.Import.onFail(e);
         }
@@ -1295,7 +1328,7 @@ class Datumizo extends Component {
 
     onFail: (payload) => {
       let { base } = this.props;
-      let msg = ZFunc.IfFuncExec(base.operations?.Import?.fail) + (payload.message || "");
+      let msg = ZFunc.IfFuncExec(base.operations?.Import?.fail) + (payload?.message || "");
       STORE.Alert(msg, "error");
       STORE.clearAsk();
     },
@@ -1313,6 +1346,10 @@ class Datumizo extends Component {
       console.log("Sync from Cloud");
 
       let { base, addOns } = this.state;
+
+      if(base.operations?.Sync?.addOnsMod){
+        addOns = await base.operations?.Sync?.addOnsMod(addOns);
+      }
 
       let url = DOMAIN + base.operations?.Sync?.url;
       let payloadOut = {
@@ -1333,14 +1370,14 @@ class Datumizo extends Component {
 
         if (Success === true) {
           if (base.operations?.Sync?.onSuccess) {
-            base.operations?.Sync?.onSuccess(payload);
+            base.operations?.Sync?.onSuccess(payload, this.Sync.onSuccess);
           } else {
             this.Sync.onSuccess(payload);
           }
           return { Success: true };
         } else {
           if (base.operations?.Sync?.onFail) {
-            base.operations?.Sync?.onFail(payload);
+            base.operations?.Sync?.onFail(payload, this.Sync.onFail);
           } else {
             this.Sync.onFail(payload);
           }
@@ -1349,7 +1386,7 @@ class Datumizo extends Component {
       } catch (e) {
         STORE.isLoading(false);
         if (base.operations?.Sync?.onFail) {
-          base.operations?.Sync?.onFail(e);
+          base.operations?.Sync?.onFail(e, this.Sync.onFail);
         } else {
           this.Sync.onFail(e);
         }
@@ -1365,60 +1402,10 @@ class Datumizo extends Component {
 
     onFail: (payload) => {
       let { base } = this.props;
-      let msg = ZFunc.IfFuncExec(base.operations?.Sync?.fail) + (payload.message || "");
+      let msg = ZFunc.IfFuncExec(base.operations?.Sync?.fail) + (payload?.message || "");
       STORE.Alert(msg, "error");
     },
   };
-
-  /*
-  Push = {
-    onClick: () => {
-      let { base } = this.state;
-      this.MountPopup.Ask(base.title.Push, () => {
-        this.Push.onSubmit();
-      });
-    },
-
-    onSubmit: async () => {
-      this.MountPopup.Loading();
-      console.log("Push to Watson");
-
-      let { user, base, addOns } = this.state;
-
-      let url = DOMAIN + base.url.Push;
-      let payload = {
-        JWT: user.JWT,
-        addOns: addOns,
-      };
-
-      console.log(payload);
-
-      try {
-        let res = await axios.post(url, payload);
-        if (res.data.Success === true) {
-          this.Push.onSuccess(res);
-        } else {
-          this.Push.onFail(res);
-        }
-      } catch (e) {
-        this.Push.onFail(e);
-      }
-    },
-
-    onSuccess: (res) => {
-      console.log(res);
-      this.MountPopup.Alert("Push Successfully.", () => {
-        this.fetchData();
-      });
-    },
-
-    onFail: (res) => {
-      console.log(res);
-      this.MountPopup.Alert("Push Failed.");
-    },
-  };
-  
-  */
 
   renderTableButtons(buttons, left = true) {
     let { table } = this.state;

@@ -95,7 +95,7 @@ class NavBar extends Component {
           marginTop: 0,
           opacity: 0.15,
           }}>
-          <img src={SITEBASE + "Images/izo.png"} alt="elain" draggable={false}/>
+          <img src={SITEBASE + "Images/izo.png"} alt="izo" draggable={false}/>
         </Box>
       </HStack>
     );
@@ -156,7 +156,7 @@ class NavBar extends Component {
       <HStack position="absolute" style={NavbarDis.style}>
         {NavbarDis.preRender}
         <Box style={NavbarDis.imgStyle}>
-          <img src={NavbarDis.src} alt="elain" draggable={false}/>
+          <img src={NavbarDis.src} alt="izo" draggable={false}/>
         </Box>
         {NavbarDis.postRender}
       </HStack>

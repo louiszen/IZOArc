@@ -54,7 +54,6 @@ class LEDz extends Component {
 
   render(){
     let {size, color} = this.props;
-    console.log("render", color);
     return (
       <Box style={{
         height: size,
