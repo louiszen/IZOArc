@@ -1,5 +1,5 @@
 import axios from "axios";
-import { IncObject, InLog, OutLog } from "__SYSDefault/Debug";
+import { ReqXSettings } from "__SYSDefault/Debug";
 import { DOMAIN } from "__SYSDefault/Domain";
 import { LocaleX, STORE } from ".";
 
@@ -51,8 +51,8 @@ class ReqX {
     };
 
     try {
-      if(OutLog) {
-        if(IncObject){
+      if(ReqXSettings.OutLog.show) {
+        if(ReqXSettings.OutLog.object){
           console.log("[OUT]", path, payloadOut);
         }else{
           console.log("[OUT]", path);
@@ -62,8 +62,8 @@ class ReqX {
       if(loading) STORE.isLoading(true);
       let res = await axios.post(url, payloadOut);
       if(loading) STORE.isLoading(false);
-      if(InLog) {
-        if(IncObject){
+      if(ReqXSettings.InLog.show) {
+        if(ReqXSettings.InLog.object){
           console.log("[IN]", path, res.data);
         }else{
           console.log("[IN]", path);

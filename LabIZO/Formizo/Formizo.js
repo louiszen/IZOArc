@@ -316,7 +316,6 @@ class Formizo extends Component {
   };
 
   _onCancel = () => {
-    console.log("_onCancel");
     let { onCancel } = this.state;
     if (onCancel) {
       onCancel();
@@ -324,8 +323,6 @@ class Formizo extends Component {
   };
 
   _onClear = () => {
-    console.log("_onClear");
-
     this.setState({
       formValue: {},
     });
@@ -336,7 +333,6 @@ class Formizo extends Component {
   };
 
   _onRevert = () => {
-    console.log("_onRevert");
     let { onRevert } = this.state;
     let { defaultValue } = this.props;
     this._FillForm(defaultValue);
@@ -346,7 +342,6 @@ class Formizo extends Component {
   };
 
   _onInlineRevert = (field) => {
-    console.log("_onInlineRevert");
     let { onInlineRevert, defaultValue, formValue } = this.state;
     let dvalue = Accessor.Get(_.clone(defaultValue), field);
     Accessor.Set(formValue, field, dvalue);
