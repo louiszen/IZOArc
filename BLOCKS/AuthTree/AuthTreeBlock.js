@@ -8,6 +8,7 @@ import _ from "lodash";
 import { StyledButton } from "IZOArc/LabIZO/Stylizo";
 import { ArrowRight, ArrowDropDown } from "@mui/icons-material";
 import { LEDSwitch } from "IZOArc/BLOCKS/Ctrls";
+import { AuthTreeNode } from ".";
 
 /**
  * @augments {Component<Props, State>}
@@ -21,7 +22,8 @@ class AuthTreeBlock extends Component {
     refCtrl: PropsType.object,
     level: PropsType.string,
     nodeKey: PropsType.string,
-    onCtrlSet: PropsType.func
+    onCtrlSet: PropsType.func,
+    parentAccessible: PropsType.bool
   }
 
   static defaultProps = {
@@ -31,7 +33,8 @@ class AuthTreeBlock extends Component {
     refCtrl: {},
     level: "",
     nodeKey: "",
-    onCtrlSet: () => {}
+    onCtrlSet: () => {},
+    parentAccessible: true
   }
 
   constructor(){
@@ -64,7 +67,7 @@ class AuthTreeBlock extends Component {
   }
 
   renderNextTree(){
-    let {tree, ctrl, level, projID, onCtrlSet, refCtrl} = this.props;
+    let {tree, ctrl, level, projID, onCtrlSet, refCtrl, parentAccessible} = this.props;
     return _.map(tree, (o, i) => {
       let nextlevel = level + (level === ""? i : ("." + i)); 
       return (
@@ -77,6 +80,8 @@ class AuthTreeBlock extends Component {
             projID={projID}
             nodeKey={i}
             onCtrlSet={onCtrlSet}
+            parentAccessible={parentAccessible && ctrl[nextlevel] 
+              && (refCtrl !== undefined && refCtrl[nextlevel])}
             />
         </VStack>
       );
@@ -111,9 +116,9 @@ class AuthTreeBlock extends Component {
   }
 
   renderLED(){
-    let {ctrl, level, projID, onCtrlSet, refCtrl} = this.props;
+    let {ctrl, level, projID, onCtrlSet, refCtrl, parentAccessible} = this.props;
     let nodeCtrl = ctrl[level];
-    let nodeRefCtrl = refCtrl && refCtrl[level];
+    let nodeRefCtrl = parentAccessible && (refCtrl !== undefined && refCtrl[level]);
     return (
       <LEDSwitch
         projID={projID}
@@ -126,11 +131,11 @@ class AuthTreeBlock extends Component {
   }
 
   renderFunc(){
-    let {projID, tree, ctrl, level, onCtrlSet, refCtrl} = this.props;
+    let {projID, tree, ctrl, level, onCtrlSet, refCtrl, parentAccessible} = this.props;
     let funcs = _.map(tree, (o, i) => {
       let thisLevel = level + "." + o;
       let nodeCtrl = ctrl[thisLevel];
-      let nodeRefCtrl = refCtrl && refCtrl[thisLevel];
+      let nodeRefCtrl = ctrl[level] && parentAccessible && (refCtrl !== undefined && refCtrl[thisLevel]);
       return (
         <HStack key={i} 
           justifyContent="flex-start">
@@ -177,7 +182,7 @@ class AuthTreeBlock extends Component {
   }
 
   render(){
-    let {tree} = this.props;
+    let {tree, parentAccessible} = this.props;
     let {show} = this.state;
     let isEnd = _.isArray(tree);
     return (

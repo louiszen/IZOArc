@@ -17,7 +17,8 @@ class AuthTreeNode extends Component {
     ctrl: PropsType.object,
     refCtrl: PropsType.object,
     level: PropsType.string,
-    onCtrlSet: PropsType.func
+    onCtrlSet: PropsType.func,
+    parentAccessible: PropsType.bool
   }
 
   static defaultProps = {
@@ -26,7 +27,8 @@ class AuthTreeNode extends Component {
     ctrl: {},
     refCtrl: {},
     level: "",
-    onCtrlSet: () => {}
+    onCtrlSet: () => {},
+    parentAccessible: true
   }
 
   constructor(){
@@ -57,7 +59,7 @@ class AuthTreeNode extends Component {
   }
 
   renderBlockList(){
-    let {tree, ctrl, level, projID, onCtrlSet, refCtrl} = this.props;
+    let {tree, ctrl, level, projID, onCtrlSet, refCtrl, parentAccessible} = this.props;
     return _.map(tree, (o, i) => {
       let nextlevel = level + (level === ""? i : ("." + i)); 
       return (
@@ -70,6 +72,8 @@ class AuthTreeNode extends Component {
           projID={projID}
           nodeKey={i}
           onCtrlSet={onCtrlSet}
+          parentAccessible={parentAccessible && ctrl[nextlevel] 
+            && (refCtrl !== undefined && refCtrl[nextlevel])}
           />
       );
     });
