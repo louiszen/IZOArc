@@ -15,7 +15,7 @@ import Inner from "./_gears/Inner";
 import Formizo from "IZOArc/LabIZO/Formizo";
 import Tablizo from "IZOArc/LabIZO/Tablizo";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
-import { Accessor, Authority, ColorX, ErrorX, LocaleX, STORE, ZFunc } from "IZOArc/STATIC";
+import { Accessor, Authority, ColorX, ErrorX, LocaleX, STORE, ZFunc, ZTime } from "IZOArc/STATIC";
 import { StyledButton } from "IZOArc/LabIZO/Stylizo";
 import { IconButton } from "@mui/material";
 import ReqX from "IZOArc/STATIC/ReqX";
@@ -146,6 +146,8 @@ class Datumizo extends Component {
     onFail: PropsType.func,
     withFile: PropsType.bool,
     defaultDoc: PropsType.oneOfType([PropsType.string, PropsType.func, PropsType.object]),
+    propsMod: PropsType.func,
+    addOnsMod: PropsType.func,
   };
 
   static buttonPropsType = {
@@ -167,14 +169,17 @@ class Datumizo extends Component {
 
     //config
     base: PropsType.shape({
+      title: PropsType.oneOfType([PropsType.string, PropsType.func]),
       exportDoc: PropsType.string,
+      schema: PropsType.object,
       rowIdAccessor: PropsType.string,
       reqAuth: PropsType.string,
-      showSelector: PropsType.bool,
-      noDefaultButtons: PropsType.bool,
+
       noDefaultTable: PropsType.bool,
+      noDefaultButtons: PropsType.bool,
       refreshButton: PropsType.oneOf(["none", "left", "right"]),
       usePropsData: PropsType.bool,
+      timeRanged: PropsType.oneOf(["none", "day", "month", "year"]),
 
       tablizo: PropsType.shape({
         ...Tablizo.propTypes,
@@ -184,6 +189,12 @@ class Datumizo extends Component {
       formizo: PropsType.shape({
         ...Formizo.propTypes,
         user: PropsType.object
+      }), 
+
+      Connect: PropsType.shape({
+        DBInfo: PropsType.string,
+        List: PropsType.string,
+        schema: PropsType.array,
       }), 
 
       operations: PropsType.objectOf(PropsType.shape(this.operationsPropsType)),
@@ -250,6 +261,7 @@ class Datumizo extends Component {
       doc: {},
       docID: null,
       selectedrows: 0,
+      timerange: [ZTime.StartOfMonth().add(-3, "month").toISOString(), ZTime.EndOfMonth().toISOString()],
     };
   }
 
@@ -282,6 +294,14 @@ class Datumizo extends Component {
   onMountTablizo = (callbacks) => {
     this.MountTablizo = callbacks;
   };
+
+  onTimeRangeSelected = (formValue, name, value, validate) => {
+    this.setState({
+      timerange: value
+    }, () => {
+      this._fetchData();
+    });
+  }
 
   _setAllStates = (callback) => {
     this.setState(
@@ -683,7 +703,7 @@ class Datumizo extends Component {
 
     Data: async () => {
       let { base, addOns, serverSidePagination } = this.props;
-      let { nav } = this.state;
+      let { nav, timerange } = this.state;
       let payloadOut = {};
 
       if (serverSidePagination) {
@@ -696,6 +716,13 @@ class Datumizo extends Component {
         payloadOut = {
           selector: nav.selector
         };
+      }
+
+      if(base.timeRanged && base.timeRanged !== "none"){
+        payloadOut = {
+          ...payloadOut,
+          timerange: timerange
+        }
       }
 
       let res = await ReqX.SendBE(base.Connect.List, payloadOut, addOns, null, null, this.Connect.onError);
@@ -1549,10 +1576,42 @@ class Datumizo extends Component {
     }
   }
 
+
+
+  renderTimeRangeSelector(){
+    let {base} = this.props;
+    let {timerange} = this.state;
+    if(!base.timeRanged || base.timeRanged === "none") return;
+    return (
+      <HStack width={400}>
+        <Formizo
+          formID="__timerange"
+          schema={[{
+            label: () => LocaleX.Parse({
+              EN: "Time Range",
+              TC: "時間"
+            }),
+            name: "__timerange",
+            format: "daterange",
+            dateType: base.timeRanged,
+            noLabelGrid: true
+          }]}
+          formValue={{__timerange: timerange}}
+          buttons={[]}
+          onChange={this.onTimeRangeSelected}
+          labelXS={1}
+          fieldXS={8}/>
+      </HStack>
+    );
+  }
+
   renderGridView(){
     return (
       <VStack width="100%">
-        {this.renderButtons()}
+        <HStack width="100%">
+          {this.renderTimeRangeSelector()}
+          {this.renderButtons()}
+        </HStack>
         {this.renderTable()}
       </VStack>
     );
