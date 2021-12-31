@@ -1,8 +1,15 @@
-import { Group, Sync } from "@material-ui/icons";
+import { PermDataSettingRounded, Sync, ArticleRounded, ConfirmationNumber } from "@mui/icons-material";
+
 import { LocaleX } from "IZOArc/STATIC";
 
 import SysBnR from "./SysBnR/SysBnR";
-import SysUser from "./SysUser/SysUser";
+
+const Tail = {
+  iconPos: "left",
+  noTransform: true,
+  alignment: "left",
+  width: 250
+};
 
 const tabs = [
   {
@@ -10,18 +17,28 @@ const tabs = [
     icon: <Sync/>,
     reqAuth: "System.BnR",
     render: <SysBnR/>,
-    iconPos: "left",
-    noTransform: true,
-    alignment: "left"
+    ...Tail
   },
   {
     label: () => LocaleX.GetIZO("System.UAC"),
-    icon: <Group/>,
-    reqAuth: "System.User",
-    render: <SysUser/>,
-    iconPos: "left",
-    noTransform: true,
-    alignment: "left"
+    icon: <PermDataSettingRounded/>,
+    reqAuth: "System.UAC",
+    render: () => <div/>,
+    ...Tail
+  },
+  {
+    label: () => LocaleX.GetIZO("System.AuthLog"),
+    icon: <ArticleRounded/>,
+    reqAuth: "System.AuthLog",
+    render: () => <div/>,
+    ...Tail
+  },
+  {
+    label: () => LocaleX.GetIZO("System.Ticket"),
+    icon: <ConfirmationNumber/>,
+    reqAuth: "System.Ticket",
+    render: () => <div/>,
+    ...Tail
   }
 ];
 

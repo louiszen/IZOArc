@@ -34,7 +34,8 @@ let DefTC = {
   MenuBar: {
     System: "系統設定",
     ShowLabels: "顯示標籤",
-    HideLabels: "隱藏標籤"
+    HideLabels: "隱藏標籤",
+    BugReport: "錯誤報告"
   },
   Alert: {
     UserNotFound: "User ID不存在",
@@ -73,7 +74,9 @@ let DefTC = {
     BackupSystem: "備份系統?",
     Delete: "刪除",
     DeleteBackup: "刪除備份@str?",
-    AccessDenied: "訪問被拒"
+    AccessDenied: "訪問被拒",
+    AuthLog: "權限變更記錄",
+    Ticket: "錯誤報告存票"
   },
   BnR: {
     Include: "備份",

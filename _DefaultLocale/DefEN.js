@@ -35,7 +35,8 @@ let DefEN = {
   MenuBar: {
     System: "System",
     ShowLabels: "Show Labels",
-    HideLabels: "Hide Labels"
+    HideLabels: "Hide Labels",
+    BugReport: "Bug Report"
   },
   Alert: {
     UserNotFound: "User not found.",
@@ -74,7 +75,9 @@ let DefEN = {
     BackupSystem: "Backup System?",
     Delete: "Delete",
     DeleteBackup: "Delete Backup @str?",
-    AccessDenied: "Access Denied"
+    AccessDenied: "Access Denied",
+    AuthLog: "Authority Change Log",
+    Ticket: "Bug Report Ticket"
   },
   BnR: {
     Include: "Include",

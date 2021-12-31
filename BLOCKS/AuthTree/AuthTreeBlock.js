@@ -8,7 +8,6 @@ import _ from "lodash";
 import { StyledButton } from "IZOArc/LabIZO/Stylizo";
 import { ArrowRight, ArrowDropDown } from "@mui/icons-material";
 import { LEDSwitch } from "IZOArc/BLOCKS/Ctrls";
-import { AuthTreeNode } from ".";
 
 /**
  * @augments {Component<Props, State>}
@@ -182,7 +181,7 @@ class AuthTreeBlock extends Component {
   }
 
   render(){
-    let {tree, parentAccessible} = this.props;
+    let {tree} = this.props;
     let {show} = this.state;
     let isEnd = _.isArray(tree);
     return (

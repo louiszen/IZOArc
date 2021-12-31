@@ -65,7 +65,7 @@ class LEDSwitch extends Component {
       <StyledIconButton size={"small"} onClick={() => onCtrlSet(projID, field, !ctrl)}>
         <Tooltip title={LocaleX.Parse({
           EN: ctrl? (refCtrl !== false? "Accessible" : "Inherited Inaccessible") : "Inaccessible",
-          TC: ctrl? (refCtrl !== false? "准許存取" : "上層櫂限禁止存取") : "禁止存取"
+          TC: ctrl? (refCtrl !== false? "允許存取" : "上層櫂限禁止存取") : "禁止存取"
         })}>
           <HStack>
             <LEDz color={ctrl? (refCtrl !== false? "pureGreen" : "Warning") : "pureRed"} size={25}/>

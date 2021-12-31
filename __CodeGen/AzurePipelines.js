@@ -1,7 +1,9 @@
 
 const Fs = require("./Fs");
 
-
+/**
+ * To Generate Azure Pipelines necessary documents
+ */
 ( async () => {
   let id = process.argv[2].toLowerCase();
   let pipeline = `name: "$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)"

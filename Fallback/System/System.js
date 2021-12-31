@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import tabs from "./tabs";
 
-import { Accessor, Authority } from "IZOArc/STATIC";
+import { Accessor, Authority, STORE } from "IZOArc/STATIC";
 import { Denied } from "IZOArc/Fallback";
 import { observer } from "mobx-react";
 import Tabbizo from "IZOArc/LabIZO/Tabbizo";
@@ -63,7 +63,7 @@ class System extends Component {
   render(){
     if(!Authority.IsAccessibleQ("System")) return <Denied/>;
     return (
-      <Tabbizo tabs={tabs} height="100%" panelHeight="100%"/>
+      <Tabbizo tabs={tabs} height="100%" panelHeight="100%" addOns={{lang: STORE.lang }}/>
     );
   }
 

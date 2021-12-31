@@ -66,11 +66,13 @@ class BLangToggler extends Component {
     return (
       <HStack width="fit-content" marginRight={5}>
         <Tooltip title={LocaleX.GetIZO("NavBar.SwitchLang")} arrow={true} placement="bottom">
-          <IconButton style={{color: ColorX.GetColorCSS(IZOTheme.menuFG, 1)}} size="small" onClick={() => this._ToggleLanguage()}>
+          <IconButton style={{color: ColorX.GetColorCSS(IZOTheme.menuFG, 1)}} 
+            size="small" onClick={() => this._ToggleLanguage()}>
             <Language/>
           </IconButton>
         </Tooltip>
-        <Typography style={{width: 60, marginLeft: 5, fontFamily: IZOFontFamily, fontSize: 14, fontWeight: "bold", color: ColorX.GetColorCSS(IZOTheme.menuFG)}}>
+        <Typography style={{width: 60, marginLeft: 5, fontFamily: IZOFontFamily, 
+          fontSize: 14, fontWeight: "bold", color: ColorX.GetColorCSS(IZOTheme.menuFG)}}>
           {langLabel}
         </Typography>
       </HStack>

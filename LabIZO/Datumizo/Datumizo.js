@@ -722,7 +722,7 @@ class Datumizo extends Component {
         payloadOut = {
           ...payloadOut,
           timerange: timerange
-        }
+        };
       }
 
       let res = await ReqX.SendBE(base.Connect.List, payloadOut, addOns, null, null, this.Connect.onError);

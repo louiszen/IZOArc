@@ -3,3 +3,4 @@ export { default as NoMatch } from "./NoMatch/NoMatch";
 export { default as Landing } from "./Landing/Landing";
 export { default as Login } from "./Login/Login";
 export { default as System } from "./System/System";
+export { default as BugReport } from "./BugReport/BugReport";
