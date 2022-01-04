@@ -81,7 +81,7 @@ class AuthTreeNode extends Component {
 
   render(){
     return (
-      <VStack height="fit-content" alignItems="flex-start" width="100%">
+      <VStack height="100%" alignItems="flex-start" width="100%">
         {this.renderBlockList()}
       </VStack>
     );

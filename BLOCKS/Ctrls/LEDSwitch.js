@@ -16,7 +16,8 @@ class LEDSwitch extends Component {
     field: PropsType.string,
     ctrl: PropsType.bool,
     refCtrl: PropsType.bool,
-    onCtrlSet: PropsType.func
+    onCtrlSet: PropsType.func,
+    size: PropsType.number
   }
 
   static defaultProps = {
@@ -24,7 +25,8 @@ class LEDSwitch extends Component {
     field: "",
     ctrl: false,
     refCtrl: true,
-    onCtrlSet: () => {}
+    onCtrlSet: () => {},
+    size: 25
   }
 
   constructor(){
@@ -60,7 +62,7 @@ class LEDSwitch extends Component {
   }
 
   render(){
-    let {ctrl, onCtrlSet, projID, field, refCtrl} = this.props;
+    let {ctrl, onCtrlSet, projID, field, refCtrl, size} = this.props;
     return (
       <StyledIconButton size={"small"} onClick={() => onCtrlSet(projID, field, !ctrl)}>
         <Tooltip title={LocaleX.Parse({
@@ -68,7 +70,7 @@ class LEDSwitch extends Component {
           TC: ctrl? (refCtrl !== false? "允許存取" : "上層櫂限禁止存取") : "禁止存取"
         })}>
           <HStack>
-            <LEDz color={ctrl? (refCtrl !== false? "pureGreen" : "Warning") : "pureRed"} size={25}/>
+            <LEDz color={ctrl? (refCtrl !== false? "pureGreen" : "Warning") : "pureRed"} size={size}/>
           </HStack>
         </Tooltip>
       </StyledIconButton>

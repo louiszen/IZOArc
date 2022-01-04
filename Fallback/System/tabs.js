@@ -1,8 +1,11 @@
 import { PermDataSettingRounded, Sync, ArticleRounded, ConfirmationNumber } from "@mui/icons-material";
 
 import { LocaleX } from "IZOArc/STATIC";
+import SysAuthLog from "./SysAuthLog/SysAuthLog";
 
 import SysBnR from "./SysBnR/SysBnR";
+import SysTickets from "./SysTickets/SysTickets";
+import SysUAC from "./SysUAC/SysUAC";
 
 const Tail = {
   iconPos: "left",
@@ -23,21 +26,21 @@ const tabs = [
     label: () => LocaleX.GetIZO("System.UAC"),
     icon: <PermDataSettingRounded/>,
     reqAuth: "System.UAC",
-    render: () => <div/>,
+    render: <SysUAC/>,
     ...Tail
   },
   {
     label: () => LocaleX.GetIZO("System.AuthLog"),
     icon: <ArticleRounded/>,
     reqAuth: "System.AuthLog",
-    render: () => <div/>,
+    render: <SysAuthLog/>,
     ...Tail
   },
   {
     label: () => LocaleX.GetIZO("System.Ticket"),
     icon: <ConfirmationNumber/>,
     reqAuth: "System.Ticket",
-    render: () => <div/>,
+    render: <SysTickets/>,
     ...Tail
   }
 ];

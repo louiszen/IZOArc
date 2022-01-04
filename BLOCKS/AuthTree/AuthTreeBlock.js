@@ -70,7 +70,7 @@ class AuthTreeBlock extends Component {
     return _.map(tree, (o, i) => {
       let nextlevel = level + (level === ""? i : ("." + i)); 
       return (
-        <VStack marginTop={1} key={i} width="100%" alignItems="flex-start">
+        <VStack height={"fit-content"} marginTop={1} key={i} width="100%" alignItems="flex-start">
           <AuthTreeBlock
             tree={o}
             ctrl={ctrl}
@@ -96,7 +96,7 @@ class AuthTreeBlock extends Component {
   renderToggle(){
     let {show} = this.state;
     return (
-      <StyledButton onClick={() => this.toggleShow()}>
+      <StyledButton onClick={() => this.toggleShow()} theme={{height: 30}}>
         {show? <ArrowDropDown/> : <ArrowRight/>}
       </StyledButton>
     );
@@ -105,8 +105,8 @@ class AuthTreeBlock extends Component {
   renderNodeKey(){
     let {nodeKey} = this.props;
     return (
-      <HStack width={150} paddingX={2}>
-        <Typography style={{color: ColorX.GetColorCSS("blue")}}>
+      <HStack width={150} paddingX={1}>
+        <Typography style={{color: ColorX.GetColorCSS("blue"), fontSize: 15}}>
           {nodeKey}
         </Typography>
         <Spacer/>
@@ -120,6 +120,7 @@ class AuthTreeBlock extends Component {
     let nodeRefCtrl = parentAccessible && (refCtrl !== undefined && refCtrl[level]);
     return (
       <LEDSwitch
+        size={20}
         projID={projID}
         field={level}
         ctrl={nodeCtrl}
@@ -136,12 +137,13 @@ class AuthTreeBlock extends Component {
       let nodeCtrl = ctrl[thisLevel];
       let nodeRefCtrl = ctrl[level] && parentAccessible && (refCtrl !== undefined && refCtrl[thisLevel]);
       return (
-        <HStack key={i} 
+        <HStack key={i} width="fit-content" height={"fit-content"}
           justifyContent="flex-start">
-          <Typography>
+          <Typography style={{fontSize: 14}}>
             {o}
           </Typography>
           <LEDSwitch
+            size={16}
             projID={projID}
             field={thisLevel}
             ctrl={nodeCtrl}
@@ -152,13 +154,15 @@ class AuthTreeBlock extends Component {
       );
     });
     return (
-      <HStack justifyContent="flex-start">
+      <HStack justifyContent="flex-start" height={"fit-content"}>
         <HStack width="fit-content" 
-          paddingX={2}
-          spacing={10}
+          justifyContent="flex-start"
+          paddingX={1}
+          spacing={6}
           style={{
             background: ColorX.GetColorCSS("white"),
-            borderRadius: 5
+            borderRadius: 5,
+            flexWrap: "wrap"
           }}>
           {funcs}
         </HStack>
@@ -171,7 +175,7 @@ class AuthTreeBlock extends Component {
     let {tree} = this.props;
     let isEnd = _.isArray(tree);
     return (
-      <HStack width="100%" spacing={20} justifyContent="flex-start">
+      <HStack width="100%" height={"fit-content"} spacing={20} justifyContent="flex-start">
         {this.renderLED()}
         {this.renderNodeKey()}
         <Spacer/>
@@ -186,11 +190,11 @@ class AuthTreeBlock extends Component {
     let isEnd = _.isArray(tree);
     return (
       <VStack 
+        height={"fit-content"}
         width={"100%"}
         justifyContent="flex-start"
-        paddingX={2}
-        paddingY={1}
         style={{
+          padding: "2px 10px",
           borderRadius: 5,
           borderWidth: 1,
           borderStyle: "solid",
