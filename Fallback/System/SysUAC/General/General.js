@@ -63,11 +63,11 @@ class General extends Component {
       let {projDoc} = this.props;
       STORE.Ask(LocaleX.Parse({
         EN: "Allow access",
-        TC: "准許存取"
+        TC: "允許存取"
       }), 
       LocaleX.Parse({
         EN: "Do you confirm to allow access right to the project " + projDoc.projectname + "?",
-        TC: "你是否確認准許對項目 " + projDoc.projectname + "的存取?"
+        TC: "你是否確認允許對項目 " + projDoc.projectname + "的存取?"
       }), this.SetProjectActive.onConfirm);
     },
     onConfirm: async () => {
