@@ -70,7 +70,7 @@ class AuthTreeBlock extends Component {
     return _.map(tree, (o, i) => {
       let nextlevel = level + (level === ""? i : ("." + i)); 
       return (
-        <VStack height={"fit-content"} marginTop={1} key={i} width="100%" alignItems="flex-start">
+        <VStack height={"fit-content"} key={i} width="100%" alignItems="flex-start">
           <AuthTreeBlock
             tree={o}
             ctrl={ctrl}
