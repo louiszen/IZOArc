@@ -14,7 +14,6 @@ import NavBar from "./NavBar";
 import "./Container.css";
 
 import { IZOTheme } from "__SYSDefault/Theme";
-import { FirstPage, hasContainer, loginSys, serverCheck } from "__SYSDefault/Config";
 import { StartUp } from "__SYSDefault/StartUp";
 
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
@@ -23,6 +22,7 @@ import { StyledIconButton } from "IZOArc/LabIZO/Stylizo";
 import { ColorX, LocaleX, STORE } from "IZOArc/STATIC";
 import { EnvInfoAPI } from "__SYSDefault/SysAPI";
 import ReqX from "IZOArc/STATIC/ReqX";
+import { SysConfig } from "__SYSDefault/Config";
 
 class Container extends Component {
 
@@ -39,6 +39,7 @@ class Container extends Component {
 
   componentDidMount(){
     this._setAllStates(() => {
+      let {serverCheck} = SysConfig.Settings;
       if(serverCheck){
         this.GetServerDetail();
       }
@@ -82,6 +83,8 @@ class Container extends Component {
       }
     );
     
+    let {loginSys} = SysConfig.Settings;
+
     if(loginSys){
       let {location} = this.props;
       let isPublic = (location?.pathname) === "/";
@@ -112,6 +115,7 @@ class Container extends Component {
 
   AutoLogin = () => {
     setTimeout(() => {
+      let {FirstPage} = SysConfig.Project;
       this.props.history.push(FirstPage);
       STORE.Alert(LocaleX.GetIZO("Alert.AutoLogin"), "success");
     }, 1000);
@@ -320,6 +324,7 @@ class Container extends Component {
     let isPublic = (location && location.pathname) === "/";
     let isLogin = (location && location.pathname) === "/Login";
     let isTest = (location && location.pathname).startsWith("/Test/");
+    let {hasContainer} = SysConfig.Settings;
     let isContained = hasContainer && !isPublic && !isTest && !isLogin && STORE.isLoggedIn();
 
     return (

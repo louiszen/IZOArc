@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Accessor } from "IZOArc/STATIC";
-import { loginSys } from "__SYSDefault/Config";
+import { SysConfig } from "__SYSDefault/Config";
 
 class Landing extends Component {
 
@@ -12,6 +12,7 @@ class Landing extends Component {
     this.setState((state, props) => ({
       ...props,
     }), () => {
+      let {loginSys} = SysConfig.Settings;
       this.props.history.push(loginSys? "/Login" : "/Home");
     });
   }

@@ -14,10 +14,10 @@ import Formizo from "IZOArc/LabIZO/Formizo";
 import { Accessor, STORE, ColorX, LocaleX } from "IZOArc/STATIC";
 import { VStack, HStack, Spacer } from "IZOArc/LabIZO/Stackizo";
 import { StyledButton, StyledLinearProgress } from "IZOArc/LabIZO/Stylizo";
-import { FirstPage, StartDate } from "__SYSDefault/Config";
 import { Password, Window, GitHub, Facebook, Instagram, Twitter, Google, LinkedIn, Sms, Email} from "@mui/icons-material";
 import { BLangToggler } from "IZOArc/BLOCKS/Ctrls";
 import { SLogin } from "IZOArc/API";
+import { SysConfig } from "__SYSDefault/Config";
 class Login extends Component {
 
   /**
@@ -192,6 +192,7 @@ class Login extends Component {
 
   redirectToFirstPage = () => {
     if(STORE.isInitialized){
+      let {FirstPage} = SysConfig.Project;
       setTimeout(() => {
         this.props.history.push(FirstPage);
         STORE.isLoading(false);
@@ -550,7 +551,7 @@ class Login extends Component {
           {"Backend Version: " + STORE.server.backendVersion}
         </Typography>
         <Typography style={style}>
-          {"Start Date: " + StartDate}
+          {"Start Date: " + SysConfig.Project.StartDate}
         </Typography>
         <Typography style={style}>
           {"Domain: " + DOMAIN}
