@@ -114,7 +114,7 @@ class SysUAC extends Component {
             }}>
             {LocaleX.Parse({
               EN: active? "Accessible" : "Inaccessible",
-              TC: active? "准許存取" : "禁止存取"
+              TC: active? "允許存取" : "禁止存取"
             })}
           </Typography>
         </HStack>
