@@ -1101,7 +1101,7 @@ class Datumizo extends Component {
         }
         this._QuitInner();
       } else {
-        if (base.operations?.Edit?.onSuccess) {
+        if (base.operations?.Edit?.onFail) {
           base.operations?.Edit?.onFail(payload, this.Edit.onFail);
         } else {
           this.Edit.onFail(payload);
