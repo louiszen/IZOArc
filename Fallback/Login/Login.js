@@ -4,20 +4,21 @@ import { withRouter } from "react-router";
 import { observer } from "mobx-react";
 import _ from "lodash";
 import { Box, Link, Typography } from "@material-ui/core";
+import { Password, Window, GitHub, Facebook, Instagram, Twitter, Google, LinkedIn, Sms, Email} from "@mui/icons-material";
 
 import schema from "./schema";
 import { IZOTheme, GateDis } from "__SYSDefault/Theme";
 import { DOMAIN } from "__SYSDefault/Domain";
 import Version from "__SYSDefault/Version";
+import { SysConfig } from "__SYSDefault/Config";
 
 import Formizo from "IZOArc/LabIZO/Formizo";
 import { Accessor, STORE, ColorX, LocaleX } from "IZOArc/STATIC";
 import { VStack, HStack, Spacer } from "IZOArc/LabIZO/Stackizo";
 import { StyledButton, StyledLinearProgress } from "IZOArc/LabIZO/Stylizo";
-import { Password, Window, GitHub, Facebook, Instagram, Twitter, Google, LinkedIn, Sms, Email} from "@mui/icons-material";
 import { BLangToggler } from "IZOArc/BLOCKS/Ctrls";
 import { SLogin } from "IZOArc/API";
-import { SysConfig } from "__SYSDefault/Config";
+
 class Login extends Component {
 
   /**

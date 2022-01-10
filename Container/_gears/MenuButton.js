@@ -4,7 +4,8 @@ import { withRouter } from "react-router-dom";
 import PropsType from "prop-types";
 import _ from "lodash";
 import { observer } from "mobx-react";
-import { Typography, Tooltip } from "@material-ui/core";
+import { Tooltip } from "@material-ui/core";
+import { Typography } from "@mui/material";
 
 import MenuButtonList from "./MenuButtonList";
 
