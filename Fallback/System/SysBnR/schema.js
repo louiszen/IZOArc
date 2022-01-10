@@ -1,5 +1,5 @@
-import { Typography, Tooltip } from "@material-ui/core";
-import { DeleteOutline, Restore } from "@material-ui/icons";
+import { Typography, Tooltip } from "@mui/material";
+import { DeleteOutline, Restore } from "@mui/icons-material";
 
 import SysDBInc from "./SysDBInc";
 
@@ -64,8 +64,7 @@ const restore = [
     width: 50,
     Cell: (row, field, addOns) => {
       return (
-        <Tooltip title="Delete" arrow={true} placement="top">
-          <StyledButton 
+        <StyledButton 
           onClick={() => {
             if(addOns.Delete) {
               addOns.Delete(row._id);
@@ -82,10 +81,11 @@ const restore = [
               }
             }}>
             <HStack spacing={5}>
-              <DeleteOutline fontSize="small"/>
+              <Tooltip title="Delete" arrow={true} placement="top">
+                <DeleteOutline fontSize="small"/>
+              </Tooltip>
             </HStack>            
-          </StyledButton>
-        </Tooltip>
+        </StyledButton>
       );
     }
   }, 

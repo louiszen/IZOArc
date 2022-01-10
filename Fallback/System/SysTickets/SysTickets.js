@@ -3,15 +3,16 @@ import PropsType from "prop-types";
 import { observer } from "mobx-react";
 
 import _ from "lodash";
-import { Box, Typography } from "@material-ui/core";
+import { Box, Typography } from "@mui/material";
 
 import schema from "./schema";
 import datalink from "./datalink";
 
+import { IZOTheme } from "__SYSDefault/Theme";
+
 import Datumizo from "IZOArc/LabIZO/Datumizo/Datumizo";
 import { VStack } from "IZOArc/LabIZO/Stackizo";
 import { Accessor, ColorX, Authority, STORE, LocaleX } from "IZOArc/STATIC";
-import { IZOTheme } from "__SYSDefault/Theme";
 import { Denied } from "IZOArc/Fallback";
 
 /**
