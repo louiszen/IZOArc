@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Accessor, ColorX } from "IZOArc/STATIC";
 import PropsType from "prop-types";
 import { Handle } from "react-flow-renderer";
-import { Box, Typography } from "@material-ui/core";
-import { AllOutOutlined} from "@material-ui/icons";
+import { Box, Typography } from "@mui/material";
+import { AllOutOutlined} from "@mui/icons-material";
 import { HStack } from "IZOArc/LabIZO/Stackizo";
 import _ from "lodash";
 

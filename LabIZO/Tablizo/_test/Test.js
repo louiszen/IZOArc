@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Delete } from "@material-ui/icons";
+import { Delete } from "@mui/icons-material";
 
 import schema from "./_schema";
 import data from "./_data"; 

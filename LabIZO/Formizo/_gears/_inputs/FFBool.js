@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import PropsType from "prop-types";
 import _ from "lodash";
 import { Checkbox, FormControlLabel, Switch } from "@material-ui/core";
-import { Favorite, FavoriteBorder } from "@material-ui/icons";
+import { Favorite, FavoriteBorder } from "@mui/icons-material";
 
 import { Accessor } from "IZOArc/STATIC";
 

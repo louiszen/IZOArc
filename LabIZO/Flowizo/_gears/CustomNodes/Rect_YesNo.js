@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import { Accessor, ColorX } from "IZOArc/STATIC";
 import PropsType from "prop-types";
 import { Handle } from "react-flow-renderer";
-import { Box } from "@material-ui/core";
-import { CancelOutlined, CheckCircleOutlined, PlayForWork, Cancel } from "@material-ui/icons";
+
+import { Box } from "@mui/material";
+import { CancelOutlined, CheckCircleOutlined, PlayForWork, Cancel } from "@mui/icons-material";
+
 import { VStack } from "IZOArc/LabIZO/Stackizo";
 import { FFDropdown } from "IZOArc/LabIZO/Formizo/_gears/_inputs";
 

@@ -2,8 +2,8 @@ import React, { Component } from "react";
 
 import PropsType from "prop-types";
 import _ from "lodash";
-import { IconButton, Typography } from "@material-ui/core";
-import { Check, Close, ErrorOutlined, InfoOutlined, ReportProblemOutlined } from "@material-ui/icons";
+import { IconButton, Typography } from "@mui/material";
+import { Check, Close, ErrorOutlined, InfoOutlined, ReportProblemOutlined } from "@mui/icons-material";
 
 import { Accessor, ColorX } from "IZOArc/STATIC";
 import { HStack, VStack } from "IZOArc/LabIZO/Stackizo";

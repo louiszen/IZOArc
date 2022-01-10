@@ -1,5 +1,4 @@
-import { Widgets } from "@material-ui/icons";
-import { AccountTreeRounded, ApiRounded, GroupsRounded, InfoOutlined, PersonRounded } from "@mui/icons-material";
+import { AccountTreeRounded, ApiRounded, GroupsRounded, InfoOutlined, PersonRounded, Widgets } from "@mui/icons-material";
 import { LocaleX } from "IZOArc/STATIC";
 import APIAvail from "./APIAvail/APIAvail";
 import AuthTree from "./AuthTree/AuthTree";

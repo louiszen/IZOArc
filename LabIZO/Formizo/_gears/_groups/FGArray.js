@@ -3,7 +3,7 @@ import React, { Component } from "react";
 
 import PropsType from "prop-types";
 import _ from "lodash";
-import { Add, ArrowDownward, ArrowUpward, Delete } from "@material-ui/icons";
+import { Add, ArrowDownward, ArrowUpward, Delete } from "@mui/icons-material";
 import { Box, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 
 import FItem from "../FItem";

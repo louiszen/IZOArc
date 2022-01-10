@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import PropsType from "prop-types";
 import _ from "lodash";
 import { v1 } from "uuid";
-import { CloudUpload } from "@material-ui/icons";
+import { CloudUpload } from "@mui/icons-material";
 import { FormHelperText, FormLabel, Typography } from "@material-ui/core";
 
 import { Accessor, ColorX, LocaleX } from "IZOArc/STATIC";

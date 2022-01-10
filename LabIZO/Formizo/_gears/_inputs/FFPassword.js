@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import PropsType from "prop-types";
 import _ from "lodash";
-import { Visibility, VisibilityOff } from "@material-ui/icons";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { FormControl, FormHelperText, IconButton, InputAdornment } from "@material-ui/core";
 
 import { Accessor } from "IZOArc/STATIC";

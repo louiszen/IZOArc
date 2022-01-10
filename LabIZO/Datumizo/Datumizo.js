@@ -4,9 +4,11 @@ import PropsType from "prop-types";
 import _ from "lodash";
 import axios from "axios";
 import fileDownload from "js-file-download";
-import { Add, CloudDownload, CloudUpload, Delete, DeleteForever, Edit, GetApp, InfoOutlined, Publish, Assessment} from "@material-ui/icons";
-import { ContentCopy, Refresh } from "@mui/icons-material";
-import { Box, Slide, Typography } from "@material-ui/core";
+import { 
+  ContentCopy, Refresh, Add, CloudDownload, CloudUpload, 
+  Delete, DeleteForever, Edit, GetApp, InfoOutlined, Publish, Assessment } from "@mui/icons-material";
+import { Slide } from "@material-ui/core";
+import { IconButton, Box, Typography } from "@mui/material";
 
 import { IZOTheme } from "__SYSDefault/Theme";
 import { DOMAIN } from "__SYSDefault/Domain";
@@ -15,10 +17,8 @@ import Inner from "./_gears/Inner";
 import Formizo from "IZOArc/LabIZO/Formizo";
 import Tablizo from "IZOArc/LabIZO/Tablizo";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
-import { Accessor, Authority, ColorX, ErrorX, LocaleX, STORE, ZFunc, ZTime } from "IZOArc/STATIC";
+import { Accessor, Authority, ColorX, ErrorX, LocaleX, STORE, ZFunc, ZTime, ReqX } from "IZOArc/STATIC";
 import { StyledButton } from "IZOArc/LabIZO/Stylizo";
-import { IconButton } from "@mui/material";
-import ReqX from "IZOArc/STATIC/ReqX";
 
 /**
  * Datumizo - display documents with tables and controls

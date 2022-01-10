@@ -4,7 +4,7 @@ import PropsType from "prop-types";
 import _ from "lodash";
 import { v1 } from "uuid";
 import { Box, Typography } from "@material-ui/core";
-import { ArrowBack } from "@material-ui/icons";
+import { ArrowBack } from "@mui/icons-material";
 
 import { Accessor, ColorX } from "IZOArc/STATIC";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Delete } from "@material-ui/icons";
+import { Delete } from "@mui/icons-material";
 
 import OutlinedBox from "../OutlinedBox";
 import StyledTextField from "../StyledTextField";
