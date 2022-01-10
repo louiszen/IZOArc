@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import PropsType from "prop-types";
-import { Box } from "@material-ui/core";
+import { Box } from "@mui/material";
 
 import { Accessor } from "IZOArc/STATIC";
 

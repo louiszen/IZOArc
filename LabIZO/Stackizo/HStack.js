@@ -4,7 +4,7 @@ import PropsType from "prop-types";
 import _ from "lodash";
 
 import { Accessor } from "IZOArc/STATIC";
-import { Box, Typography } from "@material-ui/core";
+import { Box, Typography } from "@mui/material";
 
 /**
  * Stack children components horizontally

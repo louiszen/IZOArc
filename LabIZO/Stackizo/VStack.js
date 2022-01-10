@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import PropsType from "prop-types";
 import _ from "lodash";
-import { Box, Typography } from "@material-ui/core";
+import { Box, Typography } from "@mui/material";
 
 import { Accessor } from "IZOArc/STATIC";
 
