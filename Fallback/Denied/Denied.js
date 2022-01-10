@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
 import { Accessor, LocaleX } from "IZOArc/STATIC";

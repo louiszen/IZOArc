@@ -3,7 +3,8 @@ import { withRouter } from "react-router";
 
 import { observer } from "mobx-react";
 import _ from "lodash";
-import { Box, Link, Typography } from "@material-ui/core";
+import { Box, Typography } from "@mui/material";
+import { Link } from "@material-ui/core";
 import { Password, Window, GitHub, Facebook, Instagram, Twitter, Google, LinkedIn, Sms, Email} from "@mui/icons-material";
 
 import schema from "./schema";
