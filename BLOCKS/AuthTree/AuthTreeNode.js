@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+
 import { Accessor } from "IZOArc/STATIC";
-import PropsType from "prop-types";
 import { VStack } from "IZOArc/LabIZO/Stackizo";
-import AuthTreeBlock from "./AuthTreeBlock";
 
 import _ from "lodash";
+import PropsType from "prop-types";
+
+import AuthTreeBlock from "./AuthTreeBlock";
 
 /**
  * @augments {Component<Props, State>}

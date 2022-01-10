@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 
-import { HStack } from "IZOArc/LabIZO/Stackizo";
-import { Accessor, STORE, ColorX, LocaleX } from "IZOArc/STATIC";
 import { IZOTheme, IZOFontFamily } from "__SYSDefault/Theme";
-
 import { LocaleConfig } from "__SYSDefault/Locale";
 
-import { IconButton, Typography, Tooltip } from "@material-ui/core";
-import { Language } from "@material-ui/icons";
+import { HStack } from "IZOArc/LabIZO/Stackizo";
+import { Accessor, STORE, ColorX, LocaleX } from "IZOArc/STATIC";
 
+import { IconButton, Typography, Tooltip } from "@mui/material";
+import { Language } from "@mui/icons-material";
 
 /**
  * @augments {Component<Props, State>}

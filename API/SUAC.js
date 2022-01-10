@@ -1,5 +1,4 @@
-import { LocaleX, STORE } from "IZOArc/STATIC";
-import ReqX from "IZOArc/STATIC/ReqX";
+import { LocaleX, STORE, ReqX } from "IZOArc/STATIC";
 
 class SUAC {
 

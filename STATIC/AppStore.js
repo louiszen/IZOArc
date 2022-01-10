@@ -1,6 +1,5 @@
 import _ from "lodash";
-import {makeAutoObservable, runInAction} from "mobx";
-import { toJS, autorun, set } from "mobx";
+import { makeAutoObservable, runInAction, toJS, autorun, set } from "mobx";
 import BrowserX from "./BrowserX";
 
 class AppStore {

@@ -1,13 +1,15 @@
 import React, { Component } from "react";
+
 import { Accessor, ColorX } from "IZOArc/STATIC";
-import PropsType from "prop-types";
+import { StyledButton } from "IZOArc/LabIZO/Stylizo";
+import { LEDSwitch } from "IZOArc/BLOCKS/Ctrls";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
+
 import { Typography } from "@mui/material";
+import { ArrowRight, ArrowDropDown } from "@mui/icons-material";
 
 import _ from "lodash";
-import { StyledButton } from "IZOArc/LabIZO/Stylizo";
-import { ArrowRight, ArrowDropDown } from "@mui/icons-material";
-import { LEDSwitch } from "IZOArc/BLOCKS/Ctrls";
+import PropsType from "prop-types";
 
 /**
  * @augments {Component<Props, State>}

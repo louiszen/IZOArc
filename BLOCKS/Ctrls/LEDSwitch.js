@@ -1,10 +1,13 @@
 import React, { Component } from "react";
+
 import { Accessor, LocaleX } from "IZOArc/STATIC";
-import PropsType from "prop-types";
 import { StyledIconButton } from "IZOArc/LabIZO/Stylizo";
 import { LEDz } from "IZOArc/LabIZO/Luminizo";
 import { HStack } from "IZOArc/LabIZO/Stackizo";
+
 import { Tooltip } from "@material-ui/core";
+
+import PropsType from "prop-types";
 
 /**
  * @augments {Component<Props, State>}

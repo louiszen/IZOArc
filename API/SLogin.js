@@ -1,7 +1,8 @@
-import { Env, LocaleX, STORE } from "IZOArc/STATIC";
 import { CheckUserNameAPI, RenewAuthority, SignInAPI, VerifyOTPAPI } from "__SYSDefault/SysAPI";
+
+import { Env, LocaleX, STORE, ReqX } from "IZOArc/STATIC";
+
 import crypto from "crypto";
-import ReqX from "IZOArc/STATIC/ReqX";
 
 class SLogin {
 
