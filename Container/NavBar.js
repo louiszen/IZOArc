@@ -3,7 +3,7 @@ import { withRouter } from "react-router";
 
 import { observer } from "mobx-react";
 
-import { ExitToAppOutlined } from "@material-ui/icons";
+import { ExitToAppOutlined } from "@mui/icons-material";
 import { Box, IconButton, Typography, Tooltip } from "@material-ui/core";
 
 import "./Container.css";

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 
 import { IZOTheme } from "__SYSDefault/Theme";
 import { DOMAIN } from "__SYSDefault/Domain";

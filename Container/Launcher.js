@@ -43,9 +43,7 @@ class Launcher extends Component {
 
   render(){
     return (
-      <Box>
-        
-      </Box>
+      <div/>
     );
   }
 

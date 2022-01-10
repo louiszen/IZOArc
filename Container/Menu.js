@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import _ from "lodash";
 
 import { Box, Tooltip } from "@material-ui/core";
-import { VerticalSplit } from "@material-ui/icons";
+import { VerticalSplit } from "@mui/icons-material";
 
 import { Accessor, ColorX, LocaleX, STORE } from "IZOArc/STATIC";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
