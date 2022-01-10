@@ -5,7 +5,7 @@ import { when } from "mobx";
 import { observer } from "mobx-react";
 import _ from "lodash";
 import htmlParser from "html-react-parser";
-import { Close } from "@material-ui/icons";
+import { Close } from "@mui/icons-material";
 import { Backdrop, Box, CircularProgress, Snackbar } from "@material-ui/core";
 
 import Footer from "./Footer";
@@ -15,14 +15,14 @@ import "./Container.css";
 
 import { IZOTheme } from "__SYSDefault/Theme";
 import { StartUp } from "__SYSDefault/StartUp";
+import { EnvInfoAPI } from "__SYSDefault/SysAPI";
+import { SysConfig } from "__SYSDefault/Config";
 
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
 import { SnackAlert, StyledButton, StyledLinearProgress } from "IZOArc/LabIZO/Stylizo";
 import { StyledIconButton } from "IZOArc/LabIZO/Stylizo";
-import { ColorX, LocaleX, STORE } from "IZOArc/STATIC";
-import { EnvInfoAPI } from "__SYSDefault/SysAPI";
-import ReqX from "IZOArc/STATIC/ReqX";
-import { SysConfig } from "__SYSDefault/Config";
+import { ColorX, LocaleX, STORE, ReqX } from "IZOArc/STATIC";
+
 
 class Container extends Component {
 
