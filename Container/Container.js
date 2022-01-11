@@ -6,7 +6,8 @@ import { observer } from "mobx-react";
 import _ from "lodash";
 import htmlParser from "html-react-parser";
 import { Close } from "@mui/icons-material";
-import { Backdrop, Box, CircularProgress, Snackbar } from "@material-ui/core";
+import { Backdrop, Snackbar } from "@material-ui/core";
+import { Box, CircularProgress } from "@mui/material";
 
 import Footer from "./Footer";
 import Menu from "./Menu";
