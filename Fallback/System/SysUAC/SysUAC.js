@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { observer } from "mobx-react";
 import { Accessor, ColorX, LocaleX } from "IZOArc/STATIC";
 import { VStack, HStack } from "IZOArc/LabIZO/Stackizo";
-import {Typography} from "@material-ui/core";
+import { Typography } from "@mui/material";
 import { LEDz } from "IZOArc/LabIZO/Luminizo";
 import Tabbizo from "IZOArc/LabIZO/Tabbizo";
 

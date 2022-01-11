@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import PropsType from "prop-types";
 import _ from "lodash";
-import { Box } from "@material-ui/core";
+import { Box } from "@mui/material";
 
 import FItem from "./_gears/FItem";
 import Validation from "./Validation";

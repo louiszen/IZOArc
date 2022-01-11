@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import PropsType from "prop-types";
 import _ from "lodash";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 
 import "./animatizo.css";
 

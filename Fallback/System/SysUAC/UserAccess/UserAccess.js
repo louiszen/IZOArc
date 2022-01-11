@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 
 import _ from "lodash";
 import crypto from "crypto";
-import { Box, Typography } from "@material-ui/core";
+import { Box, Typography } from "@mui/material";
 import { ManageAccountsRounded, AccountTreeRounded } from "@mui/icons-material";
 
 import schema from "./schema";

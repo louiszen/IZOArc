@@ -13,7 +13,7 @@ import ReactFlow, {
 
 import nodeTypes from "./_gears/CustomNodes";
 import edgeTypes from "./_gears/CustomEdges";
-import { Box } from "@material-ui/core";
+import { Box } from "@mui/material";
 import _ from "lodash";
 import { v1 } from "uuid";
 

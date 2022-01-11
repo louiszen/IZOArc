@@ -4,7 +4,8 @@ import { withRouter } from "react-router";
 import { observer } from "mobx-react";
 
 import { ExitToAppOutlined, Cached } from "@mui/icons-material";
-import { Box, IconButton, Typography, Tooltip } from "@material-ui/core";
+import { Tooltip } from "@material-ui/core";
+import { Box, IconButton, Typography } from "@mui/material";
 
 import "./Container.css";
 import Version from "__SYSDefault/Version";

@@ -3,7 +3,7 @@ import PropsType from "prop-types";
 import { observer } from "mobx-react";
 
 import _ from "lodash";
-import { Box, Typography } from "@material-ui/core";
+import { Box, Typography } from "@mui/material";
 
 import schema from "./schema";
 import datalink from "./datalink";

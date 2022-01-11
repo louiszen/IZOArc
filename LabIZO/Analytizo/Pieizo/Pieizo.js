@@ -4,7 +4,7 @@ import PropsType from "prop-types";
 import _ from "lodash";
 
 import { Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import MaterialTooltip from "@material-ui/core/Tooltip";
 
 import { Accessor } from "IZOArc/STATIC";
