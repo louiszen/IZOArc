@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Accessor, ColorX } from "IZOArc/STATIC";
 import PropsType from "prop-types";
-import { Box } from "@mui/system";
+import { Box } from "@mui/material";
 
 /**
  * @augments {Component<Props, State>}

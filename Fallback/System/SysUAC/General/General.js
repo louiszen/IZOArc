@@ -8,7 +8,7 @@ import Tabbizo from "IZOArc/LabIZO/Tabbizo/Tabbizo";
 
 import tabs from "./tabs/generalTabs";
 import * as md from "./md";
-import { Box } from "@mui/system";
+import { Box } from "@mui/material";
 import { StyledButton } from "IZOArc/LabIZO/Stylizo";
 import SUAC from "IZOArc/API/SUAC";
 /**
