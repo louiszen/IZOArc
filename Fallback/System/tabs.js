@@ -37,7 +37,7 @@ const tabs = [
     ...Tail
   },
   {
-    label: () => LocaleX.GetIZO("System.Tickets"),
+    label: () => LocaleX.GetIZO("System.Ticket"),
     icon: <ConfirmationNumber/>,
     reqAuth: "System.Tickets",
     render: <SysTickets/>,
