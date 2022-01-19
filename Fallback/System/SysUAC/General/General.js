@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Accessor, ColorX, LocaleX, STORE } from "IZOArc/STATIC";
+import { Accessor, Authority, ColorX, LocaleX, STORE } from "IZOArc/STATIC";
 import PropsType from "prop-types";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
 import Formizo from "IZOArc/LabIZO/Formizo";
@@ -11,6 +11,7 @@ import * as md from "./md";
 import { Box } from "@mui/material";
 import { StyledButton } from "IZOArc/LabIZO/Stylizo";
 import SUAC from "IZOArc/API/SUAC";
+import { Denied } from "IZOArc/Fallback";
 /**
  * @augments {Component<Props, State>}
  */
@@ -199,6 +200,7 @@ class General extends Component {
   render(){
     let {projDoc} = this.props;
     if(!projDoc) return <div/>;
+    if(!Authority.IsAccessibleQ("System.UAC.General")) return <Denied/>;
     return (
       <VStack width="100%" spacing={20} height="100%">
         {this.renderInfo()}

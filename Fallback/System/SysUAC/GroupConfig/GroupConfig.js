@@ -345,7 +345,9 @@ class GroupConfig extends Component {
       selectedGroupDoc: null,
       selectedGroupUserData: null
     }, () => {
-      this.MountDatumizo.SetSelectedRows([]);
+      if(this.MountDatumizo){
+        this.MountDatumizo.SetSelectedRows([]);
+      }
     });
   }
 
@@ -412,7 +414,7 @@ class GroupConfig extends Component {
   render(){
     let {addOns, projDoc} = this.props;
     let {base, serverSidePagination, title} = this.state;
-    if(!Authority.IsAccessibleQ("ProjConfig.Group")) return <Denied/>;
+    if(!Authority.IsAccessibleQ("System.UAC.Groups")) return <Denied/>;
     
     let pageTitle = title;
     if(_.isFunction(title)){

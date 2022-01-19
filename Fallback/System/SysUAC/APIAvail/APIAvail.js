@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Accessor, LocaleX, STORE } from "IZOArc/STATIC";
+import { Accessor, Authority, LocaleX, STORE } from "IZOArc/STATIC";
 import PropsType from "prop-types";
 import { Typography } from "@mui/material";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
@@ -9,6 +9,7 @@ import Tablizo from "IZOArc/LabIZO/Tablizo";
 
 import schema from "./schema";
 import SUAC from "IZOArc/API/SUAC";
+import { Denied } from "IZOArc/Fallback";
 
 /**
  * @augments {Component<Props, State>}
@@ -128,6 +129,7 @@ class APIAvail extends Component {
   }
 
   render(){
+    if(!Authority.IsAccessibleQ("System.UAC.API")) return <Denied/>;
     return (
       <VStack width="100%" height="100%">
         {this.renderTitle()}

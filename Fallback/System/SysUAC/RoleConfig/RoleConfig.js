@@ -425,7 +425,7 @@ class RoleConfig extends Component {
   render(){
     let {addOns, projDoc, onUpdate} = this.props;
     let {base, serverSidePagination, title} = this.state;
-    if(!Authority.IsAccessibleQ("ProjConfig.Role")) return <Denied/>;
+    if(!Authority.IsAccessibleQ("System.UAC.Roles")) return <Denied/>;
     
     let pageTitle = title;
     if(_.isFunction(title)){

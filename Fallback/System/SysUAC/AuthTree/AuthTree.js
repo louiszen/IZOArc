@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { Accessor, LocaleX } from "IZOArc/STATIC";
+import { Accessor, Authority, LocaleX } from "IZOArc/STATIC";
 import PropsType from "prop-types";
 import { Typography } from "@mui/material";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
 import { IZOFontFamily } from "__SYSDefault/Theme";
 import { AuthTreeNode } from "IZOArc/BLOCKS/AuthTree";
 import SUAC from "IZOArc/API/SUAC";
+import { Denied } from "IZOArc/Fallback";
 
 /**
  * @augments {Component<Props, State>}
@@ -103,6 +104,7 @@ class AuthTree extends Component {
   }
 
   render(){
+    if(!Authority.IsAccessibleQ("System.UAC.AuthTree")) return <Denied/>;
     return (
       <VStack 
         height="100%"

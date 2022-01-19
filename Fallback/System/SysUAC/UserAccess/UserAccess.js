@@ -313,8 +313,9 @@ class UserAccess extends Component {
   componentDidUpdate(prevProps, prevState){
     if(!Accessor.IsIdentical(prevProps, this.props, Object.keys(UserAccess.defaultProps))){
       this._setAllStates(() => {
-        if(this.MountDatumizo) 
+        if(this.MountDatumizo){
           this.MountDatumizo.Reload();
+        }
         this.ClearSelected();
       });
     }
@@ -347,7 +348,9 @@ class UserAccess extends Component {
       selectedMode: "",
       selectedUserGroupData: null
     }, () => {
-      this.MountDatumizo.SetSelectedRows([]);
+      if(this.MountDatumizo){
+        this.MountDatumizo.SetSelectedRows([]);
+      }
     });
   }
 
@@ -433,7 +436,7 @@ class UserAccess extends Component {
       selectedMode: "group",
       selectedUserGroupData: dataMod
     }, () => {
-      this.MountDatumizo.SetSelectedRows([id]);
+      if(this.MountDatumizo) this.MountDatumizo.SetSelectedRows([id]);
       if(this.MountUserGroup) this.MountUserGroup.Reload();
     });
   }
@@ -444,7 +447,9 @@ class UserAccess extends Component {
       selectedUserDoc: doc,
       selectedMode: "authtree"
     }, () => {
-      this.MountDatumizo.SetSelectedRows([id]);
+      if(this.MountDatumizo){
+        this.MountDatumizo.SetSelectedRows([id]);
+      }
     });
   }
 
@@ -529,7 +534,7 @@ class UserAccess extends Component {
   render(){
     let {addOns, projDoc, rolelist} = this.props;
     let {base, serverSidePagination, title} = this.state;
-    if(!Authority.IsAccessibleQ("ProjConfig.User")) return <Denied/>;
+    if(!Authority.IsAccessibleQ("System.UAC.Users")) return <Denied/>;
     
     let pageTitle = title;
     if(_.isFunction(title)){

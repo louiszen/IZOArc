@@ -41,6 +41,7 @@ const tabs = [
     }),
     icon: <InfoOutlined/>,
     render: (addOns) => <General projDoc={addOns.projDoc} onUpdate={addOns.Refresh}/>,
+    reqAuth: "System.UAC.General",
     ...tail,
     width: 180
   },
@@ -51,6 +52,7 @@ const tabs = [
     }),
     icon: <ApiRounded/>,
     render: (addOns) => <APIAvail projDoc={addOns.projDoc} onUpdate={addOns.Refresh}/>,
+    reqAuth: "System.UAC.API",
     ...tail
   },
   {
@@ -59,6 +61,7 @@ const tabs = [
       TC: "項目權限設定"
     }),
     icon: <AccountTreeRounded/>,
+    reqAuth: "System.UAC.AuthTree",
     render: (addOns) => <AuthTree projDoc={addOns.projDoc} onUpdate={addOns.Refresh}/>,
     ...tail
   },
@@ -69,6 +72,7 @@ const tabs = [
     }),
     icon: <PersonRounded/>,
     render: (addOns) => <RoleConfig projDoc={addOns.projDoc} onUpdate={addOns.Refresh}/>,
+    reqAuth: "System.UAC.Roles",
     ...tail
   },
   {
@@ -84,6 +88,7 @@ const tabs = [
       rolelist={addOns.rolelist} 
       onUpdate={addOns.Refresh}
       />,
+    reqAuth: "System.UAC.Groups",
     ...tail
   },
   {
@@ -98,6 +103,7 @@ const tabs = [
       grouplist={addOns.grouplist} 
       rolelist={addOns.rolelist}
       onUpdate={addOns.Refresh}/>,
+    reqAuth: "System.UAC.Users",
     ...tail
   }
 ];
