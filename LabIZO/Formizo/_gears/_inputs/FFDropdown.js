@@ -109,8 +109,13 @@ class FFDropdown extends Component {
       let c = _.isEmpty(ischema.selectCap) ? o : Accessor.Get(o, ischema.selectCap);
       let t = _.isEmpty(ischema.selectTip) ? o : Accessor.Get(o, ischema.selectTip);
 
+      let display;
       if(ischema.selectCapMod && _.isFunction(ischema.selectCapMod)){
-        c = ischema.selectCapMod(c);
+        display = ischema.selectCapMod(c, v, t);
+      }else{
+        display = (<Typography>
+            {c}
+          </Typography>);
       }
 
       if(ischema.showTooltip){
@@ -119,9 +124,7 @@ class FFDropdown extends Component {
             value={v} 
             disabled={ischema.selectDisable && o[ischema.selectDisable]}>
             <Tooltip title={t || ""} placement="top" arrow>
-              <Typography>
-                {c}
-              </Typography>
+              {display}
             </Tooltip>
           </MenuItem>
         );
@@ -130,7 +133,7 @@ class FFDropdown extends Component {
           <MenuItem key={v} 
             value={v} 
             disabled={ischema.selectDisable && o[ischema.selectDisable]}>
-            {c}
+            {display}
           </MenuItem>
         );
       }

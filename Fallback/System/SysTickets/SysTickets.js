@@ -48,7 +48,7 @@ class SysTickets extends Component {
         exportDoc: "ticket",
         schema: schema,
         rowIdAccessor: "_id",
-        reqAuth: "Ticket",
+        reqAuth: "Tickets",
 
         noDefaultTable: false,
         noDefaultButtons: false,
@@ -63,7 +63,7 @@ class SysTickets extends Component {
           exportToolbar: false,
           density: "compact", //compact, standard, comfortable
           defaultPageSize: 50,
-          showSelector: true,
+          showSelector: false,
         },
 
         formizo: {
@@ -247,11 +247,11 @@ class SysTickets extends Component {
             }), reqFunc: "Add" }
           ],
           right: [
-            { icon: "deletebulk", func: "DeleteBulk", 
-              caption: (n) => LocaleX.Parse({
-                EN: "Delete(@n)",
-                TC: "刪除(@n)"
-              }, {n:n}), reqFunc: "Delete", theme: "caution" },
+            // { icon: "deletebulk", func: "DeleteBulk", 
+            //   caption: (n) => LocaleX.Parse({
+            //     EN: "Delete(@n)",
+            //     TC: "刪除(@n)"
+            //   }, {n:n}), reqFunc: "Delete", theme: "caution" },
             //{ icon: "export", func: "Export", 
             //  caption: (n) => LocaleX.Parse({
             //  EN: "Export(@n)",

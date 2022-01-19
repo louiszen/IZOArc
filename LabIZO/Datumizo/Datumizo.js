@@ -858,7 +858,7 @@ class Datumizo extends Component {
 
     onFail: (payload) => {
       let { base } = this.props;
-      let msg = ZFunc.IfFuncExec(base.operations?.Delete?.fail) + (payload.message || "");
+      let msg = ZFunc.IfFuncExec(base.operations?.Delete?.fail) + (payload?.message || "");
       STORE.Alert(msg, "error");
     },
   };
@@ -1437,6 +1437,7 @@ class Datumizo extends Component {
   renderTableButtons(buttons, left = true) {
     let { table } = this.state;
     let { base, addOns } = this.props;
+    
     return _.map(buttons, (o, i) => {
       if (Authority.IsAccessibleQ(base.reqAuth, o.reqLevel, o.reqFunc, o.reqGroup, o.reqRole)) {
         //injection

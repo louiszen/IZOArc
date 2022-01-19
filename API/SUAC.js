@@ -18,7 +18,7 @@ class SUAC {
     Error: () => {
       STORE.Alert(LocaleX.GetIZO("Alert.CannotConnect"), "error");
     }
-  }
+  };
 
   static Send = async (path, data, addOns = {}, success = this.Alert.Success, fail = this.Alert.Fail, error = this.Alert.Error, loading = true) => {
     return await ReqX.SendBE(path, data, addOns, success, fail, error, loading);
@@ -28,11 +28,6 @@ class SUAC {
     return await ReqX.SendBE(path, data, addOns, success, fail, error, false);
   }
 
-  /**
-   * projDoc, userlist, rolelist, grouplist
-   * @param {*} projID 
-   * @returns 
-   */
   static GetProject = async () => {
     return await this.Send("/GAuth/Env/GetProjectDetails", {}, {}, null, () => STORE.Alert(LocaleX.Parse({
       EN: "Cannot Get Project Details.",
