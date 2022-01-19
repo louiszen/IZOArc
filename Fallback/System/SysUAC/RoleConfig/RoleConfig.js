@@ -55,7 +55,7 @@ class RoleConfig extends Component {
         }),
         exportDoc: "roles",
         schema: schema,
-        reqAuth: "ProjConfig.Role",
+        reqAuth: "System.UAC.Roles",
 
         noDefaultTable: false,
         noDefaultButtons: false,

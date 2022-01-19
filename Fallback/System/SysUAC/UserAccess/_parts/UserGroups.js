@@ -54,7 +54,7 @@ class UserGroups extends Component {
         exportDoc: "user_groups",
         rowIdAccessor: "ID",
         schema: schema,
-        reqAuth: "ProjConfig.User",
+        reqAuth: "System.UAC.Users",
 
         noDefaultTable: false,
         noDefaultButtons: false,
@@ -426,7 +426,7 @@ class UserGroups extends Component {
   render(){
     let {addOns, data} = this.props;
     let {base, serverSidePagination, title} = this.state;
-    if(!Authority.IsAccessibleQ("ProjConfig.User")) return <Denied/>;
+    if(!Authority.IsAccessibleQ("System.UAC.Users")) return <Denied/>;
     
     let {projDoc, Refresh} = addOns;
 

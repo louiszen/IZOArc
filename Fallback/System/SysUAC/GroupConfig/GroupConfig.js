@@ -61,7 +61,7 @@ class GroupConfig extends Component {
         }),
         exportDoc: "groups",
         schema: schema,
-        reqAuth: "ProjConfig.Group",
+        reqAuth: "System.UAC.Groups",
 
         noDefaultTable: false,
         noDefaultButtons: false,

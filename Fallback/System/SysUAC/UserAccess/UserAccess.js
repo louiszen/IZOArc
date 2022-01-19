@@ -63,7 +63,7 @@ class UserAccess extends Component {
         }),
         exportDoc: "users",
         schema: schema,
-        reqAuth: "ProjConfig.User",
+        reqAuth: "System.UAC.Users",
 
         noDefaultTable: false,
         noDefaultButtons: false,

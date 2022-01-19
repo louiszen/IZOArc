@@ -51,7 +51,7 @@ class GroupUsers extends Component {
         exportDoc: "group_users",
         rowIdAccessor: "username",
         schema: schema,
-        reqAuth: "ProjConfig.Group",
+        reqAuth: "System.UAC.Groups",
 
         noDefaultTable: false,
         noDefaultButtons: false,
@@ -320,7 +320,7 @@ class GroupUsers extends Component {
   render(){
     let {addOns, onDataChange, data} = this.props;
     let {base, serverSidePagination, title} = this.state;
-    if(!Authority.IsAccessibleQ("ProjConfig.Group")) return <Denied/>;
+    if(!Authority.IsAccessibleQ("System.UAC.Groups")) return <Denied/>;
     
     let pageTitle = title;
     if(_.isFunction(title)){
