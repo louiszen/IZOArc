@@ -16,7 +16,7 @@ import "./Container.css";
 
 import { IZOTheme } from "__SYSDefault/Theme";
 import { StartUp } from "__SYSDefault/StartUp";
-import { EnvInfoAPI } from "__SYSDefault/SysAPI";
+import { EnvInfoAPI } from "IZOArc/API/SysAPI";
 import { SysConfig } from "__SYSDefault/Config";
 
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";

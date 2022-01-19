@@ -1,4 +1,4 @@
-import { CheckUserNameAPI, RenewAuthority, SignInAPI, VerifyOTPAPI } from "__SYSDefault/SysAPI";
+import { CheckUserNameAPI, RenewAuthority, SignInAPI, VerifyOTPAPI } from "IZOArc/API/SysAPI";
 
 import { Env, LocaleX, STORE, ReqX } from "IZOArc/STATIC";
 

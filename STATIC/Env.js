@@ -1,6 +1,6 @@
 import STORE from "./AppStore";
 
-import { CheckInitAPI } from "__SYSDefault/SysAPI";
+import { CheckInitAPI } from "IZOArc/API/SysAPI";
 import ReqX from "./ReqX";
 
 class Env {

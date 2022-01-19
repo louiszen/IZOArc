@@ -9,7 +9,7 @@ import { SaveOutlined } from "@mui/icons-material";
 
 import schema from "./schema";
 
-import { BnRBackup, BnRDBInclude, BnRDelete, BnRInfo, BnRRestore } from "__SYSDefault/SysAPI";
+import { BnRBackup, BnRDBInclude, BnRDelete, BnRInfo, BnRRestore } from "IZOArc/API/SysAPI";
 
 import Tablizo from "IZOArc/LabIZO/Tablizo";
 import Accessizo from "IZOArc/LabIZO/Accessizo";
