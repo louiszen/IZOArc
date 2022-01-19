@@ -37,6 +37,7 @@ class Tabbizo extends Component {
     width: PropsType.oneOfType([PropsType.string, PropsType.number]),
     height: PropsType.oneOfType([PropsType.string, PropsType.number]),
     panelHeight: PropsType.oneOfType([PropsType.string, PropsType.number]),
+    defaultTab: PropsType.number
   }
 
   static defaultProps = {
@@ -44,7 +45,8 @@ class Tabbizo extends Component {
     tabs: [],
     width: "100%",
     height: "100%",
-    panelHeight: "100%"
+    panelHeight: "100%",
+    defaultTab: 0
   }
 
   constructor(){
@@ -55,7 +57,9 @@ class Tabbizo extends Component {
   }
 
   componentDidMount(){
-    this._setAllStates();
+    this._setAllStates(() => {
+      this.onChangeTab(null, this.props.defaultTab);
+    });
   }
 
   componentDidUpdate(prevProps, prevState){

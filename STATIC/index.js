@@ -5,7 +5,7 @@ export {default as BrowserX} from "./BrowserX";
 export {default as ColorX} from "./ColorX";
 export {default as Env} from "./Env";
 export {default as ErrorX} from "./ErrorX";
-export {default as QueryString} from "./QueryString";
+export {default as QsX} from "./QsX";
 export {default as ZArray} from "./ZArray";
 export {default as ZGen} from "./ZGen";
 export {default as ZMath} from "./ZMath";

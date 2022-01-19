@@ -26,7 +26,7 @@ const tabs = [
     label: () => LocaleX.GetIZO("System.UAC"),
     icon: <PermDataSettingRounded/>,
     reqAuth: "System.UAC",
-    render: <SysUAC/>,
+    render: (addOns) => <SysUAC location={addOns?.location}/>,
     ...Tail
   },
   {

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import tabs from "./tabs";
 
-import { Accessor, Authority, STORE } from "IZOArc/STATIC";
+import { Accessor, Authority, QsX, STORE } from "IZOArc/STATIC";
 import { Denied } from "IZOArc/Fallback";
 import { observer } from "mobx-react";
 import Tabbizo from "IZOArc/LabIZO/Tabbizo";
@@ -39,7 +39,12 @@ class System extends Component {
   }
 
   componentDidMount(){
-    this._setAllStates();
+    this._setAllStates(() => {
+      let qs = QsX.Parse(this.props.location.search);
+      if(qs.p){
+        this.setDefaultTab(qs.p);
+      }
+    });
   }
 
   componentDidUpdate(prevProps, prevState){
@@ -60,10 +65,19 @@ class System extends Component {
     }), callback);
   }
 
+  setDefaultTab = (t) => {
+    this.setState({
+      defaultTab: Number(t)
+    });
+  }
+
   render(){
     if(!Authority.IsAccessibleQ("System")) return <Denied/>;
+    if(!this.state) return <div/>;
+    let {defaultTab} = this.state;
+    let {location} = this.props;
     return (
-      <Tabbizo tabs={tabs} height="100%" panelHeight="100%" addOns={{lang: STORE.lang }}/>
+      <Tabbizo tabs={tabs} height="100%" panelHeight="100%" addOns={{lang: STORE.lang, location: location}} defaultTab={defaultTab}/>
     );
   }
 

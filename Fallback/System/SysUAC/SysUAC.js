@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import PropsType from "prop-types";
 import { observer } from "mobx-react";
-import { Accessor, ColorX, LocaleX } from "IZOArc/STATIC";
+import { Accessor, ColorX, LocaleX, QsX } from "IZOArc/STATIC";
 import { VStack, HStack } from "IZOArc/LabIZO/Stackizo";
 import { Typography } from "@mui/material";
 import { LEDz } from "IZOArc/LabIZO/Luminizo";
@@ -17,11 +18,11 @@ import { StyledIconButton } from "IZOArc/LabIZO/Stylizo";
 class SysUAC extends Component {
 
   static propTypes = {
-
+    location: PropsType.object
   }
 
   static defaultProps = {
-
+    location: {}
   }
 
   constructor(){
@@ -31,6 +32,12 @@ class SysUAC extends Component {
 
   componentDidMount(){
     this._setAllStates(() => {
+      if(this.props.location){
+        let qs = QsX.Parse(this.props.location.search);
+        if(qs.q){
+          this.setDefaultTab(qs.q);
+        }
+      }
       this.getProject();
     });
   }
@@ -47,7 +54,13 @@ class SysUAC extends Component {
     };
   }
 
-  getProject = async ()  => {
+  setDefaultTab = (t) => {
+    this.setState({
+      defaultTab: Number(t)
+    });
+  }
+
+  getProject = async (callback)  => {
     let res = await SUAC.GetProject();
     let {Success, payload} = res;
     if (Success === true) {
@@ -58,6 +71,7 @@ class SysUAC extends Component {
         rolelist: rolelist,
         grouplist: grouplist
       });
+      if(callback) callback();
     }
   }
 
@@ -80,7 +94,8 @@ class SysUAC extends Component {
   }
 
   renderProjectTabs(){
-    let {projDoc, userlist, rolelist, grouplist} = this.state;
+    let {projDoc, userlist, rolelist, grouplist, defaultTab} = this.state;
+    if(!projDoc) return;
     return (
       <Tabbizo
         tabs={tabs}
@@ -94,6 +109,7 @@ class SysUAC extends Component {
           grouplist: grouplist,
           Refresh: this._Refresh
         }}
+        defaultTab={defaultTab}
         />
     );
   }

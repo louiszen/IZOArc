@@ -1,7 +1,7 @@
 import _ from "lodash";
 import Accessor from "./Accessor";
 
-class QueryString {
+class QsX {
 
   /**
    * 
@@ -10,13 +10,14 @@ class QueryString {
    */
   static Parse(queryString){
 
+    if(_.isEmpty(queryString)) return {};
     let qS = queryString.slice(1);
 
     let rtn = {};
 
     let qSSplited = qS.split("&");
     _.map(qSSplited, (o, i) => {
-      let splited = qS.split("=");
+      let splited = o.split("=");
       if(splited.length === 2){
         Accessor.Set(rtn, splited[0], splited[1]);
       }
@@ -27,4 +28,4 @@ class QueryString {
 
 }
 
-export default QueryString;
+export default QsX;
