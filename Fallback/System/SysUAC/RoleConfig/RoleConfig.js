@@ -346,7 +346,9 @@ class RoleConfig extends Component {
       selectedRole: null,
       selectedRoleDoc: null
     }, () => {
-      this.MountDatumizo.SetSelectedRows([]);
+      if(this.MountDatumizo){
+        this.MountDatumizo.SetSelectedRows([]);
+      }
     });
   }
 
@@ -370,7 +372,9 @@ class RoleConfig extends Component {
       selectedRole: id,
       selectedRoleDoc: doc
     }, () => {
-      this.MountDatumizo.SetSelectedRows([id]);
+      if(this.MountDatumizo){
+        this.MountDatumizo.SetSelectedRows([id]);
+      }
     });
   }
 
