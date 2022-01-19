@@ -48,7 +48,7 @@ class SysTickets extends Component {
         exportDoc: "ticket",
         schema: schema,
         rowIdAccessor: "_id",
-        reqAuth: "Tickets",
+        reqAuth: "System.Tickets",
 
         noDefaultTable: false,
         noDefaultButtons: false,
@@ -297,7 +297,7 @@ class SysTickets extends Component {
   renderProjectDetails(){
     let {addOns, onDataChange} = this.props;
     let {base, serverSidePagination, title} = this.state;
-    if(!Authority.IsAccessibleQ("Tickets")) return <Denied/>;
+    if(!Authority.IsAccessibleQ("System.Tickets")) return <Denied/>;
 
     let pageTitle = title;
     if(_.isFunction(title)){
