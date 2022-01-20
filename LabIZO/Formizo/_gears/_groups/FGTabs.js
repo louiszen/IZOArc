@@ -6,7 +6,7 @@ import { Paper, Tab, Tabs } from "@material-ui/core";
 
 import FItem from "../FItem";
 
-import { Accessor, Authority } from "IZOArc/STATIC";
+import { Accessor, AuthX } from "IZOArc/STATIC";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
 import { Typography } from "antd";
 
@@ -121,7 +121,7 @@ class FGTabs extends Component {
     let {ischema, user} = this.props;
     let tabSchema = this.getTabSchema();
     return _.map(tabSchema, (o, i) => {
-      if(Authority.IsAccessible(user, o.reqAuth, o.reqLevel, o.reqFunc, o.reqGroup, o.reqRole)){
+      if(AuthX.IsAccessible(user, o.reqAuth, o.reqLevel, o.reqFunc, o.reqGroup, o.reqRole)){
         let label = o.label;
         let icon = o.icon;
         if(o.noTransform){

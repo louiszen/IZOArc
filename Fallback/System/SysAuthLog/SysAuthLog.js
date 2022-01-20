@@ -13,7 +13,7 @@ import { IZOTheme } from "__SYSDefault/Theme";
 import Datumizo from "IZOArc/LabIZO/Datumizo/Datumizo";
 import { VStack } from "IZOArc/LabIZO/Stackizo";
 import { Denied } from "IZOArc/Fallback";
-import { Accessor, ColorX, Authority, STORE, LocaleX } from "IZOArc/STATIC";
+import { Accessor, ColorX, AuthX, STORE, LocaleX } from "IZOArc/STATIC";
 
 
 /**
@@ -296,7 +296,7 @@ class SysAuthLog extends Component {
   renderProjectDetails(){
     let {addOns, onDataChange} = this.props;
     let {base, serverSidePagination, title} = this.state;
-    if(!Authority.IsAccessibleQ("System.AuthLog")) return <Denied/>;
+    if(!AuthX.IsAccessibleQ("System.AuthLog")) return <Denied/>;
     
     let pageTitle = title;
     if(_.isFunction(title)){

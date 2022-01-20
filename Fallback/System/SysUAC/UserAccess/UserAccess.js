@@ -14,7 +14,7 @@ import { IZOTheme } from "__SYSDefault/Theme";
 
 import Datumizo from "IZOArc/LabIZO/Datumizo/Datumizo";
 import { VStack, HStack } from "IZOArc/LabIZO/Stackizo";
-import { Accessor, ColorX, Authority, STORE, LocaleX } from "IZOArc/STATIC";
+import { Accessor, ColorX, AuthX, STORE, LocaleX } from "IZOArc/STATIC";
 import { Denied } from "IZOArc/Fallback";
 import { AuthTreeNode } from "IZOArc/BLOCKS/AuthTree";
 import SUAC from "IZOArc/API/SUAC";
@@ -534,7 +534,7 @@ class UserAccess extends Component {
   render(){
     let {addOns, projDoc, rolelist} = this.props;
     let {base, serverSidePagination, title} = this.state;
-    if(!Authority.IsAccessibleQ("System.UAC.Users")) return <Denied/>;
+    if(!AuthX.IsAccessibleQ("System.UAC.Users")) return <Denied/>;
     
     let pageTitle = title;
     if(_.isFunction(title)){

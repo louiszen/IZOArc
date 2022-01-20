@@ -10,7 +10,7 @@ import CellExpand from "./_gears/CellExpand";
 
 import { StyledLinearProgress, StyledIconButton } from "IZOArc/LabIZO/Stylizo";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
-import { Accessor, Authority, ColorX, STORE } from "IZOArc/STATIC";
+import { Accessor, AuthX, ColorX, STORE } from "IZOArc/STATIC";
 
 import { IZOTheme } from "__SYSDefault/Theme";
 import { LocaleX } from "IZOArc/STATIC";
@@ -304,7 +304,7 @@ class Tablizo extends Component {
     let btns = [];
 
     _.map(buttons, (o, i) => {
-      if (Authority.IsAccessible(user, o.reqAuth, o.reqLevel, o.reqFunc, o.reqGroup, o.reqRole)) {
+      if (AuthX.IsAccessible(user, o.reqAuth, o.reqLevel, o.reqFunc, o.reqGroup, o.reqRole)) {
         
         let caption = o.caption;
         if(_.isFunction(o.caption)){
@@ -405,7 +405,7 @@ class Tablizo extends Component {
 
   getColumn = (o) => {
     let { user, addOns, selectionOnClick } = this.props;
-    if (Authority.IsAccessible(user, o.reqAuth, o.reqLevel, o.reqFunc, o.reqGroup, o.reqRole)) {
+    if (AuthX.IsAccessible(user, o.reqAuth, o.reqLevel, o.reqFunc, o.reqGroup, o.reqRole)) {
       let renderCell;
 
       if (!o.Cell && o.transform === "datetime") {
@@ -489,7 +489,7 @@ class Tablizo extends Component {
     let { user } = this.props;
     let schema = this.getSchema();
     let sortModel = _.map(schema, (o, i) => {
-      if (Authority.IsAccessible(user, o.reqAuth, o.reqLevel, o.reqFunc, o.reqGroup, o.reqRole)) {
+      if (AuthX.IsAccessible(user, o.reqAuth, o.reqLevel, o.reqFunc, o.reqGroup, o.reqRole)) {
         if (o.defaultSort) {
           return {
             field: o.name,

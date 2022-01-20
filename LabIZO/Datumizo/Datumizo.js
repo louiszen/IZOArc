@@ -17,7 +17,7 @@ import Inner from "./_gears/Inner";
 import Formizo from "IZOArc/LabIZO/Formizo";
 import Tablizo from "IZOArc/LabIZO/Tablizo";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
-import { Accessor, Authority, ColorX, ErrorX, LocaleX, STORE, ZFunc, ZTime, ReqX } from "IZOArc/STATIC";
+import { Accessor, AuthX, ColorX, ErrorX, LocaleX, STORE, ZFunc, ZTime, ReqX } from "IZOArc/STATIC";
 import { StyledButton } from "IZOArc/LabIZO/Stylizo";
 
 /**
@@ -1439,7 +1439,7 @@ class Datumizo extends Component {
     let { base, addOns } = this.props;
     
     return _.map(buttons, (o, i) => {
-      if (Authority.IsAccessibleQ(base.reqAuth, o.reqLevel, o.reqFunc, o.reqGroup, o.reqRole)) {
+      if (AuthX.IsAccessibleQ(base.reqAuth, o.reqLevel, o.reqFunc, o.reqGroup, o.reqRole)) {
         //injection
         if (o.inject) {
           return o.inject(table.data, addOns);

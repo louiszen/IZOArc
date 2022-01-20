@@ -12,7 +12,7 @@ import { IZOTheme } from "__SYSDefault/Theme";
 
 import Datumizo from "IZOArc/LabIZO/Datumizo/Datumizo";
 import { VStack } from "IZOArc/LabIZO/Stackizo";
-import { Accessor, ColorX, Authority, STORE, LocaleX } from "IZOArc/STATIC";
+import { Accessor, ColorX, AuthX, STORE, LocaleX } from "IZOArc/STATIC";
 import { Denied } from "IZOArc/Fallback";
 
 /**
@@ -297,7 +297,7 @@ class SysTickets extends Component {
   renderProjectDetails(){
     let {addOns, onDataChange} = this.props;
     let {base, serverSidePagination, title} = this.state;
-    if(!Authority.IsAccessibleQ("System.Tickets")) return <Denied/>;
+    if(!AuthX.IsAccessibleQ("System.Tickets")) return <Denied/>;
 
     let pageTitle = title;
     if(_.isFunction(title)){

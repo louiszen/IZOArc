@@ -10,7 +10,7 @@ import datalink from "./datalink";
 
 import Datumizo from "IZOArc/LabIZO/Datumizo/Datumizo";
 import { VStack, HStack } from "IZOArc/LabIZO/Stackizo";
-import { Accessor, ColorX, Authority, STORE, LocaleX } from "IZOArc/STATIC";
+import { Accessor, ColorX, AuthX, STORE, LocaleX } from "IZOArc/STATIC";
 import { IZOTheme } from "__SYSDefault/Theme";
 import { Denied } from "IZOArc/Fallback";
 import { GroupRounded } from "@mui/icons-material";
@@ -414,7 +414,7 @@ class GroupConfig extends Component {
   render(){
     let {addOns, projDoc} = this.props;
     let {base, serverSidePagination, title} = this.state;
-    if(!Authority.IsAccessibleQ("System.UAC.Groups")) return <Denied/>;
+    if(!AuthX.IsAccessibleQ("System.UAC.Groups")) return <Denied/>;
     
     let pageTitle = title;
     if(_.isFunction(title)){

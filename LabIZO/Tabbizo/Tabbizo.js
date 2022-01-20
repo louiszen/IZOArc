@@ -4,7 +4,7 @@ import PropsType from "prop-types";
 import _ from "lodash";
 import { Box, Paper, Tab, Tabs, Typography } from "@material-ui/core";
 
-import { Accessor, Authority } from "IZOArc/STATIC";
+import { Accessor, AuthX } from "IZOArc/STATIC";
 import { VStack, HStack, Spacer } from "IZOArc/LabIZO/Stackizo";
 
 /** 
@@ -101,7 +101,7 @@ class Tabbizo extends Component {
   renderTabButtons(){
     let {tabs} = this.props;
     return _.map(tabs, (o, i) => {
-      if(Authority.IsAccessibleQ(o.reqAuth, o.reqLevel, o.reqFunc, o.reqGroup, o.reqRole)){
+      if(AuthX.IsAccessibleQ(o.reqAuth, o.reqLevel, o.reqFunc, o.reqGroup, o.reqRole)){
         let label = _.isFunction(o.label)? o.label() : o.label;
         let icon = o.icon;
         if(o.noTransform){

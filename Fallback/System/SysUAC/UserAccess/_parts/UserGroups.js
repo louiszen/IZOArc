@@ -10,7 +10,7 @@ import datalink from "./datalink";
 
 import Datumizo from "IZOArc/LabIZO/Datumizo/Datumizo";
 import { HStack, VStack } from "IZOArc/LabIZO/Stackizo";
-import { Accessor, ColorX, Authority, STORE, LocaleX } from "IZOArc/STATIC";
+import { Accessor, ColorX, AuthX, STORE, LocaleX } from "IZOArc/STATIC";
 import { IZOTheme } from "__SYSDefault/Theme";
 import { Denied } from "IZOArc/Fallback";
 import { AccountTree } from "@mui/icons-material";
@@ -426,7 +426,7 @@ class UserGroups extends Component {
   render(){
     let {addOns, data} = this.props;
     let {base, serverSidePagination, title} = this.state;
-    if(!Authority.IsAccessibleQ("System.UAC.Users")) return <Denied/>;
+    if(!AuthX.IsAccessibleQ("System.UAC.Users")) return <Denied/>;
     
     let {projDoc, Refresh} = addOns;
 

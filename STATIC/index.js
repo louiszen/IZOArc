@@ -1,6 +1,6 @@
 export {default as Accessor} from "./Accessor";
 export {default as STORE} from "./AppStore";
-export {default as Authority} from "./Authority";
+export {default as AuthX} from "./AuthX";
 export {default as BrowserX} from "./BrowserX";
 export {default as ColorX} from "./ColorX";
 export {default as Env} from "./Env";

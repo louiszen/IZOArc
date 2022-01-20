@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Accessor, Authority, ColorX, LocaleX, STORE } from "IZOArc/STATIC";
+import { Accessor, AuthX, ColorX, LocaleX, STORE } from "IZOArc/STATIC";
 import PropsType from "prop-types";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
 import Formizo from "IZOArc/LabIZO/Formizo";
@@ -200,7 +200,7 @@ class General extends Component {
   render(){
     let {projDoc} = this.props;
     if(!projDoc) return <div/>;
-    if(!Authority.IsAccessibleQ("System.UAC.General")) return <Denied/>;
+    if(!AuthX.IsAccessibleQ("System.UAC.General")) return <Denied/>;
     return (
       <VStack width="100%" spacing={20} height="100%">
         {this.renderInfo()}

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import PropsType from "prop-types";
 
-import { Accessor, Authority } from "IZOArc/STATIC";
+import { Accessor, AuthX } from "IZOArc/STATIC";
 
 /**
  * Accessizo - Control access with IZO authority tree
@@ -57,7 +57,7 @@ class Accessizo extends Component {
     }), () => {
       let {user, reqLevel, reqAuth, reqFunc, reqGroup, reqRole} = this.state;
       this.setState({
-        pass: Authority.IsAccessible(user, reqAuth, reqLevel, reqFunc, reqGroup, reqRole)
+        pass: AuthX.IsAccessible(user, reqAuth, reqLevel, reqFunc, reqGroup, reqRole)
       });
     });
   }
