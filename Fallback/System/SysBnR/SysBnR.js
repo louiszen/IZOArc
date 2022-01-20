@@ -13,7 +13,7 @@ import { BnRBackup, BnRDBInclude, BnRDelete, BnRInfo, BnRRestore } from "IZOArc/
 
 import Tablizo from "IZOArc/LabIZO/Tablizo";
 import Accessizo from "IZOArc/LabIZO/Accessizo";
-import { Accessor, ColorX, STORE, ErrorX, LocaleX, ReqX } from "IZOArc/STATIC";
+import { Accessor, ColorX, STORE, ErrorX, LocaleX, ReqX, AuthX } from "IZOArc/STATIC";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
 import { StyledButton } from "IZOArc/LabIZO/Stylizo";
 
@@ -196,7 +196,7 @@ class SysBnR extends Component {
     let {LastBackup} = this.state;
     return (
       <HStack justifyContent="flex-start" spacing={10}>
-        <StyledButton 
+        {AuthX.PassF("System.BnR", "Backup") && <StyledButton 
           onClick={this._Backup.onClick}
           theme={{
             width: 200,
@@ -212,7 +212,7 @@ class SysBnR extends Component {
                 {LocaleX.GetIZO("System.Backup")}
               </Typography>
             </HStack>            
-        </StyledButton>
+        </StyledButton>}
         <Typography>
           {LocaleX.GetIZO("System.LastBackup")}
         </Typography>
@@ -235,6 +235,9 @@ class SysBnR extends Component {
 
   renderDatabases(){
     let {dbs} = this.state;
+    if(!AuthX.PassF("System.BnR", "Database")){
+      return;
+    }
     return (
       <Accessizo reqLevel={0} user={STORE.user}>
         <VStack paddingY={2}>

@@ -31,6 +31,8 @@ const restore = [
     label: " ",
     name: "_id",
     width: 120,
+    reqAuth: "System.BnR",
+    reqFunc: "Restore",
     Cell: (row, field, addOns) => {
       return (
         <StyledButton 
@@ -62,6 +64,8 @@ const restore = [
     label: " ",
     name: "",
     width: 50,
+    reqAuth: "System.BnR",
+    reqFunc: "Delete",
     Cell: (row, field, addOns) => {
       return (
         <StyledButton 
