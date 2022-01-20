@@ -47,11 +47,21 @@ class AuthX {
   static IsAccessible(user, reqAuth = "", reqLevel = Number.MAX_SAFE_INTEGER, reqFunc = "", reqGroup = "", reqRole = ""){
     if(!user) return false;
     let {authority, level, groups, role} = user;
-    return this.AuthCheck(authority, reqAuth) 
-      && this.LevelCheck(level, reqLevel) 
-      && this.FuncCheck(authority, reqAuth, reqFunc)
-      && this.GroupCheck(groups, reqGroup)
-      && this.RoleCheck(role, reqRole);
+    if(_.isEmpty(reqGroup)){
+      return this.AuthCheck(authority, reqAuth) 
+        && this.LevelCheck(level, reqLevel) 
+        && this.FuncCheck(authority, reqAuth, reqFunc)
+        && this.RoleCheck(role, reqRole);
+    }else{
+      let group = groups.find(o => o.ID === reqGroup);
+      if(!group) return false;
+      return this.AuthCheck(group.authority, reqAuth) 
+        && this.LevelCheck(group.Level, reqLevel) 
+        && this.FuncCheck(group.authority, reqAuth, reqFunc)
+        && this.RoleCheck(group.Role, reqRole);
+    }
+
+    
   }
 
   static IsAccessibleQ(reqAuth = "", reqLevel = Number.MAX_SAFE_INTEGER, reqFunc = "", reqGroup = "", reqRole = ""){
