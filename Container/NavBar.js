@@ -120,7 +120,7 @@ class NavBar extends Component {
         <Typography style={{...fontCSS, marginLeft: 10, marginRight: 5}}>
           {STORE.user && STORE.user.UserDisplayName}
         </Typography>
-        <Typography style={{...fontCSS, width: 70, marginLeft: 5, marginRight: 5}}>
+        <Typography style={{...fontCSS, width: 150, marginLeft: 5, marginRight: 5}}>
           {STORE.user && ("[" + LocaleX.Parse(STORE.user.roleName) + "]")}
         </Typography>
         <Tooltip title={LocaleX.GetIZO("NavBar.Reload")}>

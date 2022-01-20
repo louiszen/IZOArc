@@ -359,11 +359,11 @@ class Login extends Component {
   }
 
   renderHeaderMessage(){
-    let {page, userDisplayName} = this.state;
+    let {page, userDisplayName, method} = this.state;
     switch(page){
       default: case "user": return LocaleX.GetIZO("Login.HeaderMessage");
       case "password": return (
-        <Link onClick={() => this.toUser()}>
+        <Link onClick={() => this.toUser(method)}>
           {LocaleX.GetIZO("Login.Not") + " " + userDisplayName + " ?"}
         </Link>
       );
