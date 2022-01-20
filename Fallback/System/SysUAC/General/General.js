@@ -200,7 +200,7 @@ class General extends Component {
   render(){
     let {projDoc} = this.props;
     if(!projDoc) return <div/>;
-    if(!AuthX.IsAccessibleQ("System.UAC.General")) return <Denied/>;
+    if(!AuthX.Pass("System.UAC.General")) return <Denied/>;
     return (
       <VStack width="100%" spacing={20} height="100%">
         {this.renderInfo()}

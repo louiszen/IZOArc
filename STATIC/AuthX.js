@@ -60,11 +60,25 @@ class AuthX {
         && this.FuncCheck(group.authority, reqAuth, reqFunc)
         && this.RoleCheck(group.Role, reqRole);
     }
-
-    
   }
 
-  static IsAccessibleQ(reqAuth = "", reqLevel = Number.MAX_SAFE_INTEGER, reqFunc = "", reqGroup = "", reqRole = ""){
+  static Pass(reqAuth = "", reqLevel = Number.MAX_SAFE_INTEGER, reqFunc = "", reqGroup = "", reqRole = ""){
+    return this.IsAccessible(STORE.user, reqAuth, reqLevel, reqFunc, reqGroup, reqRole);
+  }
+
+  static PassF(reqAuth = "", reqFunc = "", reqGroup = "", reqRole = "", reqLevel = Number.MAX_SAFE_INTEGER){
+    return this.IsAccessible(STORE.user, reqAuth, reqLevel, reqFunc, reqGroup, reqRole);
+  }
+
+  static PassR(reqRole = "", reqAuth = "", reqFunc = "", reqGroup = "",  reqLevel = Number.MAX_SAFE_INTEGER){
+    return this.IsAccessible(STORE.user, reqAuth, reqLevel, reqFunc, reqGroup, reqRole);
+  }
+
+  static PassG(reqGroup = "", reqAuth = "", reqFunc = "", reqRole = "", reqLevel = Number.MAX_SAFE_INTEGER){
+    return this.IsAccessible(STORE.user, reqAuth, reqLevel, reqFunc, reqGroup, reqRole);
+  }
+
+  static PassL(reqLevel = Number.MAX_SAFE_INTEGER, reqAuth = "", reqFunc = "", reqGroup = "", reqRole = ""){
     return this.IsAccessible(STORE.user, reqAuth, reqLevel, reqFunc, reqGroup, reqRole);
   }
 
@@ -89,7 +103,7 @@ class AuthX {
   }
 
   static Require(reqAuth = "", reqLevel = Number.MAX_SAFE_INTEGER, reqFunc = [], reqGroup = "", reqRole = ""){
-    if(!this.IsAccessibleQ(reqAuth, reqLevel, reqFunc, reqGroup, reqRole)){
+    if(!this.Pass(reqAuth, reqLevel, reqFunc, reqGroup, reqRole)){
       window.location.assign("/Denied");
     }
   }

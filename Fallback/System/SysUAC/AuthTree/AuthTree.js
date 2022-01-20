@@ -104,7 +104,7 @@ class AuthTree extends Component {
   }
 
   render(){
-    if(!AuthX.IsAccessibleQ("System.UAC.AuthTree")) return <Denied/>;
+    if(!AuthX.Pass("System.UAC.AuthTree")) return <Denied/>;
     return (
       <VStack 
         height="100%"

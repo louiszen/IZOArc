@@ -1439,7 +1439,7 @@ class Datumizo extends Component {
     let { base, addOns } = this.props;
     
     return _.map(buttons, (o, i) => {
-      if (AuthX.IsAccessibleQ(base.reqAuth, o.reqLevel, o.reqFunc, o.reqGroup, o.reqRole)) {
+      if (AuthX.Pass(base.reqAuth, o.reqLevel, o.reqFunc, o.reqGroup, o.reqRole)) {
         //injection
         if (o.inject) {
           return o.inject(table.data, addOns);

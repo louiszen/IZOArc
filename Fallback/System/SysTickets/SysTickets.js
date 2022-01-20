@@ -297,7 +297,7 @@ class SysTickets extends Component {
   renderProjectDetails(){
     let {addOns, onDataChange} = this.props;
     let {base, serverSidePagination, title} = this.state;
-    if(!AuthX.IsAccessibleQ("System.Tickets")) return <Denied/>;
+    if(!AuthX.Pass("System.Tickets")) return <Denied/>;
 
     let pageTitle = title;
     if(_.isFunction(title)){

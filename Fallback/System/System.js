@@ -72,7 +72,7 @@ class System extends Component {
   }
 
   render(){
-    if(!AuthX.IsAccessibleQ("System")) return <Denied/>;
+    if(!AuthX.Pass("System")) return <Denied/>;
     if(!this.state) return <div/>;
     let {defaultTab} = this.state;
     let {location} = this.props;

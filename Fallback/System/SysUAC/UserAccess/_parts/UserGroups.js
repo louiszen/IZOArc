@@ -426,7 +426,7 @@ class UserGroups extends Component {
   render(){
     let {addOns, data} = this.props;
     let {base, serverSidePagination, title} = this.state;
-    if(!AuthX.IsAccessibleQ("System.UAC.Users")) return <Denied/>;
+    if(!AuthX.Pass("System.UAC.Users")) return <Denied/>;
     
     let {projDoc, Refresh} = addOns;
 

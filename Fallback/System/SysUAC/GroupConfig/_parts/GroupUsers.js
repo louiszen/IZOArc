@@ -320,7 +320,7 @@ class GroupUsers extends Component {
   render(){
     let {addOns, onDataChange, data} = this.props;
     let {base, serverSidePagination, title} = this.state;
-    if(!AuthX.IsAccessibleQ("System.UAC.Groups")) return <Denied/>;
+    if(!AuthX.Pass("System.UAC.Groups")) return <Denied/>;
     
     let pageTitle = title;
     if(_.isFunction(title)){

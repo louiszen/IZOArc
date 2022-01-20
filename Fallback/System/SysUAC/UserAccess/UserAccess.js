@@ -534,7 +534,7 @@ class UserAccess extends Component {
   render(){
     let {addOns, projDoc, rolelist} = this.props;
     let {base, serverSidePagination, title} = this.state;
-    if(!AuthX.IsAccessibleQ("System.UAC.Users")) return <Denied/>;
+    if(!AuthX.Pass("System.UAC.Users")) return <Denied/>;
     
     let pageTitle = title;
     if(_.isFunction(title)){

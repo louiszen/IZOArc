@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
-import { Accessor, ColorX, LocaleX } from "IZOArc/STATIC";
+import { Accessor, AuthX, ColorX, LocaleX } from "IZOArc/STATIC";
 import Formizo from "IZOArc/LabIZO/Formizo";
 
 import schema from "./schema";
 import { Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
 import { Typography } from "@mui/material";
 import SReport from "IZOArc/API/SReport";
+import { Denied } from "..";
 
 /**
  * @augments {Component<Props, State>}
@@ -82,6 +83,7 @@ class BugReport extends Component {
   }
 
   render(){
+    if(!AuthX.Pass("BugReport")) return <Denied/>;
     return (
       <VStack>
         <Spacer/>

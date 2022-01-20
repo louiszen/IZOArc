@@ -129,7 +129,7 @@ class APIAvail extends Component {
   }
 
   render(){
-    if(!AuthX.IsAccessibleQ("System.UAC.API")) return <Denied/>;
+    if(!AuthX.Pass("System.UAC.API")) return <Denied/>;
     return (
       <VStack width="100%" height="100%">
         {this.renderTitle()}

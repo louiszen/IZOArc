@@ -296,7 +296,7 @@ class SysAuthLog extends Component {
   renderProjectDetails(){
     let {addOns, onDataChange} = this.props;
     let {base, serverSidePagination, title} = this.state;
-    if(!AuthX.IsAccessibleQ("System.AuthLog")) return <Denied/>;
+    if(!AuthX.Pass("System.AuthLog")) return <Denied/>;
     
     let pageTitle = title;
     if(_.isFunction(title)){
