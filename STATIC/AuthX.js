@@ -2,7 +2,7 @@ import _ from "lodash";
 import Accessor from "./Accessor";
 import STORE from "./AppStore";
 
-class Authority {
+class AuthX {
 
   static AuthCheck(authority, reqAuth){
     if(_.isEmpty(reqAuth) || Accessor.Get(authority, reqAuth) !== undefined){ //no authority required or authority tree found
@@ -86,4 +86,4 @@ class Authority {
 
 }
 
-export default Authority;
+export default AuthX;
