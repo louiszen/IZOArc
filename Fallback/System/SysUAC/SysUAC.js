@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropsType from "prop-types";
 import { observer } from "mobx-react";
-import { Accessor, ColorX, LocaleX, QsX } from "IZOArc/STATIC";
+import { Accessor, AuthX, ColorX, LocaleX, QsX } from "IZOArc/STATIC";
 import { VStack, HStack } from "IZOArc/LabIZO/Stackizo";
 import { Typography } from "@mui/material";
 import { LEDz } from "IZOArc/LabIZO/Luminizo";
@@ -11,6 +11,7 @@ import tabs from "./tabs";
 import SUAC from "IZOArc/API/SUAC";
 import { Refresh } from "@mui/icons-material";
 import { StyledIconButton } from "IZOArc/LabIZO/Stylizo";
+import { Denied } from "IZOArc/Fallback";
 
 /**
  * @augments {Component<Props, State>}
@@ -151,6 +152,7 @@ class SysUAC extends Component {
   }
 
   render(){
+    if(!AuthX.Pass("System.UAC")) return <Denied/>;
     return (
       <VStack width="100%" height="100%">
         {this.renderProjectDetails()}

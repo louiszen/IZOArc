@@ -194,7 +194,7 @@ class Container extends Component {
           color: "green", 
           background: ColorX.GetColorCSS("transparent"), 
           width: buttonWidth,
-          borderRadius: "0 0 0 5px",
+          borderRadius: "0 0 0 12px",
           margin: "0",
           disabled: {
             color: ColorX.GetColorCSS("grey")
@@ -211,7 +211,7 @@ class Container extends Component {
           color: "red", 
           background: ColorX.GetColorCSS("transparent"), 
           width: buttonWidth,
-          borderRadius: "0 0 5px 0",
+          borderRadius: "0 0 12px 0",
           disabled: {
             color: ColorX.GetColorCSS("grey")
           }
@@ -258,7 +258,7 @@ class Container extends Component {
 
     return (
       <Box bgcolor={ColorX.GetColorCSS(IZOTheme.popupBG)}
-        borderRadius={5} 
+        borderRadius={3} 
         boxShadow={"0px 0px 2px 2px " + ColorX.GetColorCSS(IZOTheme.popupFG, 0.2)}
         minWidth={300}
         maxWidth={420}

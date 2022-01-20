@@ -9,7 +9,7 @@ import schema from "./schema";
 import datalink from "./datalink";
 
 import Datumizo from "IZOArc/LabIZO/Datumizo/Datumizo";
-import { VStack, HStack } from "IZOArc/LabIZO/Stackizo";
+import { VStack, HStack, Spacer } from "IZOArc/LabIZO/Stackizo";
 import { Accessor, ColorX, AuthX, STORE, LocaleX } from "IZOArc/STATIC";
 import { IZOTheme } from "__SYSDefault/Theme";
 import { Denied } from "IZOArc/Fallback";
@@ -243,10 +243,10 @@ class GroupConfig extends Component {
               reqFunc: "Edit" },
             { icon: <GroupRounded/> , func: this.EditUserAT,  
               caption: () => LocaleX.Parse({
-                EN: "Edit Users",
-                TC: "編輯使用者"
+                EN: "Users",
+                TC: "使用者"
               }), 
-              reqFunc: "Edit" },
+              reqFunc: "UserView" },
             // { icon: "info", func: "Info", 
             //   caption: () => LocaleX.Parse({
             //     EN: "Details",
@@ -332,6 +332,10 @@ class GroupConfig extends Component {
   }
 
   ToggleCtrl = async (_, group, ctrl) => {
+    if(!AuthX.PassF("System.UAC.Groups", "Terminate")){
+      STORE.Alert(LocaleX.GetIZO("Alert.NoAuthority"), "error");
+      return;
+    }
     let {onUpdate} = this.props;
     let res = await SUAC.SetProjectGroupActive(group, ctrl);
     if(res.Success){
@@ -383,6 +387,10 @@ class GroupConfig extends Component {
   }
 
   setGroupUserActive = async (_, field, ctrl) => {
+    if(!AuthX.PassF("System.UAC.Groups", "UserTerminate")){
+      STORE.Alert(LocaleX.GetIZO("Alert.NoAuthority"), "error");
+      return;
+    }
     let {selectedGroup} = this.state;
     let res = await SUAC.SetGroupUserActive(selectedGroup, field, ctrl);
     if(res.Success){
@@ -395,7 +403,17 @@ class GroupConfig extends Component {
     let {selectedGroupDoc, selectedGroupUserData} = this.state;
     let {addOns, projDoc, userlist, rolelist} = this.props;
     if(!selectedGroupDoc) return <VStack width="100%"/>;
-    
+    if(!AuthX.PassF("System.UAC.Groups", "UserView")){
+      return (
+        <VStack width="100%" alignItems="flex-start">
+          <Spacer/>
+          <HStack>
+            <Denied/>
+          </HStack>
+          <Spacer/>
+        </VStack>
+      );
+    }
     return (
       <VStack width="100%" alignItems="flex-start">
         <GroupUsers

@@ -62,7 +62,9 @@ let DefEN = {
       message: "Are you confirm to logout?"
     },
     SuccessRenew: "Login Restored Successfully.",
-    FailRenew: "Login Restored Fails"
+    FailRenew: "Login Restored Fails",
+    NoAuthority: "You don't have authority.",
+    Denied: "Your request is denied."
   },
   System: {
     BnR: "Backup & Restore",

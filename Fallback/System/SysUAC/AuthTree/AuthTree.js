@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Accessor, AuthX, LocaleX } from "IZOArc/STATIC";
+import { Accessor, AuthX, LocaleX, STORE } from "IZOArc/STATIC";
 import PropsType from "prop-types";
 import { Typography } from "@mui/material";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
@@ -56,6 +56,10 @@ class AuthTree extends Component {
   }
 
   ToggleCtrl = async (_, level, value) => {
+    if(!AuthX.PassF("System.UAC.AuthTree", "Edit")){
+      STORE.Alert(LocaleX.GetIZO("Alert.NoAuthority"), "error");
+      return;
+    }
     let res = await SUAC.SetTreeNodeActive(level, value);
     if(res.Success){
       this.Refresh();

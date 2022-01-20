@@ -249,10 +249,10 @@ class RoleConfig extends Component {
               reqFunc: "Edit" },
             { icon: <AccountTree/> , func: this.EditRoleAT,  
               caption: () => LocaleX.Parse({
-                EN: "Edit Authority Tree",
-                TC: "編輯權限樹"
+                EN: "Authority Tree",
+                TC: "權限樹"
               }), 
-              reqFunc: "Edit" },
+              reqFunc: "TreeView" },
             // { icon: "info", func: "Info", 
             //   caption: () => LocaleX.Parse({
             //     EN: "Details",
@@ -334,6 +334,10 @@ class RoleConfig extends Component {
   }
 
   ToggleCtrl = async (_, role, ctrl) => {
+    if(!AuthX.PassF("System.UAC.Roles", "Terminate")){
+      STORE.Alert(LocaleX.GetIZO("Alert.NoAuthority"), "error");
+      return;
+    }
     let {onUpdate} = this.props;
     let res = await SUAC.SetProjectRoleActive(role, ctrl);
     if(res.Success){
@@ -379,6 +383,10 @@ class RoleConfig extends Component {
   }
 
   onRoleTreeCtrlSet = async (_, role, field, ctrl) => {
+    if(!AuthX.PassF("System.UAC.Roles", "TreeEdit")){
+      STORE.Alert(LocaleX.GetIZO("Alert.NoAuthority"), "error");
+      return;
+    }
     let res = await SUAC.SetRoleTreeNodeActive(role, field, ctrl);
     if(res.Success){
       this.MountDatumizo.Reload();
@@ -387,6 +395,9 @@ class RoleConfig extends Component {
   }
 
   renderRoleTree(){
+    if(!AuthX.PassF("System.UAC.Roles", "TreeView")) {
+      return <VStack width="100%" alignItems="flex-start" paddingY={1}/>;
+    }
     let {projDoc} = this.props;
     let {selectedRole, selectedRoleDoc} = this.state;
     if(!selectedRoleDoc) return <VStack width="100%"/>;

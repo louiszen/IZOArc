@@ -114,7 +114,7 @@ class SnackAlert extends Component {
         color="white"
         bgcolor={this.bgColor()}
         padding={!_.isEmpty(message)? 1: 0}
-        borderRadius={5}
+        borderRadius={2}
         boxShadow="0px 1px 2px 1px rgba(0, 0, 0, 0.2)"
         {...other}>
         {this.renderInside()}

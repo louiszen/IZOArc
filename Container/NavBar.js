@@ -124,7 +124,7 @@ class NavBar extends Component {
           {STORE.user && ("[" + LocaleX.Parse(STORE.user.roleName) + "]")}
         </Typography>
         <Tooltip title={LocaleX.GetIZO("NavBar.Reload")}>
-          <IconButton size="small" style={{color: ColorX.GetColorCSS(IZOTheme.menuFG, 1)}} onClick={() => this.ReloadAuth()}>
+          <IconButton size="small" style={{zIndex: 1, color: ColorX.GetColorCSS(IZOTheme.menuFG, 1)}} onClick={() => this.ReloadAuth()}>
             <Cached/>
           </IconButton>
         </Tooltip>

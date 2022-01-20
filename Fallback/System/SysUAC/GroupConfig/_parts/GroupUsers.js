@@ -222,7 +222,7 @@ class GroupUsers extends Component {
                 EN: "Edit",
                 TC: "編輯"
               }), 
-              reqFunc: "Edit" },
+              reqFunc: "UserEdit" },
             // { icon: "info", func: "Info", 
             //   caption: () => LocaleX.Parse({
             //     EN: "Details",
@@ -232,7 +232,7 @@ class GroupUsers extends Component {
               caption: () => LocaleX.Parse({
                 EN: "Delete",
                 TC: "刪除"
-              }), reqFunc: "Delete" },
+              }), reqFunc: "UserDelete" },
             //{ icon: "duplicate", func: "Duplicate", 
             //  caption: () => LocaleX.Parse({
             //    EN: "Duplicate",
@@ -249,7 +249,7 @@ class GroupUsers extends Component {
             caption: () => LocaleX.Parse({
               EN: "Add Users",
               TC: "新增使用者"
-            }), reqFunc: "Add" }
+            }), reqFunc: "UserAdd" }
           ],
           right: [
             // { icon: "deletebulk", func: "DeleteBulk", 

@@ -61,7 +61,9 @@ let DefTC = {
       message: "你是否確認登出?"
     },
     SuccessRenew: "登入資料已重整",
-    FailRenew: "登入資料重整失敗"
+    FailRenew: "登入資料重整失敗",
+    NoAuthority: "你沒有足夠權限執行",
+    Denied: "你的要求被拒"
   },
   System: {
     BnR: "備份和恢復",

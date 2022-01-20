@@ -20,8 +20,7 @@ class AuthTreeNode extends Component {
     refCtrl: PropsType.object,
     level: PropsType.string,
     onCtrlSet: PropsType.func,
-    parentAccessible: PropsType.bool,
-    REQAUTH: PropsType.object
+    parentAccessible: PropsType.bool
   }
 
   static defaultProps = {
@@ -31,10 +30,7 @@ class AuthTreeNode extends Component {
     refCtrl: {},
     level: "",
     onCtrlSet: () => {},
-    parentAccessible: true,
-    REQAUTH: {
-      
-    }
+    parentAccessible: true
   }
 
   constructor(){

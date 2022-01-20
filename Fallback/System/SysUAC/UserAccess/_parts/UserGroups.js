@@ -231,7 +231,7 @@ class UserGroups extends Component {
                 EN: "Edit Authority Tree",
                 TC: "編輯權限樹"
               }), 
-              reqFunc: "Edit" },
+              reqFunc: "GroupEdit" },
             // { icon: "info", func: "Info", 
             //   caption: () => LocaleX.Parse({
             //     EN: "Details",
@@ -241,7 +241,7 @@ class UserGroups extends Component {
               caption: () => LocaleX.Parse({
                 EN: "Delete",
                 TC: "刪除"
-              }), reqFunc: "Delete" },
+              }), reqFunc: "GroupDelete" },
             //{ icon: "duplicate", func: "Duplicate", 
             //  caption: () => LocaleX.Parse({
             //    EN: "Duplicate",
@@ -258,7 +258,7 @@ class UserGroups extends Component {
             caption: () => LocaleX.Parse({
               EN: "Add Resources Group",
               TC: "新增資源組"
-            }), reqFunc: "Add" }
+            }), reqFunc: "GroupAdd" }
           ],
           right: [
             // { icon: "deletebulk", func: "DeleteBulk", 
@@ -338,16 +338,6 @@ class UserGroups extends Component {
     }
   }
 
-  ToggleCtrl = async (_, field, ctrl) => {
-    let {onUpdate, addOns} = this.props;
-    let {selectedUserDoc} = addOns;
-    let {selectedUserGroup} = this.state;
-    let res = await SUAC.SetUserGroupTreeNodeActive(selectedUserDoc, selectedUserGroup, field, ctrl);
-    if(res.Success){
-      await onUpdate();
-    }
-  }
-
   EditUserGroupAT = (id, doc) => {
     let {addOns} = this.props;
     let {projDoc, grouplist, rolelist, selectedUserDoc} = addOns;
@@ -380,6 +370,10 @@ class UserGroups extends Component {
   }
 
   onUserGroupTreeCtrlSet = async (_, user, group, field, ctrl) => {
+    if(!AuthX.PassF("System.UAC.Users", "GroupEdit")){
+      STORE.Alert(LocaleX.GetIZO("Alert.NoAuthority"), "error");
+      return;
+    }
     let {addOns} = this.props;
     let res = await SUAC.SetUserGroupTreeNodeActive(user, group, field, ctrl);
     if(res.Success && addOns.Refresh){
@@ -453,7 +447,7 @@ class UserGroups extends Component {
             height={"100%"}
             lang={STORE.lang}
             base={base}
-            addOns={{...addOns, projID: projDoc._id, projDoc: projDoc, Refresh: Refresh, onCtrlSet: this.ToggleCtrl}} 
+            addOns={{...addOns, projID: projDoc._id, projDoc: projDoc, Refresh: Refresh}} 
             serverSidePagination={serverSidePagination} 
             onMounted={this.onMountDatumizo} 
             onDataChange={this.Refresh}

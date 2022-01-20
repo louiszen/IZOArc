@@ -128,6 +128,7 @@ class General extends Component {
 
   renderButtons(){
     let {projDoc} = this.props;
+    if(!AuthX.PassF("System.UAC.General.Edit")) return;
     if(projDoc.active){
       return (
         <StyledButton theme={{

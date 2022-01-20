@@ -63,6 +63,10 @@ class APIAvail extends Component {
   }
 
   ToggleCtrl = async (_, api, ctrl) => {
+    if(!AuthX.PassF("System.UAC.API", "Edit")){
+      STORE.Alert(LocaleX.GetIZO("Alert.NoAuthority"), "error");
+      return;
+    }
     let {onUpdate} = this.props;
     let res = await SUAC.SetProjectAPIActive(api, ctrl);
     if(res.Success){

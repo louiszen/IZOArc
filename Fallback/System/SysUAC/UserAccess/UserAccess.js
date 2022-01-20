@@ -13,7 +13,7 @@ import datalink from "./datalink";
 import { IZOTheme } from "__SYSDefault/Theme";
 
 import Datumizo from "IZOArc/LabIZO/Datumizo/Datumizo";
-import { VStack, HStack } from "IZOArc/LabIZO/Stackizo";
+import { VStack, HStack, Spacer } from "IZOArc/LabIZO/Stackizo";
 import { Accessor, ColorX, AuthX, STORE, LocaleX } from "IZOArc/STATIC";
 import { Denied } from "IZOArc/Fallback";
 import { AuthTreeNode } from "IZOArc/BLOCKS/AuthTree";
@@ -246,16 +246,16 @@ class UserAccess extends Component {
               reqFunc: "Edit" },
             { icon: <AccountTreeRounded/> , func: this.EditUserAT,  
               caption: () => LocaleX.Parse({
-                EN: "Edit Authority Tree",
-                TC: "編輯權限樹"
+                EN: "Authority Tree",
+                TC: "權限樹"
               }), 
-              reqFunc: "Edit" },
+              reqFunc: "TreeView" },
             { icon: <ManageAccountsRounded/> , func: this.EditUserD,  
               caption: () => LocaleX.Parse({
                 EN: "Edit User Group Authority",
                 TC: "編輯使用者資源組權限"
               }), 
-              reqFunc: "Edit" },
+              reqFunc: "GroupView" },
             // { icon: "info", func: "Info", 
             //   caption: () => LocaleX.Parse({
             //     EN: "Details",
@@ -390,6 +390,10 @@ class UserAccess extends Component {
   }
 
   ToggleCtrl = async (_, user, ctrl) => {
+    if(!AuthX.PassF("System.UAC.Users", "Terminate")){
+      STORE.Alert(LocaleX.GetIZO("Alert.NoAuthority"), "error");
+      return;
+    }
     let {onUpdate} = this.props;
     let res = await SUAC.SetProjectUserActive(user, ctrl);
     if(res.Success){
@@ -466,6 +470,10 @@ class UserAccess extends Component {
   }
 
   onUserTreeCtrlSet = async (_, user, field, ctrl) => {
+    if(!AuthX.PassF("System.UAC.Users", "TreeEdit")){
+      STORE.Alert(LocaleX.GetIZO("Alert.NoAuthority"), "error");
+      return;
+    }
     let res = await SUAC.SetUserTreeNodeActive(user, field, ctrl);
     if(res.Success){
       this.MountDatumizo.Reload(() => {
@@ -475,6 +483,17 @@ class UserAccess extends Component {
   }
 
   renderUserAT(){
+    if(!AuthX.PassF("System.UAC.Users", "TreeView")){
+      return (
+        <VStack width="100%" alignItems="flex-start">
+          <Spacer/>
+          <HStack>
+            <Denied/>
+          </HStack>
+          <Spacer/>
+        </VStack>
+      );
+    }
     let {projDoc} = this.props;
     let {selectedUser, selectedUserDoc, rolelist} = this.state;
     if(!selectedUserDoc) return <VStack width="67%"/>;
@@ -515,6 +534,17 @@ class UserAccess extends Component {
   }
 
   renderUserGroup(){
+    if(!AuthX.PassF("System.UAC.Users", "GroupView")){
+      return (
+        <VStack width="67%" alignItems="flex-start">
+          <Spacer/>
+          <HStack>
+            <Denied/>
+          </HStack>
+          <Spacer/>
+        </VStack>
+      );
+    }
     let {selectedUserDoc, selectedUserGroupData} = this.state;
     let {addOns, projDoc, grouplist, rolelist} = this.props;
     return (
