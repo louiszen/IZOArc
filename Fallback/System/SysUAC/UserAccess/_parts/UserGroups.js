@@ -42,14 +42,14 @@ class UserGroups extends Component {
     super();
     this.state = {
       title: (addOns) => "[" + addOns.selectedUserDoc.UserDisplayName + "] " + LocaleX.Parse({
-        EN: "Resources Group",
-        TC: "資源組"
+        EN: "Project Group",
+        TC: "項目群組"
       }),
       serverSidePagination: false, 
       base: {
         title: () => LocaleX.Parse({
-          EN: "Resources Group",
-          TC: "資源組"
+          EN: "Project Group",
+          TC: "項目群組"
         }),
         exportDoc: "user_groups",
         rowIdAccessor: "ID",
@@ -84,17 +84,17 @@ class UserGroups extends Component {
         operations: {
           Add: {
             title: () => LocaleX.Parse({
-              EN: "Add Resources Group",
-              TC: "新增資源組"
+              EN: "Add Project Group",
+              TC: "新增項目群組"
             }),
             url: datalink.Request.Add,
             success:  () => LocaleX.Parse({
-              EN: "Resources Group Added Successfully",
-              TC: "成功新增資源組"
+              EN: "Project Group Added Successfully",
+              TC: "成功新增項目群組"
             }),
             fail:  () => LocaleX.Parse({
-              EN: "Resources Group Add Failed: ",
-              TC: "新增資源組失敗: "
+              EN: "Project Group Add Failed: ",
+              TC: "新增項目群組失敗: "
             }),
             schema: schema.Add,
             buttons: ["Clear", "Submit"],
@@ -103,8 +103,8 @@ class UserGroups extends Component {
           },
           Delete: {
             title: () => LocaleX.Parse({
-              EN: "Delete this Resources Group?",
-              TC: "刪除資源組"
+              EN: "Delete this Project Group?",
+              TC: "刪除項目群組"
             }),
             content: () => LocaleX.Parse({
               EN: "Caution: This is irrevertable.",
@@ -112,29 +112,29 @@ class UserGroups extends Component {
             }),
             url: datalink.Request.Delete,
             success: () => LocaleX.Parse({
-              EN: "Resources Group Deleted Successfully.",
-              TC: "成功刪除資源組"
+              EN: "Project Group Deleted Successfully.",
+              TC: "成功刪除項目群組"
             }),
             fail: () => LocaleX.Parse({
-              EN: "Resources Group Delete Failed: ",
-              TC: "刪除資源組失敗: "
+              EN: "Project Group Delete Failed: ",
+              TC: "刪除項目群組失敗: "
             }),
             onSubmit: "Delete",
             onSuccess: this.ReloadTable
           },
           Edit: {
             title: () => LocaleX.Parse({
-              EN: "Edit Resources Group",
-              TC: "編輯資源組"
+              EN: "Edit Project Group",
+              TC: "編輯項目群組"
             }),
             url: datalink.Request.Edit,
             success: () => LocaleX.Parse({
-              EN: "Resources Group Edited Successfully",
-              TC: "成功編輯資源組"
+              EN: "Project Group Edited Successfully",
+              TC: "成功編輯項目群組"
             }),
             fail: () => LocaleX.Parse({
-              EN: "Resources Group Edit Failed: ",
-              TC: "編輯資源組失敗: "
+              EN: "Project Group Edit Failed: ",
+              TC: "編輯項目群組失敗: "
             }),
             schema: schema.Edit,
             buttons: ["Revert", "Submit"],
@@ -143,17 +143,17 @@ class UserGroups extends Component {
           },
           Info: {
             title: () => LocaleX.Parse({
-              EN: "Resources Group",
-              TC: "資源組"
+              EN: "Project Group",
+              TC: "項目群組"
             }),
             url: datalink.Request.Info,
             success: () => LocaleX.Parse({
-              EN: "Resources Group Load Successfully",
-              TC: "成功載入資源組"
+              EN: "Project Group Load Successfully",
+              TC: "成功載入項目群組"
             }),
             fail: () => LocaleX.Parse({
-              EN: "Resources Group Load Failed: ",
-              TC: "載入資源組失敗: "
+              EN: "Project Group Load Failed: ",
+              TC: "載入項目群組失敗: "
             }),
             schema: schema.Info,
             readOnly: true
@@ -165,29 +165,29 @@ class UserGroups extends Component {
             }),
             url: datalink.Request.Duplicate,
             success: () => LocaleX.Parse({
-              EN: "Resources Group Duplicated Successfully.",
-              TC: "成功複製資源組"
+              EN: "Project Group Duplicated Successfully.",
+              TC: "成功複製項目群組"
             }),
             fail: () => LocaleX.Parse({
-              EN: "Resources Group Duplicate Failed: ",
-              TC: "複製資源組失敗: "
+              EN: "Project Group Duplicate Failed: ",
+              TC: "複製項目群組失敗: "
             }),
             onSubmit: "Duplicate"
           },
           Import: {
             title: () => LocaleX.Parse({
-              EN: "Import Resources Groups",
-              TC: "導入資源組"
+              EN: "Import Project Groups",
+              TC: "導入項目群組"
             }),
             content: "",
             url: datalink.Request.Import,
             success: () => LocaleX.Parse({
-              EN: "Resources Groups Imported Successfully.",
-              TC: "成功導入資源組"
+              EN: "Project Groups Imported Successfully.",
+              TC: "成功導入項目群組"
             }),
             fail: () => LocaleX.Parse({
-              EN: "Resources Groups Import Failed: ",
-              TC: "導入資源組失敗: "
+              EN: "Project Groups Import Failed: ",
+              TC: "導入項目群組失敗: "
             }),
             schema: schema.ImportFormat,
             replace: false
@@ -198,8 +198,8 @@ class UserGroups extends Component {
           },
           DeleteBulk: {
             title: (n) => LocaleX.Parse({
-              EN: "Delete these @n Resources Group?",
-              TC: "刪除這@n個資源組?"
+              EN: "Delete these @n Project Group?",
+              TC: "刪除這@n個項目群組?"
             }, {n:n}),
             content: () => LocaleX.Parse({
               EN: "Caution: This is irrevertable.",
@@ -207,12 +207,12 @@ class UserGroups extends Component {
             }),
             url: datalink.Request.DeleteBulk,
             success: () => LocaleX.Parse({
-              EN: "Resources Group Deleted Successfully.",
-              TC: "成功刪除資源組"
+              EN: "Project Group Deleted Successfully.",
+              TC: "成功刪除項目群組"
             }),
             fail: () => LocaleX.Parse({
-              EN: "Resources Group Delete Failed: ",
-              TC: "刪除資源組失敗: "
+              EN: "Project Group Delete Failed: ",
+              TC: "刪除項目群組失敗: "
             }),
             onSubmit: "DeleteBulk",
           },
@@ -256,8 +256,8 @@ class UserGroups extends Component {
           left: [
             { icon: "add", func: "Add", 
             caption: () => LocaleX.Parse({
-              EN: "Add Resources Group",
-              TC: "新增資源組"
+              EN: "Add Project Group",
+              TC: "新增項目群組"
             }), reqFunc: "GroupAdd" }
           ],
           right: [

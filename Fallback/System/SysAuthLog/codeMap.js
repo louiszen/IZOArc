@@ -70,44 +70,44 @@ const codeMap = {
   },
   //Group
   50: {
-    EN: "Resources Group Disabled",
-    TC: "資源組禁止存取"
+    EN: "Project Group Disabled",
+    TC: "項目群組禁止存取"
   },
   51: {
-    EN: "Resources Group Enabled",
-    TC: "資源組允許存取"
+    EN: "Project Group Enabled",
+    TC: "項目群組允許存取"
   },
   52: {
-    EN: "Resources Group Authority Tree Node Disabled",
-    TC: "資源組權限樹節點停用"
+    EN: "Project Group Authority Tree Node Disabled",
+    TC: "項目群組權限樹節點停用"
   },
   53: {
-    EN: "Resources Group Authority Tree Node Enabled",
-    TC: "資源組權限樹節點啟用"
+    EN: "Project Group Authority Tree Node Enabled",
+    TC: "項目群組權限樹節點啟用"
   },
   54: {
-    EN: "Resources Group Deleted",
-    TC: "資源組刪除"
+    EN: "Project Group Deleted",
+    TC: "項目群組刪除"
   },
   55: {
-    EN: "Resources Group Created",
-    TC: "資源組創建"
+    EN: "Project Group Created",
+    TC: "項目群組創建"
   },
   56: {
-    EN: "Resources Group User Disabled",
-    TC: "資源組使用者禁止存取"
+    EN: "Project Group User Disabled",
+    TC: "項目群組使用者禁止存取"
   },
   57: {
-    EN: "Resources Group User Enabled",
-    TC: "資源組使用者允許存取"
+    EN: "Project Group User Enabled",
+    TC: "項目群組使用者允許存取"
   },
   58: {
-    EN: "Resources Group User Edit",
-    TC: "資源組使用者修改"
+    EN: "Project Group User Edit",
+    TC: "項目群組使用者修改"
   },
   59: {
-    EN: "Resources Group Edit",
-    TC: "資源組修改"
+    EN: "Project Group Edit",
+    TC: "項目群組修改"
   },
   //User
   60: {
@@ -153,31 +153,31 @@ const codeMap = {
   //User Group
   70: {
     EN: "User Group Disabled",
-    TC: "使用者資源組禁止存取"
+    TC: "使用者項目群組禁止存取"
   },
   71: {
     EN: "User Group Enabled",
-    TC: "使用者資源組允許存取"
+    TC: "使用者項目群組允許存取"
   },
   72: {
     EN: "User Group Authority Tree Node Disabled",
-    TC: "使用者資源組權限樹節點停用"
+    TC: "使用者項目群組權限樹節點停用"
   },
   73: {
     EN: "User Group Authority Tree Node Enabled",
-    TC: "使用者資源組權限樹節點啟用"
+    TC: "使用者項目群組權限樹節點啟用"
   },
   74: {
     EN: "User Group Deleted",
-    TC: "使用者資源組刪除"
+    TC: "使用者項目群組刪除"
   },
   75: {
     EN: "User Group Created",
-    TC: "使用者資源組創建"
+    TC: "使用者項目群組創建"
   },
   79: {
     EN: "User Group Edit",
-    TC: "使用者資源組修改"
+    TC: "使用者項目群組修改"
   },
 };
 

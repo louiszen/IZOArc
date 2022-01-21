@@ -27,7 +27,7 @@ const Table = [
   {
     label: () => LocaleX.Parse({
       EN: "Group",
-      TC: "所屬資源群組"
+      TC: "所屬項目群組"
     }),
     name: "req.reqGroup",
     width: 200,

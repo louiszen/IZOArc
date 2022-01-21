@@ -20,7 +20,7 @@ const Table = [
   {
     label: () => LocaleX.Parse({
       EN: "Group",
-      TC: "資源組"
+      TC: "項目群組"
     }),
     name: "name",
     Cell: (row, field, addOns) => LocaleX.Parse(field),

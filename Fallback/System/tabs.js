@@ -1,4 +1,4 @@
-import { PermDataSettingRounded, Sync, ArticleRounded, ConfirmationNumber } from "@mui/icons-material";
+import { Sync, ArticleRounded, ConfirmationNumber, SettingsAccessibility } from "@mui/icons-material";
 
 import { LocaleX } from "IZOArc/STATIC";
 import SysAuthLog from "./SysAuthLog/SysAuthLog";
@@ -24,7 +24,7 @@ const tabs = [
   },
   {
     label: () => LocaleX.GetIZO("System.UAC"),
-    icon: <PermDataSettingRounded/>,
+    icon: <SettingsAccessibility/>,
     reqAuth: "System.UAC",
     render: (addOns) => <SysUAC location={addOns?.location}/>,
     ...Tail

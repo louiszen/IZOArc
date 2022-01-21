@@ -3,8 +3,8 @@ import { LocaleX } from "IZOArc/STATIC";
 const Table = [
   {
     label: () => LocaleX.Parse({
-      EN: "Resources Group",
-      TC: "資源組"
+      EN: "Project Group",
+      TC: "項目群組"
     }),
     name: "ID",
     Cell: (row, field, addOns) => {
@@ -34,8 +34,8 @@ const Table = [
 const Add = [
   {
     label: () => LocaleX.Parse({
-      EN: "Resources Group",
-      TC: "資源組"
+      EN: "Project Group",
+      TC: "項目群組"
     }),
     name: "ID",
     format: "select",
@@ -76,8 +76,8 @@ const Add = [
 const Info = [
   {
     label: () => LocaleX.Parse({
-      EN: "Resources Group",
-      TC: "資源組"
+      EN: "Project Group",
+      TC: "項目群組"
     }),
     name: "ID",
     format: "select",

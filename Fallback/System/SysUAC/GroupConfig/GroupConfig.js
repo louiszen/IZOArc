@@ -50,16 +50,16 @@ class GroupConfig extends Component {
       selectedGroup: null,
       selectedGroupDoc: null,
       title: () => LocaleX.Parse({
-        EN: "Groups",
-        TC: "資源組"
+        EN: "Project Groups",
+        TC: "項目群組"
       }),
       serverSidePagination: false, 
       base: {
         title: () => LocaleX.Parse({
-          EN: "Groups",
-          TC: "資源組"
+          EN: "Project Groups",
+          TC: "項目群組"
         }),
-        exportDoc: "groups",
+        exportDoc: "proj_groups",
         schema: schema,
         reqAuth: "System.UAC.Groups",
 
@@ -90,17 +90,17 @@ class GroupConfig extends Component {
         operations: {
           Add: {
             title: () => LocaleX.Parse({
-              EN: "Add Groups",
-              TC: "新增資源組"
+              EN: "Add Project Groups",
+              TC: "新增項目群組"
             }),
             url: datalink.Request.Add,
             success:  () => LocaleX.Parse({
-              EN: "Groups Added Successfully",
-              TC: "成功新增資源組"
+              EN: "Project Groups Added Successfully",
+              TC: "成功新增項目群組"
             }),
             fail:  () => LocaleX.Parse({
-              EN: "Groups Add Failed: ",
-              TC: "新增資源組失敗: "
+              EN: "Project Groups Add Failed: ",
+              TC: "新增項目群組失敗: "
             }),
             schema: schema.Add,
             buttons: ["Clear", "Submit"],
@@ -112,8 +112,8 @@ class GroupConfig extends Component {
           },
           Delete: {
             title: () => LocaleX.Parse({
-              EN: "Delete this Groups?",
-              TC: "刪除資源組"
+              EN: "Delete this Project Groups?",
+              TC: "刪除項目群組"
             }),
             content: () => LocaleX.Parse({
               EN: "Caution: This is irrevertable.",
@@ -121,12 +121,12 @@ class GroupConfig extends Component {
             }),
             url: datalink.Request.Delete,
             success: () => LocaleX.Parse({
-              EN: "Groups Deleted Successfully.",
-              TC: "成功刪除資源組"
+              EN: "Project Groups Deleted Successfully.",
+              TC: "成功刪除項目群組"
             }),
             fail: () => LocaleX.Parse({
-              EN: "Groups Delete Failed: ",
-              TC: "刪除資源組失敗: "
+              EN: "Project Groups Delete Failed: ",
+              TC: "刪除項目群組失敗: "
             }),
             onSubmit: "Delete",
             onSuccess: (payload, success) => {
@@ -136,17 +136,17 @@ class GroupConfig extends Component {
           },
           Edit: {
             title: () => LocaleX.Parse({
-              EN: "Edit Groups",
-              TC: "編輯資源組"
+              EN: "Edit Project Groups",
+              TC: "編輯項目群組"
             }),
             url: datalink.Request.Edit,
             success: () => LocaleX.Parse({
-              EN: "Groups Edited Successfully",
-              TC: "成功編輯資源組"
+              EN: "Project Groups Edited Successfully",
+              TC: "成功編輯項目群組"
             }),
             fail: () => LocaleX.Parse({
-              EN: "Groups Edit Failed: ",
-              TC: "編輯資源組失敗: "
+              EN: "Project Groups Edit Failed: ",
+              TC: "編輯項目群組失敗: "
             }),
             schema: schema.Edit,
             buttons: ["Revert", "Submit"],
@@ -158,17 +158,17 @@ class GroupConfig extends Component {
           },
           Info: {
             title: () => LocaleX.Parse({
-              EN: "Groups",
-              TC: "資源組"
+              EN: "Project Groups",
+              TC: "項目群組"
             }),
             url: datalink.Request.Info,
             success: () => LocaleX.Parse({
-              EN: "Groups Load Successfully",
-              TC: "成功載入資源組"
+              EN: "Project Groups Load Successfully",
+              TC: "成功載入項目群組"
             }),
             fail: () => LocaleX.Parse({
-              EN: "Groups Load Failed: ",
-              TC: "載入資源組失敗: "
+              EN: "Project Groups Load Failed: ",
+              TC: "載入項目群組失敗: "
             }),
             schema: schema.Info,
             readOnly: true
@@ -180,29 +180,29 @@ class GroupConfig extends Component {
             }),
             url: datalink.Request.Duplicate,
             success: () => LocaleX.Parse({
-              EN: "Groups Duplicated Successfully.",
-              TC: "成功複製資源組"
+              EN: "Project Groups Duplicated Successfully.",
+              TC: "成功複製項目群組"
             }),
             fail: () => LocaleX.Parse({
-              EN: "Groups Duplicate Failed: ",
-              TC: "複製資源組失敗: "
+              EN: "Project Groups Duplicate Failed: ",
+              TC: "複製項目群組失敗: "
             }),
             onSubmit: "Duplicate"
           },
           Import: {
             title: () => LocaleX.Parse({
-              EN: "Import Groupss",
-              TC: "導入資源組"
+              EN: "Import Project Groups",
+              TC: "導入項目群組"
             }),
             content: "",
             url: datalink.Request.Import,
             success: () => LocaleX.Parse({
-              EN: "Groupss Imported Successfully.",
-              TC: "成功導入資源組"
+              EN: "Project Groups Imported Successfully.",
+              TC: "成功導入項目群組"
             }),
             fail: () => LocaleX.Parse({
-              EN: "Groupss Import Failed: ",
-              TC: "導入資源組失敗: "
+              EN: "Project Groups Import Failed: ",
+              TC: "導入項目群組失敗: "
             }),
             schema: schema.ImportFormat,
             replace: false
@@ -213,8 +213,8 @@ class GroupConfig extends Component {
           },
           DeleteBulk: {
             title: (n) => LocaleX.Parse({
-              EN: "Delete these @n Groups?",
-              TC: "刪除這@n個資源組?"
+              EN: "Delete these @n Project Groups?",
+              TC: "刪除這@n個項目群組?"
             }, {n:n}),
             content: () => LocaleX.Parse({
               EN: "Caution: This is irrevertable.",
@@ -222,12 +222,12 @@ class GroupConfig extends Component {
             }),
             url: datalink.Request.DeleteBulk,
             success: () => LocaleX.Parse({
-              EN: "Groups Deleted Successfully.",
-              TC: "成功刪除資源組"
+              EN: "Project Groups Deleted Successfully.",
+              TC: "成功刪除項目群組"
             }),
             fail: () => LocaleX.Parse({
-              EN: "Groups Delete Failed: ",
-              TC: "刪除資源組失敗: "
+              EN: "Project Groups Delete Failed: ",
+              TC: "刪除項目群組失敗: "
             }),
             onSubmit: "DeleteBulk",
           },
@@ -271,8 +271,8 @@ class GroupConfig extends Component {
           left: [
             { icon: "add", func: "Add", 
             caption: () => LocaleX.Parse({
-              EN: "Add Groups",
-              TC: "新增資源組"
+              EN: "Add Project Groups",
+              TC: "新增項目群組"
             }), reqFunc: "Add" }
           ],
           right: [

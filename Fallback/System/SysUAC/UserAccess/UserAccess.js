@@ -253,7 +253,7 @@ class UserAccess extends Component {
             { icon: <ManageAccountsRounded/> , func: this.EditUserD,  
               caption: () => LocaleX.Parse({
                 EN: "Edit User Group Authority",
-                TC: "編輯使用者資源組權限"
+                TC: "編輯使用者項目群組權限"
               }), 
               reqFunc: "GroupView" },
             // { icon: "info", func: "Info", 

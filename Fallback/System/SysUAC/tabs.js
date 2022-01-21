@@ -77,8 +77,8 @@ const tabs = [
   },
   {
     label: () => LocaleX.Parse({
-      EN: "Resource Groups",
-      TC: "資源組別配置"
+      EN: "Project Groups",
+      TC: "項目群組配置"
     }),
     icon: <Widgets/>,
     render: (addOns) => <GroupConfig 
