@@ -186,52 +186,108 @@ class Container extends Component {
     STORE.clearAsk();
   }
 
-  renderButtons(){
+  getTheme = (name, order) => {
     let {buttonWidth} = this.state;
-    let buttonsJSX = {
-      "OK":
-      <StyledButton key={0} theme={{
+    let borderRadius = "0 0 0 0";
+    switch(order){
+      case "first": borderRadius = "0 0 0 12px"; break;
+      case "last": borderRadius = "0 0 12px 0"; break;
+      case "only": borderRadius = "0 0 12px 12px"; break;
+      default: break;
+    }
+
+    let theme = {};
+    switch(name){
+      case "OK":
+        theme = {
           color: "green", 
           background: ColorX.GetColorCSS("transparent"), 
           width: buttonWidth,
-          borderRadius: "0 0 0 12px",
+          borderRadius: borderRadius,
           margin: "0",
           disabled: {
             color: ColorX.GetColorCSS("grey")
           }
-        }}
-        onClick={this._onOK} 
-        disabled={STORE.ask.loading}
-        >
-        <i className="fas fa-check"/>
-        <div className="formizo-h-m">{LocaleX.GetIZO("Formizo.Confirm")}</div>
-      </StyledButton>,
-      "Cancel":
-      <StyledButton key={2} theme={{
+        };
+        break;
+      case "Cancel":
+        theme = {
           color: "red", 
           background: ColorX.GetColorCSS("transparent"), 
           width: buttonWidth,
-          borderRadius: "0 0 12px 0",
+          borderRadius: borderRadius,
           disabled: {
             color: ColorX.GetColorCSS("grey")
           }
-        }} 
-        onClick={this._onCancel} 
-        disabled={STORE.ask.loading}
-        >
-        <i className="fas fa-ban"/>
+        };
+        break;
+      default: break;
+    }
+    return theme;
+  }
+
+  getOnClick = (name) => {
+    let func = () => {};
+    switch(name){
+      case "OK": func = this._onOK; break;
+      case "Cancel": func = this._onCancel; break;
+      default: break;
+    }
+    return func;
+  }
+
+  getIcon = (name) => {
+    let icon = <div/>;
+    switch(name){
+      case "OK": icon = <i className="fas fa-check"/>; break;
+      case "Cancel": icon = <i className="fas fa-ban"/>; break;
+      default: break;
+    }
+    return icon;
+  }
+
+  getContent = (name) => {
+    let content = <div/>;
+    switch(name){
+      case "OK": content = (
+        <div className="formizo-h-m">
+          {LocaleX.GetIZO("Formizo.Confirm")}
+        </div>
+      ); break;
+      case "Cancel": content = (
         <div className="formizo-h-m">
           {LocaleX.GetIZO("Formizo.Cancel")}
         </div>
-      </StyledButton>,
-    };
+      ); break;
+      default: break;
+    }
+    return content;
+  }
 
+  getJSX = (i, name, order) => {
+    let theme = this.getTheme(name, order);
+    let func = this.getOnClick(name);
+    let content = this.getContent(name);
+    let icon = this.getIcon(name);
+    return (
+      <StyledButton key={i} theme={theme}
+        onClick={func} 
+        disabled={STORE.ask.loading}>
+        {icon}
+        {content}
+      </StyledButton>
+    );
+  }
+
+  renderButtons(){
     return _.map(STORE.ask.buttons, (o, i) => {
-      if(_.isString(o) && buttonsJSX[o])
-        return buttonsJSX[o];
-      else{
-        return o;
-      }
+      let order = "middle";
+      if(i===0 && STORE.ask.buttons.length === 1) order = "only";
+      else if (i===0) order = "first";
+      else if(i===STORE.ask.buttons.length - 1) order = "last";
+
+      if(_.isString(o))
+        return this.getJSX(i, o, order);
     });
   }
 
@@ -284,7 +340,8 @@ class Container extends Component {
               </StyledIconButton>
             }
           </HStack>
-          <Box fontSize="normal" 
+          <Box style={{fontFamily: "Arial"}}
+            fontSize="normal" 
             textAlign="left" 
             width="100%"
             marginY={1}
