@@ -308,6 +308,9 @@ class Container extends Component {
       title = htmlParser(title);
     }
     let message = STORE.ask.message;
+    if(_.isFunction(message)){
+      message = message();
+    }
     if(_.isString(message)){
       message = htmlParser(message);
     }
