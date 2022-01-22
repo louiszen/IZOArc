@@ -15,11 +15,11 @@ import IZOVersion from "../version";
 
 import { Accessor, ColorX, STORE } from "IZOArc/STATIC";
 import { HStack, Spacer } from "IZOArc/LabIZO/Stackizo";
-import Accessizo from "IZOArc/LabIZO/Accessizo";
 import LocaleX from "IZOArc/STATIC/LocaleX";
 import { BLangToggler } from "IZOArc/BLOCKS/Ctrls";
 
 import SLogin from "../API/SLogin";
+import AuthX from "../STATIC/AuthX";
 
 class NavBar extends Component {
 
@@ -133,12 +133,11 @@ class NavBar extends Component {
   }
 
   renderVersion(){
+    if(!AuthX.PassL(0)) return;
     return (
-      <Accessizo reqLevel={0} user={STORE.user}>
-        <Typography style={{fontFamily: IZOFontFamily, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.3)}}>
-          {"v" + Version}
-        </Typography>
-      </Accessizo>
+      <Typography style={{fontFamily: IZOFontFamily, color: ColorX.GetColorCSS(IZOTheme.menuFG, 0.3)}}>
+        {"v" + Version}
+      </Typography>
     );
   }
 

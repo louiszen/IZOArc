@@ -10,13 +10,28 @@ import { VerticalSplit } from "@mui/icons-material";
 import { IZOTheme } from "__SYSDefault/Theme";
 import { LowerMenu, MainMenu, UpperMenu } from "__SYSDefault/Menu";
 
-import { Accessor, ColorX, LocaleX, STORE } from "IZOArc/STATIC";
+import { Accessor, AuthX, ColorX, LocaleX, STORE } from "IZOArc/STATIC";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
 import StyledIconButton from "IZOArc/LabIZO/Stylizo/StyledIconButton";
 
 import MenuButton from "./_gears/MenuButton";
 
 import "./Container.css";
+
+/**
+ * @typedef {{
+ *    caption: String | (() => String),
+ *    link: String,
+ *    faIcon: JSX.Element | String,
+ *    auth?: String,
+ *    level?: Number,
+ *    group?: String,
+ *    role?: String,
+ *    func?: String
+ *    disabled?: Boolean,
+ *    submenu?: [Menu]
+ * }} Menu
+ */
 
 class Menu extends Component {
 
@@ -50,17 +65,13 @@ class Menu extends Component {
     }), callback);
   }
 
-  menuButton(caption, path, fafa, reqAuth, reqLevel = Number.MAX_SAFE_INTEGER, reqGroup = "", reqRole = "", submenu = null, disabled = false){
+  menuButton(caption, path, fafa, submenu = null, disabled = false){
     return (
       <MenuButton
         key={caption}
         caption={caption}
         path={path}
         fafa={fafa}
-        reqAuth={reqAuth}
-        reqLevel={reqLevel}
-        reqGroup={reqGroup}
-        reqRole={reqRole}
         submenu={submenu}
         disabled={disabled}
         mini={STORE.mini}
@@ -77,8 +88,10 @@ class Menu extends Component {
     return (
       <VStack height="fit-content">
         {_.map(buttons, (o, i) => {
-            return this.menuButton(o.caption, o.link, o.faIcon, o.auth, o.level, o.group, o.role, o.submenu, o.disabled);
-          })}
+          if(AuthX.Pass(o.auth, o.level, o.group, o.role, o.func)){
+            return this.menuButton(o.caption, o.link, o.faIcon, o.submenu, o.disabled);
+          }
+        })}
       </VStack>
     );
   }

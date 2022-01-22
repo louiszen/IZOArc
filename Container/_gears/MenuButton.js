@@ -9,13 +9,11 @@ import { Typography } from "@mui/material";
 
 import MenuButtonList from "./MenuButtonList";
 
-import Accessizo from "IZOArc/LabIZO/Accessizo";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
 import { Accessor, STORE } from "IZOArc/STATIC";
 import { StyledButton } from "IZOArc/LabIZO/Stylizo";
 import { HMarquee } from "IZOArc/LabIZO/Animatizo";
 import theme from "./theme";
-import { v1 } from "uuid";
 
 class MenuButton extends Component {
 
@@ -23,10 +21,6 @@ class MenuButton extends Component {
     caption: PropsType.oneOfType([PropsType.string, PropsType.func]),
     path: PropsType.string,
     fafa: PropsType.any,
-    reqAuth: PropsType.string,
-    reqLevel: PropsType.number,
-    reqGroup: PropsType.string,
-    reqRole: PropsType.string,
     submenu: PropsType.array,
     mini: PropsType.bool,
     zIndex: PropsType.number,
@@ -37,10 +31,6 @@ class MenuButton extends Component {
     caption: "",
     path: "",
     fafa: "",
-    reqAuth: "",
-    reqLevel: Number.MAX_SAFE_INTEGER,
-    reqGroup: "",
-    reqRole: "",
     submenu: [],
     mini: false,
     zIndex: 50,
@@ -168,18 +158,7 @@ class MenuButton extends Component {
   }
 
   render(){
-    let {reqAuth, reqLevel, reqGroup, reqRole} = this.props;
-    return (
-      <Accessizo 
-        key={v1()}
-        reqAuth={reqAuth}
-        reqLevel={reqLevel}
-        reqGroup={reqGroup}
-        reqRole={reqRole}
-        user={STORE.user}>
-          {this.renderInner()}
-      </Accessizo>
-    );
+    return this.renderInner();
   }
 
 }

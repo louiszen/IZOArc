@@ -5,9 +5,9 @@ import { Typography } from "@mui/material";
 import { IZOTheme } from "__SYSDefault/Theme";
 import { DOMAIN } from "__SYSDefault/Domain";
 
-import Accessizo from "IZOArc/LabIZO/Accessizo";
 import { HStack, Spacer } from "IZOArc/LabIZO/Stackizo";
-import { Accessor, STORE, ColorX, BrowserX } from "IZOArc/STATIC";
+import { Accessor, ColorX, BrowserX } from "IZOArc/STATIC";
+import AuthX from "../STATIC/AuthX";
 
 class Footer extends Component {
 
@@ -52,24 +52,23 @@ class Footer extends Component {
       paddingRight: 5,
       fontSize: 9
     };
+    if(!AuthX.PassL(0)) return <div/>;
     return (
-      <Accessizo reqLevel={0} user={STORE.user}>
-        <HStack height={15} style={{
-          position: "fixed", 
-          paddingLeft: 40,
-          bottom: 0,
-          background: ColorX.GetColorCSS(IZOTheme.menuBG),
-          zIndex: 100,
-          }}>
-          <Typography style={style}>
-            {"[" + BrowserX.getBrowser() + "] " + BrowserX.getUserAgent()}
-          </Typography>
-          <Spacer/>
-          <Typography style={style}>
-            {DOMAIN}
-          </Typography>
-        </HStack>
-      </Accessizo>
+      <HStack height={15} style={{
+        position: "fixed", 
+        paddingLeft: 40,
+        bottom: 0,
+        background: ColorX.GetColorCSS(IZOTheme.menuBG),
+        zIndex: 100,
+        }}>
+        <Typography style={style}>
+          {"[" + BrowserX.getBrowser() + "] " + BrowserX.getUserAgent()}
+        </Typography>
+        <Spacer/>
+        <Typography style={style}>
+          {DOMAIN}
+        </Typography>
+      </HStack>
     );
   }
 

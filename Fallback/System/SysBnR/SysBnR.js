@@ -12,7 +12,6 @@ import schema from "./schema";
 import { BnRBackup, BnRDBInclude, BnRDelete, BnRInfo, BnRRestore } from "IZOArc/API/SysAPI";
 
 import Tablizo from "IZOArc/LabIZO/Tablizo";
-import Accessizo from "IZOArc/LabIZO/Accessizo";
 import { Accessor, ColorX, STORE, ErrorX, LocaleX, ReqX, AuthX } from "IZOArc/STATIC";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
 import { StyledButton } from "IZOArc/LabIZO/Stylizo";
@@ -235,28 +234,26 @@ class SysBnR extends Component {
 
   renderDatabases(){
     let {dbs} = this.state;
-    if(!AuthX.PassF("System.BnR", "Database")){
+    if(!AuthX.PassF("System.BnR", "Database", "", "", 0)){
       return;
     }
     return (
-      <Accessizo reqLevel={0} user={STORE.user}>
-        <VStack paddingY={2}>
-          <Tablizo 
-          width={400} 
-          height="100%" 
-          density="compact"
-          user={STORE.user}
-          rowIdAccessor="name"
-          schema={schema.database}
-          showSelector={false}
-          data={dbs}
-          addOns={{
-            onToggle: this._IncToggle
-          }}
-          lang={STORE.lang}
-          />
-        </VStack>
-      </Accessizo>
+      <VStack paddingY={2}>
+        <Tablizo 
+        width={400} 
+        height="100%" 
+        density="compact"
+        user={STORE.user}
+        rowIdAccessor="name"
+        schema={schema.database}
+        showSelector={false}
+        data={dbs}
+        addOns={{
+          onToggle: this._IncToggle
+        }}
+        lang={STORE.lang}
+        />
+      </VStack>
     );
   }
 
