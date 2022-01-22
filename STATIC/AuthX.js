@@ -12,6 +12,7 @@ class AuthX {
   }
 
   static LevelCheck(level, reqLevel){
+    if(reqLevel === -1) return true;
     return level <= reqLevel; //level less is more
   }
 
@@ -41,45 +42,61 @@ class AuthX {
    */
   static RoleCheck(role, reqRole){
     if(_.isEmpty(reqRole)) return true;
+    if(_.isArray(reqRole)){
+      return reqRole.includes(role);
+    }
     return role === reqRole;
   }
 
-  static IsAccessible(user, reqAuth = "", reqLevel = Number.MAX_SAFE_INTEGER, reqFunc = "", reqGroup = "", reqRole = ""){
+  static IsAccessible(user, reqAuth = "", reqLevel = Number.MAX_SAFE_INTEGER, reqFunc = "", reqGroup = "", reqRole = "", DEBUG = false){
     if(!user) return false;
     let {authority, level, groups, role} = user;
+    let check = {G: false, A: false, L: false, F: false, R: false};
+    
     if(_.isEmpty(reqGroup)){
-      return this.AuthCheck(authority, reqAuth) 
-        && this.LevelCheck(level, reqLevel) 
-        && this.FuncCheck(authority, reqAuth, reqFunc)
-        && this.RoleCheck(role, reqRole);
+      check.G = true;
+      check.A = this.AuthCheck(authority, reqAuth) 
+      check.L = this.LevelCheck(level, reqLevel) 
+      check.F = this.FuncCheck(authority, reqAuth, reqFunc)
+      check.R = this.RoleCheck(role, reqRole);
     }else{
       let group = groups.find(o => o.ID === reqGroup);
-      if(!group) return false;
-      return this.AuthCheck(group.authority, reqAuth) 
-        && this.LevelCheck(group.Level, reqLevel) 
-        && this.FuncCheck(group.authority, reqAuth, reqFunc)
-        && this.RoleCheck(group.Role, reqRole);
+      if(!group) {
+        check.G = false;
+        return false;
+      }
+      check.G = true;
+      check.A = this.AuthCheck(group.authority, reqAuth) 
+      check.L = this.LevelCheck(level, reqLevel)
+      check.F = this.FuncCheck(group.authority, reqAuth, reqFunc)
+      check.R = this.RoleCheck(group.role, reqRole);
     }
+
+    if(DEBUG){
+      console.log(check);
+    }
+    let {G, A, L, F, R} = check;
+    return G && A && L && F && R;
   }
 
-  static Pass(reqAuth = "", reqLevel = Number.MAX_SAFE_INTEGER, reqFunc = "", reqGroup = "", reqRole = ""){
-    return this.IsAccessible(STORE.user, reqAuth, reqLevel, reqFunc, reqGroup, reqRole);
+  static Pass(reqAuth = "", reqLevel = Number.MAX_SAFE_INTEGER, reqFunc = "", reqGroup = "", reqRole = "", DEBUG = false){
+    return this.IsAccessible(STORE.user, reqAuth, reqLevel, reqFunc, reqGroup, reqRole, DEBUG);
   }
 
-  static PassF(reqAuth = "", reqFunc = "", reqGroup = "", reqRole = "", reqLevel = Number.MAX_SAFE_INTEGER){
-    return this.IsAccessible(STORE.user, reqAuth, reqLevel, reqFunc, reqGroup, reqRole);
+  static PassF(reqAuth = "", reqFunc = "", reqGroup = "", reqRole = "", reqLevel = Number.MAX_SAFE_INTEGER, DEBUG = false){
+    return this.IsAccessible(STORE.user, reqAuth, reqLevel, reqFunc, reqGroup, reqRole, DEBUG);
   }
 
-  static PassR(reqRole = "", reqAuth = "", reqFunc = "", reqGroup = "",  reqLevel = Number.MAX_SAFE_INTEGER){
-    return this.IsAccessible(STORE.user, reqAuth, reqLevel, reqFunc, reqGroup, reqRole);
+  static PassR(reqRole = "", reqAuth = "", reqFunc = "", reqGroup = "",  reqLevel = Number.MAX_SAFE_INTEGER, DEBUG = false){
+    return this.IsAccessible(STORE.user, reqAuth, reqLevel, reqFunc, reqGroup, reqRole, DEBUG);
   }
 
-  static PassG(reqGroup = "", reqAuth = "", reqFunc = "", reqRole = "", reqLevel = Number.MAX_SAFE_INTEGER){
-    return this.IsAccessible(STORE.user, reqAuth, reqLevel, reqFunc, reqGroup, reqRole);
+  static PassG(reqGroup = "", reqAuth = "", reqFunc = "", reqRole = "", reqLevel = Number.MAX_SAFE_INTEGER, DEBUG = false){
+    return this.IsAccessible(STORE.user, reqAuth, reqLevel, reqFunc, reqGroup, reqRole, DEBUG);
   }
 
-  static PassL(reqLevel = Number.MAX_SAFE_INTEGER, reqAuth = "", reqFunc = "", reqGroup = "", reqRole = ""){
-    return this.IsAccessible(STORE.user, reqAuth, reqLevel, reqFunc, reqGroup, reqRole);
+  static PassL(reqLevel = Number.MAX_SAFE_INTEGER, reqAuth = "", reqFunc = "", reqGroup = "", reqRole = "", DEBUG = false){
+    return this.IsAccessible(STORE.user, reqAuth, reqLevel, reqFunc, reqGroup, reqRole, DEBUG);
   }
 
   static AuthCheckQ(reqAuth){
