@@ -1,0 +1,15 @@
+.MuiStepIcon-root, .MuiStepLabel-label{
+  color: #3f51b5 !important;
+}
+
+.MuiStepIcon-completed, .MuiStepLabel-completed{
+  color: #3f51b5 !important;
+}
+
+.MuiStepIcon-active, .MuiStepLabel-active{
+  color: #4d67f7 !important;
+}
+
+.Mui-disabled .MuiStepIcon-root, .Mui-disabled .MuiStepLabel-label{
+  color: grey !important;
+}

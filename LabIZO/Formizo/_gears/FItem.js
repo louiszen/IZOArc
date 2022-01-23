@@ -120,13 +120,17 @@ class FItem extends Component {
 
   renderHeader(ischema){
     let {textAlign, fontSize, fontWeight, color} = ischema;
+    let header = ischema.header;
+    if(_.isFunction(header)){
+      header = header();
+    }
     return (
       <Box
         textAlign={textAlign || "center"} 
         fontSize={fontSize || 16} 
         fontWeight={fontWeight || "bold"}
         color={color || "black"}>
-        {ischema.header}
+        {header}
       </Box>
     );
   }

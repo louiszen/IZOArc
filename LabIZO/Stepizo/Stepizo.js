@@ -6,6 +6,8 @@ import { Step, StepButton, Stepper } from "@material-ui/core";
 
 import { Accessor } from "IZOArc/STATIC";
 
+import "./style.css";
+
 /**
  * Stepizo - step tabs
  * @augments {Component<Props, State>}
@@ -15,6 +17,8 @@ class Stepizo extends Component {
   static propTypes = {
     //runtime data
     steps: PropsType.arrayOf(PropsType.object),
+    defaultCompleted: PropsType.arrayOf(PropsType.number),
+
     activeStep: PropsType.number,
     
     //function
@@ -32,6 +36,8 @@ class Stepizo extends Component {
 
   static defaultProps = {
     steps: [],
+    defaultCompleted: [],
+
     activeStep: 0,
 
     onMounted: undefined,
@@ -52,7 +58,11 @@ class Stepizo extends Component {
   }
 
   componentDidMount(){
-    this._setAllStates();
+    this._setAllStates(() => {
+      this.setState({
+        completed: this.props.defaultCompleted
+      });
+    });
   }
 
   componentDidUpdate(prevProps, prevState){
@@ -75,14 +85,25 @@ class Stepizo extends Component {
         this.props.onMounted({
           activeStep: this._getActiveStep,
           setStep: this._setActiveStep,
+          isCompleted: this._isCompleted,
+          isDisabled: this._isDisabled,
           setCompleted: this._setCompleted,
-          setIncomplete: this._setIncomplete,
+          setIdxCompleted: this._setIdxCompleted,
+          setIdxIncomplete: this._setIdxIncomplete,
           IsAllComplete: this._IsAllComplete,
           Reset: this._Reset
         });
       }
       if(callback) callback();
     });
+  }
+
+  _isCompleted = (idx) => {
+    return this.state.completed.includes(idx);
+  }
+
+  _isDisabled = (idx) => {
+    return this.state.disabled.includes(idx);
   }
 
   _getActiveStep = () => {
@@ -114,7 +135,13 @@ class Stepizo extends Component {
     });
   }
 
-  _setCompleted = (idx) => {
+  _setCompleted = (idxs) => {
+    this.setState({
+      completed: idxs
+    });
+  }
+
+  _setIdxCompleted = (idx) => {
     let newCompleted = this.state.completed;
     newCompleted.push(idx);
     this.setState({
@@ -122,7 +149,7 @@ class Stepizo extends Component {
     });
   }
 
-  _setIncomplete = (idx) => {
+  _setIdxIncomplete = (idx) => {
     let newCompleted = this.state.completed;
     newCompleted = _.filter(newCompleted, o => o !== idx);
     this.setState({
@@ -143,11 +170,14 @@ class Stepizo extends Component {
         label = label();
       }
       return (
-        <Step key={i} completed={this.isCompleted(i)}>
+        <Step key={i} completed={this.isCompleted(i)} 
+          disabled={o.disabled}>
           <StepButton
             onClick={() => this._stepOnClick(i)}
             completed={this.isCompleted(i)}
-            style={{marginRight: stepWidth}}
+            style={{
+              marginRight: stepWidth
+            }}
           >
             {label}
           </StepButton>
@@ -161,8 +191,11 @@ class Stepizo extends Component {
     let {nonLinear, orientation} = this.props;
 
     return (
-      <Stepper alternativeLabel={orientation === "horizontal"} nonLinear={nonLinear} activeStep={activeStep} 
-        style={{background: "transparent"}} orientation={orientation}>
+      <Stepper alternativeLabel={orientation === "horizontal"} 
+        nonLinear={nonLinear} activeStep={activeStep} 
+        style={{
+          background: "transparent"
+        }} orientation={orientation}>
         {this.renderSteps()}
       </Stepper>
     );
