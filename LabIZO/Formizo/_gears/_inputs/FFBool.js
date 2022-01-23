@@ -5,7 +5,9 @@ import _ from "lodash";
 import { Checkbox, FormControlLabel, Switch } from "@material-ui/core";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 
-import { Accessor } from "IZOArc/STATIC";
+import { Accessor, ColorX } from "IZOArc/STATIC";
+import { HStack, VStack } from "IZOArc/LabIZO/Stackizo";
+import { Typography } from "@mui/material";
 
 /**
  * @augments {Component<Props, State>}
@@ -171,7 +173,7 @@ class FFBool extends Component {
     let ivalue = Accessor.Get(formValue, iname) || false;
     let ireadOnly = ischema.readOnly || readOnly;
     let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
-
+    
     if(ifieldStyle === "grid"){
       return (
         <Checkbox 
@@ -218,8 +220,25 @@ class FFBool extends Component {
   }
 
   render(){
-    let {ischema} = this.state;
+    let {ischema, iname, formError} = this.state;
     if(!ischema){ return null; }
+
+    let ierror = Accessor.Get(formError, iname);
+    if(ierror){
+      if(_.isFunction(ierror)){
+        ierror = ierror();
+      }
+      return (
+        <VStack>
+          {this.renderInside()}
+          <HStack justifyContent="flex-start">
+            <Typography style={{color: ColorX.GetColorCSS("pureRed"), fontSize: "small"}}>
+              {"*" + ierror}
+            </Typography>
+          </HStack>
+        </VStack>
+      )
+    }
 
     return this.renderInside();
 

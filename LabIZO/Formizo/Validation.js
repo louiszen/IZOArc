@@ -8,7 +8,8 @@ const Rules = {
   plain: value => !value || /^[a-zA-Z0-9_]+$/i.test(value),
   plainSpace: value => !value || /^[a-zA-Z0-9_ -]+$/i.test(value),
   plainAt: value => !value || /^[a-zA-Z0-9_@]+$/i.test(value),
-  plainLower: value => !value || /^[a-z0-9_]+$/.test(value)
+  plainLower: value => !value || /^[a-z0-9_]+$/.test(value),
+  boolTrue: value => value === true,
 };
 
 const ErrorMsg = {
@@ -40,6 +41,11 @@ const ErrorMsg = {
     EN: "Must be in lowercase, no spaces or special characters except _",
     TC: "只接受小寫字母，不可包含除 _ 外特殊子元",
   }),
+  boolTrue: () => LocaleX.Parse({
+    EN: "Please check the box if you want to submit this form",
+    TC: "你必須勾選這項才可提交表單",
+  }),
+
 };
 
 let validates = {
