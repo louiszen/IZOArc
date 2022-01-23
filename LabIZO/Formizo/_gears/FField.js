@@ -158,7 +158,15 @@ class FField extends Component {
         </HStack>
       );
     }
-    return null;
+    return (
+      <HStack key={"display"}>
+        <HStack justifyContent="flex-start">
+          <Typography>
+            {fvalue}
+          </Typography>
+        </HStack>
+      </HStack>
+    );
   }
 
   renderText(){

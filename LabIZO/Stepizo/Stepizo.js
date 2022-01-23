@@ -26,7 +26,8 @@ class Stepizo extends Component {
 
     //style
     stepWidth: PropsType.oneOfType([PropsType.string, PropsType.number]),
-
+    orientation: PropsType.oneOf(["vertical", "horizontal"]),
+    addOns: PropsType.object
   }
 
   static defaultProps = {
@@ -38,7 +39,9 @@ class Stepizo extends Component {
 
     nonLinear: true,
 
-    stepWidth: 150
+    stepWidth: 150,
+    orientation: "horizontal",
+    addOns: {}
   }
 
   constructor(){
@@ -135,6 +138,10 @@ class Stepizo extends Component {
   renderSteps(){
     let {steps, stepWidth} = this.props;
     return _.map(steps, (o, i) => {
+      let label = o.label;
+      if(_.isFunction(label)){
+        label = label();
+      }
       return (
         <Step key={i} completed={this.isCompleted(i)}>
           <StepButton
@@ -142,7 +149,7 @@ class Stepizo extends Component {
             completed={this.isCompleted(i)}
             style={{marginRight: stepWidth}}
           >
-            {o.label}
+            {label}
           </StepButton>
         </Step>
       );
@@ -151,9 +158,11 @@ class Stepizo extends Component {
 
   render(){
     let {activeStep} = this.state;
-    let {nonLinear} = this.props;
+    let {nonLinear, orientation} = this.props;
+
     return (
-      <Stepper alternativeLabel nonLinear={nonLinear} activeStep={activeStep} style={{background: "transparent"}}>
+      <Stepper alternativeLabel={orientation === "horizontal"} nonLinear={nonLinear} activeStep={activeStep} 
+        style={{background: "transparent"}} orientation={orientation}>
         {this.renderSteps()}
       </Stepper>
     );

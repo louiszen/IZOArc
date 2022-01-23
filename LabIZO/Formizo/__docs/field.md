@@ -19,6 +19,7 @@
 | select | Value with a list of selection |
 | hidden | Value hidden and will not being cleared or reverted |
 | display | Display the value differently |
+| custom | Display the value differently |
 | selectTable | select from a table source |
 <br/>
 
