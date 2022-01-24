@@ -40,7 +40,6 @@ let simple = [
     selectCap: "cap",
     selectVal: "val"
   },
-  /*
   {
     inline: [
       {
@@ -223,7 +222,6 @@ let simple = [
       }
     ]
   }))
-  */
 ];
 
 /*

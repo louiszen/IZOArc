@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import PropsType from "prop-types";
 import _ from "lodash";
-import { Collapse } from "@mui/material";
 
 import FItem from "../FItem";
 
