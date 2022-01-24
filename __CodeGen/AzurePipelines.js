@@ -16,7 +16,7 @@ resources:
 
 variables:
 - name: dockerRegistryServiceConnection
-  value: "gammondev ACR connection"
+  value: "digitalgdev-ACR-service-connection"
 - name: imageRepository
   value: "${id}-web-dev"
 - name: tag
@@ -86,7 +86,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: gammondev.azurecr.io/${id}-web-dev
+        image: digitalgdev.azurecr.io/${id}-web-dev
         imagePullPolicy: Always
         ports:
         - containerPort: 80`;
