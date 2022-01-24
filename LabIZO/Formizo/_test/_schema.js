@@ -27,10 +27,20 @@ let simple = [
     name: "type",
     format: "select",
     selectStyle: "radio",
-    selectRef: ["Balcony", "AC Platform"],
-    variant: "outlined",
-    selectDirection: "row"
+    selectRef: [
+      {
+        cap: () => LocaleX.Parse({EN: "Yes", TC: "有"}),
+        val: "true"
+      },
+      {
+        cap: () => LocaleX.Parse({EN: "No", TC: "沒有"}),
+        val: "false"
+      }
+    ],
+    selectCap: "cap",
+    selectVal: "val"
   },
+  /*
   {
     inline: [
       {
@@ -213,6 +223,7 @@ let simple = [
       }
     ]
   }))
+  */
 ];
 
 /*

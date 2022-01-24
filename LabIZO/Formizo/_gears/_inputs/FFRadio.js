@@ -147,7 +147,7 @@ class FFRadio extends Component {
             e.target.value, ischema.validate)
         }
         >
-        <HStack justifyContent={ischema.selectAlignment || "flex-start"}>
+        <HStack justifyContent={ischema.selectAlignment || "flex-start"} padding={2}>
           {
             ischema.selectDirection === "row"?
             <HStack flexWrap="wrap" justifyContent={ischema.selectAlignment || "flex-start"}>

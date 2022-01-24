@@ -196,3 +196,18 @@ Display the section in columns
 | columns | `[Object]` |✔| `[]` | The pages under the column |
 | ~.page | <code>[simple &#124; group]</code> |✔||The items array in the group |
 <br/>
+
+### ***Box***
+Display the section in columns
+```jsx
+{
+  box: [
+    group | simple
+  ] | (formValue, addOns) => [],
+  style: CSSStyle
+}
+```
+| Props | Type | Required | Default | Description |
+| :---|:---:|:---:|:---:|:---|
+| style | `CSSStyle` || `default style` | The style of the box |
+<br/>
