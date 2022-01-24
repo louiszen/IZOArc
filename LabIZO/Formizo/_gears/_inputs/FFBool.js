@@ -237,7 +237,7 @@ class FFBool extends Component {
             </Typography>
           </HStack>
         </VStack>
-      )
+      );
     }
 
     return this.renderInside();
