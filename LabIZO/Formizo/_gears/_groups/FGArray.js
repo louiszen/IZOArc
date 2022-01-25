@@ -163,7 +163,7 @@ class FGArray extends Component {
 
   onDeleteItem = (idx) => {
     console.log("onDeleteItem");
-    let {ischema, preAccessor, formValue, _onValueChange} = this.props;
+    let {ischema, preAccessor, formValue, _onValueChange, ignoreValidate, visible} = this.props;
     let {arraySize} = this.state;
     let iname = ischema.name;
     if(!_.isEmpty(preAccessor)){
@@ -181,7 +181,7 @@ class FGArray extends Component {
       
       newItems = newItems.filter(o=>o);
       
-      _onValueChange(iname, newItems);
+      _onValueChange(iname, newItems, null, ignoreValidate, visible);
       this.setState({
         arraySize: arraySize - 1
       });

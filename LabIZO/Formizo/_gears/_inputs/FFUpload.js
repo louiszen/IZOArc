@@ -30,6 +30,8 @@ class FFUpload extends Component {
     //disability
     errorsShowOnHelperText: PropsType.bool.isRequired,
     readOnly: PropsType.bool.isRequired,
+    ignoreValidate: PropsType.bool,
+visible: PropsType.bool,
 
     //runtime
     formValue: PropsType.object.isRequired,
@@ -53,6 +55,8 @@ class FFUpload extends Component {
 
     errorsShowOnHelperText: true,
     readOnly: false,
+    ignoreValidate: true,
+    visible: true,
     
     formValue: {},
     formError: {},
@@ -158,7 +162,7 @@ class FFUpload extends Component {
     let {ischema, iname, formError, uuid, 
       _onValueChange, _onBlurInlineSubmit, 
       _onFieldFocus, _onFieldBlur, errorsShowOnHelperText, 
-      ifieldStyle, readOnly, formValue, addOns} = this.state;
+      ifieldStyle, readOnly, formValue, addOns, ignoreValidate, visible} = this.state;
     if(!ischema) return null;
 
     let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
@@ -182,7 +186,7 @@ class FFUpload extends Component {
           id={uuid}
           onChange={(e) => {
             _onValueChange(iname, 
-              e.target.files[0], ischema.validate);
+              e.target.files[0], ischema.validate, ignoreValidate, visible);
           }}
           onFocus={(e) => {
             _onFieldFocus();

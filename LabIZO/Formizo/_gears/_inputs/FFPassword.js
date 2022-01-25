@@ -27,6 +27,8 @@ class FFPassword extends Component {
     //disability
     errorsShowOnHelperText: PropsType.bool.isRequired,
     readOnly: PropsType.bool.isRequired,
+    ignoreValidate: PropsType.bool,
+visible: PropsType.bool,
 
     //runtime
     formValue: PropsType.object.isRequired,
@@ -50,6 +52,8 @@ class FFPassword extends Component {
 
     errorsShowOnHelperText: true,
     readOnly: false,
+    ignoreValidate: true,
+    visible: true,
 
     formValue: {},
     formError: {},
@@ -86,10 +90,10 @@ class FFPassword extends Component {
         ...props,
       }),
       () => {
-        let { formValue, ischema, iname, _Validate } = this.state;
+        let { formValue, ischema, iname, _Validate, ignoreValidate, visible } = this.state;
         let ivalue = Accessor.Get(formValue, iname);
         if (!_.isEmpty(ischema.validate)) {
-          _Validate(iname, ivalue, ischema.validate);
+          _Validate(iname, ivalue, ischema.validate, ignoreValidate, visible);
         }
         if (callback) callback();
       }
@@ -103,7 +107,7 @@ class FFPassword extends Component {
   };
 
   renderInput() {
-    let { ischema, iname, formValue, formError, _onValueChange, _onBlurInlineSubmit, _onFieldFocus, _onFieldBlur, errorsShowOnHelperText, readOnly, showPassword, fieldSize, theme } = this.state;
+    let { ischema, iname, formValue, formError, _onValueChange, _onBlurInlineSubmit, _onFieldFocus, _onFieldBlur, errorsShowOnHelperText, readOnly, showPassword, fieldSize, theme, ignoreValidate, visible } = this.state;
     if (!ischema) return null;
 
     let ivalue = Accessor.Get(formValue, iname);
@@ -126,7 +130,7 @@ class FFPassword extends Component {
         disabled={ireadOnly}
         fullWidth={ischema.fullWidth !== false}
         name={iname}
-        onChange={(e) => _onValueChange(iname, e.target.value, ischema.validate)}
+        onChange={(e) => _onValueChange(iname, e.target.value, ischema.validate, ignoreValidate, visible)}
         onFocus={(e) => {
           _onFieldFocus();
         }}
@@ -157,7 +161,7 @@ class FFPassword extends Component {
   }
 
   renderTextField() {
-    let { ischema, iname, formValue, formError, _onValueChange, _onBlurInlineSubmit, _onFieldFocus, _onFieldBlur, errorsShowOnHelperText, ifieldStyle, readOnly, showPassword, fieldSize, theme, addOns } =
+    let { ischema, iname, formValue, formError, _onValueChange, _onBlurInlineSubmit, _onFieldFocus, _onFieldBlur, errorsShowOnHelperText, ifieldStyle, readOnly, showPassword, fieldSize, theme, addOns, ignoreValidate, visible } =
       this.state;
     if (!ischema) return null;
     let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
@@ -182,7 +186,7 @@ class FFPassword extends Component {
         label={label || ""}
         helperText={helperText || ""}
         placeholder={ischema.placeholder || ""}
-        onChange={(e) => _onValueChange(iname, e.target.value, ischema.validate)}
+        onChange={(e) => _onValueChange(iname, e.target.value, ischema.validate, ignoreValidate, visible)}
         onFocus={(e) => {
           _onFieldFocus();
         }}

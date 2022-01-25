@@ -88,13 +88,16 @@ class FGFold extends Component {
 
   renderSchema(){
     // eslint-disable-next-line no-unused-vars
-    let {ischema, ...other} = this.props;
+    let {open} = this.state;
+    let {ischema, ignoreValidate, visible, ...other} = this.props;
     let foldSchema = this.getFoldSchema();
     return _.map(foldSchema, (o, i) => {
       return (
         <FItem
           key={i}
           ischema={o}
+          visible={visible && open}
+          ignoreValidate={ignoreValidate || (o.ignoreValidate !== false? !open : false )}
           {...other}/>
       );
     });

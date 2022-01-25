@@ -28,6 +28,8 @@ class FFBool extends Component {
 
     //controls
     readOnly: PropsType.bool.isRequired,
+    ignoreValidate: PropsType.bool,
+visible: PropsType.bool,
 
     //runtime
     formValue: PropsType.object.isRequired,
@@ -49,6 +51,8 @@ class FFBool extends Component {
     _onFieldBlur: () => {},
 
     readOnly: false,
+    ignoreValidate: true,
+    visible: true,
 
     formValue: {},
 
@@ -80,20 +84,20 @@ class FFBool extends Component {
     this.setState((state, props) => ({
       ...props,
     }), () => {
-      let {formValue, ischema, iname, _Validate, _onValueChange} = this.state;
+      let {formValue, ischema, iname, _Validate, _onValueChange, ignoreValidate, visible} = this.state;
       let ivalue = Accessor.Get(formValue, iname);
       if(!_.isEmpty(ischema.validate)){
-        _Validate(iname, ivalue, ischema.validate);
+        _Validate(iname, ivalue, ischema.validate, ignoreValidate, visible);
       }
       if(!ivalue && ischema.defaultValue){
-        _onValueChange(iname, ischema.defaultValue, ischema.validate);
+        _onValueChange(iname, ischema.defaultValue, ischema.validate, ignoreValidate, visible);
       }
       if(callback) callback();
     });
   }
 
   renderCheckBox(){
-    let {formValue, iname, ischema, readOnly, _onValueChange, ifieldStyle, addOns} = this.state;
+    let {formValue, iname, ischema, readOnly, _onValueChange, ifieldStyle, addOns, ignoreValidate, visible} = this.state;
     let ivalue = Accessor.Get(formValue, iname) || false;
     let ireadOnly = ischema.readOnly || readOnly;
     let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
@@ -106,7 +110,7 @@ class FFBool extends Component {
           checked={ivalue}
           onChange={(e) => 
             _onValueChange(iname, 
-              e.target.checked, ischema.validate)} 
+              e.target.checked, ischema.validate, ignoreValidate, visible)} 
           disabled={ireadOnly}/>
       );
     }else{
@@ -119,7 +123,7 @@ class FFBool extends Component {
               checked={ivalue}
               onChange={(e) => 
                 _onValueChange(iname, 
-                  e.target.checked, ischema.validate)} 
+                  e.target.checked, ischema.validate, ignoreValidate, visible)} 
               disabled={ireadOnly}/>
           }
           label={label}
@@ -130,7 +134,7 @@ class FFBool extends Component {
 
   renderSwitch(){
 
-    let {formValue, iname, ischema, readOnly, _onValueChange, ifieldStyle} = this.state;
+    let {formValue, iname, ischema, readOnly, _onValueChange, ifieldStyle, ignoreValidate, visible} = this.state;
     let ivalue = Accessor.Get(formValue, iname) || false;
     let ireadOnly = ischema.readOnly || readOnly;
 
@@ -142,7 +146,7 @@ class FFBool extends Component {
           checked={ivalue}
           onChange={(e) => 
             _onValueChange(iname, 
-              e.target.checked, ischema.validate)} 
+              e.target.checked, ischema.validate, ignoreValidate, visible)} 
           inputProps={{ "aria-label": "primary checkbox" }}
           disabled={ireadOnly}
           />
@@ -169,7 +173,7 @@ class FFBool extends Component {
   }
 
   renderHeart(){
-    let {formValue, iname, ischema, readOnly, _onValueChange, ifieldStyle, addOns} = this.state;
+    let {formValue, iname, ischema, readOnly, _onValueChange, ifieldStyle, addOns, ignoreValidate, visible} = this.state;
     let ivalue = Accessor.Get(formValue, iname) || false;
     let ireadOnly = ischema.readOnly || readOnly;
     let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
@@ -181,7 +185,7 @@ class FFBool extends Component {
           checked={ivalue}
           onChange={(e) => 
             _onValueChange(iname, 
-              e.target.checked, ischema.validate)} 
+              e.target.checked, ischema.validate, ignoreValidate, visible)} 
           disabled={ireadOnly}
           icon={<FavoriteBorder />} 
           checkedIcon={<Favorite />} 
@@ -196,7 +200,7 @@ class FFBool extends Component {
               checked={ivalue}
               onChange={(e) => 
                 _onValueChange(iname, 
-                  e.target.checked, ischema.validate)} 
+                  e.target.checked, ischema.validate, ignoreValidate, visible)} 
               disabled={ireadOnly}
               icon={<FavoriteBorder />} 
               checkedIcon={<Favorite />} 

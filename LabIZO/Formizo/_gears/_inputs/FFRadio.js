@@ -29,6 +29,8 @@ class FFRadio extends Component {
     //disability
     errorsShowOnHelperText: PropsType.bool.isRequired,
     readOnly: PropsType.bool.isRequired,
+    ignoreValidate: PropsType.bool,
+    visible: PropsType.bool,
 
     //runtime
     formValue: PropsType.object.isRequired,
@@ -53,7 +55,9 @@ class FFRadio extends Component {
 
     errorsShowOnHelperText: true,
     readOnly: false,
-    
+    ignoreValidate: true,
+    visible: true,
+
     formValue: {},
     formError: {},
 
@@ -70,7 +74,7 @@ class FFRadio extends Component {
   }
 
   componentDidUpdate(prevProps, prevState){
-    if(!Accessor.IsIdentical(prevProps, this.props, Object.keys(FFRadio.defaultProps))){
+    if(!Accessor.IsIdentical(prevProps, this.props, Object.keys(FFRadio.defaultProps), true, "visible")){
       this._setAllStates();
     }
   }
@@ -85,13 +89,15 @@ class FFRadio extends Component {
     this.setState((state, props) => ({
       ...props,
     }), () => {
-      let {formValue, ischema, iname, _Validate, _onValueChange} = this.state;
+      
+      let {formValue, ischema, iname, _Validate, _onValueChange, ignoreValidate, visible} = this.state;
+      console.log("RUN ", iname + ":" + visible);
       let ivalue = Accessor.Get(formValue, iname);
       if(!_.isEmpty(ischema.validate)){
-        _Validate(iname, ivalue, ischema.validate);
+        _Validate(iname, ivalue, ischema.validate, ignoreValidate, visible);
       }
       if(!ivalue && ischema.defaultValue){
-        _onValueChange(iname, ischema.defaultValue, ischema.validate);
+        _onValueChange(iname, ischema.defaultValue, ischema.validate, ignoreValidate, visible);
       }
     });
   }
@@ -134,7 +140,7 @@ class FFRadio extends Component {
   }
 
   renderRadioGroup(){
-    let {ischema, iname, formValue, _onValueChange} = this.state;
+    let {ischema, iname, formValue, _onValueChange, ignoreValidate, visible} = this.state;
     let ivalue = Accessor.Get(formValue, iname);
     if(ivalue === undefined || ivalue === null) ivalue = "";
     return (
@@ -144,7 +150,7 @@ class FFRadio extends Component {
         value={ivalue}
         onChange={(e) => 
           _onValueChange(iname, 
-            e.target.value, ischema.validate)
+            e.target.value, ischema.validate, ignoreValidate, visible)
         }
         >
         <HStack justifyContent={ischema.selectAlignment || "flex-start"} padding={2}>

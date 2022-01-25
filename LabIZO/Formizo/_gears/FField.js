@@ -46,6 +46,8 @@ class FField extends Component {
     enableInlineSubmit: PropsType.bool,
     errorsShowOnHelperText: PropsType.bool,
     readOnly: PropsType.bool,
+    ignoreValidate: PropsType.bool,
+    visible: PropsType.bool,
 
     //style
     fieldStyle: PropsType.oneOf([
@@ -87,6 +89,8 @@ class FField extends Component {
     enableInlineSubmit: false,
     errorsShowOnHelperText: true, 
     readOnly: false,
+    ignoreValidate: true,
+    visible: true,
 
     fieldStyle: "grid",
 

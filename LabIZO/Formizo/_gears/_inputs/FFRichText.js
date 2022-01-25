@@ -26,6 +26,8 @@ class FFRichText extends Component {
     //disability
     errorsShowOnHelperText: PropsType.bool.isRequired,
     readOnly: PropsType.bool.isRequired,
+    ignoreValidate: PropsType.bool,
+visible: PropsType.bool,
 
     //runtime
     formValue: PropsType.object.isRequired,
@@ -49,6 +51,8 @@ class FFRichText extends Component {
 
     errorsShowOnHelperText: true,
     readOnly: false,
+    ignoreValidate: true,
+    visible: true,
     
     formValue: {},
     formError: {},
@@ -81,13 +85,13 @@ class FFRichText extends Component {
     this.setState((state, props) => ({
       ...props,
     }), () => {
-      let {formValue, ischema, iname, _Validate, _onValueChange} = this.state;
+      let {formValue, ischema, iname, _Validate, _onValueChange, ignoreValidate, visible} = this.state;
       let ivalue = Accessor.Get(formValue, iname);
       if(!_.isEmpty(ischema.validate)){
-        _Validate(iname, ivalue, ischema.validate);
+        _Validate(iname, ivalue, ischema.validate, ignoreValidate, visible);
       }
       if(!ivalue && ischema.defaultValue){
-        _onValueChange(iname, ischema.defaultValue, ischema.validate);
+        _onValueChange(iname, ischema.defaultValue, ischema.validate, ignoreValidate, visible);
       }
     });
   }
@@ -95,7 +99,7 @@ class FFRichText extends Component {
   renderRTE(){
     let {ischema, iname, formValue,  
       _onValueChange, _onBlurInlineSubmit, 
-      _onFieldFocus, _onFieldBlur, readOnly } = this.state;
+      _onFieldFocus, _onFieldBlur, readOnly, ignoreValidate, visible } = this.state;
     if(!ischema) return null;
 
     let ivalue = Accessor.Get(formValue, iname);
@@ -140,7 +144,7 @@ class FFRichText extends Component {
       value={ivalue} 
       onChange={(e) => 
         _onValueChange(iname, 
-          e, ischema.validate)} 
+          e, ischema.validate, ignoreValidate, visible)} 
       readOnly={ireadOnly}
       onFocus={(e) => {
         _onFieldFocus();

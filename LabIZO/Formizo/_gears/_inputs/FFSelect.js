@@ -17,10 +17,50 @@ class FFSelect extends Component {
   static propTypes = {
     //data
     ischema: PropsType.object.isRequired,
+    iname: PropsType.string.isRequired,
+
+    //root func
+    _onValueChange: PropsType.func.isRequired,
+    _onBlurInlineSubmit: PropsType.func.isRequired,
+    _onInlineSubmit: PropsType.func.isRequired,
+    _onFieldFocus: PropsType.func.isRequired,
+    _onFieldBlur: PropsType.func.isRequired,
+
+    //disability
+    errorsShowOnHelperText: PropsType.bool.isRequired,
+    readOnly: PropsType.bool.isRequired,
+    ignoreValidate: PropsType.bool,
+visible: PropsType.bool,
+
+    //runtime
+    formValue: PropsType.object.isRequired,
+    formError: PropsType.object.isRequired,
+
+    //style
+    ifieldStyle: PropsType.oneOf([
+      "grid", "standard", "filled", "outlined"
+    ]).isRequired
   }
 
   static defaultProps = {
     ischema: {},
+    iname: "",
+
+    _onValueChange: () => {},
+    _onBlurInlineSubmit: () => {},
+    _onInlineSubmit: () => {},
+    _onFieldFocus: () => {},
+    _onFieldBlur: () => {},
+
+    errorsShowOnHelperText: true,
+    readOnly: false,
+    ignoreValidate: true,
+    visible: true,
+    
+    formValue: {},
+    formError: {},
+
+    fieldStyle: "grid"
   }
 
   constructor(){

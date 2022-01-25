@@ -220,10 +220,10 @@ class Formizo extends Component {
     });
   };
 
-  _onValueChange = (name, value, criteria, visible) => {
+  _onValueChange = (name, value, criteria, ignoreValidate, visible) => {
     
     let { formValue, onChange } = this.state;
-    this._Validate(name, value, criteria, visible);
+    this._Validate(name, value, criteria, ignoreValidate, visible);
     if (formValue) {
       let names = name.split(".");
       if (!isNaN(names[names.length - 1])) {
@@ -295,12 +295,12 @@ class Formizo extends Component {
     return false;
   };
 
-  _onInlineSubmit = (field, criteria, visible) => {
+  _onInlineSubmit = (field, criteria, ignoreValidate, visible) => {
     console.log("_onInlineSubmit");
     let { onInlineSubmit, formValue, formHidden } = this.state;
     let value = Accessor.Get(formValue, field);
 
-    if (!this._Validate(field, value, criteria, visible)) {
+    if (!this._Validate(field, value, criteria, ignoreValidate, visible)) {
       return;
     }
 
@@ -383,9 +383,12 @@ class Formizo extends Component {
     return false;
   };
 
-  _Validate = (name, value, criteria = [], visible = true) => {
+  _Validate = (name, value, criteria = [], ignoreValidate = true, visible = true) => {
     let { formError } = this.state;
-    if (_.isEmpty(criteria) || !visible) return true;
+    if (_.isEmpty(criteria) || (ignoreValidate && !visible)){
+      Accessor.Delete(formError, name);
+      return true;
+    } 
 
     let error = "";
     _.map(criteria, (o, i) => {

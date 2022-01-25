@@ -33,6 +33,8 @@ class FFDate extends Component {
     //disability
     errorsShowOnHelperText: PropsType.bool.isRequired,
     readOnly: PropsType.bool.isRequired,
+    ignoreValidate: PropsType.bool,
+visible: PropsType.bool,
 
     //runtime
     formValue: PropsType.object.isRequired,
@@ -57,6 +59,8 @@ class FFDate extends Component {
 
     errorsShowOnHelperText: true,
     readOnly: false,
+    ignoreValidate: true,
+    visible: true,
     
     formValue: {},
     formError: {},
@@ -89,13 +93,13 @@ class FFDate extends Component {
     this.setState((state, props) => ({
       ...props,
     }), () => {
-      let {formValue, ischema, iname, _Validate, _onValueChange} = this.state;
+      let {formValue, ischema, iname, _Validate, _onValueChange, ignoreValidate, visible} = this.state;
       let ivalue = Accessor.Get(formValue, iname);
       if(!_.isEmpty(ischema.validate)){
-        _Validate(iname, ivalue, ischema.validate);
+        _Validate(iname, ivalue, ischema.validate, ignoreValidate, visible);
       }
       if(!ivalue && ischema.defaultValue){
-        _onValueChange(iname, ischema.defaultValue, ischema.validate);
+        _onValueChange(iname, ischema.defaultValue, ischema.validate, ignoreValidate, visible);
       }
     });
   }
@@ -112,7 +116,7 @@ class FFDate extends Component {
   renderTimePicker(){
     let {ischema, iname, itype, formValue,  
       _onValueChange, _onBlurInlineSubmit, 
-      _onFieldFocus, _onFieldBlur, readOnly} = this.state;
+      _onFieldFocus, _onFieldBlur, readOnly, ignoreValidate, visible} = this.state;
     if(!ischema) return null;
     let ivalue = Accessor.Get(formValue, iname);
     let idateformat = ischema.dateFormat || "DD/MM/YYYY HH:mm";
@@ -132,7 +136,7 @@ class FFDate extends Component {
         showTime={itype === "datetime"}
         onChange={(v) =>
           _onValueChange(iname, 
-            this._handleReturn(v, idateformat), ischema.validate)
+            this._handleReturn(v, idateformat), ischema.validate, ignoreValidate, visible)
         }
         onFocus={(e) => {
           _onFieldFocus();
@@ -150,7 +154,7 @@ class FFDate extends Component {
   renderDatePicker(){
     let {ischema, iname, itype, formValue,  
       _onValueChange, _onBlurInlineSubmit, 
-      _onFieldFocus, _onFieldBlur, readOnly} = this.state;
+      _onFieldFocus, _onFieldBlur, readOnly, ignoreValidate, visible} = this.state;
     if(!ischema) return null;
     let ivalue = Accessor.Get(formValue, iname);
     let idateformat = ischema.dateFormat || "moment";
@@ -170,7 +174,7 @@ class FFDate extends Component {
         value={dpvalue}        
         onChange={(v) => {
           _onValueChange(iname, 
-            this._handleReturn(v, idateformat), ischema.validate);
+            this._handleReturn(v, idateformat), ischema.validate, ignoreValidate, visible);
         }}
         onFocus={(e) => {
           _onFieldFocus();

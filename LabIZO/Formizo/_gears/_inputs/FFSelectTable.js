@@ -27,6 +27,8 @@ class FFSelectTable extends Component {
     //disability
     errorsShowOnHelperText: PropsType.bool.isRequired,
     readOnly: PropsType.bool.isRequired,
+    ignoreValidate: PropsType.bool,
+visible: PropsType.bool,
 
     //runtime
     formValue: PropsType.object.isRequired,
@@ -51,6 +53,8 @@ class FFSelectTable extends Component {
 
     errorsShowOnHelperText: true,
     readOnly: false,
+    ignoreValidate: true,
+    visible: true,
     
     formValue: {},
     formError: {},
@@ -83,13 +87,13 @@ class FFSelectTable extends Component {
     this.setState((state, props) => ({
       ...props,
     }), () => {
-      let {formValue, ischema, iname, _Validate, _onValueChange} = this.state;
+      let {formValue, ischema, iname, _Validate, _onValueChange, ignoreValidate, visible} = this.state;
       let ivalue = Accessor.Get(formValue, iname);
       if(!_.isEmpty(ischema.validate)){
-        _Validate(iname, ivalue, ischema.validate);
+        _Validate(iname, ivalue, ischema.validate, ignoreValidate, visible);
       }
       if(!ivalue && ischema.defaultValue){
-        _onValueChange(iname, ischema.defaultValue, ischema.validate);
+        _onValueChange(iname, ischema.defaultValue, ischema.validate, ignoreValidate, visible);
       }
       if(this.MountTablizo){
         this.MountTablizo.SetSelectedRows(ivalue);
@@ -135,8 +139,8 @@ class FFSelectTable extends Component {
 
   _onRowSelected = (n) => {
     let selectedRows = this.MountTablizo.GetSelectedRows();
-    let {_onValueChange, iname, ischema} = this.props;
-    _onValueChange(iname, selectedRows, ischema.validate);
+    let {_onValueChange, iname, ischema, ignoreValidate, visible} = this.props;
+    _onValueChange(iname, selectedRows, ischema.validate, ignoreValidate, visible);
   }
 
   render(){

@@ -180,7 +180,7 @@ class Rect_YesNo extends Component {
           }}
           addOns={data.addOns}
           ifieldStyle="outlined"
-          _onValueChange={(iname, value, validate) => data.callback?.onValueChange(id, iname, value, validate)}
+          _onValueChange={(iname, value, validate, ignoreValidate, visible) => data.callback?.onValueChange(id, iname, value, validate, ignoreValidate, visible)}
           formValue={data}
           />
       </VStack>

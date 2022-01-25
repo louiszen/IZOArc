@@ -63,13 +63,13 @@ class AuthX {
       let group = groups.find(o => o.ID === reqGroup);
       if(!group) {
         check.G = false;
-        return false;
+      }else{
+        check.G = true;
+        check.A = this.AuthCheck(group.authority, reqAuth);
+        check.L = this.LevelCheck(level, reqLevel);
+        check.F = this.FuncCheck(group.authority, reqAuth, reqFunc);
+        check.R = this.RoleCheck(group.role, reqRole);
       }
-      check.G = true;
-      check.A = this.AuthCheck(group.authority, reqAuth);
-      check.L = this.LevelCheck(level, reqLevel);
-      check.F = this.FuncCheck(group.authority, reqAuth, reqFunc);
-      check.R = this.RoleCheck(group.role, reqRole);
     }
 
     if(DEBUG){

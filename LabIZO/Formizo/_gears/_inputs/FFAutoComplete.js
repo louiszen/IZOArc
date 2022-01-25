@@ -27,6 +27,8 @@ class FFAutoComplete extends Component {
     //disability
     errorsShowOnHelperText: PropsType.bool.isRequired,
     readOnly: PropsType.bool.isRequired,
+    ignoreValidate: PropsType.bool,
+visible: PropsType.bool,
 
     //runtime
     formValue: PropsType.object.isRequired,
@@ -51,7 +53,9 @@ class FFAutoComplete extends Component {
 
     errorsShowOnHelperText: true,
     readOnly: false,
-    
+    ignoreValidate: true,
+    visible: true,
+
     formValue: {},
     formError: {},
 
@@ -100,13 +104,13 @@ class FFAutoComplete extends Component {
     this.setState((state, props) => ({
       ...props,
     }), () => {
-      let {formValue, ischema, iname, _Validate, _onValueChange, addOns, value} = this.state;
+      let {formValue, ischema, iname, _Validate, _onValueChange, addOns, value, ignoreValidate, visible} = this.state;
       let ivalue = Accessor.Get(formValue, iname);
       if(!_.isEmpty(ischema.validate)){
-        _Validate(iname, ivalue, ischema.validate);
+        _Validate(iname, ivalue, ischema.validate, ignoreValidate, visible);
       }
       if(!ivalue && ischema.defaultValue){       
-        _onValueChange(iname, ischema.defaultValue, ischema.validate);
+        _onValueChange(iname, ischema.defaultValue, ischema.validate, ignoreValidate, visible);
       }
       if(ivalue && !value){
         let options = Accessor.Get(addOns, ischema.selectRef);

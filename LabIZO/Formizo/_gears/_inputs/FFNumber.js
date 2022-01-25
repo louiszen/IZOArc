@@ -27,6 +27,8 @@ class FFNumber extends Component {
     //controls
     errorsShowOnHelperText: PropsType.bool.isRequired,
     readOnly: PropsType.bool.isRequired,
+    ignoreValidate: PropsType.bool,
+visible: PropsType.bool,
 
     //runtime
     formValue: PropsType.object.isRequired,
@@ -52,6 +54,8 @@ class FFNumber extends Component {
 
     errorsShowOnHelperText: true,
     readOnly: false,
+    ignoreValidate: true,
+    visible: true,
     
     formValue: {},
     formError: {},
@@ -86,13 +90,13 @@ class FFNumber extends Component {
     this.setState((state, props) => ({
       ...props,
     }), () => {
-      let {formValue, ischema, iname, _Validate, _onValueChange} = this.state;
+      let {formValue, ischema, iname, _Validate, _onValueChange, ignoreValidate, visible} = this.state;
       let ivalue = Accessor.Get(formValue, iname);
       if(!_.isEmpty(ischema.validate)){
-        _Validate(iname, Number(ivalue), ischema.validate);
+        _Validate(iname, Number(ivalue), ischema.validate, ignoreValidate, visible);
       }
       if(!ivalue && ischema.defaultValue){
-        _onValueChange(iname, Number(ischema.defaultValue), ischema.validate);
+        _onValueChange(iname, Number(ischema.defaultValue), ischema.validate, ignoreValidate, visible);
       }
     });
   }
@@ -101,7 +105,7 @@ class FFNumber extends Component {
     let {ischema, iname, formValue, formError, 
       _onValueChange, _onBlurInlineSubmit, 
       _onFieldFocus, _onFieldBlur, errorsShowOnHelperText, 
-      readOnly, theme} = this.state;
+      readOnly, theme, ignoreValidate, visible} = this.state;
     if(!ischema) return null;
 
     let ivalue = Accessor.Get(formValue, iname);
@@ -126,7 +130,7 @@ class FFNumber extends Component {
         name={iname}
         onChange={(e) => 
           _onValueChange(iname, 
-            Number(e.target.value), ischema.validate)
+            Number(e.target.value), ischema.validate, ignoreValidate, visible)
         }
         onFocus={(e) => {
           _onFieldFocus();
@@ -164,7 +168,7 @@ class FFNumber extends Component {
     let {ischema, iname, formValue, formError, 
       _onValueChange, _onBlurInlineSubmit, 
       _onFieldFocus, _onFieldBlur, errorsShowOnHelperText, 
-      ifieldStyle, readOnly, fieldSize, theme, addOns} = this.state;
+      ifieldStyle, readOnly, fieldSize, theme, addOns, ignoreValidate, visible} = this.state;
     if(!ischema) return null;
 
     let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
@@ -192,7 +196,7 @@ class FFNumber extends Component {
         placeholder={ischema.placeholder || ""}
         onChange={(e) => 
           _onValueChange(iname, 
-            Number(e.target.value), ischema.validate)} 
+            Number(e.target.value), ischema.validate, ignoreValidate, visible)} 
         onFocus={(e) => {
           _onFieldFocus();
         }}

@@ -30,6 +30,8 @@ class FFCheckbox extends Component {
     //disability
     errorsShowOnHelperText: PropsType.bool.isRequired,
     readOnly: PropsType.bool.isRequired,
+    ignoreValidate: PropsType.bool,
+visible: PropsType.bool,
 
     //runtime
     formValue: PropsType.object.isRequired,
@@ -54,6 +56,8 @@ class FFCheckbox extends Component {
 
     errorsShowOnHelperText: true,
     readOnly: false,
+    ignoreValidate: true,
+    visible: true,
     
     formValue: {},
     formError: {},
@@ -86,33 +90,33 @@ class FFCheckbox extends Component {
     this.setState((state, props) => ({
       ...props,
     }), () => {
-      let {formValue, ischema, iname, _Validate, _onValueChange} = this.state;
+      let {formValue, ischema, iname, _Validate, _onValueChange, ignoreValidate, visible} = this.state;
       let ivalue = Accessor.Get(formValue, iname);
       if(!_.isEmpty(ischema.validate)){
-        _Validate(iname, ivalue, ischema.validate);
+        _Validate(iname, ivalue, ischema.validate, ignoreValidate, visible);
       }
       if(!ivalue && ischema.defaultValue){
-        _onValueChange(iname, ischema.defaultValue, ischema.validate);
+        _onValueChange(iname, ischema.defaultValue, ischema.validate, ignoreValidate, visible);
       }
     });
   }
 
   onChecked = (oname, checked) => {
-    let {formValue, iname, _onValueChange, ischema} = this.state;
+    let {formValue, iname, _onValueChange, ischema, ignoreValidate, visible} = this.state;
     let ivalue = Accessor.Get(formValue, iname) || [];
 
     if(checked && !ivalue.includes(oname)){
       ivalue.push(oname);
-      _onValueChange(iname, ivalue, ischema.validate);
+      _onValueChange(iname, ivalue, ischema.validate, ignoreValidate, visible);
     }else if(!checked && ivalue.includes(oname)){
       ivalue = ivalue.filter(o => o !== oname);
-      _onValueChange(iname, ivalue, ischema.validate);
+      _onValueChange(iname, ivalue, ischema.validate, ignoreValidate, visible);
     }
 
   }
 
   renderOption(ivalue){
-    let {ischema, addOns, iname, _onValueChange} = this.state;
+    let {ischema, addOns, iname, _onValueChange, ignoreValidate, visible} = this.state;
     let options;
     if(_.isArray(ischema.selectRef)){
       options = ischema.selectRef;
@@ -158,7 +162,7 @@ class FFCheckbox extends Component {
               onChange={(e) => {
                 if(ischema.fieldFormat === "object"){
                   _onValueChange(oname, 
-                    e.target.checked, ischema.validate);
+                    e.target.checked, ischema.validate, ignoreValidate, visible);
                 }else{
                   this.onChecked(val, e.target.checked);
                 }

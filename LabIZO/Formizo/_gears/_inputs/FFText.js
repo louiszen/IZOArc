@@ -27,6 +27,8 @@ class FFText extends Component {
     //disability
     errorsShowOnHelperText: PropsType.bool.isRequired,
     readOnly: PropsType.bool.isRequired,
+    ignoreValidate: PropsType.bool,
+visible: PropsType.bool,
 
     //runtime
     formValue: PropsType.object.isRequired,
@@ -50,6 +52,8 @@ class FFText extends Component {
 
     errorsShowOnHelperText: true,
     readOnly: false,
+    ignoreValidate: true,
+    visible: true,
 
     formValue: {},
     formError: {},
@@ -87,13 +91,13 @@ class FFText extends Component {
         ...props,
       }),
       () => {
-        let { formValue, ischema, iname, _Validate, _onValueChange } = this.state;
+        let { formValue, ischema, iname, _Validate, _onValueChange, ignoreValidate, visible } = this.state;
         let ivalue = Accessor.Get(formValue, iname);
         if (!_.isEmpty(ischema.validate)) {
-          _Validate(iname, ivalue, ischema.validate);
+          _Validate(iname, ivalue, ischema.validate, ignoreValidate, visible);
         }
         if (!ivalue && ischema.defaultValue) {
-          _onValueChange(iname, ischema.defaultValue, ischema.validate);
+          _onValueChange(iname, ischema.defaultValue, ischema.validate, ignoreValidate, visible);
         }
 
         if (callback) callback();
@@ -102,7 +106,7 @@ class FFText extends Component {
   };
 
   renderInput() {
-    let { ischema, iname, formValue, formError, _onValueChange, _onBlurInlineSubmit, _onFieldFocus, _onFieldBlur, errorsShowOnHelperText, readOnly, theme } = this.state;
+    let { ischema, iname, formValue, formError, _onValueChange, _onBlurInlineSubmit, _onFieldFocus, _onFieldBlur, errorsShowOnHelperText, readOnly, theme, ignoreValidate, visible } = this.state;
     if (!ischema) return null;
 
     let ivalue = Accessor.Get(formValue, iname);
@@ -125,7 +129,7 @@ class FFText extends Component {
         disabled={ireadOnly}
         fullWidth={ischema.fullWidth !== false}
         name={iname}
-        onChange={(e) => _onValueChange(iname, e.target.value, ischema.validate)}
+        onChange={(e) => _onValueChange(iname, e.target.value, ischema.validate, ignoreValidate, visible)}
         onFocus={(e) => {
           _onFieldFocus();
         }}
@@ -154,7 +158,7 @@ class FFText extends Component {
   }
 
   renderTextField() {
-    let { ischema, iname, formValue, formError, _onValueChange, _onBlurInlineSubmit, _onFieldFocus, _onFieldBlur, errorsShowOnHelperText, ifieldStyle, readOnly, fieldSize, theme, addOns } = this.state;
+    let { ischema, iname, formValue, formError, _onValueChange, _onBlurInlineSubmit, _onFieldFocus, _onFieldBlur, errorsShowOnHelperText, ifieldStyle, readOnly, fieldSize, theme, addOns, ignoreValidate, visible } = this.state;
     if (!ischema) return null;
 
     let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
@@ -179,7 +183,7 @@ class FFText extends Component {
           value={ivalue}
           maskChar={ischema.maskChar || " "}
           formatChars={ischema.formatChars || { 9: "[0-9]", a: "[A-Za-z]", "*": "[A-Za-z0-9]" }}
-          onChange={(e) => _onValueChange(iname, e.target.value, ischema.validate)}
+          onChange={(e) => _onValueChange(iname, e.target.value, ischema.validate, ignoreValidate, visible)}
           onFocus={(e) => {
             _onFieldFocus();
           }}
@@ -218,7 +222,7 @@ class FFText extends Component {
         label={label || ""}
         helperText={helperText || ""}
         placeholder={ischema.placeholder || ""}
-        onChange={(e) => _onValueChange(iname, e.target.value, ischema.validate)}
+        onChange={(e) => _onValueChange(iname, e.target.value, ischema.validate, ignoreValidate, visible)}
         onFocus={(e) => {
           _onFieldFocus();
         }}

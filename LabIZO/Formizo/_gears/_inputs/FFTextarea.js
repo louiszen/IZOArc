@@ -27,6 +27,8 @@ class FFTextarea extends Component {
     //disability
     errorsShowOnHelperText: PropsType.bool.isRequired,
     readOnly: PropsType.bool.isRequired,
+    ignoreValidate: PropsType.bool,
+visible: PropsType.bool,
 
     //runtime
     formValue: PropsType.object.isRequired,
@@ -50,6 +52,8 @@ class FFTextarea extends Component {
 
     errorsShowOnHelperText: true,
     readOnly: false,
+    ignoreValidate: true,
+    visible: true,
     
     formValue: {},
     formError: {},
@@ -82,13 +86,13 @@ class FFTextarea extends Component {
     this.setState((state, props) => ({
       ...props,
     }), () => {
-      let {formValue, ischema, iname, _Validate, _onValueChange} = this.state;
+      let {formValue, ischema, iname, _Validate, _onValueChange, ignoreValidate, visible} = this.state;
       let ivalue = Accessor.Get(formValue, iname);
       if(!_.isEmpty(ischema.validate)){
-        _Validate(iname, ivalue, ischema.validate);
+        _Validate(iname, ivalue, ischema.validate, ignoreValidate, visible);
       }
       if(!ivalue && ischema.defaultValue){
-        _onValueChange(iname, ischema.defaultValue, ischema.validate);
+        _onValueChange(iname, ischema.defaultValue, ischema.validate, ignoreValidate, visible);
       }
     });
   }
@@ -96,7 +100,7 @@ class FFTextarea extends Component {
   renderInput(){
     let {ischema, iname, formValue, formError, 
       _onValueChange, _onBlurInlineSubmit, 
-      _onFieldFocus, _onFieldBlur, errorsShowOnHelperText, readOnly, theme} = this.state;
+      _onFieldFocus, _onFieldBlur, errorsShowOnHelperText, readOnly, theme, ignoreValidate, visible} = this.state;
     if(!ischema) return null;
 
     let ivalue = Accessor.Get(formValue, iname);
@@ -123,7 +127,7 @@ class FFTextarea extends Component {
         name={iname}
         onChange={(e) => 
           _onValueChange(iname, 
-            e.target.value, ischema.validate)
+            e.target.value, ischema.validate, ignoreValidate, visible)
         }
         onFocus={(e) => {
           _onFieldFocus();
@@ -157,7 +161,7 @@ class FFTextarea extends Component {
   renderTextField(){
     let {ischema, iname, formValue, formError, 
       _onValueChange, _onBlurInlineSubmit, 
-      _onFieldFocus, _onFieldBlur, errorsShowOnHelperText, ifieldStyle, readOnly, fieldSize, theme, addOns} = this.state;
+      _onFieldFocus, _onFieldBlur, errorsShowOnHelperText, ifieldStyle, readOnly, fieldSize, theme, addOns, ignoreValidate, visible} = this.state;
     if(!ischema) return null;
 
     let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
@@ -186,7 +190,7 @@ class FFTextarea extends Component {
         placeholder={ischema.placeholder || ""}
         onChange={(e) => 
           _onValueChange(iname, 
-            e.target.value, ischema.validate)} 
+            e.target.value, ischema.validate, ignoreValidate, visible)} 
         onFocus={(e) => {
           _onFieldFocus();
         }}

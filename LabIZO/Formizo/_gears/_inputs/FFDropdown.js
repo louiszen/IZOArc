@@ -29,6 +29,8 @@ class FFDropdown extends Component {
     //disability
     errorsShowOnHelperText: PropsType.bool.isRequired,
     readOnly: PropsType.bool.isRequired,
+    ignoreValidate: PropsType.bool,
+visible: PropsType.bool,
 
     //runtime
     formValue: PropsType.object.isRequired,
@@ -53,6 +55,8 @@ class FFDropdown extends Component {
 
     errorsShowOnHelperText: true,
     readOnly: false,
+    ignoreValidate: true,
+    visible: true,
     
     formValue: {},
     formError: {},
@@ -85,13 +89,13 @@ class FFDropdown extends Component {
     this.setState((state, props) => ({
       ...props,
     }), () => {
-      let {formValue, ischema, iname, _Validate, _onValueChange} = this.state;
+      let {formValue, ischema, iname, _Validate, _onValueChange, ignoreValidate, visible} = this.state;
       let ivalue = Accessor.Get(formValue, iname);
       if(!_.isEmpty(ischema.validate)){
-        _Validate(iname, ivalue, ischema.validate);
+        _Validate(iname, ivalue, ischema.validate, ignoreValidate, visible);
       }
       if(!ivalue && ischema.defaultValue){
-        _onValueChange(iname, ischema.defaultValue, ischema.validate);
+        _onValueChange(iname, ischema.defaultValue, ischema.validate, ignoreValidate, visible);
       }
     });
   }
@@ -141,7 +145,7 @@ class FFDropdown extends Component {
   }
 
   renderSelect(){
-    let {ischema, iname, formValue, _onValueChange} = this.state;
+    let {ischema, iname, formValue, _onValueChange, ignoreValidate, visible} = this.state;
     let ivalue = Accessor.Get(formValue, iname);
     if(ivalue === undefined || ivalue === null) ivalue = "";
     return (
@@ -150,7 +154,7 @@ class FFDropdown extends Component {
         onChange={(e) => {
           e.stopPropagation();
           _onValueChange(iname, 
-            e.target.value, ischema.validate);
+            e.target.value, ischema.validate, ignoreValidate, visible);
           }
         }
         fullWidth={ischema.fullWidth !== false}

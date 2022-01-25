@@ -63,18 +63,30 @@ class Accessor {
     this.Set(obj, accessor, undefined);
   }
 
+  static isTrueEmpty(v){
+    if(v === null) return true;
+    if((_.isArray(v) || _.isString(v)) && _.isEmpty(v)) return true;
+    if(_.isObject(v) && this.isDeepEmpty(v)) return true;
+    return false;
+  }
+
   /**
    * 
    * @param {*} obj1 
    * @param {*} obj2 
    * @param {[String]} fields
    */
-  static IsIdentical(obj1, obj2, fields = null){
+  static IsIdentical(obj1, obj2, fields = null, DEBUG = false, DEBUGfield = ""){
     if(fields && fields.length){
       for(var i=0; i<fields.length; i++){
         let v1 = this.Get(obj1, fields[i]);
         let v2 = this.Get(obj2, fields[i]);
-        if(!_.isEqual(v1, v2) && !(_.isEmpty(v1) && _.isEmpty(v2))){
+        if(DEBUG){
+          if(_.isEmpty(DEBUGfield) || DEBUGfield === fields[i]){
+            console.log(fields[i], v1, v2);
+          }
+        }
+        if(!_.isEqual(v1, v2) && !(this.isTrueEmpty(v1) && this.isTrueEmpty(v2))){
           return false;
         }
       }

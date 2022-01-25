@@ -99,6 +99,7 @@ Fields can be folded and controlled by value in the form
   fold: [
     group | simple
   ] | (formValue, addOns) => [],
+  ignoreValidate?: Boolean | true
 }
 ```
 | Props | Type | Required | Default | Description |
@@ -109,6 +110,7 @@ Fields can be folded and controlled by value in the form
 | controlFunc | `(doc, field) => Boolean` ||| The function for determine fold if the control field is not boolean or straight forward |
 | foldStyle | `String` || `outlined` | The style of the container `outlined, none`|
 | fold | <code>[simple &#124; group]</code> |✔||The items array in the group |
+| ignoreValidate | `Boolean` || `true` | Ignore validation if it is invisible |
 <br/>
 
 ### ***Collapse***
