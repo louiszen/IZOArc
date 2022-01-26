@@ -65,12 +65,13 @@ class SysUAC extends Component {
     let res = await SUAC.GetProject();
     let {Success, payload} = res;
     if (Success === true) {
-      let { projDoc, userlist, rolelist, grouplist } = payload;
+      let { projDoc, userlist, rolelist, grouplist, companylist } = payload;
       this.setState({
         projDoc: projDoc,
         userlist: userlist,
         rolelist: rolelist,
-        grouplist: grouplist
+        grouplist: grouplist, 
+        companylist: companylist
       });
       if(callback) callback();
     }
@@ -95,7 +96,7 @@ class SysUAC extends Component {
   }
 
   renderProjectTabs(){
-    let {projDoc, userlist, rolelist, grouplist, defaultTab} = this.state;
+    let {projDoc, userlist, rolelist, grouplist, companylist, defaultTab} = this.state;
     if(!projDoc) return;
     return (
       <Tabbizo
@@ -108,6 +109,7 @@ class SysUAC extends Component {
           userlist: userlist,
           rolelist: rolelist,
           grouplist: grouplist,
+          companylist: companylist,
           Refresh: this._Refresh
         }}
         defaultTab={defaultTab}

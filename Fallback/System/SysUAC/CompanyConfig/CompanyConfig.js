@@ -9,12 +9,10 @@ import schema from "./schema";
 import datalink from "./datalink";
 
 import Datumizo from "IZOArc/LabIZO/Datumizo/Datumizo";
-import { VStack, HStack, Spacer } from "IZOArc/LabIZO/Stackizo";
+import { VStack } from "IZOArc/LabIZO/Stackizo";
 import { Accessor, ColorX, AuthX, STORE, LocaleX } from "IZOArc/STATIC";
 import { IZOTheme } from "__SYSDefault/Theme";
 import { Denied } from "IZOArc/Fallback";
-import { GroupRounded } from "@mui/icons-material";
-import GroupUsers from "./_parts/GroupUsers";
 import SUAC from "IZOArc/API/SUAC";
 
 /**
@@ -22,52 +20,45 @@ import SUAC from "IZOArc/API/SUAC";
  * add ~react-schema.js as schema.js in the same scope
  * @augments {Component<Props, State>}
  */
-class GroupConfig extends Component {
+class CompanyConfig extends Component {
 
   static propTypes = {
     addOns: PropsType.object,
     onDataChange: PropsType.func,
     projDoc: PropsType.object,
-    onUpdate: PropsType.func,
-    userlist: PropsType.array,
-    grouplist: PropsType.array,
-    rolelist: PropsType.array,
-    companylist: PropsType.array,
+    onUpdate: PropsType.func
   }
 
   static defaultProps = {
     addOns: {},
     onDataChange: undefined,
     projDoc: {},
-    onUpdate: () => {},
-    userlist: [],
-    grouplist: [],
-    rolelist: [],
-    companylist: []
+    onUpdate: () => {}
   }
 
   constructor(){
     super();
     this.state = {
-      selectedGroup: null,
-      selectedGroupDoc: null,
       title: () => LocaleX.Parse({
-        EN: "Project Groups",
-        TC: "項目群組"
+        EN: "Company",
+        TC: "公司"
       }),
       serverSidePagination: false, 
       base: {
         title: () => LocaleX.Parse({
-          EN: "Project Groups",
-          TC: "項目群組"
+          EN: "Company",
+          TC: "公司"
         }),
-        exportDoc: "proj_groups",
+        exportDoc: "companies",
         schema: schema,
-        reqAuth: "System.UAC.Groups",
+        rowIdAccessor: "_id",
+        reqAuth: "System.UAC.Companies",
 
         noDefaultTable: false,
         noDefaultButtons: false,
-        refreshButton: "right",
+        refreshButton: "none",
+        usePropsData: false,
+        timeRanged: "none",
 
         tablizo: {
           columnsToolbar: false,
@@ -92,30 +83,26 @@ class GroupConfig extends Component {
         operations: {
           Add: {
             title: () => LocaleX.Parse({
-              EN: "Add Project Groups",
-              TC: "新增項目群組"
+              EN: "Add Company",
+              TC: "新增公司"
             }),
             url: datalink.Request.Add,
             success:  () => LocaleX.Parse({
-              EN: "Project Groups Added Successfully",
-              TC: "成功新增項目群組"
+              EN: "Company Added Successfully",
+              TC: "成功新增公司"
             }),
             fail:  () => LocaleX.Parse({
-              EN: "Project Groups Add Failed: ",
-              TC: "新增項目群組失敗: "
+              EN: "Company Add Failed: ",
+              TC: "新增公司失敗: "
             }),
             schema: schema.Add,
             buttons: ["Clear", "Submit"],
-            onSubmit: "Add",
-            onSuccess: (payload, success) => {
-              this.Refresh();
-              success();
-            }
+            onSubmit: "Add"
           },
           Delete: {
             title: () => LocaleX.Parse({
-              EN: "Delete this Project Groups?",
-              TC: "刪除項目群組"
+              EN: "Delete this Company?",
+              TC: "刪除公司"
             }),
             content: () => LocaleX.Parse({
               EN: "Caution: This is irrevertable.",
@@ -123,54 +110,46 @@ class GroupConfig extends Component {
             }),
             url: datalink.Request.Delete,
             success: () => LocaleX.Parse({
-              EN: "Project Groups Deleted Successfully.",
-              TC: "成功刪除項目群組"
+              EN: "Company Deleted Successfully.",
+              TC: "成功刪除公司"
             }),
             fail: () => LocaleX.Parse({
-              EN: "Project Groups Delete Failed: ",
-              TC: "刪除項目群組失敗: "
+              EN: "Company Delete Failed: ",
+              TC: "刪除公司失敗: "
             }),
-            onSubmit: "Delete",
-            onSuccess: (payload, success) => {
-              this.Refresh();
-              success();
-            }
+            onSubmit: "Delete"
           },
           Edit: {
             title: () => LocaleX.Parse({
-              EN: "Edit Project Groups",
-              TC: "編輯項目群組"
+              EN: "Edit Company",
+              TC: "編輯公司"
             }),
             url: datalink.Request.Edit,
             success: () => LocaleX.Parse({
-              EN: "Project Groups Edited Successfully",
-              TC: "成功編輯項目群組"
+              EN: "Company Edited Successfully",
+              TC: "成功編輯公司"
             }),
             fail: () => LocaleX.Parse({
-              EN: "Project Groups Edit Failed: ",
-              TC: "編輯項目群組失敗: "
+              EN: "Company Edit Failed: ",
+              TC: "編輯公司失敗: "
             }),
             schema: schema.Edit,
             buttons: ["Revert", "Submit"],
-            onSubmit: "Edit",
-            onSuccess: (payload, success) => {
-              this.Refresh();
-              success();
-            }
+            onSubmit: "Edit"
           },
           Info: {
             title: () => LocaleX.Parse({
-              EN: "Project Groups",
-              TC: "項目群組"
+              EN: "Company",
+              TC: "公司"
             }),
             url: datalink.Request.Info,
             success: () => LocaleX.Parse({
-              EN: "Project Groups Load Successfully",
-              TC: "成功載入項目群組"
+              EN: "Company Load Successfully",
+              TC: "成功載入公司"
             }),
             fail: () => LocaleX.Parse({
-              EN: "Project Groups Load Failed: ",
-              TC: "載入項目群組失敗: "
+              EN: "Company Load Failed: ",
+              TC: "載入公司失敗: "
             }),
             schema: schema.Info,
             readOnly: true
@@ -182,29 +161,29 @@ class GroupConfig extends Component {
             }),
             url: datalink.Request.Duplicate,
             success: () => LocaleX.Parse({
-              EN: "Project Groups Duplicated Successfully.",
-              TC: "成功複製項目群組"
+              EN: "Company Duplicated Successfully.",
+              TC: "成功複製公司"
             }),
             fail: () => LocaleX.Parse({
-              EN: "Project Groups Duplicate Failed: ",
-              TC: "複製項目群組失敗: "
+              EN: "Company Duplicate Failed: ",
+              TC: "複製公司失敗: "
             }),
             onSubmit: "Duplicate"
           },
           Import: {
             title: () => LocaleX.Parse({
-              EN: "Import Project Groups",
-              TC: "導入項目群組"
+              EN: "Import Companies",
+              TC: "導入公司"
             }),
             content: "",
             url: datalink.Request.Import,
             success: () => LocaleX.Parse({
-              EN: "Project Groups Imported Successfully.",
-              TC: "成功導入項目群組"
+              EN: "Companies Imported Successfully.",
+              TC: "成功導入公司"
             }),
             fail: () => LocaleX.Parse({
-              EN: "Project Groups Import Failed: ",
-              TC: "導入項目群組失敗: "
+              EN: "Companies Import Failed: ",
+              TC: "導入公司失敗: "
             }),
             schema: schema.ImportFormat,
             replace: false
@@ -215,8 +194,8 @@ class GroupConfig extends Component {
           },
           DeleteBulk: {
             title: (n) => LocaleX.Parse({
-              EN: "Delete these @n Project Groups?",
-              TC: "刪除這@n個項目群組?"
+              EN: "Delete these @n Companies?",
+              TC: "刪除這@n個公司?"
             }, {n:n}),
             content: () => LocaleX.Parse({
               EN: "Caution: This is irrevertable.",
@@ -224,12 +203,12 @@ class GroupConfig extends Component {
             }),
             url: datalink.Request.DeleteBulk,
             success: () => LocaleX.Parse({
-              EN: "Project Groups Deleted Successfully.",
-              TC: "成功刪除項目群組"
+              EN: "Companies Deleted Successfully.",
+              TC: "成功刪除公司"
             }),
             fail: () => LocaleX.Parse({
-              EN: "Project Groups Delete Failed: ",
-              TC: "刪除項目群組失敗: "
+              EN: "Companies Delete Failed: ",
+              TC: "刪除公司失敗: "
             }),
             onSubmit: "DeleteBulk",
           },
@@ -243,17 +222,11 @@ class GroupConfig extends Component {
                 TC: "編輯"
               }), 
               reqFunc: "Edit" },
-            { icon: <GroupRounded/> , func: this.EditUserAT,  
+            { icon: "info", func: "Info", 
               caption: () => LocaleX.Parse({
-                EN: "Users",
-                TC: "使用者"
-              }), 
-              reqFunc: "UserView" },
-            // { icon: "info", func: "Info", 
-            //   caption: () => LocaleX.Parse({
-            //     EN: "Details",
-            //     TC: "詳細資料"
-            //   })},
+                EN: "Details",
+                TC: "詳細資料"
+              })},
             { icon: "delete", func: "Delete", 
               caption: () => LocaleX.Parse({
                 EN: "Delete",
@@ -273,8 +246,8 @@ class GroupConfig extends Component {
           left: [
             { icon: "add", func: "Add", 
             caption: () => LocaleX.Parse({
-              EN: "Add Project Groups",
-              TC: "新增項目群組"
+              EN: "Add Company",
+              TC: "新增公司"
             }), reqFunc: "Add" }
           ],
           right: [
@@ -304,12 +277,8 @@ class GroupConfig extends Component {
   }
 
   componentDidUpdate(prevProps, prevState){
-    if(!Accessor.IsIdentical(prevProps, this.props, Object.keys(GroupConfig.defaultProps))){
-      this._setAllStates(() => {
-        if(this.MountDatumizo) 
-          this.MountDatumizo.Reload();
-        this.ClearSelected();
-      });
+    if(!Accessor.IsIdentical(prevProps, this.props, Object.keys(CompanyConfig.defaultProps))){
+      this._setAllStates();
     }
   }
 
@@ -325,116 +294,26 @@ class GroupConfig extends Component {
     }), callback);
   }
 
-  onMountGroupUser = (callbacks) => {
-    this.MountGroupUser = callbacks;
-  }
-
   onMountDatumizo = (callbacks) => {
     this.MountDatumizo = callbacks;
   }
 
-  ToggleCtrl = async (_, group, ctrl) => {
-    if(!AuthX.PassF("System.UAC.Groups", "Terminate")){
+  ToggleCtrl = async (_, company, ctrl) => {
+    if(!AuthX.PassF("System.UAC.Companies", "Terminate")){
       STORE.Alert(LocaleX.GetIZO("Alert.NoAuthority"), "error");
       return;
     }
     let {onUpdate} = this.props;
-    let res = await SUAC.SetProjectGroupActive(group, ctrl);
+    let res = await SUAC.SetProjectCompanyActive(company, ctrl);
     if(res.Success){
       await onUpdate();
     }
   }
 
-  ClearSelected = () => {
-    this.setState({
-      selectedGroup: null,
-      selectedGroupDoc: null,
-      selectedGroupUserData: null
-    }, () => {
-      if(this.MountDatumizo){
-        this.MountDatumizo.SetSelectedRows([]);
-      }
-    });
-  }
-
-  Refresh = async () => {
-    let {selectedGroup} = this.state;
-    let {onUpdate} = this.props;
-    if(onUpdate) await onUpdate();
-
-    if(selectedGroup){
-      this.MountDatumizo.Reload(() => {
-        let doc = this.MountDatumizo.GetDoc(selectedGroup);
-        this.EditUserAT(selectedGroup, doc);
-      });
-    }
-  }
-
-  EditUserAT = (id, doc) => {
-    if(!doc) return;
-    let dataMod = _.map(doc.users, (o, i) => {
-      return {
-        ...o,
-        _id: o.username
-      };
-    });
-    this.setState({
-      selectedGroup: id,
-      selectedGroupDoc: doc,
-      selectedGroupUserData: dataMod
-    }, () => {
-      this.MountDatumizo.SetSelectedRows([id]);
-      if(this.MountGroupUser) this.MountGroupUser.Reload();
-    });
-  }
-
-  setGroupUserActive = async (_, field, ctrl) => {
-    if(!AuthX.PassF("System.UAC.Groups", "UserTerminate")){
-      STORE.Alert(LocaleX.GetIZO("Alert.NoAuthority"), "error");
-      return;
-    }
-    let {selectedGroup} = this.state;
-    let res = await SUAC.SetGroupUserActive(selectedGroup, field, ctrl);
-    if(res.Success){
-      this.MountDatumizo.Reload();
-      await this.Refresh();
-    } 
-  }
-
-  renderUserList(){
-    let {selectedGroupDoc, selectedGroupUserData} = this.state;
-    let {addOns, projDoc, userlist, rolelist, companylist} = this.props;
-    if(!selectedGroupDoc) return <VStack width="100%"/>;
-    if(!AuthX.PassF("System.UAC.Groups", "UserView")){
-      return (
-        <VStack width="100%" alignItems="flex-start">
-          <Spacer/>
-          <HStack>
-            <Denied/>
-          </HStack>
-          <Spacer/>
-        </VStack>
-      );
-    }
-    return (
-      <VStack width="100%" alignItems="flex-start">
-        <GroupUsers
-          addOns={{...addOns, projID: projDoc._id, projDoc: projDoc,
-            userlist: userlist, rolelist: rolelist, companylist: companylist,
-            Refresh: this.Refresh, selectedGroupDoc: selectedGroupDoc,
-            onCtrlSet: this.setGroupUserActive
-          }} 
-          data={selectedGroupUserData}
-          onMounted={this.onMountGroupUser}
-          />
-      </VStack>
-    );
-  }
-
   render(){
-    let {addOns, projDoc} = this.props;
+    let {addOns, projDoc, onUpdate} = this.props;
     let {base, serverSidePagination, title} = this.state;
-    if(!AuthX.Pass("System.UAC.Groups")) return <Denied/>;
+    if(!AuthX.Pass("System.UAC.Companies")) return <Denied/>;
     
     let pageTitle = title;
     if(_.isFunction(title)){
@@ -453,23 +332,16 @@ class GroupConfig extends Component {
             {pageTitle}
           </Typography>
         </Box>
-        <HStack height="100%">
-          <Datumizo 
-            width={700}
-            height={"100%"}
-            lang={STORE.lang}
-            base={base}
-            addOns={{...addOns, projID: projDoc._id, projDoc: projDoc, 
-              Refresh: this.Refresh, onCtrlSet: this.ToggleCtrl}} 
-            serverSidePagination={serverSidePagination} 
-            onMounted={this.onMountDatumizo}
-            />
-          {this.renderUserList()}
-        </HStack>
+        <Datumizo lang={STORE.lang}
+          base={base}
+          addOns={{...addOns, projID: projDoc._id, projDoc: projDoc, Refresh: onUpdate, onCtrlSet: this.ToggleCtrl}} 
+          serverSidePagination={serverSidePagination} 
+          onMounted={this.onMountDatumizo} 
+          />
       </VStack>
     );
   }
 
 }
 
-export default observer(GroupConfig);
+export default observer(CompanyConfig);

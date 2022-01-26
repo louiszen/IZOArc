@@ -35,7 +35,8 @@ class UserAccess extends Component {
     onUpdate: PropsType.func,
     userlist: PropsType.array,
     grouplist: PropsType.array,
-    rolelist: PropsType.array
+    rolelist: PropsType.array,
+    companylist: PropsType.array
   }
 
   static defaultProps = {
@@ -45,7 +46,8 @@ class UserAccess extends Component {
     onUpdate: () => {},
     userlist: [],
     grouplist: [],
-    rolelist: []
+    rolelist: [],
+    companylist: []
   }
 
   constructor(){
@@ -108,6 +110,7 @@ class UserAccess extends Component {
             buttons: ["Clear", "Submit"],
             onSubmit: "Add",
             propsMod: this.addPropsMod,
+            addOnsMod: () => {},
             onSuccess: (payload, success) => {
               this.Refresh();
               success();
@@ -562,7 +565,7 @@ class UserAccess extends Component {
   }
 
   render(){
-    let {addOns, projDoc, rolelist} = this.props;
+    let {addOns, projDoc, rolelist, grouplist, companylist} = this.props;
     let {base, serverSidePagination, title} = this.state;
     if(!AuthX.Pass("System.UAC.Users")) return <Denied/>;
     
@@ -590,8 +593,8 @@ class UserAccess extends Component {
             lang={STORE.lang}
             base={base}
             addOns={{...addOns, projID: projDoc._id, projDoc: projDoc, 
-              rolelist: rolelist, Refresh: this.Refresh, 
-              onCtrlSet: this.ToggleCtrl, ResetPassword: this.ResetPassword}} 
+              rolelist: rolelist, grouplist: grouplist, companylist: companylist,
+              Refresh: this.Refresh, onCtrlSet: this.ToggleCtrl, ResetPassword: this.ResetPassword}} 
             serverSidePagination={serverSidePagination} 
             onMounted={this.onMountDatumizo}
             />

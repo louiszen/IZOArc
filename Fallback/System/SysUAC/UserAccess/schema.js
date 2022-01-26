@@ -31,7 +31,12 @@ const Table = [
       EN: "Company",
       TC: "公司"
     }),
-    name: "Company"
+    name: "Company",
+    Cell: (row, field, addOns) => {
+      let company = addOns.companylist.find(o => o._id === field); 
+      if(!company) return "";
+      return LocaleX.Parse(company.name);
+    }
   },
   {
     label: () => LocaleX.Parse({
@@ -81,7 +86,12 @@ const Add = [
       TC: "公司"
     }),
     name: "Company",
-    format: "text",
+    format: "select",
+    selectStyle: "dropdown",
+    selectRef: "companylist",
+    selectCap: "name",
+    selectCapMod: (c) => LocaleX.Parse(c),
+    selectVal: "_id",
     validate: ["required"]
   },
   {
@@ -124,6 +134,34 @@ const Add = [
     name: "Level",
     format: "number",
     min: 0,
+    validate: ["required"]
+  },
+  {
+    label: () => LocaleX.Parse({
+      EN: "Project Group",
+      TC: "項目組別"
+    }),
+    name: "ProjectGroup",
+    format: "select",
+    selectStyle: "dropdown",
+    selectRef: "grouplist",
+    selectCap: "name",
+    selectCapMod: (c) => LocaleX.Parse(c),
+    selectVal: "_id",
+    validate: ["required"]
+  },
+  {
+    label: () => LocaleX.Parse({
+      EN: "Project Role",
+      TC: "項目身份"
+    }),
+    name: "GroupRole",
+    format: "select",
+    selectStyle: "dropdown",
+    selectRef: "rolelist",
+    selectCap: "name",
+    selectCapMod: (c) => LocaleX.Parse(c),
+    selectVal: "_id",
     validate: ["required"]
   },
 ];
@@ -170,7 +208,13 @@ const Info = [
       TC: "公司"
     }),
     name: "Company",
-    format: "text"
+    format: "select",
+    selectStyle: "dropdown",
+    selectRef: "companylist",
+    selectCap: "name",
+    selectCapMod: (c) => LocaleX.Parse(c),
+    selectVal: "_id",
+    validate: ["required"]
   },
   {
     label: () => LocaleX.Parse({

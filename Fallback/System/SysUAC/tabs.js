@@ -1,7 +1,8 @@
-import { AccountTreeRounded, ApiRounded, GroupsRounded, InfoOutlined, PersonRounded, Widgets } from "@mui/icons-material";
+import { AccountTreeRounded, Apartment, ApiRounded, GroupsRounded, InfoOutlined, PersonRounded, Widgets } from "@mui/icons-material";
 import { LocaleX } from "IZOArc/STATIC";
 import APIAvail from "./APIAvail/APIAvail";
 import AuthTree from "./AuthTree/AuthTree";
+import CompanyConfig from "./CompanyConfig/CompanyConfig";
 import General from "./General/General";
 import GroupConfig from "./GroupConfig/GroupConfig";
 import RoleConfig from "./RoleConfig/RoleConfig";
@@ -67,6 +68,16 @@ const tabs = [
   },
   {
     label: () => LocaleX.Parse({
+      EN: "Companies",
+      TC: "公司"
+    }),
+    icon: <Apartment/>,
+    render: (addOns) => <CompanyConfig projDoc={addOns.projDoc} onUpdate={addOns.Refresh}/>,
+    reqAuth: "System.UAC.Companies",
+    ...tail
+  },
+  {
+    label: () => LocaleX.Parse({
       EN: "Available Roles",
       TC: "身份權限配置"
     }),
@@ -85,7 +96,8 @@ const tabs = [
       projDoc={addOns.projDoc} 
       userlist={addOns.userlist} 
       grouplist={addOns.grouplist} 
-      rolelist={addOns.rolelist} 
+      rolelist={addOns.rolelist}
+      companylist={addOns.companylist}
       onUpdate={addOns.Refresh}
       />,
     reqAuth: "System.UAC.Groups",
@@ -102,6 +114,7 @@ const tabs = [
       userlist={addOns.userlist} 
       grouplist={addOns.grouplist} 
       rolelist={addOns.rolelist}
+      companylist={addOns.companylist}
       onUpdate={addOns.Refresh}/>,
     reqAuth: "System.UAC.Users",
     ...tail

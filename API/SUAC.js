@@ -48,6 +48,13 @@ class SUAC {
     });
   }
 
+  static SetProjectCompanyActive = async (company, active) => {
+    return await this.Send("/GAuth/PCtrl/Company", {
+      company: company,
+      value: active
+    });
+  }
+
   static SetProjectGroupActive = async (group, active) => {
     return await this.Send("/GAuth/PCtrl/Group", {
       group: group,
