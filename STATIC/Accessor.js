@@ -66,7 +66,6 @@ class Accessor {
   static isTrueEmpty(v){
     if(v === null) return true;
     if((_.isArray(v) || _.isString(v)) && _.isEmpty(v)) return true;
-    if(_.isObject(v) && this.isDeepEmpty(v)) return true;
     return false;
   }
 

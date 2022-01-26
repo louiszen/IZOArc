@@ -87,8 +87,8 @@ class FGFold extends Component {
   }
 
   renderSchema(){
-    // eslint-disable-next-line no-unused-vars
     let {open} = this.state;
+    // eslint-disable-next-line no-unused-vars
     let {ischema, ignoreValidate, visible, ...other} = this.props;
     let foldSchema = this.getFoldSchema();
     return _.map(foldSchema, (o, i) => {
