@@ -3,6 +3,7 @@ import { Accessor } from "IZOArc/STATIC";
 import PropsType from "prop-types";
 import Tablizo from "IZOArc/LabIZO/Tablizo";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
+import { AuthX } from "IZOArc/STATIC";
 import { Typography } from "@material-ui/core";
 import _ from "lodash";
 
@@ -147,6 +148,8 @@ visible: PropsType.bool,
     let {ischema} = this.props;
     let schema = this.getSchema();
     let data = this.getData();
+    
+    data = _.filter(data, o =>  AuthX.Pass(o.reqAuth, o.reqLevel, o.reqFunc, o.reqGroup, o.reqRole));
     let rowIdAccessor = this.getIdAccessor();
     let label = this.getLabel();
     

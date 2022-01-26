@@ -4,7 +4,7 @@ import PropsType from "prop-types";
 import _ from "lodash";
 import { FormControl, FormHelperText, FormLabel, MenuItem, Select, Tooltip, Typography } from "@material-ui/core";
 
-import { Accessor } from "IZOArc/STATIC";
+import { Accessor, AuthX } from "IZOArc/STATIC";
 import { OutlinedBox } from "IZOArc/LabIZO/Stylizo";
 import { HStack, Spacer } from "IZOArc/LabIZO/Stackizo";
 
@@ -112,6 +112,9 @@ visible: PropsType.bool,
       let v = _.isEmpty(ischema.selectVal) ? o : Accessor.Get(o, ischema.selectVal);
       let c = _.isEmpty(ischema.selectCap) ? o : Accessor.Get(o, ischema.selectCap);
       let t = _.isEmpty(ischema.selectTip) ? o : Accessor.Get(o, ischema.selectTip);
+
+      //authority
+      if(!AuthX.Pass(o.reqAuth, o.reqLevel, o.reqFunc, o.reqGroup, o.reqRole)) return;
 
       let display;
       if(ischema.selectCapMod && _.isFunction(ischema.selectCapMod)){

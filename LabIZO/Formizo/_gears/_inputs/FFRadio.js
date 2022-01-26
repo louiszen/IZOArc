@@ -4,7 +4,7 @@ import PropsType from "prop-types";
 import _ from "lodash";
 import { FormControl, FormControlLabel, FormHelperText, FormLabel, Radio, RadioGroup } from "@material-ui/core";
 
-import { Accessor } from "IZOArc/STATIC";
+import { Accessor, AuthX } from "IZOArc/STATIC";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
 import { OutlinedBox } from "IZOArc/LabIZO/Stylizo";
 
@@ -111,6 +111,10 @@ class FFRadio extends Component {
       options = Accessor.Get(addOns, ischema.selectRef);
     }
     return _.map(options, (o, i) => {
+
+      //authority
+      if(!AuthX.Pass(o.reqAuth, o.reqLevel, o.reqFunc, o.reqGroup, o.reqRole)) return;
+
       let val; 
       let cap; 
       if(_.isEmpty(ischema.selectVal)){

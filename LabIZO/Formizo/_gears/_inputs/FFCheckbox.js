@@ -5,7 +5,7 @@ import _ from "lodash";
 import { Checkbox, FormControl, FormControlLabel, FormGroup, 
   FormHelperText, FormLabel } from "@material-ui/core";
 
-import { Accessor } from "IZOArc/STATIC";
+import { Accessor, AuthX } from "IZOArc/STATIC";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
 import { OutlinedBox } from "IZOArc/LabIZO/Stylizo";
 
@@ -125,6 +125,10 @@ visible: PropsType.bool,
     }
 
     return _.map(options, (o, i) => {
+
+      //authority
+      if(!AuthX.Pass(o.reqAuth, o.reqLevel, o.reqFunc, o.reqGroup, o.reqRole)) return;
+
       let val; 
       let cap; 
       if(_.isEmpty(ischema.selectVal)){
