@@ -178,6 +178,7 @@ class Formizo extends Component {
             Fill: this._FillForm,
             SetValue: this._onValueChange,
             GetValue: this._GetValue,
+            GetForm: this._GetForm
           });
         }
         if (callback) callback();
@@ -200,6 +201,11 @@ class Formizo extends Component {
     let { formValue } = this.state;
     return Accessor.Get(formValue, accessor);
   };
+
+  _GetForm = () => {
+    let { formValue } = this.state;
+    return formValue;
+  }
 
   _SetError = (accessor, message) => {
     let { formError } = this.state;

@@ -1,9 +1,10 @@
-import { Sync, ArticleRounded, ConfirmationNumber, SettingsAccessibility } from "@mui/icons-material";
+import { Sync, ArticleRounded, ConfirmationNumber, SettingsAccessibility, Dangerous } from "@mui/icons-material";
 
 import { LocaleX } from "IZOArc/STATIC";
 import SysAuthLog from "./SysAuthLog/SysAuthLog";
 
 import SysBnR from "./SysBnR/SysBnR";
+import SysDANGER from "./SysDANGER/SysDANGER";
 import SysTickets from "./SysTickets/SysTickets";
 import SysUAC from "./SysUAC/SysUAC";
 
@@ -41,6 +42,17 @@ const tabs = [
     icon: <ConfirmationNumber/>,
     reqAuth: "System.Tickets",
     render: <SysTickets/>,
+    ...Tail
+  },
+  {
+    label: () => LocaleX.Parse({
+      EN: "DANGER ZONE",
+      TC: "危險區域"
+    }),
+    icon: <Dangerous/>,
+    render: <SysDANGER/>,
+    reqAuth: "System.DANGER",
+    reqLevel: 0,
     ...Tail
   }
 ];

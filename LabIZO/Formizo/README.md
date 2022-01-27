@@ -58,6 +58,7 @@ render(){
 | Fill | data: `Object` | Actively fill the form |
 | SetValue | name: `String`, value: `any` | Actively set the value of the form |
 | GetValue | accessor: `String` | Get the value of form by accessor |
+| GetForm || Get the entire form |
 <br/>
 
 ## **Necessary Props**
