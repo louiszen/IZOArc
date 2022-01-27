@@ -1,0 +1,114 @@
+{
+  "name": "qsk_ui",
+  "version": "0.1.0",
+  "homepage": "./",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
+    "@mui/icons-material": "^5.2.5",
+    "@mui/material": "^5.2.7",
+    "@mui/system": "^5.2.6",
+    "@mui/x-data-grid": "^5.2.2",
+    "antd": "^4.18.2",
+    "axios": "^0.24.0",
+    "csstype": "^3.0.10",
+    "emoji-dictionary": "^1.0.11",
+    "eslint-plugin-no-await-async-call": "^0.0.1",
+    "html-react-parser": "^1.4.5",
+    "js-file-download": "^0.4.12",
+    "lodash": "^4.17.21",
+    "make-dir": "^3.1.0",
+    "mobx": "^6.3.12",
+    "mobx-react": "^7.2.1",
+    "moment": "^2.29.1",
+    "node-sass": "^6.0.1",
+    "promise": "^8.1.0",
+    "prop-types": "^15.7.2",
+    "rc-progress": "^3.2.4",
+    "react": "^17.0.2",
+    "react-app-polyfill": "^2.0.0",
+    "react-bootstrap": "^1.6.1",
+    "react-device-detect": "^2.1.2",
+    "react-dom": "^17.0.2",
+    "react-flow-renderer": "^9.7.2",
+    "react-input-mask": "^2.0.4",
+    "react-intl": "^5.24.2",
+    "react-json-view": "^1.21.3",
+    "react-loading-spin": "^1.0.9",
+    "react-markdown": "^7.1.2",
+    "react-qr-code": "^2.0.3",
+    "react-refresh": "^0.11.0",
+    "react-router-dom": "^5.3.0",
+    "react-rte": "^0.16.3",
+    "react-scripts": "^4.0.3",
+    "react-syntax-highlighter": "^15.4.5",
+    "recharts": "^2.1.8",
+    "remark-gfm": "^3.0.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.5.4",
+    "uuid": "^8.3.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "build": "react-scripts build",
+    "zen": "cross-env REACT_APP_STAGE=zen npm run build",
+    "dev": "cross-env REACT_APP_STAGE=dev npm run build",
+    "uat": "cross-env REACT_APP_STAGE=uat npm run build",
+    "poc": "cross-env REACT_APP_STAGE=poc npm run build",
+    "preprd": "cross-env REACT_APP_STAGE=preprd npm run build",
+    "prd": "cross-env REACT_APP_STAGE=prd npm run build",
+    "linux": "cross-env REACT_APP_STAGE=$npm_config_env npm run build",
+    "docker": "docker build --pull --rm -f \"Dockerfile\" -t test:latest \".\" && docker rmi $(docker images -f \"dangling=true\" -q)",
+    "genpipes": "node src/IZOArc/__CodeGen/AzurePipelines.js",
+    "format": "prettier-eslint --eslint-config-path ./.eslintrc --write '**/*.js'",
+    "lint": "eslint . --ext .js",
+    "cpfiles": "node src/IZOArc/__CodeGen/CPFiles.js",
+    "updatecp": "node src/IZOArc/__CodeGen/UpdateCPFiles.js"
+  },
+  "eslintConfig": {
+    "extends": "react-app",
+    "plugins": [
+      "no-await-async-call"
+    ],
+    "rules": {
+      "semi": [
+        "warn",
+        "always"
+      ],
+      "quotes": [
+        "warn",
+        "double"
+      ],
+      "no-unused-vars": [
+        "warn",
+        {
+          "vars": "all",
+          "args": "none",
+          "ignoreRestSiblings": false
+        }
+      ],
+      "no-empty": [
+        "warn",
+        {
+          "allowEmptyCatch": true
+        }
+      ],
+      "no-console": "off",
+      "require-await": "off",
+      "no-use-before-define": "warn",
+      "no-await-async-call/no-await-async-call": "warn"
+    }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all",
+    "ie 11"
+  ]
+}
