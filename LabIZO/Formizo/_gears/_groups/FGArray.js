@@ -56,9 +56,10 @@ class FGArray extends Component {
     if(!Accessor.IsIdentical(prevProps, this.props, Object.keys(FGArray.defaultProps))){
       this._setAllStates();
     }
-    let {ischema, preAccessor, formValue} = this.props;
+    let {ischema, preAccessor, formValue, _Validate, ignoreValidate, visible} = this.props
     let {arraySize} = this.state;
     let iname = ischema.name;
+
     if(!_.isEmpty(preAccessor)){
       if(!_.isEmpty(ischema.name)){
         iname = preAccessor + "." + ischema.name;
@@ -73,6 +74,8 @@ class FGArray extends Component {
         arraySize: (items && items.length) || 0
       });
     }
+
+    
   }
 
   componentWillUnmount() {
@@ -219,9 +222,13 @@ class FGArray extends Component {
     }
 
     _.map(arraySchema, (o, i) => {
+      let label = o.label;
+      if(_.isFunction(o.label)){
+        label = o.label();
+      }
       rtn.push (
         <TableCell key={i} style={{textAlign: "center", padding: 5}}>
-          {o.label}
+          {label}
         </TableCell>
       );
     });

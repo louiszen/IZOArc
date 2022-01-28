@@ -1,0 +1,7 @@
+/**
+ * @typedef {{
+ * 
+ * }} tablizoSchema
+ */
+
+ export default {};
