@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Accessor, LocaleX, ReqX } from "IZOArc/STATIC";
-import PropsType from "prop-types";
+
 import { Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
 import Formizo from "IZOArc/LabIZO/Formizo";
 
@@ -66,7 +66,7 @@ class SysDANGER extends Component {
       let formValue = this.MountFormizo.GetForm();
 
       let hash = crypto.createHash("sha256");
-      let password = hash.update(formValue.password).digest("hex")
+      let password = hash.update(formValue.password).digest("hex");
       await ReqX.SendBE("/CommonAPI/DANGER/DeleteINITIALIZED", {
         ...formValue,
         password: password
@@ -126,7 +126,7 @@ class SysDANGER extends Component {
         onMounted={this.onMountFormizo}
         addOns={{OTP: this.renderRequestOTP, requestOTP: this.requestOTP}}
         />
-    )
+    );
   }
 
   render(){
