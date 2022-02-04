@@ -74,7 +74,7 @@ class FFRadio extends Component {
   }
 
   componentDidUpdate(prevProps, prevState){
-    if(!Accessor.IsIdentical(prevProps, this.props, Object.keys(FFRadio.defaultProps), true, "visible")){
+    if(!Accessor.IsIdentical(prevProps, this.props, Object.keys(FFRadio.defaultProps))){
       this._setAllStates();
     }
   }
@@ -91,7 +91,6 @@ class FFRadio extends Component {
     }), () => {
       
       let {formValue, ischema, iname, _Validate, _onValueChange, ignoreValidate, visible} = this.state;
-      console.log("RUN ", iname + ":" + visible);
       let ivalue = Accessor.Get(formValue, iname);
       if(!_.isEmpty(ischema.validate)){
         _Validate(iname, ivalue, ischema.validate, ignoreValidate, visible);

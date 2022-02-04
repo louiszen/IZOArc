@@ -101,6 +101,7 @@ visible: PropsType.bool,
     let ivalue = Accessor.Get(formValue, iname) || false;
     let ireadOnly = ischema.readOnly || readOnly;
     let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
+    if(ischema.noLabel) label = "";
 
     if(ifieldStyle === "grid"){
       return (
@@ -134,9 +135,11 @@ visible: PropsType.bool,
 
   renderSwitch(){
 
-    let {formValue, iname, ischema, readOnly, _onValueChange, ifieldStyle, ignoreValidate, visible} = this.state;
+    let {formValue, iname, ischema, readOnly, _onValueChange, ifieldStyle, ignoreValidate, visible, addOns} = this.state;
     let ivalue = Accessor.Get(formValue, iname) || false;
     let ireadOnly = ischema.readOnly || readOnly;
+    let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
+    if(ischema.noLabel) label = "";
 
     if(ifieldStyle === "grid"){
       return (
@@ -166,7 +169,7 @@ visible: PropsType.bool,
               disabled={ireadOnly}
               />
           }
-          label={ischema.label}
+          label={label}
           />
       );
     }

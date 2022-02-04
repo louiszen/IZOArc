@@ -6,7 +6,7 @@ import { Box } from "@mui/material";
 
 import FField from "./FField";
 import {FGAccess, FGInline, FGArray, 
-  FGFold, FGCollapse, FGTabs, FGColumns, FGBox} from "./_groups";
+  FGFold, FGCollapse, FGTabs, FGColumns, FGBox, FGTable} from "./_groups";
 
 import { Accessor } from "IZOArc/STATIC";
 
@@ -197,6 +197,16 @@ class FItem extends Component {
     );
   }
 
+  renderTable(ischema){
+    return (
+      <FGTable
+        key="table"
+        {...this.props}
+        ischema={ischema}
+        />
+    );
+  }
+
   renderCollapse(ischema){
     return (
       <FGCollapse
@@ -287,6 +297,10 @@ class FItem extends Component {
 
     if(ischema.box){
       return this.renderBox(ischema);
+    }
+
+    if(ischema.table){
+      return this.renderTable(ischema);
     }
 
     return this.renderField(ischema);

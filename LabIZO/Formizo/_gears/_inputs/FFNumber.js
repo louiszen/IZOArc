@@ -93,7 +93,7 @@ visible: PropsType.bool,
       let {formValue, ischema, iname, _Validate, _onValueChange, ignoreValidate, visible} = this.state;
       let ivalue = Accessor.Get(formValue, iname);
       if(!_.isEmpty(ischema.validate)){
-        _Validate(iname, Number(ivalue), ischema.validate, ignoreValidate, visible);
+        _Validate(iname, ivalue, ischema.validate, ignoreValidate, visible);
       }
       if(!ivalue && ischema.defaultValue){
         _onValueChange(iname, Number(ischema.defaultValue), ischema.validate, ignoreValidate, visible);

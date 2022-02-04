@@ -71,6 +71,7 @@
 | Props | Type | Required | Default | Description |
 | :---|:---:|:---:|:---:|:---|
 | boolStyle | `String` || `"switch"` | The style of the Booleanean selector, `switch, heart, checkbox` |
+| noLabel | `Bool` || `false` | Force to hide the label |
 <br/>
 
 ### ***`Number`** Specific*
@@ -143,6 +144,12 @@
 | selectDirection | `String` || `"column"` | The flex direction of the options |
 | selectAlignment | `String` || `"flex-start"` | The justifyContent of the buttons |
 | fieldFormat | `<code>"array" &#124; "object" </code>` || `"array"` | Checkbox field value format, object: {[val]: Boolean} // array: ["val"] |
+<br/>
+
+### ***In-table Specific***
+| Props | Type | Required | Default | Description |
+| :---|:---:|:---:|:---:|:---|
+| colSpan | `Number` || `1` | Column Span for cell in Table |
 <br/>
 
 ### ***Style***

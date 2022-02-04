@@ -6,3 +6,4 @@ export {default as FGFold} from "./FGFold";
 export {default as FGBox} from "./FGBox";
 export {default as FGInline} from "./FGInline";
 export {default as FGTabs} from "./FGTabs";
+export {default as FGTable} from "./FGTable";

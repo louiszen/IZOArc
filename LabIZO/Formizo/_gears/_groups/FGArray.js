@@ -56,7 +56,7 @@ class FGArray extends Component {
     if(!Accessor.IsIdentical(prevProps, this.props, Object.keys(FGArray.defaultProps))){
       this._setAllStates();
     }
-    let {ischema, preAccessor, formValue, _Validate, ignoreValidate, visible} = this.props
+    let {ischema, preAccessor, formValue} = this.props;
     let {arraySize} = this.state;
     let iname = ischema.name;
 

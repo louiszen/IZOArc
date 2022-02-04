@@ -213,3 +213,21 @@ Display the section in columns
 | :---|:---:|:---:|:---:|:---|
 | style | `CSSStyle` || `default style` | The style of the box |
 <br/>
+
+### ***Table***
+Display the section in columns
+```jsx
+{
+  table: {
+    header: [[
+      group | simple
+    ] | (formValue, addOns) => []],
+    rows: [[
+      group | simple
+    ] | (formValue, addOns) => []],
+  }
+}
+```
+| Props | Type | Required | Default | Description |
+| :---|:---:|:---:|:---:|:---|
+<br/>

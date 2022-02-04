@@ -2,26 +2,33 @@ import React from "react";
 import HStack from "IZOArc/LabIZO/Stackizo/HStack";
 import { LocaleX } from "IZOArc/STATIC";
 //import { Typography } from "@mui/material";
-import _ from "lodash";
+//import _ from "lodash";
 
 //import { IZOFontFamily } from "__SYSDefault/Theme";
 
-let ITEMS = [
-  "All worker of the team wear safety harness with lanyard (Each lifeline is only for one worker)",
-  "All worker of the team wear safety helmet with chin strap",
-  "All hand-tools are in good condition",
-  "Loosened material had proper containment",
-  "All hand-tools/ portable electric tools equipped with hand sling",
-  "If the hot work is included, valid hot work permit had been obtained.",
-  "Safety net at the workplace is in good condition",
-  "Working at AC Platform, mobile temporary fall arrest system should be adopted",
-  "Others"
-];
+// let ITEMS = [
+//   "All worker of the team wear safety harness with lanyard (Each lifeline is only for one worker)",
+//   "All worker of the team wear safety helmet with chin strap",
+//   "All hand-tools are in good condition",
+//   "Loosened material had proper containment",
+//   "All hand-tools/ portable electric tools equipped with hand sling",
+//   "If the hot work is included, valid hot work permit had been obtained.",
+//   "Safety net at the workplace is in good condition",
+//   "Working at AC Platform, mobile temporary fall arrest system should be adopted",
+//   "Others"
+// ];
 
 let simple = [
   {
     header: "Application"
   },
+  {
+    label: "Number",
+    name: "number",
+    format: "number",
+    validate: ["number"]
+  },
+  /*
   {
     label: "Type",
     name: "type",
@@ -222,6 +229,7 @@ let simple = [
       }
     ]
   }))
+  */
 ];
 
 /*

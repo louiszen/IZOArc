@@ -2,9 +2,9 @@ import { LocaleX } from "IZOArc/STATIC";
 import _ from "lodash";
 
 const Rules = {
-  required: value => !_.isEmpty(value) || _.isNumber(value),
+  required: value => !_.isEmpty(value) || !_.isUndefined(value) || _.isNumber(value),
   email: value => !value || /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value),
-  number: value => !value || !isNaN(Number(value)),
+  number: value => !_.isNaN(Number(value) || _.isUndefined(value)),
   plain: value => !value || /^[a-zA-Z0-9_]+$/i.test(value),
   plainSpace: value => !value || /^[a-zA-Z0-9_ -]+$/i.test(value),
   plainAt: value => !value || /^[a-zA-Z0-9_@]+$/i.test(value),
