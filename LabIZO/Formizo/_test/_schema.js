@@ -18,218 +18,215 @@ import { LocaleX } from "IZOArc/STATIC";
 //   "Others"
 // ];
 
+
+/**
+ * @type {import("IZOArc/LabIZO/Formizo/Formizo").formizoSchema}
+ */
 let simple = [
   {
-    header: "Application"
+    header: () => LocaleX.Parse({
+      EN: "Part 1: Basic Information",
+      TC: "第1部: 基本資料"
+    })
   },
   {
-    label: "Number",
-    name: "number",
-    format: "number",
-    validate: ["number"]
-  },
-  /*
-  {
-    label: "Type",
-    name: "type",
-    format: "select",
-    selectStyle: "radio",
-    selectRef: [
+    box: [
       {
-        cap: () => LocaleX.Parse({EN: "Yes", TC: "有"}),
-        val: "true"
+        header: () => LocaleX.Parse({
+          EN: "1a) Work Information",
+          TC: "1a) 工作資料"
+        })
       },
       {
-        cap: () => LocaleX.Parse({EN: "No", TC: "沒有"}),
-        val: "false"
-      }
-    ],
-    selectCap: "cap",
-    selectVal: "val"
-  },
-  {
-    inline: [
-      {
-        label: "Company",
-        name: "company",
+        label: () => LocaleX.Parse({
+          EN: "Subcontractor / Department",
+          TC: "分判商 / 部門"
+        }),
+        name: "apply.subDep",
         format: "text",
         validate: ["required"]
       },
       {
-        label: "Date",
-        name: "appliedDate",
-        format: "date"
+        label: () => LocaleX.Parse({
+          EN: "Job Location",
+          TC: "工作位置"
+        }),
+        name: "apply.jobLocate",
+        format: "text",
+        validate: ["required"]
+      },
+      {
+        label: () => LocaleX.Parse({
+          EN: "Job Description",
+          TC: "工作描述"
+        }),
+        name: "apply.jobDes",
+        format: "text",
+        validate: ["required"]
+      },
+      {
+        label: () => LocaleX.Parse({
+          EN: "Datetime at entering confined space",
+          TC: "進入密閉空間日期及時間"
+        }),
+        name: "apply.enterTime",
+        format: "date",
+        dateType: "datetime",
+        validate: ["required"]
+      },
+      {
+        label: () => LocaleX.Parse({
+          EN: "Permit will be expired at",
+          TC: "此密閉空間工作許可證有效期至"
+        }),
+        name: "apply.expiryTime",
+        format: "date",
+        dateType: "datetime",
+        validate: ["required"]
       }
     ]
   },
   {
-    inline: [
+    box: [
       {
-        label: "Work location",
-        name: "location",
-        format: "text"
+        header: () => LocaleX.Parse({
+          EN: "2a) Work Information",
+          TC: "2a) 參與人員"
+        })
       },
       {
-        label: "Working Task",
-        name: "task",
-        format: "text"
-      },
-    ]
-  },
-  {
-    inline: [
-      {
-        label: "Work in charge",
-        name: "WIC.name",
-        format: "text"
-      },
-      {
-        label: "Contact Number",
-        name: "WIC.phone",
-        format: "text"
-      }
-    ]
-  },
-  {
-    inline: [
-      {
-        label: "Permit effective from",
-        name: "permit.Start",
-        format: "date"
-      },
-      {
-        label: "Permit expired at",
-        name: "permit.End",
-        format: "date"
-      }
-    ]
-  },
-  {
-    header: "Risk Assessment",
-  },
-  {
-    label: "Item",
-    name: "itemtoCheck",
-    format: "select",
-    selectStyle: "checkbox",
-    selectRef: [
-      {cap: "Falling of people", val: "a1"},
-      {cap: "Falling of objects", val: "a2"},
-      {cap: "Handtools", val: "a3"},
-      {cap: "Welding at height", val: "a4"},
-    ],
-    selectCap: "cap",
-    selectVal: "val"
-  },
-  {
-    inline: [
-      {
-        label: "Other high risk activities",
-        name: "otherItem",
-        format: "bool",
-      },
-      {
-        control: "otherItem",
-        fold:[
+        inline: [
           {
-            label: "",
-            name: "otherItemDesc",
+            label: () => LocaleX.Parse({
+              EN: "Permit Holder",
+              TC: "許可證持有人"
+            }),
+            name: "apply.permitHolder",
             format: "text",
-            noLabelGrid: true
+            validate: ["required"]
+          },
+          {
+            label: () => LocaleX.Parse({
+              EN: "Position",
+              TC: "職位"
+            }),
+            name: "apply.permitHolderPos",
+            format: "text",
+            validate: ["required"]
+          }
+        ]
+      },
+      {
+        label: () => LocaleX.Parse({
+          EN: "Appointed Approved Worker",
+          TC: "獲委派的核准工人"
+        }),
+        name: "apply.appointedWorkers",
+        canAdd: true,
+        canDelete: true,
+        array: [
+          {
+            label: () => LocaleX.Parse({
+              EN: "Name",
+              TC: "姓名"
+            }),
+            name: "name",
+            format: "text"
+          },
+          {
+            label: () => LocaleX.Parse({
+              EN: "Certificate Number",
+              TC: "證書編號"
+            }),
+            name: "certNo",
+            format: "text"
+          }
+        ],
+        validate: ["required"]
+      },
+      {
+        label: () => LocaleX.Parse({
+          EN: "Appointed Standby Worker",
+          TC: "獲委派的候命人員"
+        }),
+        name: "apply.standbyWorkers",
+        canAdd: true,
+        canDelete: true,
+        array: [
+          {
+            label: () => LocaleX.Parse({
+              EN: "Name",
+              TC: "姓名"
+            }),
+            name: "name",
+            format: "text"
+          },
+          {
+            label: () => LocaleX.Parse({
+              EN: "Certificate Number",
+              TC: "證書編號"
+            }),
+            name: "certNo",
+            format: "text"
+          }
+        ]
+      },
+      {
+        label: () => LocaleX.Parse({
+          EN: "Risk Assessment Competent Person",
+          TC: "風險評估合資格人士"
+        }),
+        name: "apply.riskAssessPerson",
+        canAdd: true,
+        canDelete: true,
+        array: [
+          {
+            label: () => LocaleX.Parse({
+              EN: "Name",
+              TC: "姓名"
+            }),
+            name: "name",
+            format: "text"
+          },
+          {
+            label: () => LocaleX.Parse({
+              EN: "Certificate Number",
+              TC: "證書編號"
+            }),
+            name: "certNo",
+            format: "text"
+          }
+        ]
+      },
+      {
+        label: () => LocaleX.Parse({
+          EN: "Atmospheric Test Competent Person",
+          TC: "大氣測試合資格人士"
+        }),
+        name: "apply.atmoTestPerson",
+        canAdd: true,
+        canDelete: true,
+        array: [
+          {
+            label: () => LocaleX.Parse({
+              EN: "Name",
+              TC: "姓名"
+            }),
+            name: "name",
+            format: "text"
+          },
+          {
+            label: () => LocaleX.Parse({
+              EN: "Certificate Number",
+              TC: "證書編號"
+            }),
+            name: "certNo",
+            format: "text"
           }
         ]
       }
     ]
-  },
-  {
-    label: "FCS attachment",
-    name: "fcsAttachment",
-    format: "bool",
-    boolStyle: "switch"
-  },
-  {
-    header: "Pre-inspection check and briefing"
-  },
-  {
-    label: "Pre-inspection check to be conducted as according to the checklist in P.2, the overall condition is satisfactory and suitable to issue working permit.",
-    name: "preCheck",
-    format: "bool",
-    boolStyle: "switch"
-  },
-  {
-    label: "I hereby certified that I fully understand the working restrictions and conditions relating to this Work Permit, including the risk and safety measures of working at external scaffold, and can confirm that this information has been relayed to my team.",
-    name: "informedWorker",
-    canAdd: true,
-    canDelete: true,
-    arrayStyle: "card",
-    array: [
-      {
-        label: "Worker Name",
-        name: "name",
-        format: "text"
-      },
-      {
-        label: "Position",
-        name: "position",
-        format: "text"
-      },
-      {
-        label: "Signature",
-        name: "signature",
-        format: "text"
-      }
-    ]
-  },
-  {
-    header: "Permit to work Checklist"
-  },
-  {
-    inline: [
-      {
-        label: "Company",
-        name: "companyName",
-        format: "text"
-      },
-      {
-        label: "Location",
-        name: "location",
-        format: "text"
-      }
-    ]
-  },
-  {
-    label: "Weather",
-    name: "weather",
-    format: "select",
-    selectStyle: "radio",
-    selectRef: [
-      "Fine",
-      "Windy",
-      "Rainy",
-      "Heavy Rain"
-    ]
-  },
-  {
-    header: "Inspection Items"
-  },
-  _.map(ITEMS, (o, i) => ({
-    inline: [
-      {
-        inject: o,
-      },
-      {
-        label: "Result",
-        name: "result" + i,
-        format: "text"
-      },
-      {
-        label: "Remarks",
-        name: "remarks" + i,
-        format: "text"
-      }
-    ]
-  }))
-  */
+  }
 ];
 
 /*

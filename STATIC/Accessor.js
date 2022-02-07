@@ -186,6 +186,12 @@ class Accessor {
     return process.env[iname] === "true";
   }
 
+  /**
+   * Execute if it is a function 
+   * @param {*} value 
+   * @param  {...any} param 
+   * @returns 
+   */
   static Functionable(value, ...param){
     if (_.isFunction(value)) {
       return value(...param);

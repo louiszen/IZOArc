@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React, { Component } from "react";
 
 import _ from "lodash";
@@ -121,31 +122,35 @@ class Test extends Component {
               />
           </Box>
           <Box width="70vw" height="85vh" style={{background: "aliceblue"}}>
-            <Formizo
-              width="100%"
-              height="100%"
-              form="login"
-              schema={schema[tab]}
-              buttons={["Submit", "Revert", "Clear"]}
-              buttonsAlign={"center"}
-              onSubmit={this.onSubmit}
-              onInlineSubmit={this.onInlineSubmit}
-              enableInlineSubmit={false}
-              defaultValue={data.defaultV}
-              addOns={data.addOns}
-              user={{
-                level: 1,
-                authority: {
-                  System: ["*"]
-                },
-                groups: ["Test"]
-              }}
-              fieldStyle={vtype}
-              fieldSize="small"
-              inputColor={{
-                text: "red"
-              }}
-              />
+            {/* <VStack width={700} padding={2}>
+              <Formizo
+                // width="100%"
+                // height="100%"
+                form="x1234"
+                schema={schema[tab]}
+                buttons={["Submit", "Clear"]}
+                // buttonsAlign={"center"}
+                onSubmit={this.onSubmit}
+                // onInlineSubmit={this.onInlineSubmit}
+                enableInlineSubmit={false}
+                defaultValue={data.defaultV}
+                addOns={data.addOns}
+                fieldStyle={vtype}
+                // fieldSize="small"
+                // inputColor={{
+                //   text: "red"
+                // }}
+                />
+              </VStack> */}
+              <VStack width={700} padding={2}>
+                <Formizo
+                  schema={schema[tab]}
+                  readOnly={false}
+                  buttons={[]}
+                  onSubmit={this.onSubmit}
+                  fieldStyle="standard"
+                  />
+              </VStack>
           </Box>
         </HStack>
       </VStack>
@@ -155,3 +160,4 @@ class Test extends Component {
 }
 
 export default observer(Test);
+/*eslint-enable*/

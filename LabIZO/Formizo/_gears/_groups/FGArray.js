@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import PropsType from "prop-types";
 import _ from "lodash";
 import { Add, ArrowDownward, ArrowUpward, Delete } from "@mui/icons-material";
-import { Box, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 
 import FItem from "../FItem";
 
@@ -108,7 +108,7 @@ class FGArray extends Component {
 
   getDisplayIdx = (idx) => {
     let {ischema} = this.props;
-    return "#" + (idx + (ischema.startDisplayIndex || 0));
+    return "#" + (idx + (ischema.startDisplayIndex || 1));
   }
 
   onSwap = (src, target) => {
@@ -216,7 +216,6 @@ class FGArray extends Component {
     if(ischema.reordering){
       rtn.push(
         <TableCell key={"reordering"} style={{textAlign: "center", padding: 5}}>
-          {""}
         </TableCell>
       );
     }
@@ -489,19 +488,20 @@ class FGArray extends Component {
     let {ischema, readOnly} = this.props;
     let ireadOnly = ischema.readOnly || readOnly;
     return (
-      <IconButton onClick={() => this.onDeleteItem(idx)} disabled={ireadOnly} color="secondary">
+      <StyledIconButton onClick={() => this.onDeleteItem(idx)} disabled={ireadOnly} color="secondary">
         <Delete/>
-      </IconButton>
+      </StyledIconButton>
     );
   }
 
   renderAddButton(size = "medium"){
     let {ischema, readOnly} = this.props;
     let ireadOnly = ischema.readOnly || readOnly;
+    console.log(size);
     return (
-      <IconButton onClick={() => this.onAddItem()} disabled={ireadOnly} color="primary" size={size}>
+      <StyledIconButton onClick={() => this.onAddItem()} disabled={ireadOnly} color="primary" size={size}>
         <Add/>
-      </IconButton>
+      </StyledIconButton>
     );
   }
 

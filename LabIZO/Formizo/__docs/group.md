@@ -12,13 +12,15 @@ Access Control using Accessizo.
   reqAuth?: String,             //accessizo
   reqLevel?: null | Number,     //accessizo
   reqFunc?: String,             //accessizo
+  reqGroup?: String,
+  reqRole?: String
 }
 ```
 | Props | Type | Required | Default | Description |
 | :---|:---:|:---:|:---:|:---|
 | accessizo | <code>[simple &#124; group]</code> |✔||The items array in the group |
 | reqAuth | `String` || `null` | The required Authority Tree Node accessor, see `Accessizo` |
-| reqLevel | <code>null &#124; Number</code> || The required Level of Access, see `Accessizo` |
+| reqLevel | <code>null &#124; Number</code> ||`INT MAX`| The required Level of Access, see `Accessizo` |
 | reqFunc | `String` || `null` | The required function of Access, see `Accessizo` |
 | reqGroup | `String` || `null` | The required group tag of Access, see `Accessizo` |
 | reqRole | `String` || `null` | The required role of Access, see `Accessizo` |
@@ -39,7 +41,7 @@ Array of values.
   headerStyle?: "header" | "outlined" | "noheader",
   addStyle?: "header" | "placeholder",
   showIndex?: Boolean | false,
-  startDisplayIndex?: Number | 0,
+  startDisplayIndex?: Number | 1,
   reordering?: Boolean | false,
   array: [
     {
