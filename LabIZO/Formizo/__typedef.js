@@ -221,4 +221,8 @@
  * ]} formizoSchema
  */
 
+/**
+ * @type {import("IZOArc/LabIZO/Formizo/__typedef").formizoSchema}
+ */
+
 export default {};
