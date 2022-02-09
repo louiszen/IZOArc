@@ -6,7 +6,7 @@ import { v1 } from "uuid";
 import { CloudUpload } from "@mui/icons-material";
 import { FormHelperText, FormLabel, Typography } from "@material-ui/core";
 
-import { Accessor, ColorX, LocaleX } from "IZOArc/STATIC";
+import { Accessor, ColorX, LocaleX, ZFunc } from "IZOArc/STATIC";
 import { HStack, Spacer } from "IZOArc/LabIZO/Stackizo";
 import { OutlinedBox, StyledButton } from "IZOArc/LabIZO/Stylizo";
 
@@ -31,7 +31,7 @@ class FFUpload extends Component {
     errorsShowOnHelperText: PropsType.bool.isRequired,
     readOnly: PropsType.bool.isRequired,
     ignoreValidate: PropsType.bool,
-visible: PropsType.bool,
+    visible: PropsType.bool,
 
     //runtime
     formValue: PropsType.object.isRequired,
@@ -100,11 +100,8 @@ visible: PropsType.bool,
     let ivalue = Accessor.Get(formValue, iname);
     if(ivalue === undefined || ivalue === null) ivalue = "";
     let ierror = Accessor.Get(formError, iname);
+    ierror = ZFunc.IfFuncExec(ierror);
     let ireadOnly = ischema.readOnly || readOnly;
-
-    if(_.isFunction(ierror)){
-      ierror = ierror();
-    }
 
     let helperText = ischema.helperText;
     if(errorsShowOnHelperText){
@@ -165,14 +162,12 @@ visible: PropsType.bool,
       ifieldStyle, readOnly, formValue, addOns, ignoreValidate, visible} = this.state;
     if(!ischema) return null;
 
-    let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
+    let label = ZFunc.IfFuncExec(ischema.label, formValue, addOns);
 
     let ierror = Accessor.Get(formError, iname);
-    let ireadOnly = ischema.readOnly || readOnly;
+    ierror = ZFunc.IfFuncExec(ierror);
 
-    if(_.isFunction(ierror)){
-      ierror = ierror();
-    }
+    let ireadOnly = ischema.readOnly || readOnly;
 
     let helperText = ischema.helperText;
     if(errorsShowOnHelperText){

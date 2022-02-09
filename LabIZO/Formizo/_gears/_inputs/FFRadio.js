@@ -4,7 +4,7 @@ import PropsType from "prop-types";
 import _ from "lodash";
 import { FormControl, FormControlLabel, FormHelperText, FormLabel, Radio, RadioGroup } from "@material-ui/core";
 
-import { Accessor, AuthX } from "IZOArc/STATIC";
+import { Accessor, AuthX, ZFunc } from "IZOArc/STATIC";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
 import { OutlinedBox } from "IZOArc/LabIZO/Stylizo";
 
@@ -125,9 +125,7 @@ class FFRadio extends Component {
         cap = o;
       }else{
         cap = Accessor.Get(o, ischema.selectCap);
-        if(_.isFunction(cap)){
-          cap = cap();
-        }
+        cap = ZFunc.IfFuncExec(cap);
       }
       let disabled = ischema.selectDisable && Accessor.Get(o, ischema.selectDisable);
       return (        
@@ -177,14 +175,12 @@ class FFRadio extends Component {
       _onFieldFocus, _onFieldBlur, errorsShowOnHelperText, readOnly, formValue, addOns} = this.state;
     if(!ischema) return null;
 
-    let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
+    let label = ZFunc.IfFuncExec(ischema.label, formValue, addOns);
 
     let ierror = Accessor.Get(formError, iname);
-    let ireadOnly = ischema.readOnly || readOnly;
+    ierror = ZFunc.IfFuncExec(ierror, formValue, addOns);
 
-    if(_.isFunction(ierror)){
-      ierror = ierror();
-    }
+    let ireadOnly = ischema.readOnly || readOnly;
 
     let helperText = ischema.helperText;
     if(errorsShowOnHelperText){

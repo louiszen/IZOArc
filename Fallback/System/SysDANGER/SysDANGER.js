@@ -65,8 +65,7 @@ class SysDANGER extends Component {
       if(!this.MountFormizo) return;
       let formValue = this.MountFormizo.GetForm();
 
-      let hash = crypto.createHash("sha256");
-      let password = hash.update(formValue.password).digest("hex");
+      let password = formValue.password;
       await ReqX.SendBE("/CommonAPI/DANGER/DeleteINITIALIZED", {
         ...formValue,
         password: password

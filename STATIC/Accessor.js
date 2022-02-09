@@ -185,19 +185,7 @@ class Accessor {
     let iname = "REACT_APP_WITH_" + name;
     return process.env[iname] === "true";
   }
-
-  /**
-   * Execute if it is a function 
-   * @param {*} value 
-   * @param  {...any} param 
-   * @returns 
-   */
-  static Functionable(value, ...param){
-    if (_.isFunction(value)) {
-      return value(...param);
-    }
-    return value;
-  }
+  
 }
 
 export default Accessor;

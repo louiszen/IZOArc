@@ -8,7 +8,7 @@ import { FormControl, FormHelperText, FormLabel } from "@material-ui/core";
 
 import "antd/dist/antd.css";
 
-import { Accessor } from "IZOArc/STATIC";
+import { Accessor, ZFunc } from "IZOArc/STATIC";
 import { HStack, Spacer } from "IZOArc/LabIZO/Stackizo";
 import { OutlinedBox } from "IZOArc/LabIZO/Stylizo";
 
@@ -36,7 +36,7 @@ class FFDateRange extends Component {
     errorsShowOnHelperText: PropsType.bool.isRequired,
     readOnly: PropsType.bool.isRequired,
     ignoreValidate: PropsType.bool,
-visible: PropsType.bool,
+    visible: PropsType.bool,
 
     //runtime
     formValue: PropsType.object.isRequired,
@@ -176,14 +176,12 @@ visible: PropsType.bool,
       errorsShowOnHelperText, readOnly, formValue, addOns} = this.state;
     if(!ischema) return null;
 
-    let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
+    let label = ZFunc.IfFuncExec(ischema.label, formValue, addOns);
     
     let ireadOnly = ischema.readOnly || readOnly;
 
     let ierror = Accessor.Get(formError, iname);
-    if(_.isFunction(ierror)){
-      ierror = ierror();
-    }
+    ierror = ZFunc.IfFuncExec(ierror, formValue, addOns);
     
     let helperText = ischema.helperText;
     if(errorsShowOnHelperText){

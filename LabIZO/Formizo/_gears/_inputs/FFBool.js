@@ -5,7 +5,7 @@ import _ from "lodash";
 import { Checkbox, FormControlLabel, Switch } from "@material-ui/core";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 
-import { Accessor, ColorX } from "IZOArc/STATIC";
+import { Accessor, ColorX, ZFunc } from "IZOArc/STATIC";
 import { HStack, VStack } from "IZOArc/LabIZO/Stackizo";
 import { Typography } from "@mui/material";
 
@@ -100,7 +100,7 @@ visible: PropsType.bool,
     let {formValue, iname, ischema, readOnly, _onValueChange, ifieldStyle, addOns, ignoreValidate, visible} = this.state;
     let ivalue = Accessor.Get(formValue, iname) || false;
     let ireadOnly = ischema.readOnly || readOnly;
-    let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
+    let label = ZFunc.IfFuncExec(ischema.label, formValue, addOns);
     if(ischema.noLabel) label = "";
 
     if(ifieldStyle === "grid"){
@@ -138,7 +138,7 @@ visible: PropsType.bool,
     let {formValue, iname, ischema, readOnly, _onValueChange, ifieldStyle, ignoreValidate, visible, addOns} = this.state;
     let ivalue = Accessor.Get(formValue, iname) || false;
     let ireadOnly = ischema.readOnly || readOnly;
-    let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
+    let label = ZFunc.IfFuncExec(ischema.label, formValue, addOns);
     if(ischema.noLabel) label = "";
 
     if(ifieldStyle === "grid"){
@@ -179,7 +179,7 @@ visible: PropsType.bool,
     let {formValue, iname, ischema, readOnly, _onValueChange, ifieldStyle, addOns, ignoreValidate, visible} = this.state;
     let ivalue = Accessor.Get(formValue, iname) || false;
     let ireadOnly = ischema.readOnly || readOnly;
-    let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
+    let label = ZFunc.IfFuncExec(ischema.label, formValue, addOns);
     
     if(ifieldStyle === "grid"){
       return (
@@ -232,9 +232,7 @@ visible: PropsType.bool,
 
     let ierror = Accessor.Get(formError, iname);
     if(ierror){
-      if(_.isFunction(ierror)){
-        ierror = ierror();
-      }
+      ierror = ZFunc.IfFuncExec(ierror);
       return (
         <VStack>
           {this.renderInside()}

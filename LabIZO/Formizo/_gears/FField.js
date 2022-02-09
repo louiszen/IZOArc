@@ -8,7 +8,7 @@ import {FFText, FFHidden, FFPassword, FFNumber,
   FFBool, FFTextarea, FFSelect, FFDate, 
   FFDateRange, FFUpload, FFSlider} from "./_inputs";
   
-import { Accessor } from "IZOArc/STATIC";
+import { Accessor, ZFunc } from "IZOArc/STATIC";
 import { StyledButton } from "IZOArc/LabIZO/Stylizo";
 import { HStack, Spacer } from "IZOArc/LabIZO/Stackizo";
 import FFRichText from "./_inputs/FFRichText";
@@ -438,7 +438,7 @@ class FField extends Component {
     let {ischema, fieldStyle, inTable, enableInlineSubmit, formValue, addOns} = this.state;
     let vstyle = (ischema.variant || fieldStyle);
 
-    let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
+    let label = ZFunc.IfFuncExec(ischema.label, formValue, addOns);
     
     if(!inTable && vstyle === "grid" && !ischema.noLabelGrid && ischema.format !== "selectTable"){
       let {labelXS, labelPaddingX, labelJustify,

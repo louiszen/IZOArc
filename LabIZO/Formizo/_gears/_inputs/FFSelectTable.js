@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Accessor } from "IZOArc/STATIC";
+import { Accessor, ZFunc } from "IZOArc/STATIC";
 import PropsType from "prop-types";
 import Tablizo from "IZOArc/LabIZO/Tablizo";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
@@ -29,7 +29,7 @@ class FFSelectTable extends Component {
     errorsShowOnHelperText: PropsType.bool.isRequired,
     readOnly: PropsType.bool.isRequired,
     ignoreValidate: PropsType.bool,
-visible: PropsType.bool,
+    visible: PropsType.bool,
 
     //runtime
     formValue: PropsType.object.isRequired,
@@ -123,7 +123,7 @@ visible: PropsType.bool,
 
   getLabel = () => {
     let {ischema, formValue, addOns} = this.props;
-    let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
+    let label = ZFunc.IfFuncExec(ischema.label, formValue, addOns);
 
     if(_.isString(ischema.label)){
       return (

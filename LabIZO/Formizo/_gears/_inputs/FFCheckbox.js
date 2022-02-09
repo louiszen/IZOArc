@@ -5,7 +5,7 @@ import _ from "lodash";
 import { Checkbox, FormControl, FormControlLabel, FormGroup, 
   FormHelperText, FormLabel } from "@material-ui/core";
 
-import { Accessor, AuthX } from "IZOArc/STATIC";
+import { Accessor, AuthX, ZFunc } from "IZOArc/STATIC";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
 import { OutlinedBox } from "IZOArc/LabIZO/Stylizo";
 
@@ -31,7 +31,7 @@ class FFCheckbox extends Component {
     errorsShowOnHelperText: PropsType.bool.isRequired,
     readOnly: PropsType.bool.isRequired,
     ignoreValidate: PropsType.bool,
-visible: PropsType.bool,
+    visible: PropsType.bool,
 
     //runtime
     formValue: PropsType.object.isRequired,
@@ -140,9 +140,7 @@ visible: PropsType.bool,
         cap = o;
       }else{
         cap = Accessor.Get(o, ischema.selectCap);
-        if(_.isFunction(cap)){
-          cap = cap();
-        }
+        cap = ZFunc.IfFuncExec(cap);
       }
       let disabled = ischema.selectDisable && Accessor.Get(o, ischema.selectDisable);
 
@@ -203,14 +201,12 @@ visible: PropsType.bool,
       errorsShowOnHelperText, readOnly, formValue, addOns} = this.state;
     if(!ischema) return null;
 
-    let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
+    let label = ZFunc.IfFuncExec(ischema.label, formValue, addOns);
 
     let ierror = Accessor.Get(formError, iname);
-    let ireadOnly = ischema.readOnly || readOnly;
+    ierror = ZFunc.IfFuncExec(ierror);
 
-    if(_.isFunction(ierror)){
-      ierror = ierror();
-    }
+    let ireadOnly = ischema.readOnly || readOnly;
 
     let helperText = ischema.helperText;
     if(errorsShowOnHelperText){

@@ -58,11 +58,10 @@ class SLogin {
   static SignInAndRequestOTP = async (method, formProps) => {
     let {username, password} = formProps;
 
-    let hash = crypto.createHash("sha256");
     let req = {
       method: method,
       username: username,
-      password: hash.update(password).digest("hex")
+      password: password
     };
 
     return await ReqX.SendBE(SignInAPI, req, {}, null, 
@@ -84,11 +83,10 @@ class SLogin {
   static SignInByUP = async (method, formProps) => {
     let {username, password} = formProps;
 
-    let hash = crypto.createHash("sha256");
     let req = {
       method: method,
       username: username,
-      password: hash.update(password).digest("hex")
+      password: password
     };
 
     let res = await ReqX.SendBE(SignInAPI, req, {}, null, 

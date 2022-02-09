@@ -8,7 +8,7 @@ import FField from "./FField";
 import {FGAccess, FGInline, FGArray, 
   FGFold, FGCollapse, FGTabs, FGColumns, FGBox, FGTable} from "./_groups";
 
-import { Accessor } from "IZOArc/STATIC";
+import { Accessor, ZFunc } from "IZOArc/STATIC";
 
 class FItem extends Component {
 
@@ -124,10 +124,7 @@ class FItem extends Component {
 
   renderHeader(ischema){
     let {textAlign, fontSize, fontWeight, color} = ischema;
-    let header = ischema.header;
-    if(_.isFunction(header)){
-      header = header();
-    }
+    let header = ZFunc.IfFuncExec(ischema.header);
     return (
       <Box
         textAlign={textAlign || "center"} 
@@ -141,10 +138,7 @@ class FItem extends Component {
 
   renderInject(ischema){
     let {formValue, addOns} = this.props;
-    if(_.isFunction(ischema.inject)){
-      return ischema.inject(formValue, addOns);
-    }
-    return ischema.inject;
+    return ZFunc.IfFuncExec(ischema.inject, formValue, addOns);
   }
 
   renderAccessizo(ischema){

@@ -10,7 +10,7 @@ import CellExpand from "./_gears/CellExpand";
 
 import { StyledLinearProgress, StyledIconButton } from "IZOArc/LabIZO/Stylizo";
 import { HStack, Spacer, VStack } from "IZOArc/LabIZO/Stackizo";
-import { Accessor, AuthX, ColorX, STORE } from "IZOArc/STATIC";
+import { Accessor, AuthX, ColorX, STORE, ZFunc } from "IZOArc/STATIC";
 
 import { IZOTheme } from "__SYSDefault/Theme";
 import { LocaleX } from "IZOArc/STATIC";
@@ -306,10 +306,7 @@ class Tablizo extends Component {
     _.map(buttons, (o, i) => {
       if (AuthX.IsAccessible(user, o.reqAuth, o.reqLevel, o.reqFunc, o.reqGroup, o.reqRole)) {
         
-        let caption = o.caption;
-        if(_.isFunction(o.caption)){
-          caption = o.caption();
-        }
+        let caption = ZFunc.IfFuncExec(o.caption);
 
         btns.push({
           headerName: "",
@@ -352,10 +349,7 @@ class Tablizo extends Component {
 
   getSchema = () => {
     let { schema, data, addOns } = this.props;
-    if (_.isFunction(schema)) {
-      return schema(data, addOns);
-    }
-    return schema;
+    return ZFunc.IfFuncExec(schema, data, addOns)
   };
 
   getColumns = (schema) => {
@@ -425,15 +419,9 @@ class Tablizo extends Component {
         renderCell = (param) => <CellExpand value={param.value} width={param.colDef.width || param.colDef.computedWidth} />;
       }
 
-      let renderHeader = undefined;
-      let headerName = undefined;
-      if (_.isString(o.label)) {
-        headerName = o.label;
-      } if(_.isFunction(o.label)){
-        headerName = o.label();
-      } else {
-        renderHeader = () => o.label;
-      }
+      
+      let headerName = ZFunc.IfFuncExec(o.label);
+      let renderHeader = () => headerName;
 
       let cellClassName = undefined;
       if (_.isFunction(o.cellClass)) {

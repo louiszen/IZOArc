@@ -4,7 +4,7 @@ import PropsType from "prop-types";
 import _ from "lodash";
 import { FormControl, FormHelperText, FormLabel, MenuItem, Select, Tooltip, Typography } from "@material-ui/core";
 
-import { Accessor, AuthX } from "IZOArc/STATIC";
+import { Accessor, AuthX, ZFunc } from "IZOArc/STATIC";
 import { OutlinedBox } from "IZOArc/LabIZO/Stylizo";
 import { HStack, Spacer } from "IZOArc/LabIZO/Stackizo";
 
@@ -174,18 +174,15 @@ visible: PropsType.bool,
     if(!ischema) return null;
 
     let ierror = Accessor.Get(formError, iname);
+    ierror = ZFunc.IfFuncExec(ierror);
     let ireadOnly = ischema.readOnly || readOnly;
-
-    if(_.isFunction(ierror)){
-      ierror = ierror();
-    }
 
     let helperText = ischema.helperText;
     if(errorsShowOnHelperText){
       helperText = ierror;
     }
 
-    let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
+    let label = ZFunc.IfFuncExec(ischema.label, formValue, addOns);
 
     return(
       <FormControl 

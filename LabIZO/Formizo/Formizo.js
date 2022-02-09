@@ -8,7 +8,7 @@ import FItem from "./_gears/FItem";
 import Validation from "./Validation";
 import "./Formizo.css";
 
-import { Accessor, ColorX, LocaleX } from "IZOArc/STATIC";
+import { Accessor, ColorX, LocaleX, ZFunc } from "IZOArc/STATIC";
 import { VStack, HStack, Spacer } from "IZOArc/LabIZO/Stackizo";
 import { StyledButton } from "IZOArc/LabIZO/Stylizo";
 
@@ -367,18 +367,12 @@ class Formizo extends Component {
 
   getSchema = () => {
     let {schema, formValue, addOns} = this.props;
-    if(_.isFunction(schema)){
-      return schema(formValue, addOns);
-    }
-    return schema;
+    return ZFunc.IfFuncExec(schema, formValue, addOns);
   }
 
   getInnerSchema = (cschema) => {
     let {formValue, addOns} = this.props;
-    if(_.isFunction(cschema)){
-      return cschema(formValue, addOns);
-    }
-    return cschema;
+    return ZFunc.IfFuncExec(cschema, formValue, addOns);
   }
 
   ValidateForm = () => {
@@ -401,11 +395,7 @@ class Formizo extends Component {
     _.map(criteria, (o, i) => {
       if (!Validation.Rules[o](value)) {
         if (_.isEmpty(error)) {
-          if(_.isFunction(Validation.ErrorMsg[o])){
-            error = Validation.ErrorMsg[o]();
-          }else{
-            error = Validation.ErrorMsg[o];
-          }
+          error = ZFunc.IfFuncExec(Validation.ErrorMsg[o]);
         }
       }
     });

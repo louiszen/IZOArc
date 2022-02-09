@@ -4,7 +4,7 @@ import PropsType from "prop-types";
 import _ from "lodash";
 import { FormControl, FormHelperText } from "@material-ui/core";
 
-import { Accessor } from "IZOArc/STATIC";
+import { Accessor, ZFunc } from "IZOArc/STATIC";
 import { StyledInput, StyledTextField } from "IZOArc/LabIZO/Stylizo";
 
 /**
@@ -28,7 +28,7 @@ class FFTextarea extends Component {
     errorsShowOnHelperText: PropsType.bool.isRequired,
     readOnly: PropsType.bool.isRequired,
     ignoreValidate: PropsType.bool,
-visible: PropsType.bool,
+    visible: PropsType.bool,
 
     //runtime
     formValue: PropsType.object.isRequired,
@@ -106,11 +106,9 @@ visible: PropsType.bool,
     let ivalue = Accessor.Get(formValue, iname);
     if(ivalue === undefined || ivalue === null) ivalue = "";
     let ierror = Accessor.Get(formError, iname);
-    let ireadOnly = ischema.readOnly || readOnly;
+    ierror = ZFunc.IfFuncExec(ierror);
 
-    if(_.isFunction(ierror)){
-      ierror = ierror();
-    }
+    let ireadOnly = ischema.readOnly || readOnly;
 
     let helperText = ischema.helperText;
     if(errorsShowOnHelperText){
@@ -164,16 +162,14 @@ visible: PropsType.bool,
       _onFieldFocus, _onFieldBlur, errorsShowOnHelperText, ifieldStyle, readOnly, fieldSize, theme, addOns, ignoreValidate, visible} = this.state;
     if(!ischema) return null;
 
-    let label = _.isFunction(ischema.label)? ischema.label(formValue, addOns) : ischema.label;
+    let label = ZFunc.IfFuncExec(ischema.label, formValue, addOns);
 
     let ivalue = Accessor.Get(formValue, iname);
     if(ivalue === undefined || ivalue === null) ivalue = "";
     let ierror = Accessor.Get(formError, iname);
-    let ireadOnly = ischema.readOnly || readOnly;
+    ierror = ZFunc.IfFuncExec(ierror);
 
-    if(_.isFunction(ierror)){
-      ierror = ierror();
-    }
+    let ireadOnly = ischema.readOnly || readOnly;
 
     let helperText = ischema.helperText;
     if(errorsShowOnHelperText){

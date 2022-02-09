@@ -384,10 +384,9 @@ class UserAccess extends Component {
   }
 
   addPropsMod = async (formProps) => {
-    let hash = crypto.createHash("sha256");
     formProps = {
       ...formProps,
-      password: hash.update(formProps.password).digest("hex")
+      password: formProps.password
     };
     return formProps;
   }
