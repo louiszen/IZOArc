@@ -7,25 +7,6 @@ import { Box, Paper, Tab, Tabs, Typography } from "@material-ui/core";
 import { Accessor, AuthX } from "IZOArc/STATIC";
 import { VStack, HStack, Spacer } from "IZOArc/LabIZO/Stackizo";
 
-/** 
- * Add ~react-tabs.js as props "tab"
- * 
- * @typedef {{
- *   label: String,
- *   icon: String | JSX,
- *   reqAuth: String,
- *   render: JSX,
- *   iconPos: "top" | "left" | "right" | "bottom",
- *   noTransform: Boolean | false,
- *   spacing: Number | 5,
- *   alignment: "center" | "left" | "right",
- *   width: Number | 200,
- *   height: Number | 20
- * }} tab
- * 
- * @typedef {[tab]} tabs
- */
-
 /**
  * @augments {Component<Props, State>}
  */

@@ -15,6 +15,9 @@ const Tail = {
   width: 250
 };
 
+/**
+ * @type {import("IZOArc/LabIZO/Tabbizo/__typedef").tabbizoSchema}
+ */
 const tabs = [
   {
     label: () => LocaleX.GetIZO("System.BnR"),
