@@ -2,8 +2,6 @@ import { CheckUserNameAPI, RenewAuthority, SignInAPI, VerifyOTPAPI } from "IZOAr
 
 import { Env, LocaleX, STORE, ReqX } from "IZOArc/STATIC";
 
-import crypto from "crypto";
-
 class SLogin {
 
   /**

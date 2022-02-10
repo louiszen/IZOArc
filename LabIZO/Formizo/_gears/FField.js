@@ -14,8 +14,6 @@ import { HStack, Spacer } from "IZOArc/LabIZO/Stackizo";
 import FFRichText from "./_inputs/FFRichText";
 import FFSelectTable from "./_inputs/FFSelectTable";
 
-import _ from "lodash";
-
 class FField extends Component {
 
   static propTypes = {

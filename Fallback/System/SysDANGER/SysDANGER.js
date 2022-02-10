@@ -8,8 +8,6 @@ import schema from "./schema";
 import { StyledButton } from "IZOArc/LabIZO/Stylizo";
 import { STORE } from "../../../STATIC";
 
-import crypto from "crypto";
-
 /**
  * @augments {Component<Props, State>}
  */

@@ -349,7 +349,7 @@ class Tablizo extends Component {
 
   getSchema = () => {
     let { schema, data, addOns } = this.props;
-    return ZFunc.IfFuncExec(schema, data, addOns)
+    return ZFunc.IfFuncExec(schema, data, addOns);
   };
 
   getColumns = (schema) => {
