@@ -89,7 +89,7 @@ class FGTable extends Component {
     let {ischema, ...other} = this.props;
     let cellSchema = this.getCellSchema(cell);
     return (
-      <TableCell colSpan={cellSchema.colSpan} key={idx} width={cellSchema.width} padding="none">
+      <TableCell style={ischema.table.cellStyle} colSpan={cellSchema.colSpan} key={idx} width={cellSchema.width} padding="none">
         <FItem
           ischema={cellSchema}
           {...other}/>
@@ -98,10 +98,11 @@ class FGTable extends Component {
   }
 
   renderHeader(){
+    let {ischema} = this.state;
     let headerSchema = this.getHeaderSchema();
     return _.map(headerSchema, (o, i) => {
       return (
-        <TableRow key={i} style={{width: "100%"}}>
+        <TableRow key={i} style={{width: "100%", ...ischema.table.rowStyle}}>
           {this.renderRow(o, i)}
         </TableRow>
       );
@@ -116,10 +117,11 @@ class FGTable extends Component {
   }
 
   renderRows(){
+    let {ischema} = this.state;
     let rowsSchema = this.getRowsSchema();
     return _.map(rowsSchema, (o, i) => {
       return (
-        <TableRow key={i} style={{width: "100%"}}>
+        <TableRow key={i} style={{width: "100%",  ...ischema.table.rowStyle}}>
           {this.renderRow(o, i)}
         </TableRow>
       );

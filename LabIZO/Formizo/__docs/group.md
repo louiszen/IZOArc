@@ -227,6 +227,8 @@ Display the section in columns
     rows: [[
       group | simple
     ] | (formValue, addOns) => []],
+    rowStyle: CSSStyle,
+    cellStyle: CSSStyle
   }
 }
 ```

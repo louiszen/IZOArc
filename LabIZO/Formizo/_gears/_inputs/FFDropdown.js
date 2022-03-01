@@ -30,7 +30,7 @@ class FFDropdown extends Component {
     errorsShowOnHelperText: PropsType.bool.isRequired,
     readOnly: PropsType.bool.isRequired,
     ignoreValidate: PropsType.bool,
-visible: PropsType.bool,
+    visible: PropsType.bool,
 
     //runtime
     formValue: PropsType.object.isRequired,
@@ -113,6 +113,7 @@ visible: PropsType.bool,
       let c = _.isEmpty(ischema.selectCap) ? o : Accessor.Get(o, ischema.selectCap);
       let t = _.isEmpty(ischema.selectTip) ? o : Accessor.Get(o, ischema.selectTip);
 
+      c = ZFunc.IfFuncExec(c);
       //authority
       if(!AuthX.Pass(o.reqAuth, o.reqLevel, o.reqFunc, o.reqGroup, o.reqRole)) return;
 
@@ -121,8 +122,8 @@ visible: PropsType.bool,
         display = ischema.selectCapMod(c, v, t);
       }else{
         display = (<Typography>
-            {c}
-          </Typography>);
+          {c}
+        </Typography>);
       }
 
       if(ischema.showTooltip){

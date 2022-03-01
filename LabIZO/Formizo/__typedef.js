@@ -1,3 +1,6 @@
+// eslint-disable-next-line no-unused-vars
+import { CSSProperties } from "react";
+
 /**
  * @typedef {"text" | "file" | "date" | "daterange" | "textarea" | "bool" | "number" | "silder" | "rate" | "password" | "select" | "hidden" | "display" | "custom" | "selectTable"} fformats
  * @typedef {"row" | "standard" | "filled" | "outlined"} fvariants
@@ -201,18 +204,24 @@
  * 
  * @typedef {{
  *  table: {
- *    header: [fitem] | (formValue, addOns) => [fitem],
- *    rows: [fitem] | (formValue, addOns) => [fitem]
+ *    header: [[fitem]] | (formValue, addOns) => [[fitem]],
+ *    rows: [[fitem]] | (formValue, addOns) => [[fitem]],
+ *    rowStyle: CSSProperties,
+ *    cellStyle: CSSProperties
  *  }
  * }} fgtable
  * 
  * @typedef {{
- *  header: String | Function
+ *  header?: String | Function
  * }} fgheader
+ * 
+ * @typedef {{
+ *  inject?: String | Function
+ * }} fginject
  * 
  * @typedef {(ffcommon | ffintable) & (fftext | fffile | fftextarea | ffbool | ffnumber | ffslider | ffrate | ffpassword | ffdate | ffdaterange | fftableselect | ffselect)} ffield
  * 
- * @typedef {fgheader | fgaccess | fgarray | fgfold | fgcollapse | fgtabs | fgcolumns | fgbox | fgtable} fgroup
+ * @typedef {fginject | fgheader | fgaccess | fgarray | fgfold | fgcollapse | fgtabs | fgcolumns | fgbox | fgtable} fgroup
  * 
  * @typedef {fgroup | ffield | () => fgroup | () => ffield } fitem
  * 
