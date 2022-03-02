@@ -5,6 +5,7 @@ import { HStack, VStack } from "IZOArc/LabIZO/Stackizo";
 import { IconButton } from "@mui/material";
 import { AttachFile, Code, Hive, InsertEmoticon, Mic, RadioButtonChecked, Send } from "@mui/icons-material";
 import { Box } from "@mui/system";
+import _ from "lodash";
 
 /**
  * @augments {Component<Props, State>}
@@ -103,7 +104,10 @@ class WInputBar extends Component {
   }
 
   onInputChange = (text) => {
-
+    this.setState({
+      input: text,
+      isEmpty: _.isEmpty(text)
+    })
   }
 
   renderImageUpload(){
@@ -139,8 +143,9 @@ class WInputBar extends Component {
     let {input} = this.state;
     let ph = ZFunc.IfFuncExec(inputPlaceHolder, addOns);
     return (
-      <Box style={themeCSS?.inputbar?.mainbar?.text?.outter}>
+      <Box className="chatizo-input-box" style={themeCSS?.inputbar?.mainbar?.text?.outter}>
         <input
+          className="chatizo-input"
           style={themeCSS?.inputbar?.mainbar?.text?.inner}
           onKeyDown={e => this.onKeyDown(e)}
           onChange={e => this.onInputChange(e.target.value)}
@@ -208,6 +213,18 @@ class WInputBar extends Component {
     }
   }
 
+  renderButtons(){
+    let {isEmpty} = this.state;
+    if(isEmpty){
+      return [
+        this.renderCMDBtn(),
+        this.renderAttachBtn(),
+        this.renderAudioRecordBtn()
+      ];
+    }
+    return this.renderSendBtn()
+  }
+
   renderMainBar(){
     let {themeCSS} = this.props;
     return (
@@ -215,10 +232,7 @@ class WInputBar extends Component {
         {this.renderMenuBtn()}
         {this.renderEmojiBtn()}
         {this.renderTextField()}
-        {this.renderCMDBtn()}
-        {this.renderAttachBtn()}
-        {this.renderAudioRecordBtn()}
-        {this.renderSendBtn()}
+        {this.renderButtons()}
       </HStack>
     );
   }

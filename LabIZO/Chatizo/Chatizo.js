@@ -11,6 +11,8 @@ import _ from "lodash";
 import WInputBar from "./_gears/InputBar/WInputBar";
 import WMsgBody from "./_gears/MsgBody/WMsgBody";
 
+import "./Chatizo.css";
+
 /**
  * @augments {Component<Props, State>}
  */

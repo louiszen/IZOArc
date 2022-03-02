@@ -39,7 +39,7 @@ const style = {
         roundRadius: 5,
         width: "100%",
         borderWidth: 0,
-        backgroundColor: ColorX.GetColorCSS("transparent"),
+        backgroundColor: ColorX.GetColorCSS("transparent")
       },
       notEmpty: {
 
@@ -55,7 +55,7 @@ const style = {
       ...btnStyle
     },
     send: {
-      
+      ...btnStyle
     },
     cmd: {
       ...btnStyle
