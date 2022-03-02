@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import Accessor from "IZOArc/STATIC/Accessor";
-/* import PropsType from "prop-types";
+import { Accessor } from "IZOArc/STATIC";
+import PropsType from "prop-types";
+import Chatizo from "..";
 
-import schema from "./_schema";
-import data from "./_data"; */
-
-import Msgizo from "IZOArc/LabIZO/Msgizo";
-
+/**
+ * @augments {Component<Props, State>}
+ */
 class Test extends Component {
 
   static propTypes = {
@@ -32,6 +31,12 @@ class Test extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.setState = (state, callback) => {
+      return;
+    };
+  }
+
   _setAllStates = (callback) => {
     this.setState((state, props) => ({
       ...props,
@@ -40,9 +45,15 @@ class Test extends Component {
 
   render(){
     return (
-      <Msgizo>
-
-      </Msgizo>
+      <Chatizo
+        width={"100%"}
+        height={"100%"}
+        headlineIcon="/Images/Icon/gambot.jpg"
+        headlineText={(addOns) => "Gambot - " + addOns.projectID}
+        addOns={{
+          projectID: "J0000"
+        }}
+        />
     );
   }
 
