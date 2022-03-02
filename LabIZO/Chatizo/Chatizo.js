@@ -8,6 +8,8 @@ import style from "./_style";
 import WHeadline from "./_gears/Headline/WHeadline";
 
 import _ from "lodash";
+import WInputBar from "./_gears/InputBar/WInputBar";
+import WMsgBody from "./_gears/MsgBody/WMsgBody";
 
 /**
  * @augments {Component<Props, State>}
@@ -49,25 +51,35 @@ class Chatizo extends Component {
     HTMLSpecialTagParser: PropsType.func,
 
     //Command
-    sendCMD: PropsType.bool,
+    enableCMD: PropsType.bool,
     cmds: PropsType.objectOf(PropsType.func),
 
     //Menu
     showMenu: PropsType.bool,
     menu: PropsType.arrayOf(PropsType.shape({
+      icon: PropsType.oneOfType([PropsType.func, PropsType.string]),
       cap: PropsType.oneOfType([PropsType.func, PropsType.string]),
       func: PropsType.func
     })),
 
     //Settings
-    sendImage: PropsType.bool,
-    sendVideo: PropsType.bool,
-    sendAttach: PropsType.bool,
+    enableEmoji: PropsType.bool,
+    enableAttach: PropsType.bool,
+    enableAudio: PropsType.bool,
+    enableRecord: PropsType.bool,
+    
+    //attachments
+    allowCamera: PropsType.bool,
+    allowImage: PropsType.bool,
+    allowVideo: PropsType.bool,
+    allowFile: PropsType.bool,
+    allowLocation: PropsType.bool,
+    allowPoll: PropsType.bool,
+    allowMusic: PropsType.bool,
 
     pressEnterToSend: PropsType.bool,
     inputPlaceHolder: PropsType.oneOfType([PropsType.func, PropsType.string]),
     appendTextAfterSent: PropsType.bool,
-    autoCompleteAllowed: PropsType.bool,
 
     hideLongAnswer: PropsType.bool,
     longAnswerLength: PropsType.number,
@@ -76,6 +88,15 @@ class Chatizo extends Component {
     readLessCaption: PropsType.oneOfType([PropsType.func, PropsType.string]),
 
     animated: PropsType.bool,
+
+    //autoComplete
+    autoCompleteAllowed: PropsType.bool,
+    autoCompleteLibs: PropsType.objectOf(PropsType.arrayOf(PropsType.shape({
+      icon: PropsType.oneOfType([PropsType.func, PropsType.string]),
+      cap: PropsType.oneOfType([PropsType.func, PropsType.string]),
+      val: PropsType.func
+    }))),
+    autoCompleteMethod: PropsType.oneOf(["startsWith", "endsWith", "contains"]),
 
     //appearance
     showHeadline: PropsType.bool,
@@ -146,18 +167,31 @@ class Chatizo extends Component {
     HTMLSpecialTagParser: null,
 
     //Command
-    sendCMD: true,
+    enableCMD: true,
     cmds: {},
 
+    //Menu
+    showMenu: true,
+    menu: [],
+
     //Settings
-    sendImage: true,
-    sendVideo: true,
-    sendAttach: true,
+    enableEmoji: true,
+    enableAttach: true,
+    enableAudio: true,
+    enableRecord: true,
+    
+    //attachments
+    allowCamera: true,
+    allowImage: true,
+    allowVideo: true,
+    allowFile: true,
+    allowLocation: true,
+    allowPoll: true,
+    allowMusic: true,
 
     pressEnterToSend: true,
-    inputPlaceHolder: "Please input something here...",
+    inputPlaceHolder: "Message",
     appendTextAfterSent: true,
-    autoCompleteAllowed: true,
 
     hideLongAnswer: true,
     longAnswerLength: 300,
@@ -167,6 +201,11 @@ class Chatizo extends Component {
 
     animated: false,
 
+    //autoComplete
+    autoCompleteAllowed: true,
+    autoCompleteLibs: {},
+    autoCompleteMethod: "startsWith",
+
     //appearance
     showHeadline: true,
     headlineIcon: "",
@@ -174,12 +213,12 @@ class Chatizo extends Component {
 
     showHeader: true,
     showFooter: true,
-    showStatus: false,
+    showStatus: true,
     showDateTime: true,
     showLapseTime: true,
 
     showInAvatar: true,
-    showOutAvatar: false,
+    showOutAvatar: true,
     hideSameAvatar: true,
     avatarAtTop: true,
 
@@ -187,8 +226,8 @@ class Chatizo extends Component {
     showQuickRepliesAsButtons: true,
     disableButtonAfterSent: true,
 
-    canClickOnIn: false,
-    canClickOnOut: false,
+    canClickOnIn: true,
+    canClickOnOut: true,
     HTMLEnabled: true,
 
     //runtime operating
@@ -202,6 +241,7 @@ class Chatizo extends Component {
     this.state = {
       themeCSS: {},
       inQR: false,
+      inAC: false,
       typingDisabled: false,
       messages: [],
       quickReplies: [],
@@ -253,16 +293,34 @@ class Chatizo extends Component {
     });
   }
 
+  _onTextChange = (text) => {
+
+  }
+
+  _onSend = (text, atth) => {
+
+  }
+
   renderNotice(){
 
   }
 
   renderInputBar(){
-
+    return (
+      <WInputBar
+        {...this.state}
+        _onTextChange={this._onTextChange}
+        _onSend={this._onSend}
+        />
+    );
   }
 
   renderMsgBody(){
-
+    return (
+      <WMsgBody
+        {...this.state}
+        />
+    );
   }
 
   renderHeadline(){

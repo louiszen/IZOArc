@@ -3,7 +3,7 @@ import { CSSProperties } from "react";
 import { ColorX } from "IZOArc/STATIC";
 
 /**
- * @type {Object.<string, CSSProperties}
+ * @type {import("../../__typedef").tstyle}
  */
 const style = {
   main: {

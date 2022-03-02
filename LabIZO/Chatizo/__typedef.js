@@ -4,6 +4,11 @@ import { CSSProperties } from "react";
 import moment from "moment";
 
 /**
+ * @typedef {Object.<string, CSSProperties>} style
+ * @typedef {style | Object.<string, CSSProperties | style>} tstyle
+ */
+
+/**
  * @typedef {"pending" | "sent" | "received" | "read" | "error"} msgstatus
  * @typedef {"web" | "phone" | "postback"} btntype
  * 
