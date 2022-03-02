@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Accessor } from "IZOArc/STATIC";
-import PropsType from "prop-types";
 import Chatizo from "..";
 
 /**
@@ -48,7 +47,7 @@ class Test extends Component {
       <Chatizo
         width={"100%"}
         height={"100%"}
-        headlineIcon="/Images/Icon/gambot.jpg"
+        headlineIcon="/Images/Icon/gambot.png"
         headlineText={(addOns) => "Gambot - " + addOns.projectID}
         addOns={{
           projectID: "J0000"

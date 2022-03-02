@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Accessor, ZFunc } from "IZOArc/STATIC";
+import { Accessor } from "IZOArc/STATIC";
 import PropsType from "prop-types";
 import { VStack } from "../Stackizo";
 import { v4 } from "uuid";
@@ -48,7 +48,22 @@ class Chatizo extends Component {
     msgIDGen: PropsType.func,
     HTMLSpecialTagParser: PropsType.func,
 
+    //Command
+    sendCMD: PropsType.bool,
+    cmds: PropsType.objectOf(PropsType.func),
+
+    //Menu
+    showMenu: PropsType.bool,
+    menu: PropsType.arrayOf(PropsType.shape({
+      cap: PropsType.oneOfType([PropsType.func, PropsType.string]),
+      func: PropsType.func
+    })),
+
     //Settings
+    sendImage: PropsType.bool,
+    sendVideo: PropsType.bool,
+    sendAttach: PropsType.bool,
+
     pressEnterToSend: PropsType.bool,
     inputPlaceHolder: PropsType.oneOfType([PropsType.func, PropsType.string]),
     appendTextAfterSent: PropsType.bool,
@@ -130,7 +145,15 @@ class Chatizo extends Component {
     msgIDGen: () => v4(),
     HTMLSpecialTagParser: null,
 
+    //Command
+    sendCMD: true,
+    cmds: {},
+
     //Settings
+    sendImage: true,
+    sendVideo: true,
+    sendAttach: true,
+
     pressEnterToSend: true,
     inputPlaceHolder: "Please input something here...",
     appendTextAfterSent: true,
@@ -150,7 +173,6 @@ class Chatizo extends Component {
     headlineText: "",
 
     showHeader: true,
-    showHeader: false,
     showFooter: true,
     showStatus: false,
     showDateTime: true,

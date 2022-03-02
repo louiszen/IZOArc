@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Accessor, ZFunc } from "IZOArc/STATIC";
 import PropsType from "prop-types";
-import { HStack, VStack } from "IZOArc/LabIZO/Stackizo";
-import { Typography } from "@mui/material";
+import { HStack, Spacer } from "IZOArc/LabIZO/Stackizo";
+import { IconButton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import { MoreVert } from "@mui/icons-material";
 
 /**
  * @augments {Component<Props, State>}
@@ -65,11 +66,20 @@ class WHeadline extends Component {
 
   renderIcon(){
     let {themeCSS, addOns, iconSrc} = this.props;
-    console.log(iconSrc);
+    iconSrc = ZFunc.IfFuncExec(iconSrc, addOns);
     return (
       <Box style={themeCSS?.headline?.icon}>
         <img src={iconSrc} alt=""/>
       </Box>
+    );
+  }
+
+  renderSettings(){
+    let {themeCSS} = this.props;
+    return (
+      <IconButton style={themeCSS?.headline?.settings}>
+        <MoreVert/>
+      </IconButton>
     );
   }
 
@@ -79,6 +89,8 @@ class WHeadline extends Component {
       <HStack style={themeCSS?.headline?.main}>
         {this.renderIcon()}
         {this.renderText()}
+        <Spacer/>
+        {this.renderSettings()}
       </HStack>
     );
   }

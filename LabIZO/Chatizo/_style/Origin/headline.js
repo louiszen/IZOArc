@@ -13,13 +13,13 @@ const style = {
     height: 50,
     width: "100%",
     borderRadius: 0,
-    padding: "0 20px",
+    padding: 0,
     background: ColorX.GetColorCSS("blue"),
   },
   icon: {
-    width: 100,
-    height: 100,
-    padding: "10px 5px"
+    width: 50,
+    height: 50,
+    marginRight: 15
   },
   text: {
     alignItems: "center",
@@ -29,7 +29,12 @@ const style = {
     fontWeight: "bold",
     color: ColorX.GetColorCSS("pureWhite")
   },
+  settings: {
+    width: 50,
+    height: 50,
+    color: ColorX.GetColorCSS("pureWhite")
+  }
 
-}
+};
 
 export default style;
