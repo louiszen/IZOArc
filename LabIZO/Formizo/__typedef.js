@@ -3,7 +3,7 @@ import { CSSProperties } from "react";
 
 /**
  * @typedef {"text" | "file" | "date" | "daterange" | "textarea" | "bool" | "number" | "silder" | "rate" | "password" | "select" | "hidden" | "display" | "custom" | "selectTable"} fformats
- * @typedef {"row" | "standard" | "filled" | "outlined"} fvariants
+ * @typedef {"row" | "standard" | "filled" | "outlined" | "grid"} fvariants
  * @typedef {"required" | "email" | "number" | "plain" | "plainSpace" | "plainAt" | "plainLower" | "boolTrue"} fvalidator
  * @typedef {"star" | "heart" | "emoji" | "number"} frateicons
  * @typedef {"time" | "date" | "datetime" | "week" | "month" | "quarter" | "month" | "year"} fdatetypes
