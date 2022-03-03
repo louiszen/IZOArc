@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import PropsType from 'prop-types';
+import React, { Component } from "react";
+import PropsType from "prop-types";
 
 import "./Scroller.css";
 
@@ -62,7 +62,7 @@ class Scroller extends Component {
   _scrollTo(offset, animated = true) {
     this._scroller.scrollTo({
       left: offset,
-      behavior: 'smooth'
+      behavior: "smooth"
     });
   }
 
@@ -144,13 +144,13 @@ class Scroller extends Component {
   };
 
   addListener(){
-    window.addEventListener('mousemove', this.onMouseMove);
-    window.addEventListener('mouseup', this.onMouseUp);
+    window.addEventListener("mousemove", this.onMouseMove);
+    window.addEventListener("mouseup", this.onMouseUp);
   }
 
   removeListener(){
-    window.removeEventListener('mousemove', this.onMouseMove);
-    window.removeEventListener('mouseup', this.onMouseUp);
+    window.removeEventListener("mousemove", this.onMouseMove);
+    window.removeEventListener("mouseup", this.onMouseUp);
   }
 
   render(){
