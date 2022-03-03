@@ -1,0 +1,13 @@
+.holdable{
+  width: fit-content;
+  height: fit-content;
+  opacity: 1;
+}
+
+.holdable.pressed{
+  opacity: 0.5;
+}
+
+.holdable.disabled{
+  opacity: 1;
+}

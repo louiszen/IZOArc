@@ -1,0 +1,41 @@
+.chatizo-input-main{
+  min-height: 40px;
+  max-height: 40px;
+}
+
+.chatizo-input-bar{
+  background: rgba(74, 98, 136, 1);
+  padding: 5px;
+}
+
+.chatizo-input-icon{
+  min-height: 30px;
+  max-height: 30px;
+  min-width: 30px;
+  max-width: 30px;
+  color: rgba(175, 214, 250, 1) !important; 
+}
+
+.chatizo-input-icon.send{
+  color: rgba(160, 255, 160, 1) !important; 
+}
+
+.chatizo-input-text-outter{
+  border-radius: 5px;
+  background: white;
+  flex-grow: 1;
+  padding: "0 5px";
+  transition: width 2s;
+}
+
+.chatizo-input-text-inner{
+  border-radius: 5px;
+  width: "100%";
+  border-width: 0;
+  background: transparent;
+  transition: width 2s;
+}
+
+.chatizo-input-text-inner:focus{
+  outline: none;
+}

@@ -395,7 +395,7 @@ class Container extends Component {
         <Box className="main-content"
           paddingTop={isContained? "30px" : 0}
           paddingLeft={isContained? "40px" : 0}
-          paddingBottom={"5px"}
+          paddingBottom={isContained? "5px" : 0}
           height="100vh">
           {this.props.children}
         </Box>

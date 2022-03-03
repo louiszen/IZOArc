@@ -6,6 +6,7 @@ import { IconButton } from "@mui/material";
 import { AttachFile, Code, Hive, InsertEmoticon, Mic, RadioButtonChecked, Send } from "@mui/icons-material";
 import { Box } from "@mui/system";
 import _ from "lodash";
+import Holdable from "IZOArc/LabIZO/Controlizo/Holdable";
 
 /**
  * @augments {Component<Props, State>}
@@ -53,15 +54,15 @@ class WInputBar extends Component {
     pressEnterToSend: PropsType.bool,
     inputPlaceHolder: PropsType.oneOfType([PropsType.func, PropsType.string]),
 
-    themeCSS: PropsType.object,
+    theme: PropsType.string,
 
     //runtime
     available: PropsType.bool,
     inAC: PropsType.bool,
 
     //base functions
-    _onTextChange: PropsType.func,
-    _onSend: PropsType.func,
+    _onInputChange: PropsType.func,
+    _onSend: PropsType.func
   }
 
   static defaultProps = {
@@ -71,9 +72,8 @@ class WInputBar extends Component {
   constructor(){
     super();
     this.state = {
-      input: "",
       isEmpty: true,
-      avSwitch: "a"
+      audioMode: true
     };
   }
 
@@ -99,15 +99,53 @@ class WInputBar extends Component {
     }), callback);
   }
 
-  onKeyDown = (e) => {
+  toggleAV = () => {
+    let {audioMode} = this.state;
+    this.setState({
+      audioMode: !audioMode
+    });
+  }
 
+  toAudio = () => {
+    console.log("toAudio");
+  }
+
+  toRecord = () => {
+    console.log("toRecord");
+  }
+
+  toMenu = () => {
+    console.log("toMenu");
+  }
+
+  toEmoji = () => {
+    console.log("toEmoji");
+  }
+
+  toCMD = () => {
+    console.log("toCMD");
+  } 
+
+  toAtth = () => {
+    console.log("toAtth");
+  } 
+
+  onKeyDown = (e) => {
+    let {pressEnterToSend, _onSend} = this.props;
+    if(pressEnterToSend && e.keyCode === 13 && e.shiftKey === false){
+      _onSend();
+      e.preventDefault();
+    }
+    return false;
   }
 
   onInputChange = (text) => {
-    this.setState({
-      input: text,
-      isEmpty: _.isEmpty(text)
-    })
+    let {_onInputChange} = this.props;
+    ZFunc.IfFuncExec(_onInputChange, {text: text}, (input) => {
+      this.setState({
+        isEmpty: _.isEmpty(input?.text)
+      });
+    });
   }
 
   renderImageUpload(){
@@ -119,39 +157,41 @@ class WInputBar extends Component {
   }
 
   renderMenuBtn(){
-    let {themeCSS, showMenu} = this.props;
+    let {theme, showMenu} = this.props;
     if(!showMenu) return;
     return (
-      <IconButton style={themeCSS?.inputbar?.mainbar?.menu} size="small">
-        <Hive style={{width:"100%", height: "100%"}}/>
-      </IconButton>
+      <Holdable onPress={() => this.toMenu()}>
+        <IconButton className={theme + " chatizo-input-icon"} size="small">
+          <Hive style={{width:"100%", height: "100%"}}/>
+        </IconButton>
+      </Holdable>
     );
   }
 
   renderEmojiBtn(){
-    let {themeCSS, enableEmoji} = this.props;
+    let {theme, enableEmoji} = this.props;
     if(!enableEmoji) return;
     return (
-      <IconButton style={themeCSS?.inputbar?.mainbar?.emoji} size="small">
-        <InsertEmoticon style={{width:"100%", height: "100%"}}/>
-      </IconButton>
+      <Holdable onPress={() => this.toEmoji()}>
+        <IconButton className={theme + " chatizo-input-icon"} size="small">
+          <InsertEmoticon style={{width:"100%", height: "100%"}}/>
+        </IconButton>
+      </Holdable>
     );
   }
 
   renderTextField(){
-    let {themeCSS, inputPlaceHolder, addOns, available} = this.props;
-    let {input} = this.state;
+    let {inputPlaceHolder, addOns, available, input} = this.props;
     let ph = ZFunc.IfFuncExec(inputPlaceHolder, addOns);
     return (
-      <Box className="chatizo-input-box" style={themeCSS?.inputbar?.mainbar?.text?.outter}>
+      <Box className="chatizo-input-text-outter" >
         <input
-          className="chatizo-input"
-          style={themeCSS?.inputbar?.mainbar?.text?.inner}
+          className="chatizo-input-text-inner"
           onKeyDown={e => this.onKeyDown(e)}
           onChange={e => this.onInputChange(e.target.value)}
           rows="1"
           placeholder={ph}
-          value={input || ""}
+          value={input?.text || ""}
           disabled={!available}
           />
       </Box>
@@ -159,54 +199,63 @@ class WInputBar extends Component {
   }
 
   renderCMDBtn(){
-    let {themeCSS, enableCMD} = this.props;
+    let {theme, enableCMD} = this.props;
     if(!enableCMD) return;
     return (
-      <IconButton style={themeCSS?.inputbar?.mainbar?.cmd} size="small">
-        <Code style={{width:"100%", height: "100%"}}/>
-      </IconButton>
+      <Holdable onPress={() => this.toCMD()} key="cmd">
+        <IconButton className={theme + " chatizo-input-icon"} size="small">
+          <Code style={{width:"100%", height: "100%"}}/>
+        </IconButton>
+      </Holdable>
     );
   }
 
   renderAttachBtn(){
-    let {themeCSS, enableAttach} = this.props;
+    let {theme, enableAttach} = this.props;
     if(!enableAttach) return;
     return (
-      <IconButton style={themeCSS?.inputbar?.mainbar?.attach} size="small">
-        <AttachFile style={{width:"100%", height: "100%"}}/>
-      </IconButton>
+      <Holdable onPress={() => this.toAtth()} key="atth">
+        <IconButton className={theme + " chatizo-input-icon"} size="small">
+          <AttachFile style={{width:"100%", height: "100%"}}/>
+        </IconButton>
+      </Holdable>
     );
 
   }
 
   renderAudioRecordBtn(){
-    let {themeCSS, enableAudio, enableRecord} = this.props;
-    let {avSwitch} = this.state;
+    let {theme, enableAudio, enableRecord} = this.props;
+    let {audioMode} = this.state;
     if(!enableAudio && !enableRecord) return;
 
-    if(enableAudio && (!enableRecord || avSwitch === "a")){
+    if(enableAudio && (!enableRecord || audioMode)){
       return (
-        <IconButton style={themeCSS?.inputbar?.mainbar?.audio} size="small">
-          <Mic style={{width:"100%", height: "100%"}}/>
-        </IconButton>
+        <Holdable onPress={() => this.toggleAV()} onLongPress={() => this.toAudio()} key="av">
+          <IconButton className={theme + " chatizo-input-icon"} size="small">
+            <Mic style={{width:"100%", height: "100%"}}/>
+          </IconButton>
+        </Holdable>
       );
     }
 
-    if(enableRecord && (!enableAudio || avSwitch === "v")){
+    if(enableRecord && (!enableAudio || !audioMode)){
       return (
-        <IconButton style={themeCSS?.inputbar?.mainbar?.record} size="small">
-          <RadioButtonChecked style={{width:"100%", height: "100%"}}/>
-        </IconButton>
+        <Holdable onPress={() => this.toggleAV()} onLongPress={() => this.toRecord()} key="ar">
+          <IconButton className={theme + " chatizo-input-icon"} size="small">
+            <RadioButtonChecked style={{width:"100%", height: "100%"}}/>
+          </IconButton>
+        </Holdable>
       );
     }
 
   }
 
   renderSendBtn(){
-    let {themeCSS, isEmpty} = this.state;
+    let {theme, _onSend} = this.props;
+    let {isEmpty} = this.state;
     if(!isEmpty){
       return (
-        <IconButton style={themeCSS?.inputbar?.mainbar?.send} size="small">
+        <IconButton className={theme + " chatizo-input-icon send"} size="small" onClick={_onSend}>
           <Send style={{width:"100%", height: "100%"}}/>
         </IconButton>
       );
@@ -222,13 +271,13 @@ class WInputBar extends Component {
         this.renderAudioRecordBtn()
       ];
     }
-    return this.renderSendBtn()
+    return this.renderSendBtn();
   }
 
   renderMainBar(){
-    let {themeCSS} = this.props;
+    let {theme} = this.props;
     return (
-      <HStack width="100%" style={themeCSS?.inputbar?.mainbar?.main} spacing={2}>
+      <HStack width="100%" className={theme + " chatizo-input-bar"} spacing={2}>
         {this.renderMenuBtn()}
         {this.renderEmojiBtn()}
         {this.renderTextField()}
@@ -238,9 +287,9 @@ class WInputBar extends Component {
   }
 
   render(){
-    let {themeCSS} = this.props;
+    let {theme} = this.props;
     return (
-      <VStack width="100%" style={themeCSS?.inputbar?.main}>
+      <VStack width="100%" className={theme + " chatizo-input-main"}>
         {this.renderImageUpload()}
         {this.renderAutoComplete()}
         {this.renderMainBar()}

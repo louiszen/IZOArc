@@ -64,6 +64,7 @@ class ColorX {
     darkRed: {r: 140, g: 1, b: 8, a: 1},
     greyOut: {r: 160, g: 160, b: 160, a: 1},
     lightGrey: {r: 220, g: 220, b: 220, a: 1},
+    lightGreen: {r: 160, g: 255, b: 160, a: 1},
 
     //pure
     pureRed: {r: 255, g: 0, b: 0, a: 1},

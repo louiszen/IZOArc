@@ -1,7 +1,0 @@
-.chatizo-input:focus{
-  outline: none;
-}
-
-.chatizo-input-box, .chatizo-input{
-  transition: width 2s;
-}

@@ -1,0 +1,36 @@
+.chatizo-headline-main{
+  user-select: none;
+  position: relative;
+  min-height: 50px;
+  height: 50px;
+  width: 100%;
+  border-radius: 0;
+  padding: 0;
+  background: rgba(74, 98, 136, 1)
+}
+
+.chatizo-headline-icon{
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+}
+
+.chatizo-headline-icon img {
+  width: 100%;
+  height: 100%;
+}
+
+.chatizo-headline-text{
+  align-items: center;
+  display: inline;
+  position: relative;
+  padding: 0;
+  font-weight: bold;
+  color: white;
+}
+
+.chatizo-headline-settings{
+  width: 50px;
+  height: 50px;
+  color: white;
+}

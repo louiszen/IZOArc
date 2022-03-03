@@ -4,14 +4,13 @@ import PropsType from "prop-types";
 import { VStack } from "../Stackizo";
 import { v4 } from "uuid";
 
-import style from "./_style";
 import WHeadline from "./_gears/Headline/WHeadline";
 
 import _ from "lodash";
 import WInputBar from "./_gears/InputBar/WInputBar";
 import WMsgBody from "./_gears/MsgBody/WMsgBody";
 
-import "./Chatizo.css";
+import "./_style";
 
 /**
  * @augments {Component<Props, State>}
@@ -42,6 +41,7 @@ class Chatizo extends Component {
     onAvatarClicked: PropsType.func,
     onImageClicked: PropsType.func,
     onWebClicked: PropsType.func,
+    onPhoneClicked: PropsType.func,
     onHeaderClicked: PropsType.func,
 
     //Rendering
@@ -109,6 +109,7 @@ class Chatizo extends Component {
 
     showHeader: PropsType.bool,
     showFooter: PropsType.bool,
+
     showStatus: PropsType.bool,
     showDateTime: PropsType.bool,
     showLapseTime: PropsType.bool,
@@ -121,6 +122,7 @@ class Chatizo extends Component {
     quickReplyBar: PropsType.bool,
     showQuickRepliesAsButtons: PropsType.bool,
     disableButtonAfterSend: PropsType.bool,
+    buttonWidthFitContent: PropsType.bool,
 
     canClickOnIn: PropsType.bool,
     canClickOnOut: PropsType.bool,
@@ -140,7 +142,7 @@ class Chatizo extends Component {
       name: "TEST",
       avatar: null
     },
-    theme: "Origin",
+    theme: "",
 
     //basic
     width: "100%",
@@ -215,18 +217,20 @@ class Chatizo extends Component {
 
     showHeader: true,
     showFooter: true,
+    
     showStatus: true,
     showDateTime: true,
     showLapseTime: true,
 
     showInAvatar: true,
-    showOutAvatar: true,
+    showOutAvatar: false,
     hideSameAvatar: true,
-    avatarAtTop: true,
+    avatarAtTop: false,
 
     quickReplyBar: true,
     showQuickRepliesAsButtons: true,
     disableButtonAfterSent: true,
+    buttonWidthFitContent: true,
 
     canClickOnIn: true,
     canClickOnOut: true,
@@ -241,20 +245,18 @@ class Chatizo extends Component {
   constructor(){
     super();
     this.state = {
-      themeCSS: {},
       inQR: false,
       inAC: false,
       typingDisabled: false,
       messages: [],
       quickReplies: [],
-      libraries: {}
+      libraries: {},
+      typing: false
     };
   }
 
   componentDidMount(){
-    this._setAllStates(() => {
-      this._setTheme();
-    });
+    this._setAllStates();
   }
 
   componentDidUpdate(prevProps, prevState){
@@ -269,38 +271,164 @@ class Chatizo extends Component {
     };
   }
 
+  onMountWMsgBody = (callbacks) => {
+    this.MountWMsgBody = callbacks;
+  }
+
   _setAllStates = (callback) => {
     this.setState((state, props) => ({
       ...props,
     }), () => {
       if(this.props.onMounted){
         this.props.onMounted({
-          
+          Append: this._Append,
+          GetMsg: this._GetMsg,
+          SetQuickReplies: this._setQuickReplies,
+          SetMsgStatus: this._setMsgStatus,
+          Clear: this._Clear,
+          Typing: this._Typing,
+          ScrollToBottom: this._scrollToBottom
         });
       }
       if(callback) callback();
     });
   }
 
-  _setTheme = () => {
-    let {theme} = this.props;
-    let newTheme = style[theme];
-    let origin = _.cloneDeep(style.Origin);
-    let css = {};
-    if(newTheme) {
-      css = Accessor.DeepReplace(origin, style[theme]);
-    }
+  _Typing = (tf = true) => {
     this.setState({
-      themeCSS: css
+      typing: tf
     });
   }
 
-  _onTextChange = (text) => {
+  _Clear = () => {
+    this.setState({
+      inQR: false,
+      inAC: false,
+      typingDisabled: false,
+      messages: [],
+      quickReplies: [],
+      typing: false,
+      input: undefined
+    });
+  }
+
+  /**
+   * 
+   * @param {String | [String]} msgID 
+   * @param {import("./__typedef").msgstatus} status 
+   */
+  _setMsgStatus = (msgID, status) => {
+    let {messages} = this.state;
+    _.map(messages, (o, i) => {
+      if(msgID === o._id){
+        o.status = status;
+      }
+    });
+    this.setState({
+      messages: messages
+    });
+  }
+
+  /**
+   * 
+   * @param {[import("./__typedef").quickReply]} quickReplies 
+   */
+  _setQuickReplies = (quickReplies) => {
+    this.setState({
+      quickReplies: quickReplies
+    });
+  }
+
+  /**
+   * 
+   * @param {Boolean} b 
+   */
+  _setTypingDisabled = (b) => {
+    this.setState({
+      typingDisabled: b
+    });
+  }
+
+
+  /**
+   * Reset Input to empty
+   */
+  _resetInput = () => {
+    this.setState({
+      input: undefined
+    });
+  }
+
+  /**
+   * 
+   * @returns 
+   */
+  _scrollToBottom = () => {
+    if(this.MountWMsgBody){
+      this.MountWMsgBody.scrollToBottom();
+    }
+  }
+
+  /**
+   * 
+   * @returns {[import("./__typedef").msgblock]}
+   */
+  _GetMsg = () => {
+    return this.state.messages;
+  }
+
+  /**
+   * 
+   * @param {[import("./__typedef").msgblock] | import("./__typedef").msgblock} msgs 
+   */
+  _Append = (msgs) => {
+    if(!_.isArray(msgs)) msgs = [msgs];
+
+    if(msgs.length === 0) return;
+
+    let lastMsg = msgs[msgs.length - 1];
+    let quickReplies = lastMsg.msg.quickReplies || [];
+
+    this.setState((state, props) => ({
+      messages: state.messages.concat(msgs),
+      quickReplies: quickReplies,
+      inQR: quickReplies.length > 0
+    }), () => {
+      this._scrollToBottom();
+    });
+  }
+
+  _onSend = () => {
+    let {input} = this.state;
+    console.log(input);
+  }
+
+  _onQuickReply = (quickReply) => {
 
   }
 
-  _onSend = (text, atth) => {
+  _onSendWithAttachment = (input, atth, type) => {
 
+  }
+
+  /**
+   * 
+   * @param {import("./__typedef").cinput} input 
+   * @param {Function} callback
+   * @returns 
+   */
+  _onInputChange = (input, callback) => {
+    let {typingDisabled, onInputChange} = this.state;
+    if(typingDisabled) return;
+
+    if(onInputChange)
+      onInputChange(input);
+
+    this.setState({
+      input: input
+    }, () => {
+      if(callback) callback(input);
+    });
   }
 
   renderNotice(){
@@ -308,19 +436,26 @@ class Chatizo extends Component {
   }
 
   renderInputBar(){
+    let {input} = this.state;
     return (
       <WInputBar
-        {...this.state}
-        _onTextChange={this._onTextChange}
+        {...this.props}
+        _onInputChange={this._onInputChange}
         _onSend={this._onSend}
+        input={input}
         />
     );
   }
 
   renderMsgBody(){
+    let {messages, typing} = this.state;
     return (
       <WMsgBody
-        {...this.state}
+        {...this.props}
+        onMounted={this.onMountWMsgBody}
+        _onQuickReply={this._onQuickReply}
+        messages={messages}
+        typing={typing}
         />
     );
   }
@@ -329,11 +464,8 @@ class Chatizo extends Component {
     let {showHeadline, headlineIcon, headlineText, addOns} = this.props;
     if(!showHeadline) return;
 
-    let {themeCSS} = this.state;
-
     return (
       <WHeadline
-        themeCSS={themeCSS}
         iconSrc={headlineIcon}
         text={headlineText}
         addOns={addOns}

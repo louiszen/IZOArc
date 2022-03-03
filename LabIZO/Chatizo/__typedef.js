@@ -9,6 +9,16 @@ import moment from "moment";
  */
 
 /**
+ * @typedef {{
+ *  text?: String,
+ *  imgSrc?: String,
+ *  videoSrc?: String,
+ *  fileSrc?: String,
+ *  replyMsgID?: String
+ * }} cinput
+ */
+
+/**
  * @typedef {"pending" | "sent" | "received" | "read" | "error"} msgstatus
  * @typedef {"web" | "phone" | "postback"} btntype
  * 
@@ -66,7 +76,7 @@ import moment from "moment";
  * }} msg
  * 
  * @typedef {{
- *  _id: String,
+ *  ID: String,
  *  name: String,
  *  avatar: String
  * }} msguser

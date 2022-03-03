@@ -1,7 +1,7 @@
 let requireComponent = require.context(
-  "./",
-  true,
-  /.\/\w+\/$/
+  "",
+  false,
+  /.css$/
 );
 
 let list = {};
@@ -10,15 +10,15 @@ requireComponent.keys().forEach((fileName) => {
 
   let componentName = fileName
     .replace(/^\.\//, "")
-    .replace(/\//, "");
+    .replace(/\.\w+$/, "")
 
-  if(componentName === "index"){ 
+  if(componentName === "index" || componentName.startsWith("_")){ 
     return;
-
   }
-  let doc = require("./" + componentName).default;
   
+  let doc = require("./" + componentName + ".css").default;
   list[componentName] = doc;
+
 });
 
 

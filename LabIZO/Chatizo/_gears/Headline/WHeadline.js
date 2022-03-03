@@ -12,7 +12,7 @@ import { MoreVert } from "@mui/icons-material";
 class WHeadline extends Component {
 
   static propTypes = {
-    themeCSS: PropsType.object,
+    theme: PropsType.string,
     iconSrc: PropsType.oneOfType([PropsType.func, PropsType.string]),
     text: PropsType.oneOfType([PropsType.string, PropsType.func]),
 
@@ -20,7 +20,7 @@ class WHeadline extends Component {
   }
 
   static defaultProps = {
-    themeCSS: {},
+    theme: "",
     iconSrc: "",
     text: "",
 
@@ -55,38 +55,38 @@ class WHeadline extends Component {
   }
 
   renderText(){
-    let {themeCSS, addOns, text} = this.props;
+    let {theme, addOns, text} = this.props;
     text = ZFunc.IfFuncExec(text, addOns);
     return (
-      <Typography style={themeCSS?.headline?.text}>
+      <Typography className={theme + " chatizo-headline-text"}>
         {text}
       </Typography>
     );
   }
 
   renderIcon(){
-    let {themeCSS, addOns, iconSrc} = this.props;
+    let {theme, addOns, iconSrc} = this.props;
     iconSrc = ZFunc.IfFuncExec(iconSrc, addOns);
     return (
-      <Box style={themeCSS?.headline?.icon}>
+      <Box className={theme + " chatizo-headline-icon"}>
         <img src={iconSrc} alt=""/>
       </Box>
     );
   }
 
   renderSettings(){
-    let {themeCSS} = this.props;
+    let {theme} = this.props;
     return (
-      <IconButton style={themeCSS?.headline?.settings}>
+      <IconButton className={theme + " chatizo-headline-settings"}>
         <MoreVert/>
       </IconButton>
     );
   }
 
   render(){
-    let {themeCSS} = this.props;
+    let {theme} = this.props;
     return (
-      <HStack style={themeCSS?.headline?.main}>
+      <HStack className={theme + " chatizo-headline-main"}>
         {this.renderIcon()}
         {this.renderText()}
         <Spacer/>
