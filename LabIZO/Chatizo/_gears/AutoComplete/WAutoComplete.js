@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Accessor } from "IZOArc/STATIC";
 import PropsType from "prop-types";
 import { Box } from "@mui/system";
-import { HStack, VStack } from "IZOArc/LabIZO/Stackizo";
+import { VStack } from "IZOArc/LabIZO/Stackizo";
 
 import _ from "lodash";
 import Holdable from "IZOArc/LabIZO/Controlizo/Holdable";

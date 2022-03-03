@@ -276,7 +276,7 @@ class WInputBar extends Component {
   }
 
   render(){
-    let {theme, inAC} = this.props;
+    let {theme} = this.props;
     return (
       <VStack width="100%" className={theme + " chatizo-input-main"}>
         {this.renderImageUpload()}

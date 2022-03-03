@@ -420,13 +420,13 @@ class Chatizo extends Component {
       _id: msgIDGen(),
       user: user,
       createdAt: new Date(),
-      status: 'sent',
+      status: "sent",
       msg: input
     };
 
     this._setTypingDisabled(true);
     this._resetInput();
-    
+
     if(appendTextAfterSent){
       this._Append(msg);
     }
@@ -450,7 +450,7 @@ class Chatizo extends Component {
     let msg = {
       user: user,
       createdAt: new Date(),
-      status: 'sent',
+      status: "sent",
       _id: msgIDGen(),
       msg: {
         text: quickReply.title
@@ -580,7 +580,7 @@ class Chatizo extends Component {
         {...this.props}
         _setShowMenu={this._setShowMenu}
         />
-    )
+    );
   }
 
   render(){

@@ -89,7 +89,7 @@ class Scroller extends Component {
     if(prevStat !== nextProps){
       return {
         ...nextProps
-      }
+      };
     }
   }
 
@@ -163,7 +163,7 @@ class Scroller extends Component {
         >
           {children}
       </div>
-    )
+    );
   }
 }
 

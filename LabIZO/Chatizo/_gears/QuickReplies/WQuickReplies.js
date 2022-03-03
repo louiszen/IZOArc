@@ -106,7 +106,7 @@ class WQuickReplies extends Component {
           </Holdable>
         </Box>
       );
-    })
+    });
 
     return rendered;
 
@@ -120,7 +120,7 @@ class WQuickReplies extends Component {
           <i className={"fas fa-chevron-" + direction + " fa-lg"}/>
         </Holdable>
       </div>
-    )
+    );
   }
 
   render(){
@@ -134,7 +134,7 @@ class WQuickReplies extends Component {
         </Scroller>
         {this.renderHandler("right", () => this.scrollRight())}
       </HStack>
-    )
+    );
   }
 
 }
