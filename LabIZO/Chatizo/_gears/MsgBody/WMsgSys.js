@@ -9,14 +9,13 @@ import { Box } from "@mui/system";
 class WMsgSys extends Component {
 
   static propTypes = {
-    themeCSS: PropsType.object,
+    theme: PropsType.string,
     text: PropsType.oneOfType([PropsType.string, PropsType.func]),
     
     addOns: PropsType.object
   }
 
   static defaultProps = {
-    themeCSS: {},
     text: ""
   }
 
@@ -48,10 +47,10 @@ class WMsgSys extends Component {
   }
 
   render(){
-    let {themeCSS, text, addOns} = this.props;
+    let {theme, text, addOns} = this.props;
     let stext = ZFunc.IfFuncExec(text, addOns);
     return (
-      <Box style={themeCSS?.msgbody?.msg?.system}>
+      <Box className={theme + " chatizo-msg-system"}>
         {stext}
       </Box>
     );

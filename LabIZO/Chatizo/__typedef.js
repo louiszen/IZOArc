@@ -27,20 +27,22 @@ import moment from "moment";
  *  title: String | Function,
  *  payload: String | Function,
  *  type?: btntype,
- *  showText?: Boolean
+ *  showText?: Boolean,
+ *  color?: String
  * }} imgbutton
  * 
  * @typedef {{
  *  title: String | Function,
  *  payload: String | Function,
  *  type?: btntype,
- *  style?: CSSProperties
+ *  color?: String
  * }} button
  * 
  * @typedef {{
  *  title: String | Function,
  *  payload: String | Function,
- *  style?: CSSProperties
+ *  type?: btntype,
+ *  color?: String
  * }} quickReply
  * 
  * @typedef {{

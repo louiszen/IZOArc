@@ -20,21 +20,8 @@ class WInputBar extends Component {
     cmds: PropsType.objectOf(PropsType.func),
 
     //Menu
+    inMenu: PropsType.bool,
     showMenu: PropsType.bool,
-    menu: PropsType.arrayOf(PropsType.shape({
-      icon: PropsType.oneOfType([PropsType.func, PropsType.string]),
-      cap: PropsType.oneOfType([PropsType.func, PropsType.string]),
-      func: PropsType.func
-    })),
-
-    //autoComplete
-    autoCompleteAllowed: PropsType.bool,
-    autoCompleteLibs: PropsType.objectOf(PropsType.arrayOf(PropsType.shape({
-      icon: PropsType.oneOfType([PropsType.func, PropsType.string]),
-      cap: PropsType.oneOfType([PropsType.func, PropsType.string]),
-      val: PropsType.func
-    }))),
-    autoCompleteMethod: PropsType.oneOf(["startsWith", "endsWith", "contains"]),
 
     //Settings
     enableEmoji: PropsType.bool,
@@ -59,8 +46,10 @@ class WInputBar extends Component {
     //runtime
     available: PropsType.bool,
     inAC: PropsType.bool,
+    ACLib: PropsType.string,
 
     //base functions
+    _setShowMenu: PropsType.func,
     _onInputChange: PropsType.func,
     _onSend: PropsType.func
   }
@@ -116,6 +105,8 @@ class WInputBar extends Component {
 
   toMenu = () => {
     console.log("toMenu");
+    let {inMenu, _setShowMenu} = this.props;
+    _setShowMenu(!inMenu);
   }
 
   toEmoji = () => {
@@ -149,10 +140,6 @@ class WInputBar extends Component {
   }
 
   renderImageUpload(){
-
-  }
-
-  renderAutoComplete(){
 
   }
 
@@ -255,9 +242,11 @@ class WInputBar extends Component {
     let {isEmpty} = this.state;
     if(!isEmpty){
       return (
-        <IconButton className={theme + " chatizo-input-icon send"} size="small" onClick={_onSend}>
-          <Send style={{width:"100%", height: "100%"}}/>
-        </IconButton>
+        <Holdable onPress={() => _onSend()} key="send">
+          <IconButton className={theme + " chatizo-input-icon send"} size="small">
+            <Send style={{width:"100%", height: "100%"}}/>
+          </IconButton>
+        </Holdable>
       );
     }
   }
@@ -287,11 +276,10 @@ class WInputBar extends Component {
   }
 
   render(){
-    let {theme} = this.props;
+    let {theme, inAC} = this.props;
     return (
       <VStack width="100%" className={theme + " chatizo-input-main"}>
         {this.renderImageUpload()}
-        {this.renderAutoComplete()}
         {this.renderMainBar()}
       </VStack>
     );

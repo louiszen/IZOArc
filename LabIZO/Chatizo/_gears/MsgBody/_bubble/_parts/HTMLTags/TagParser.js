@@ -1,22 +1,22 @@
-import React from 'react';
+import React from "react";
 
-import _ from 'lodash';
+import _ from "lodash";
 
 import "./Tags.css";
-import WMImage from '../WMImage';
-import WMVideo from '../WMVideo';
-import { Box } from '@mui/system';
+import WMImage from "../WMImage";
+import WMVideo from "../WMVideo";
+import { Box } from "@mui/system";
 
 class TagParser {
 
   /**
    * Special Tag
    * 
-   * <url href='@url'>{children}</url>
+   * <url href="@url">{children}</url>
    * 
-   * <mail href='@url'></mail>
+   * <mail href="@url"></mail>
    * 
-   * <map lang='@string'></map>
+   * <map lang="@string"></map>
    * 
    * <videourl>{children}</videourl>
    * 
@@ -24,9 +24,9 @@ class TagParser {
    * 
    */
 
-  static Parse(themeCSS, parsed, iaddOns){
+  static Parse(theme, parsed, iaddOns){
     
-    if(typeof(parsed) === 'string') return parsed;
+    if(typeof(parsed) === "string") return parsed;
     
     if(!Array.isArray(parsed)) {
       parsed = [parsed];
@@ -38,10 +38,10 @@ class TagParser {
       let {href, children, target, src, title, poster, option} = o.props || {};
 
       switch(o.type){
-        case 'url':
+        case "url":
           rendered.push(
             <Box key={o.key} 
-              className={"zchat-msg-htmltag-url"} 
+              className={theme + " chatizo-tags-url"} 
               onClick={() => window.open(href,
               target || "_blank",
               option || "resizable=1, width=800, height=600, scrollbars=yes")}>
@@ -50,21 +50,21 @@ class TagParser {
           );
           break;
         
-        case 'mail':
+        case "mail":
           rendered.push(
             <a key={o.key} 
-              className={"zchat-msg-htmltag-mail"} 
+              className={theme + " chatizo-tags-mail"} 
               href={"mailto:" + href}>
               {children}
             </a>
           );
           break;
 
-        case 'map':
+        case "map":
           console.log("map", o);
           break;
 
-        case 'imageurl':
+        case "imageurl":
           rendered.push(
             <WMImage 
               key={o.key} 
@@ -81,10 +81,10 @@ class TagParser {
           );
           break;
 
-        case 'videourl':
+        case "videourl":
           rendered.push(
             <Box key={o.key} 
-              className={" zchat-msg-htmltag-video"}>
+              className={theme + " chatizo-tags-video"}>
               <WMVideo 
                 key={o.key}
                 video={{
@@ -99,7 +99,7 @@ class TagParser {
         
         default:
           if(children && Array.isArray(children)){
-            rendered.push(this.Parse(themeCSS, children, iaddOns));
+            rendered.push(this.Parse(theme, children, iaddOns));
           }else{
             rendered.push(o);
           }

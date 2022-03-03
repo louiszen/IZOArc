@@ -156,7 +156,7 @@ class Holdable extends Component {
   render(){
     let { children, disabled } = this.props;
     let { pressed } = this.state;
-    let isTouchDevice = 'ontouchstart' in document.documentElement;
+    let isTouchDevice = "ontouchstart" in document.documentElement;
     if(isTouchDevice){
       return (
         <div 

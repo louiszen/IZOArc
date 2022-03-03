@@ -1,28 +1,104 @@
-.chatizo-msg-main{
-  flex-grow: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-  width: 100%;
+.chatizo-msg-system{
+  margin: 1;
+  padding: 3px 15px;
+  background: rgba(220, 220, 220, 1);
+  text-align: center;
+  border-radius: 5px;
+  font-size: xx-small;
 }
 
-.chatizo-msg-bubble{
-  margin: 5px 10px;
-  padding: 5px 10px;
-  max-width: 70%;
-  box-shadow: 0 0 0.25cm rgba(163, 94, 40, 0.349);
+.chatizo-msg-text-main{
+  margin: 2px 0;
+}
+
+.chatizo-msg-text-readmore{
+  margin: 5px 0;
+  font-weight: bold;
   cursor: pointer;
-  min-width: 100px;
+  color: rgb(67, 169, 223);
 }
 
-.chatizo-msg-bubble.in{
-  float: left;
-  color: rgba(51, 51, 51, 1);
-  border-radius: 10px;
+.chatizo-msg-text-box{
+
 }
 
-.chatizo-msg-bubble.out{
-  float: right;
+.chatizo-msg-text-show{
+
+}
+
+.chatizo-msg-text-hide{
+
+}
+
+.chatizo-typing{
+  display: flex;
+  flex-direction: row;
+}
+
+.chatizo-typing-circles{
+  width: 0.5em;
+  height: 0.5em;
+  margin: 2px;
+  border-radius: 90px;
+  background-color: rgb(0, 0, 0, 0.7);
+  animation-name: loading;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+}
+
+.chatizo-typing-circles:nth-child(0){
+  animation-delay: 0s
+}
+
+.chatizo-typing-circles:nth-child(1){
+  animation-delay: 0.5s
+}
+
+.chatizo-typing-circles:nth-child(2){
+  animation-delay: 1s
+}
+
+@keyframes loading {
+  from {background: rgb(0, 0, 0, 0.7)}
+  to {background: rgb(0, 0, 0, 0.2)}
+}
+
+.zchat.msg-btnlist{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.chatizo-msg-btn{
+  width: 100%;
+  cursor: pointer;
+  border-radius: 5px;
+  background: linear-gradient(90deg, rgb(200, 123, 30) 0%, rgb(125, 60, 10) 75.75%, rgb(125, 60, 10) 100%) !important;
+  padding: 1px;
+  margin: 2px 0;
+}
+
+.chatizo-msg-btn.fitcontent{
+  width: fit-content;
+} 
+
+.chatizo-msg-btn.disabled{
+  opacity: 0.5;
+}
+
+.chatizo-msg-btn-text,
+.chatizo-msg-btn-text.disabled:hover{
+  width: 100%;
+  padding: 5px 10px;
+  text-align: center;
+  color:rgb(200, 123, 30);
+  font-weight: bold;
+  background: white !important;
+  border-radius: 5px;
+}
+
+.chatizo-msg-btn-text:hover {
   color: white;
-  border-radius: 10px;
-  background: rgba(74, 98, 136, 1);
+  background: linear-gradient(90deg, rgb(200, 123, 30) 0%, rgb(125, 60, 10) 75.75%, rgb(125, 60, 10) 100%);
 }

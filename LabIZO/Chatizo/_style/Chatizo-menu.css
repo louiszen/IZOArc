@@ -1,0 +1,103 @@
+:root {
+  --hexagoncolor: rgba(140, 167, 212, 0.918);
+}
+
+.chatizo-menu{
+  position: absolute;
+  top: 0;
+  z-index: 100;
+  width: 50%;
+}
+
+.chatizo-hexagon:before{   
+  content:"";
+  width:0px;   
+  border-bottom:40px solid transparent;   
+  border-top:40px solid transparent;   
+  border-right:20px solid var(--hexagoncolor);   
+  position:absolute;   
+  left:-20px;   
+  top:0px;   
+}   
+.chatizo-hexagon{   
+  min-width:50px;   
+  height:80px;   
+  background:var(--hexagoncolor);   
+  display: inline-block;   
+  position: absolute;   
+  line-height: 80px;   
+  color:#FFFFFF;   
+  font-size: 10px;   
+  text-align: center;   
+}   
+.chatizo-hexagon:after{   
+  content:"";
+  width:0px;   
+  border-bottom: 40px solid transparent;   
+  border-top: 40px solid transparent;   
+  border-left-width: 20px;   
+  border-left-style: solid;   
+  border-left-color:var(--hexagoncolor);   
+  position:absolute;   
+  right:-20px;   
+  top:0px;   
+}   
+ .chatizo-menu{   
+    width:100%;   
+    height: 300px;   
+    position: absolute;
+    top: 25%;
+ }   
+ .chatizo-menu .center{   
+
+     top:100px;   
+     left:160px;   
+ }   
+  .chatizo-menu .top{   
+      top:10px;   
+      left:160px;   
+  }   
+  .chatizo-menu .top-left{   
+      top:55px;   
+      left:80px;   
+  }   
+  .chatizo-menu .top-right{   
+      top:55px;   
+      left:240px;   
+  }   
+  .chatizo-menu .bottom{   
+      top:190px;   
+      left:160px;   
+  }   
+  .chatizo-menu .bottom-left{   
+      top:145px;   
+      left:80px;   
+  }   
+  .chatizo-menu .bottom-right{   
+      top:145px;   
+      left:240px;   
+  }   
+  
+  .chatizo-menu-btn{
+    padding: 4px;
+    margin: 1px;
+    border-radius: 3px;
+    background: transparent;
+    width: 50px;
+    height: 75px;
+    cursor: pointer;
+  }
+  
+  .chatizo-menu-btn:hover{
+    background: rgb(75, 104, 151);
+  }
+  
+  .chatizo-menu-text:hover{
+    color: white;
+  }
+  
+  .chatizo-menu-text{
+    font-size: larger;
+    color: white;
+    font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+  }

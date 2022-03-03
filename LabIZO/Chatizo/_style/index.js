@@ -10,7 +10,7 @@ requireComponent.keys().forEach((fileName) => {
 
   let componentName = fileName
     .replace(/^\.\//, "")
-    .replace(/\.\w+$/, "")
+    .replace(/\.\w+$/, "");
 
   if(componentName === "index" || componentName.startsWith("_")){ 
     return;

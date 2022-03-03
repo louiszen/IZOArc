@@ -57,10 +57,10 @@ class WAvatar extends Component {
 
   renderImg(){
     let {iuser, hideImg, onAvatarClicked, theme} = this.props;
-    if(hideImg) return;
+    if(hideImg || !iuser) return;
     return (
       <ButtonBase className={theme + " chatizo-avatar-btn"} onClick={onAvatarClicked}>
-        <img src={iuser.avatar} title={iuser.name} alt={iuser.name}/>
+        <img src={iuser?.avatar} title={iuser?.name} alt={iuser?.name}/>
       </ButtonBase>
     );
   }

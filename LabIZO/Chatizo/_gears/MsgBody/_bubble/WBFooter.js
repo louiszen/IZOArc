@@ -10,7 +10,7 @@ import { Box } from "@mui/system";
 class WBFooter extends Component {
 
   static propTypes = {
-    themeCSS: PropsType.object,
+    theme: PropsType.string,
 
     showStatus: PropsType.bool,
     showDateTime: PropsType.bool,
@@ -55,17 +55,17 @@ class WBFooter extends Component {
   }
 
   renderLapseTime(){
-    let { themeCSS, showLapseTime, lapseTime } = this.state;
+    let { theme, showLapseTime, lapseTime } = this.state;
     if(!showLapseTime || !lapseTime) return;
     return (
-      <Box style={themeCSS?.msgbody?.bubble?.footer?.lapse}>
+      <Box className={theme + " chatizo-msg-footer-lapse"}>
         {lapseTime + "s"}
       </Box>
     );
   }
 
   renderStatus(){
-    let { themeCSS, showStatus, status } = this.state;
+    let { theme, showStatus, status } = this.state;
     if(!showStatus) return;
 
     let icon = <div/>;
@@ -91,14 +91,14 @@ class WBFooter extends Component {
     }
 
     return (
-      <Box style={themeCSS?.msgbody?.bubble?.footer?.status}>
+      <Box  className={theme + " chatizo-msg-footer-status"}>
         {icon}
       </Box>
     );
   }
 
   renderDateTime(){
-    let { themeCSS, showDateTime, createdAt } = this.state;
+    let { theme, showDateTime, createdAt } = this.state;
     if(!showDateTime) return;
     let format = "HH:mm";
     let createdAtM = ZTime.Moment(createdAt);
@@ -110,16 +110,16 @@ class WBFooter extends Component {
     }
 
     return (
-      <Box style={themeCSS?.msgbody?.bubble?.footer?.datetime}>
+      <Box className={theme + " chatizo-msg-footer-datetime"}>
         {createdAtM.format(format)}
       </Box>
     );
   }
 
   render(){
-    let { themeCSS, pos } = this.state;
+    let { theme, pos } = this.state;
     return (
-      <HStack style={themeCSS?.msgbody?.bubble?.footer?.main}>
+      <HStack className={theme + " chatizo-msg-footer-main"}>
         {pos === "in" && this.renderLapseTime()}
         {pos === "out" && this.renderStatus()}
         {this.renderDateTime()}

@@ -49,6 +49,7 @@ class WMsgBody extends Component {
   }
 
   componentDidUpdate(prevProps, prevState){
+    this.scrollToBottom();
     if(!Accessor.IsIdentical(prevProps, this.props, Object.keys(WMsgBody.defaultProps))){
       this._setAllStates();
     }
@@ -92,7 +93,7 @@ class WMsgBody extends Component {
   renderMsgs(){
     let {messages, user,
       showInAvatar, showOutAvatar, avatarAtTop, hideSameAvatar, 
-      typing, animated} = this.props;
+      typing, animated, _onQuickReply, disableButtonAfterSent} = this.props;
 
     let rtn = [];
     
@@ -128,11 +129,12 @@ class WMsgBody extends Component {
           {pos === "out" && !o.msg.system && <Spacer/>}
           <WMsg
             {...this.props}
-            _onQuickReply={this._onQuickReply}
+            _onQuickReply={_onQuickReply}
             pos={pos}
             item={o}
             last={last}
             hideHeader={hideHeader}
+            disabled={disableButtonAfterSent? !last : false}
             />
           {(showOutAvatar && pos === "out" && !o.msg.system) &&
             this.renderAvatar(o.user, hideImg)}

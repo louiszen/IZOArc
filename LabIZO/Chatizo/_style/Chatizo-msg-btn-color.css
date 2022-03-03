@@ -1,0 +1,105 @@
+/*green*/
+.chatizo-msg-btn.green{
+  background: rgb(85, 136, 38) !important;
+}
+
+.chatizo-msg-btn-text.green,
+.chatizo-msg-btn-text.green.disabled:hover{
+  color:rgb(85, 136, 38) !important;
+}
+
+.chatizo-msg-btn-text.green:hover {
+  color: white !important;
+  background: rgb(85, 136, 38) !important;
+}
+
+/*red*/
+.chatizo-msg-btn.red{
+  background: rgb(163, 1, 8) !important;
+}
+
+.chatizo-msg-btn-text.red,
+.chatizo-msg-btn-text.disabled.red:hover{
+  color:rgb(163, 1, 8) !important;
+}
+
+.chatizo-msg-btn-text.red:hover {
+  color: white !important;
+  background: rgb(163, 1, 8) !important;
+}
+
+/*yellow*/
+.chatizo-msg-btn.yellow{
+  background: rgb(157, 88, 22) !important;
+}
+
+.chatizo-msg-btn-text.yellow,
+.chatizo-msg-btn-text.disabled.yellow:hover{
+  color:rgb(157, 88, 22) !important;
+}
+
+.chatizo-msg-btn-text.yellow:hover {
+  color: white !important;
+  background: rgb(157, 88, 22) !important;
+}
+
+/*blue*/
+.chatizo-msg-btn.blue{
+  background: rgb(74, 98, 136) !important;
+}
+
+.chatizo-msg-btn-text.blue,
+.chatizo-msg-btn-text.disabled.blue:hover{
+  color:rgb(74, 98, 136) !important;
+}
+
+.chatizo-msg-btn-text.blue:hover {
+  color: white !important;
+  background: rgb(171, 84, 211) !important;
+}
+
+/*purple*/
+.chatizo-msg-btn.purple{
+  background: rgb(171, 84, 211) !important;
+}
+
+.chatizo-msg-btn-text.purple,
+.chatizo-msg-btn-text.disabled.purple:hover{
+  color:rgb(171, 84, 211) !important;
+}
+
+.chatizo-msg-btn-text.purple:hover {
+  color: white !important;
+  background: rgb(171, 84, 211) !important;
+}
+
+/*grey*/
+.chatizo-msg-btn.grey{
+  background: rgb(80, 80, 80) !important;
+}
+
+.chatizo-msg-btn-text.grey,
+.chatizo-msg-btn-text.disabled.grey:hover{
+  color:rgb(80, 80, 80) !important;
+}
+
+.chatizo-msg-btn-text.grey:hover {
+  color: white !important;
+  background: rgb(80, 80, 80) !important;
+}
+
+/*orange*/
+.chatizo-msg-btn.orange{
+  background: rgb(212, 120, 0) !important;
+}
+
+.chatizo-msg-btn-text.orange,
+.chatizo-msg-btn-text.disabled.orange:hover{
+  color:rgb(212, 120, 0) !important;
+}
+
+.chatizo-msg-btn-text.orange:hover {
+  color: white !important;
+  background: rgb(212, 120, 0) !important;
+}
+

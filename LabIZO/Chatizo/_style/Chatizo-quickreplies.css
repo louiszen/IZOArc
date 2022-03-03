@@ -1,0 +1,39 @@
+.chatizo-qrbar{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.chatizo-qrbar-arrows{
+  width: fit-content;
+  margin: 10px;
+  color: rgba(74, 98, 136, 1);
+  cursor: pointer;
+}
+
+.chatizo-qrbar-list{
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  overflow-y: hidden;
+  flex-grow: 1;
+}
+
+.chatizo-qrbar-btn{
+  text-align: center;
+  cursor: pointer;
+  padding: 1px 5px;
+  border-radius: 5px;
+  margin: 2px;
+  width: "fit-content";
+}
+
+.chatizo-qrbar-btn-text{
+  width: fit-content;
+  padding: 2px 5px;
+  font-weight: bold;
+  user-select: none;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+

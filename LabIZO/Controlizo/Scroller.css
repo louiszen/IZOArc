@@ -1,0 +1,12 @@
+.controlizo-scroll{
+  width: 100%;
+  opacity: 1;
+}
+
+.controlizo-scroll.pressed{
+  opacity: 0.5;
+}
+
+.controlizo-scroll.disabled{
+  opacity: 1;
+}

@@ -1,34 +1,26 @@
 import React, { Component } from "react";
 import { Accessor, ZFunc } from "IZOArc/STATIC";
 import PropsType from "prop-types";
-import { HStack, VStack } from "IZOArc/LabIZO/Stackizo";
+import Scroller from "IZOArc/LabIZO/Controlizo/Scoller";
 import Holdable from "IZOArc/LabIZO/Controlizo/Holdable";
-import { Typography } from "@mui/material";
 
 import _ from "lodash";
+import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import { HStack } from "IZOArc/LabIZO/Stackizo";
 
 /**
  * @augments {Component<Props, State>}
  */
-class WMButtons extends Component {
+class WQuickReplies extends Component {
 
   static propTypes = {
-    theme: PropsType.string,
-    buttons: PropsType.array,
-    disabled: PropsType.bool,
-
     _onQuickReply: PropsType.func,
-    onWebClicked: PropsType.func,
-    onPhoneClicked: PropsType.func,
-    buttonWidthFitContent: PropsType.bool,
-    
-    addOns: PropsType.object
+    disabled: PropsType.bool
   }
 
   static defaultProps = {
-    themeCSS: "",
-    buttons: [],
+    _onQuickReply: () => {},
     disabled: false
   }
 
@@ -42,7 +34,7 @@ class WMButtons extends Component {
   }
 
   componentDidUpdate(prevProps, prevState){
-    if(!Accessor.IsIdentical(prevProps, this.props, Object.keys(WMButtons.defaultProps))){
+    if(!Accessor.IsIdentical(prevProps, this.props, Object.keys(WQuickReplies.defaultProps))){
       this._setAllStates();
     }
   }
@@ -59,13 +51,24 @@ class WMButtons extends Component {
     }), callback);
   }
 
-  renderButtons(){
-    let {theme, buttons, 
-      _onQuickReply, onPhoneClick, onWebClick, 
-      disabled, buttonWidthFitContent, addOns} = this.props;
+  onMountScroll = (callbacks) => {
+    this.MountScroll = callbacks;
+  }
 
+  scrollLeft = () => {
+    this.MountScroll.scroll(-50);
+  }
+
+  scrollRight = () => {
+    this.MountScroll.scroll(50);
+  }
+
+  renderButtons(){
+    let {theme, quickReplies, _onQuickReply, onPhoneClick, onWebClick, disabled, addOns} = this.state;
     let rendered = [];
-    _.map(buttons, (o, i) => {
+
+    _.map(quickReplies, (o, i) => {
+
       let func = null;
       switch (o.type){
         case "web":
@@ -79,7 +82,7 @@ class WMButtons extends Component {
           break;
       } 
 
-      let textClass = theme + " chatizo-msg-btn-text" 
+      let textClass = theme + " chatizo-qrbar-btn-text" 
       + (disabled? " disabled" : "")
       + (o.color? (" " + o.color) : "");
 
@@ -93,9 +96,8 @@ class WMButtons extends Component {
       }
 
       rendered.push(
-        <Box key={i} className={theme + " chatizo-msg-btn" 
+        <Box key={i} className={theme + " chatizo-qrbar-btn" 
           + (disabled? " disabled" : "") 
-          + (buttonWidthFitContent? " fitcontent" : "")
           + (o.color? (" " + o.color) : "")}>
           <Holdable onPress={func} disabled={disabled}>
             <HStack>
@@ -104,19 +106,37 @@ class WMButtons extends Component {
           </Holdable>
         </Box>
       );
-    });
+    })
 
     return rendered;
+
+  }
+
+  renderHandler(direction, func){
+    let {theme} = this.props;
+    return (
+      <div key={direction} className={theme + " chatizo-qrbar-arrows"}>
+        <Holdable onHold={func} forceLongPress={false}>
+          <i className={"fas fa-chevron-" + direction + " fa-lg"}/>
+        </Holdable>
+      </div>
+    )
   }
 
   render(){
+    let {theme} = this.props;
+
     return (
-      <VStack justifyContent="center">
-        {this.renderButtons()}
-      </VStack>
-    );
+      <HStack alignItems="center">
+        {this.renderHandler("left", () => this.scrollLeft())}
+        <Scroller theme={theme + " chatizo-qrbar-list"} onMounted={this.onMountScroll}>
+          {this.renderButtons()}
+        </Scroller>
+        {this.renderHandler("right", () => this.scrollRight())}
+      </HStack>
+    )
   }
 
 }
 
-export default WMButtons;
+export default WQuickReplies;

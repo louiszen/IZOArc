@@ -8,11 +8,11 @@ import PropsType from "prop-types";
 class WMTyping extends Component {
 
   static propTypes = {
-
+    theme: PropsType.string
   }
 
   static defaultProps = {
-
+    theme: ""
   }
 
   constructor(){
@@ -43,9 +43,12 @@ class WMTyping extends Component {
   }
 
   render(){
+    let {theme} = this.props;
     return (
-      <div>
-
+      <div className={theme + " chatizo-typing"} key={"loading"}>
+        <div className={theme + " chatizo-typing-circles"}/>
+        <div className={theme + " chatizo-typing-circles"}/>
+        <div className={theme + " chatizo-typing-circles"}/>
       </div>
     );
   }

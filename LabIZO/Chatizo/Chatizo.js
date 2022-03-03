@@ -11,6 +11,9 @@ import WInputBar from "./_gears/InputBar/WInputBar";
 import WMsgBody from "./_gears/MsgBody/WMsgBody";
 
 import "./_style";
+import WQuickReplies from "./_gears/QuickReplies/WQuickReplies";
+import WAutoComplete from "./_gears/AutoComplete/WAutoComplete";
+import WMenu from "./_gears/Menu/WMenu";
 
 /**
  * @augments {Component<Props, State>}
@@ -59,7 +62,7 @@ class Chatizo extends Component {
     //Menu
     showMenu: PropsType.bool,
     menu: PropsType.arrayOf(PropsType.shape({
-      icon: PropsType.oneOfType([PropsType.func, PropsType.string]),
+      icon: PropsType.oneOfType([PropsType.func, PropsType.string, PropsType.object]),
       cap: PropsType.oneOfType([PropsType.func, PropsType.string]),
       func: PropsType.func
     })),
@@ -96,7 +99,7 @@ class Chatizo extends Component {
     autoCompleteLibs: PropsType.objectOf(PropsType.arrayOf(PropsType.shape({
       icon: PropsType.oneOfType([PropsType.func, PropsType.string]),
       cap: PropsType.oneOfType([PropsType.func, PropsType.string]),
-      val: PropsType.func
+      val: PropsType.oneOfType([PropsType.func, PropsType.string]),
     }))),
     autoCompleteMethod: PropsType.oneOf(["startsWith", "endsWith", "contains"]),
 
@@ -175,7 +178,7 @@ class Chatizo extends Component {
     cmds: {},
 
     //Menu
-    showMenu: true,
+    showMenu: false,
     menu: [],
 
     //Settings
@@ -208,7 +211,7 @@ class Chatizo extends Component {
     //autoComplete
     autoCompleteAllowed: true,
     autoCompleteLibs: {},
-    autoCompleteMethod: "startsWith",
+    autoCompleteMethod: "contains",
 
     //appearance
     showHeadline: true,
@@ -230,7 +233,7 @@ class Chatizo extends Component {
     quickReplyBar: true,
     showQuickRepliesAsButtons: true,
     disableButtonAfterSent: true,
-    buttonWidthFitContent: true,
+    buttonWidthFitContent: false,
 
     canClickOnIn: true,
     canClickOnOut: true,
@@ -251,7 +254,8 @@ class Chatizo extends Component {
       messages: [],
       quickReplies: [],
       libraries: {},
-      typing: false
+      typing: false,
+      inMenu: false
     };
   }
 
@@ -291,6 +295,12 @@ class Chatizo extends Component {
         });
       }
       if(callback) callback();
+    });
+  }
+
+  _setShowMenu = (tf) => {
+    this.setState({
+      inMenu: tf
     });
   }
 
@@ -382,33 +392,91 @@ class Chatizo extends Component {
    * @param {[import("./__typedef").msgblock] | import("./__typedef").msgblock} msgs 
    */
   _Append = (msgs) => {
+    if(!msgs) return;
     if(!_.isArray(msgs)) msgs = [msgs];
 
     if(msgs.length === 0) return;
 
     let lastMsg = msgs[msgs.length - 1];
-    let quickReplies = lastMsg.msg.quickReplies || [];
+    let quickReplies = lastMsg.msg?.quickReplies || [];
+    let ACLib = lastMsg.next?.autoComplete || "";
 
     this.setState((state, props) => ({
       messages: state.messages.concat(msgs),
       quickReplies: quickReplies,
-      inQR: quickReplies.length > 0
-    }), () => {
-      this._scrollToBottom();
-    });
+      ACLib: ACLib,
+      inQR: quickReplies.length > 0,
+      inAC: !_.isEmpty(ACLib)
+    }));
   }
 
   _onSend = () => {
+    console.log("_onSend");
     let {input} = this.state;
-    console.log(input);
+    let {msgIDGen, user, onSend, appendTextAfterSent} = this.props;
+    if(!input) return;
+
+    let msg = {
+      _id: msgIDGen(),
+      user: user,
+      createdAt: new Date(),
+      status: 'sent',
+      msg: input
+    };
+
+    this._setTypingDisabled(true);
+    this._resetInput();
+    
+    if(appendTextAfterSent){
+      this._Append(msg);
+    }
+
+    if(onSend){
+      onSend(input, msg._id);
+    }
+    
+    this._scrollToBottom();
+
+    setTimeout(() => {
+      this._setTypingDisabled(false);
+    }, 100);
+    
   }
 
   _onQuickReply = (quickReply) => {
+    console.log("_onQuickReply");
+    let {msgIDGen, user, onQuickReply, appendTextAfterSent} = this.props;
 
+    let msg = {
+      user: user,
+      createdAt: new Date(),
+      status: 'sent',
+      _id: msgIDGen(),
+      msg: {
+        text: quickReply.title
+      }
+    };
+
+    this._setTypingDisabled(true);
+    this._resetInput();
+
+    if(appendTextAfterSent){
+      this._Append(msg);
+    }
+
+    if(onQuickReply){
+      onQuickReply(quickReply, msg._id);
+    }
+    
+    this._scrollToBottom();
+
+    setTimeout(() => {
+      this._setTypingDisabled(false);
+    }, 100);
   }
 
   _onSendWithAttachment = (input, atth, type) => {
-
+    console.log("_onSendWithAttachment");
   }
 
   /**
@@ -436,19 +504,51 @@ class Chatizo extends Component {
   }
 
   renderInputBar(){
-    let {input} = this.state;
+    let {input, inAC, ACLib, inMenu} = this.state;
     return (
       <WInputBar
         {...this.props}
+        _onQuickReply={this._onQuickReply}
         _onInputChange={this._onInputChange}
         _onSend={this._onSend}
         input={input}
+        inAC={inAC}
+        ACLib={ACLib}
+        inMenu={inMenu}
+        _setShowMenu={this._setShowMenu}
+        />
+    );
+  }
+
+  renderQuickReplyBar = () => {
+    let {quickReplies} = this.state;
+    return (
+      <WQuickReplies
+        {...this.props}
+        quickReplies={quickReplies}
+        _onQuickReply={this._onQuickReply}
+        disabled={false}
+        />
+    );
+  }
+
+  renderAutoComplete = () => {
+    let {input, inAC, ACLib} = this.state;
+    return (
+      <WAutoComplete
+        {...this.props}
+        _onQuickReply={this._onQuickReply}
+        inputText={input?.text || ""}
+        inAC={inAC}
+        ACLib={ACLib}
+        disabled={false}
         />
     );
   }
 
   renderMsgBody(){
     let {messages, typing} = this.state;
+    
     return (
       <WMsgBody
         {...this.props}
@@ -466,6 +566,7 @@ class Chatizo extends Component {
 
     return (
       <WHeadline
+        {...this.props}
         iconSrc={headlineIcon}
         text={headlineText}
         addOns={addOns}
@@ -473,13 +574,26 @@ class Chatizo extends Component {
     );
   }
 
+  renderMenu(){
+    return (
+      <WMenu
+        {...this.props}
+        _setShowMenu={this._setShowMenu}
+        />
+    )
+  }
+
   render(){
-    let {width, height} = this.props;
+    let {width, height, quickReplyBar} = this.props;
+    let {inQR, inAC, inMenu} = this.state;
     return (
       <VStack width={width} height={height}>
+        {inMenu && this.renderMenu()}
         {this.renderHeadline()}
         {this.renderNotice()}
         {this.renderMsgBody()}
+        {quickReplyBar && inQR && !inAC && this.renderQuickReplyBar()}
+        {inAC && this.renderAutoComplete()}
         {this.renderInputBar()}
       </VStack>
     );

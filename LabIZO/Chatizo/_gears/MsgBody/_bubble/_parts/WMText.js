@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Accessor } from "IZOArc/STATIC";
 import PropsType from "prop-types";
-import htmlParser from 'html-react-parser';
-import TagParser from './HTMLTags/TagParser';
+import htmlParser from "html-react-parser";
+import TagParser from "./HTMLTags/TagParser";
 import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
 
@@ -14,7 +14,7 @@ import _ from "lodash";
 class WMText extends Component {
 
   static propTypes = {
-    themeCSS: PropsType.object,
+    theme: PropsType.string,
     
     addOns: PropsType.object,
 
@@ -74,35 +74,35 @@ class WMText extends Component {
 
   ReplaceSpecialTags = (text) => {
     let parsed = htmlParser(text);
-    let {cssPrefix, HTMLSpecialTagParser, iaddOns} = this.state;
+    let {theme, HTMLSpecialTagParser, iaddOns} = this.state;
 
     if(HTMLSpecialTagParser){
-      return HTMLSpecialTagParser(cssPrefix, parsed, iaddOns);
+      return HTMLSpecialTagParser(theme, parsed, iaddOns);
     }else{
-      return TagParser.Parse(cssPrefix, parsed, iaddOns);
+      return TagParser.Parse(theme, parsed, iaddOns);
     }
   }
 
   renderReadMore(){
-    let {themeCSS, readMoreCaption} = this.state;
+    let {theme, readMoreCaption} = this.state;
     return (
-      <Typography key="ReadMore" style={themeCSS?.msgbody?.msg?.text?.readmore} onClick={() => this.setHide(false)}>
+      <Typography key="readmore" className={theme + " chatizo-msg-text-readmore"} onClick={() => this.setHide(false)}>
         {readMoreCaption}
       </Typography>
     );
   }
 
   renderReadLess(){
-    let {themeCSS, readLessCaption} = this.state;
+    let {theme, readLessCaption} = this.state;
     return (
-      <Typography key="ReadLess" style={themeCSS?.msgbody?.msg?.text?.readmore} onClick={() => this.setHide(true)}>
+      <Typography key="readless" className={theme + " chatizo-msg-text-readmore"} onClick={() => this.setHide(true)}>
         {readLessCaption}
       </Typography>
     );
   }
 
   renderText(){
-    let {themeCSS, HTMLEnabled, hideLongAnswer, longAnswerLength,
+    let {theme, HTMLEnabled, hideLongAnswer, longAnswerLength,
       revertReadMore, hide, text} = this.props;
     
     let rtn = [];
@@ -162,13 +162,13 @@ class WMText extends Component {
           let hideText = text.substring(longAnswerLength);
 
           rtn = [
-            <Box style={themeCSS?.msgbody?.msg?.text?.box}>
-              <Box key="showtext" style={themeCSS?.msgbody?.msg?.text?.show}>
+            <Box className={theme + " chatizo-msg-text-box"}>
+              <Box key="showtext" className={theme + " chatizo-msg-text-show"}>
                 {showText}
               </Box>
               {
                 !hide &&
-                <Box key="hidetext" style={themeCSS?.msgbody?.msg?.text?.hide}>
+                <Box key="hidetext" className={theme + " chatizo-msg-text-hide"}>
                   {hideText}
                 </Box>
               }
@@ -191,12 +191,12 @@ class WMText extends Component {
   }
 
   render(){
-    let { themeCSS } = this.props;
+    let { theme } = this.props;
     return (
-      <Box style={themeCSS?.msgbody?.msg?.text?.main}>
+      <Box className={theme + " chatizo-msg-text-main"}>
         {this.renderText()}
       </Box>
-    )
+    );
   }
 
 }

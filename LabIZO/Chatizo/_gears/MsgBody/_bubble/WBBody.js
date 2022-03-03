@@ -4,6 +4,7 @@ import PropsType from "prop-types";
 import { VStack } from "IZOArc/LabIZO/Stackizo";
 import WMText from "./_parts/WMText";
 import WMButtons from "./_parts/WMButtons";
+import WMTyping from "./_parts/WMTyping";
 
 /**
  * @augments {Component<Props, State>}
@@ -11,7 +12,7 @@ import WMButtons from "./_parts/WMButtons";
 class WBBody extends Component {
 
   static propTypes = {
-    themeCSS: PropsType.object,
+    theme: PropsType.string,
 
     showQuickRepliesAsButtons: PropsType.bool,
     disableButtonsAfterSend: PropsType.bool, 
@@ -88,9 +89,16 @@ class WBBody extends Component {
   }
 
   render(){
-    let {imsg, themeCSS, showQuickRepliesAsButtons} = this.props;
+    let {imsg, theme, showQuickRepliesAsButtons, typingBubbles} = this.props;
+    if (typingBubbles){
+      return (
+        <VStack width="100%" className={theme + " chatizo-msg-body"}>
+          <WMTyping {...this.props}/>
+        </VStack>
+      );
+    }
     return (
-      <VStack width="100%" style={themeCSS?.msgbody?.body}>
+      <VStack width="100%" className={theme + " chatizo-msg-body"}>
         {imsg.title && this.renderText(imsg.title)}
         {imsg.image && this.renderImage(imsg.image)}
         {imsg.video && this.renderVideo(imsg.video)}

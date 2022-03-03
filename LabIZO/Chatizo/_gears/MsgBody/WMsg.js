@@ -125,20 +125,20 @@ class WMsg extends Component {
           key={_id}
           text={msg.system}
           />
-      )
+      );
     }
 
     let canClick = (canClickOnIn && pos === "in") || (canClickOnOut && pos === "out");
 
     if(canClick){
       return (
-        <Holdable onPress={onMsgPressed} onHold={onMsgLongPressed}>
-          <Box className={theme + " chatizo-msg-bubble" + (pos === "in"? " in" : " out")}>
-            {this.renderHeader()}
-            {this.renderMsg()}
-            {this.renderFooter()}
-          </Box>
-        </Holdable>
+        <Box className={theme + " chatizo-msg-bubble" + (pos === "in"? " in" : " out")}>
+          <Holdable onPress={onMsgPressed} onHold={onMsgLongPressed}>
+          {this.renderHeader()}
+          {this.renderMsg()}
+          {this.renderFooter()}
+          </Holdable>
+        </Box>
       );
     }
     return (

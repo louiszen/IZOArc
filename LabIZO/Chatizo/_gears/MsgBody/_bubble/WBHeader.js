@@ -11,7 +11,7 @@ class WBHeader extends Component {
 
   static propTypes = {
 
-    themeCSS: PropsType.object,
+    theme: PropsType.string,
 
     sender: PropsType.shape({
       ID: PropsType.string,
@@ -54,10 +54,10 @@ class WBHeader extends Component {
   }
 
   render(){
-    let { sender, themeCSS, onHeaderClicked } = this.props;
+    let { sender, theme, onHeaderClicked } = this.props;
     return (
       <Holdable onPress={() => ZFunc.IfFuncExec(onHeaderClicked, sender)}>
-        <Typography style={themeCSS?.msgbody?.bubble?.header}>
+        <Typography className={theme + " chatizo-msg-header-main"}>
           {sender.name}
         </Typography>
       </Holdable>

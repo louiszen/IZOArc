@@ -56,12 +56,12 @@ class BMarkdown extends Component {
   }
 
   render(){
-    let {width, height, children, codeTheme} = this.props;
+    let {width, height, children, codeTheme, className} = this.props;
     if(!_.isString(children)) return <div/>;
     let emojied = this.emojiSupport(children);
 
     return (
-      <div className="markdown-body" style={{width: width, height: height}}>
+      <div className={className + " markdown-body"} style={{width: width, height: height}}>
         <ReactMarkDown 
           children={emojied} 
           skipHtml={false} 
