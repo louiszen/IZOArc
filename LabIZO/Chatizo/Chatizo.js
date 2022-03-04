@@ -255,7 +255,8 @@ class Chatizo extends Component {
       quickReplies: [],
       libraries: {},
       typing: false,
-      inMenu: false
+      inMenu: false,
+      input: {}
     };
   }
 
@@ -318,7 +319,7 @@ class Chatizo extends Component {
       messages: [],
       quickReplies: [],
       typing: false,
-      input: undefined
+      input: {}
     });
   }
 
@@ -365,7 +366,7 @@ class Chatizo extends Component {
    */
   _resetInput = () => {
     this.setState({
-      input: undefined
+      input: {}
     });
   }
 

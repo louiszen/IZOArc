@@ -51,17 +51,54 @@ class WInputBar extends Component {
     //base functions
     _setShowMenu: PropsType.func,
     _onInputChange: PropsType.func,
-    _onSend: PropsType.func
+    _onSend: PropsType.func,
+    input: PropsType.object
   }
 
   static defaultProps = {
+    //Command
+    enableCMD: false,
+    cmds: {},
 
+    //Menu
+    inMenu: false,
+    showMenu: false,
+
+    //Settings
+    enableEmoji: false,
+    enableAttach: false,
+    enableAudio: false,
+    enableRecord: false,
+
+    //attachments
+    allowCamera: false,
+    allowImage: false,
+    allowVideo: false,
+    allowFile: false,
+    allowLocation: false,
+    allowPoll: false,
+    allowMusic: false,
+
+    pressEnterToSend: true,
+    inputPlaceHolder: "Message",
+
+    theme: "",
+
+    //runtime
+    available: false,
+    inAC: false,
+    ACLib: "",
+
+    //base functions
+    _setShowMenu: () => {},
+    _onInputChange: () => {},
+    _onSend: () => {},
+    input: {}
   }
 
   constructor(){
     super();
     this.state = {
-      isEmpty: true,
       audioMode: true
     };
   }
@@ -119,7 +156,12 @@ class WInputBar extends Component {
 
   toAtth = () => {
     console.log("toAtth");
-  } 
+  }
+
+  _isInputEmpty = () => {
+    let {input} = this.state;
+    return _.isEmpty(input?.text);
+  }
 
   onKeyDown = (e) => {
     let {pressEnterToSend, _onSend} = this.props;
@@ -132,11 +174,7 @@ class WInputBar extends Component {
 
   onInputChange = (text) => {
     let {_onInputChange} = this.props;
-    ZFunc.IfFuncExec(_onInputChange, {text: text}, (input) => {
-      this.setState({
-        isEmpty: _.isEmpty(input?.text)
-      });
-    });
+    ZFunc.IfFuncExec(_onInputChange, {text: text});
   }
 
   renderImageUpload(){
@@ -239,8 +277,7 @@ class WInputBar extends Component {
 
   renderSendBtn(){
     let {theme, _onSend} = this.props;
-    let {isEmpty} = this.state;
-    if(!isEmpty){
+    if(!this._isInputEmpty()){
       return (
         <Holdable onPress={() => _onSend()} key="send">
           <IconButton className={theme + " chatizo-input-icon send"} size="small">
@@ -252,8 +289,7 @@ class WInputBar extends Component {
   }
 
   renderButtons(){
-    let {isEmpty} = this.state;
-    if(isEmpty){
+    if(this._isInputEmpty()){
       return [
         this.renderCMDBtn(),
         this.renderAttachBtn(),

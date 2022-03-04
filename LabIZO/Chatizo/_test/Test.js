@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Accessor, ZTime } from "IZOArc/STATIC";
+import { Accessor } from "IZOArc/STATIC";
 import Chatizo from "..";
-import { v1 } from "uuid";
 import { CenterFocusWeakRounded } from "@mui/icons-material";
 import MockChatbotEngine from "./MockChatbotEngine";
 
@@ -157,7 +156,7 @@ class Test extends Component {
   }
 
   onSend = (input) => {
-    console.log(input)
+    console.log(input);
     this.Proceed();
   }
 

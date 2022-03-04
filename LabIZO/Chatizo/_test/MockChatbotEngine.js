@@ -14,7 +14,7 @@ class MockChatbotEngine {
 
   static GetResponse(step){
     switch(step){
-      case 0: return MockChatbotEngine.Step0();
+      default: case 0: return MockChatbotEngine.Step0();
       case 1: return MockChatbotEngine.Step1();
       case 2: return MockChatbotEngine.Step2();
       case 3: return MockChatbotEngine.Step3();
@@ -87,7 +87,7 @@ class MockChatbotEngine {
           text: "請描述你的觀察"
         }
       }
-    ]
+    ];
   }
 
   static Step3(){

@@ -15,7 +15,6 @@ class WAutoComplete extends Component {
 
   static propTypes = {
     //autoComplete
-    autoCompleteAllowed: PropsType.bool,
     autoCompleteLibs: PropsType.objectOf(PropsType.arrayOf(PropsType.shape({
       icon: PropsType.oneOfType([PropsType.func, PropsType.string]),
       cap: PropsType.oneOfType([PropsType.func, PropsType.string]),
@@ -33,7 +32,16 @@ class WAutoComplete extends Component {
   }
 
   static defaultProps = {
+    autoCompleteLibs: {},
+    autoCompleteMethod: "contains",
+  
+    theme: "",
 
+    inAC: false,
+    ACLib: "",
+
+    _onQuickReply: () => {},
+    inputText: ""
   }
 
   constructor(){

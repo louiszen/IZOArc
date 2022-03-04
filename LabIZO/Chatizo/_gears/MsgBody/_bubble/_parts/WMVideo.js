@@ -8,7 +8,7 @@ import PropsType from "prop-types";
 class WMVideo extends Component {
 
   static propTypes = {
-
+    theme: PropsType.string
   }
 
   static defaultProps = {
