@@ -100,5 +100,5 @@
 
 .chatizo-msg-btn-text:hover {
   color: white;
-  background: linear-gradient(90deg, rgb(200, 123, 30) 0%, rgb(125, 60, 10) 75.75%, rgb(125, 60, 10) 100%);
+  background: linear-gradient(90deg, rgb(200, 123, 30) 0%, rgb(125, 60, 10) 75.75%, rgb(125, 60, 10) 100%) !important;
 }

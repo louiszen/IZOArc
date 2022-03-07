@@ -41,8 +41,7 @@ class Holdable extends Component {
     super();
     this.state = {
       pressed: false,
-      startTime: null,
-      touching: false
+      startTime: null
     };
   }
 
@@ -68,13 +67,11 @@ class Holdable extends Component {
     }), callback);
   }
 
-  handlePress = (e, touch) => {
-    let {touching} = this.state;
+  handlePress = (e) => {
     let {longPressInterval, disabled, onHold, onHoldInterval, forceLongPress, stopPropagation} = this.props;
     if(stopPropagation){
       e.stopPropagation();
     }
-    if(touching) return;
     
     clearInterval(this.repeat);
 
@@ -85,7 +82,6 @@ class Holdable extends Component {
     if(disabled) return;
     this.setState({
       pressed: true,
-      touching: touch,
       startTime: ZTime.Now()
     });
     if(forceLongPress){
@@ -97,8 +93,7 @@ class Holdable extends Component {
     let {onPress, onLongPress, disabled} = this.props;
     if(disabled) return;
     this.setState({ 
-      pressed: false,
-      touching: false
+      pressed: false
     });
 
     if(onLongPress){
@@ -110,7 +105,7 @@ class Holdable extends Component {
     }
   }
 
-  handleRelease = (e, touch) => {
+  handleRelease = (e) => {
     let {pressed, startTime} = this.state;
     let {longPressInterval, onPress, onLongPress, disabled} = this.props;
 
@@ -120,8 +115,7 @@ class Holdable extends Component {
     let timeLapse = ZTime.Now() - startTime;
 
     this.setState({ 
-      pressed: false,
-      touching: false
+      pressed: false
     });
     
     if(timeLapse < longPressInterval){
@@ -139,15 +133,14 @@ class Holdable extends Component {
     clearInterval(this.repeat);
   }
 
-  handleLeave = (e, touch) => {
+  handleLeave = (e) => {
     let {pressed} = this.state;
     let {disabled} = this.props;
 
     if(!pressed) return;
     if(disabled) return;
     this.setState({ 
-      pressed: false,
-      touching: false
+      pressed: false
     });
     clearTimeout(this.timer);
     clearInterval(this.repeat);
@@ -161,9 +154,9 @@ class Holdable extends Component {
       return (
         <div 
           className={"holdable" + (pressed? " pressed" : "") + (disabled? " disabled" : "")}
-          onTouchStart={(e) => this.handlePress(e, true)}
-          onTouchMove={(e) => this.handleLeave(e, true)}
-          onTouchEnd={(e) => this.handleRelease(e, true)}
+          onTouchStart={(e) => this.handlePress(e)}
+          onTouchMove={(e) => this.handleLeave(e)}
+          onTouchEnd={(e) => this.handleRelease(e)}
           >
             {children}
         </div>
@@ -172,9 +165,9 @@ class Holdable extends Component {
       return (
         <div 
           className={"holdable" + (pressed? " pressed" : "") + (disabled? " disabled" : "")}
-          onMouseDown={(e) => this.handlePress(e, false)}
-          onMouseUp={(e) => this.handleRelease(e, false)}
-          onMouseLeave={(e) => this.handleLeave(e, false)}
+          onMouseDown={(e) => this.handlePress(e)}
+          onMouseUp={(e) => this.handleRelease(e)}
+          onMouseLeave={(e) => this.handleLeave(e)}
           >
             {children}
         </div>

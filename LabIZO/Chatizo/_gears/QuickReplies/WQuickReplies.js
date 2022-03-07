@@ -84,7 +84,7 @@ class WQuickReplies extends Component {
 
       let textClass = theme + " chatizo-qrbar-btn-text" 
       + (disabled? " disabled" : "")
-      + (o.color? (" " + o.color) : "");
+      + (o.color? (" " + o.color) : " blue");
 
       let sTitle = ZFunc.IfFuncExec(o.title, addOns);
       if(_.isString(sTitle)){
@@ -98,7 +98,7 @@ class WQuickReplies extends Component {
       rendered.push(
         <Box key={i} className={theme + " chatizo-qrbar-btn" 
           + (disabled? " disabled" : "") 
-          + (o.color? (" " + o.color) : "")}>
+          + (o.color? (" " + o.color) : " blue")}>
           <Holdable onPress={func} disabled={disabled}>
             <HStack>
               {sTitle}

@@ -16,6 +16,10 @@
   color: rgba(175, 214, 250, 1) !important; 
 }
 
+.chatizo-input-icon.in{
+  color: white !important;
+}
+
 .chatizo-input-icon.send{
   color: rgba(160, 255, 160, 1) !important; 
 }

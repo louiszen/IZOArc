@@ -43,7 +43,7 @@ const autoCompleteLibs = {
       val: "PPE"
     },
     {
-      cap: "User of hazardous & flammable substances 使用危險物品/易燃物品",
+      cap: "Use of hazardous & flammable substances 使用危險物品/易燃物品",
       val: "DANGER"
     },
     {

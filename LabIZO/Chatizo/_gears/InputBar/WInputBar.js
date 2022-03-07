@@ -183,10 +183,11 @@ class WInputBar extends Component {
 
   renderMenuBtn(){
     let {theme, showMenu} = this.props;
+    let {inMenu} = this.state;
     if(!showMenu) return;
     return (
       <Holdable onPress={() => this.toMenu()}>
-        <IconButton className={theme + " chatizo-input-icon"} size="small">
+        <IconButton className={theme + " chatizo-input-icon" + (inMenu? " in" : "")} size="small">
           <Hive style={{width:"100%", height: "100%"}}/>
         </IconButton>
       </Holdable>

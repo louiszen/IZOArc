@@ -4,6 +4,10 @@ import { v1 } from "uuid";
 
 class MockChatbotEngine {
 
+  static RecordAns(){
+
+  }
+
   static GetUser(){
     return {
       ID: "1",
@@ -21,6 +25,8 @@ class MockChatbotEngine {
       case 4: return MockChatbotEngine.Step4();
       case 5: return MockChatbotEngine.Step5();
       case 6: return MockChatbotEngine.Step6();
+      case 7: return MockChatbotEngine.Step7();
+      case 8: return MockChatbotEngine.Step8();
     }
   }
 
@@ -157,6 +163,73 @@ class MockChatbotEngine {
         },
         next: {
           autoComplete: "locations"
+        }
+      }
+    ];
+  }
+
+  static Step7(){
+    let user = MockChatbotEngine.GetUser();
+    return [
+      {
+        _id: v1(),
+        createdAt: ZTime.Now(),
+        lapseTime: 0.5,
+        user: user,
+        msg: {
+          text: "採取了什麼行動?",
+          quickReplies: [
+            {
+              title: "一般提醒",
+              payload: "0"
+            },
+            {
+              title: "口頭警告",
+              payload: "1"
+            },
+            {
+              title: "停工",
+              payload: "2",
+              color: "red"
+            },
+            {
+              title: "停工 (口頭)",
+              payload: "3",
+              color: "red"
+            },
+            {
+              title: "停工 (停工紙)",
+              payload: "4",
+              color: "red"
+            },
+            {
+              title: "於零傷害卡打洞",
+              payload: "5"
+            },
+            {
+              title: "罰款",
+              payload: "6"
+            },
+            {
+              title: "離場",
+              payload: "7"
+            },
+          ]
+        }
+      }
+    ];
+  }
+
+  static Step8(){
+    let user = MockChatbotEngine.GetUser();
+    return [
+      {
+        _id: v1(),
+        createdAt: ZTime.Now(),
+        lapseTime: 0.5,
+        user: user,
+        msg: {
+          text: "有更多相片提供?"
         }
       }
     ];
