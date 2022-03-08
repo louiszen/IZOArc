@@ -27,8 +27,7 @@ import moment from "moment";
  *  title: String | Function,
  *  payload: String | Function,
  *  type?: btntype,
- *  showText?: Boolean,
- *  color?: String
+ *  showText?: Boolean
  * }} imgbutton
  * 
  * @typedef {{
@@ -69,7 +68,7 @@ import moment from "moment";
  * @typedef {{
  *  system?: String | Function,
  *  text?: String | Function,
- *  image?: String | Function,
+ *  image?: String | Function | [String],
  *  video?: video,
  *  quickReplies?: [quickReply],
  *  buttons?: [button],

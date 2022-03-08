@@ -1,22 +1,22 @@
 import React, { Component } from "react";
 import { Accessor } from "IZOArc/STATIC";
 import PropsType from "prop-types";
-import { Player } from "video-react";
 import { Box } from "@mui/system";
+import EmojiPicker from "emoji-picker-react";
 
 /**
  * @augments {Component<Props, State>}
  */
-class WMVideo extends Component {
+class WEmoji extends Component {
 
   static propTypes = {
     theme: PropsType.string,
-    ovideo: PropsType.object,
+    _onEmojiClick: PropsType.func
   }
 
   static defaultProps = {
     theme: "",
-    ovideo: {}
+    _onEmojiClick: () => {}
   }
 
   constructor(){
@@ -29,7 +29,7 @@ class WMVideo extends Component {
   }
 
   componentDidUpdate(prevProps, prevState){
-    if(!Accessor.IsIdentical(prevProps, this.props, Object.keys(WMVideo.defaultProps))){
+    if(!Accessor.IsIdentical(prevProps, this.props, Object.keys(WEmoji.defaultProps))){
       this._setAllStates();
     }
   }
@@ -47,16 +47,14 @@ class WMVideo extends Component {
   }
 
   render(){
-    let {theme, ovideo} = this.props;
+    let {theme, _onEmojiClick} = this.props;
     return (
-      <Box className={theme + " chatizo-msg-video"}>
-        <Player
-            src={ovideo.src}
-            poster={ovideo.poster}/>
+      <Box className={theme + " chatizo-emoji"}>
+        <EmojiPicker onEmojiClick={_onEmojiClick}/>
       </Box>
     );
   }
 
 }
 
-export default WMVideo;
+export default WEmoji;

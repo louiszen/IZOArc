@@ -7,6 +7,7 @@ import { AttachFile, Code, Hive, InsertEmoticon, Mic, RadioButtonChecked, Send }
 import { Box } from "@mui/system";
 import _ from "lodash";
 import Holdable from "IZOArc/LabIZO/Controlizo/Holdable";
+import Picker from 'emoji-picker-react';
 
 /**
  * @augments {Component<Props, State>}
@@ -19,8 +20,11 @@ class WInputBar extends Component {
     enableCMD: PropsType.bool,
     cmds: PropsType.objectOf(PropsType.func),
 
-    //Menu
+    //state
     inMenu: PropsType.bool,
+    inEmoji: PropsType.bool,
+
+    //Menu
     showMenu: PropsType.bool,
 
     //Settings
@@ -45,13 +49,13 @@ class WInputBar extends Component {
 
     //runtime
     available: PropsType.bool,
-    inAC: PropsType.bool,
-    ACLib: PropsType.string,
 
     //base functions
     _setShowMenu: PropsType.func,
+    _setShowEmoji: PropsType.func,
     _onInputChange: PropsType.func,
     _onSend: PropsType.func,
+    _saveCursor: PropsType.func,
     input: PropsType.object
   }
 
@@ -86,20 +90,21 @@ class WInputBar extends Component {
 
     //runtime
     available: false,
-    inAC: false,
-    ACLib: "",
 
     //base functions
     _setShowMenu: () => {},
+    _setShowEmoji: () => {},
     _onInputChange: () => {},
     _onSend: () => {},
+    _saveCursor: () => {},
     input: {}
   }
 
   constructor(){
     super();
     this.state = {
-      audioMode: true
+      audioMode: true,
+      inEmoji: false
     };
   }
 
@@ -148,6 +153,8 @@ class WInputBar extends Component {
 
   toEmoji = () => {
     console.log("toEmoji");
+    let {inEmoji, _setShowEmoji} = this.props;
+    _setShowEmoji(!inEmoji);
   }
 
   toCMD = () => {
@@ -182,8 +189,7 @@ class WInputBar extends Component {
   }
 
   renderMenuBtn(){
-    let {theme, showMenu} = this.props;
-    let {inMenu} = this.state;
+    let {theme, showMenu, inMenu} = this.props;
     if(!showMenu) return;
     return (
       <Holdable onPress={() => this.toMenu()}>
@@ -195,11 +201,11 @@ class WInputBar extends Component {
   }
 
   renderEmojiBtn(){
-    let {theme, enableEmoji} = this.props;
+    let {theme, enableEmoji, inEmoji} = this.props;
     if(!enableEmoji) return;
     return (
       <Holdable onPress={() => this.toEmoji()}>
-        <IconButton className={theme + " chatizo-input-icon"} size="small">
+        <IconButton className={theme + " chatizo-input-icon" + (inEmoji? " in" : "")} size="small">
           <InsertEmoticon style={{width:"100%", height: "100%"}}/>
         </IconButton>
       </Holdable>
@@ -207,7 +213,7 @@ class WInputBar extends Component {
   }
 
   renderTextField(){
-    let {inputPlaceHolder, addOns, available, input} = this.props;
+    let {inputPlaceHolder, addOns, available, input, _saveCursor} = this.props;
     let ph = ZFunc.IfFuncExec(inputPlaceHolder, addOns);
     return (
       <Box className="chatizo-input-text-outter" >
@@ -219,6 +225,7 @@ class WInputBar extends Component {
           placeholder={ph}
           value={input?.text || ""}
           disabled={!available}
+          onBlur={e => _saveCursor(e.target.selectionStart)}
           />
       </Box>
     );

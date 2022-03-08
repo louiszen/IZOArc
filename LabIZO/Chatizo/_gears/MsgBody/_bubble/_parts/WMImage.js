@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Accessor } from "IZOArc/STATIC";
 import PropsType from "prop-types";
+import { Box } from "@mui/system";
+import Holdable from "IZOArc/LabIZO/Controlizo/Holdable";
 
 /**
  * @augments {Component<Props, State>}
@@ -8,11 +10,15 @@ import PropsType from "prop-types";
 class WMImage extends Component {
 
   static propTypes = {
-    theme: PropsType.string
+    theme: PropsType.string,
+    oimage: PropsType.object,
+    _onImageClicked: PropsType.func,
   }
 
   static defaultProps = {
-
+    theme: "",
+    oimage: {},
+    _onImageClicked: () => {}
   }
 
   constructor(){
@@ -43,10 +49,13 @@ class WMImage extends Component {
   }
 
   render(){
+    let {theme, oimage, _onImageClicked} = this.props;
     return (
-      <div>
-
-      </div>
+      <Holdable onPress={_onImageClicked}>
+        <Box className={theme + " chatizo-msg-image"} style={oimage.style}>
+          <img src={oimage.src} alt=""/>
+        </Box>
+      </Holdable>
     );
   }
 

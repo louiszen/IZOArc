@@ -194,7 +194,6 @@ class Test extends Component {
         menu={Menu}
         onSend={this.onSend}
         onQuickReply={this.onQR}
-        
         />
     );
   }

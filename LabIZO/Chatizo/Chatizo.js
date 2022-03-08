@@ -14,6 +14,7 @@ import "./_style";
 import WQuickReplies from "./_gears/QuickReplies/WQuickReplies";
 import WAutoComplete from "./_gears/AutoComplete/WAutoComplete";
 import WMenu from "./_gears/Menu/WMenu";
+import WEmoji from "./_gears/Emoji/WEmoji";
 
 /**
  * @augments {Component<Props, State>}
@@ -250,13 +251,16 @@ class Chatizo extends Component {
     this.state = {
       inQR: false,
       inAC: false,
+      inEmoji: false,
+      inMenu: false,
+
       typingDisabled: false,
       messages: [],
       quickReplies: [],
       libraries: {},
       typing: false,
-      inMenu: false,
-      input: {}
+      input: {},
+      inputCursorPos: 0
     };
   }
 
@@ -305,6 +309,12 @@ class Chatizo extends Component {
     });
   }
 
+  _setShowEmoji = (tf) => {
+    this.setState({
+      inEmoji: tf
+    });
+  }
+
   _Typing = (tf = true) => {
     this.setState({
       typing: tf
@@ -321,6 +331,10 @@ class Chatizo extends Component {
       typing: false,
       input: {}
     });
+  }
+
+  _onImageClick = () => {
+
   }
 
   /**
@@ -500,12 +514,32 @@ class Chatizo extends Component {
     });
   }
 
+  _onEmojiClick = (e, emoji) => {
+    let {input, inputCursorPos} = this.state;
+    let newText = input.text || "";
+    newText = newText.slice(0, inputCursorPos) + emoji.emoji + newText.slice(inputCursorPos);
+
+    this.setState((state, props) => ({
+      input: {
+        ...state.input,
+        text: newText
+      },
+      inEmoji: false
+    }));
+  }
+
+  _saveCursor = (value) => {
+    this.setState({
+      inputCursorPos: value
+    });
+  }
+
   renderNotice(){
 
   }
 
   renderInputBar(){
-    let {input, inAC, ACLib, inMenu} = this.state;
+    let {input, inMenu, inEmoji} = this.state;
     return (
       <WInputBar
         {...this.props}
@@ -513,10 +547,11 @@ class Chatizo extends Component {
         _onInputChange={this._onInputChange}
         _onSend={this._onSend}
         input={input}
-        inAC={inAC}
-        ACLib={ACLib}
         inMenu={inMenu}
+        inEmoji={inEmoji}
         _setShowMenu={this._setShowMenu}
+        _setShowEmoji={this._setShowEmoji}
+        _saveCursor={this._saveCursor}
         />
     );
   }
@@ -529,6 +564,14 @@ class Chatizo extends Component {
         quickReplies={quickReplies}
         _onQuickReply={this._onQuickReply}
         disabled={false}
+        />
+    );
+  }
+
+  renderEmoji = () => {
+    return (
+      <WEmoji
+        _onEmojiClick={this._onEmojiClick}
         />
     );
   }
@@ -555,6 +598,7 @@ class Chatizo extends Component {
         {...this.props}
         onMounted={this.onMountWMsgBody}
         _onQuickReply={this._onQuickReply}
+        _onImageClick={this._onImageClick}
         messages={messages}
         typing={typing}
         />
@@ -586,7 +630,7 @@ class Chatizo extends Component {
 
   render(){
     let {width, height, quickReplyBar} = this.props;
-    let {inQR, inAC, inMenu} = this.state;
+    let {inQR, inAC, inMenu, inEmoji} = this.state;
     return (
       <VStack width={width} height={height}>
         {inMenu && this.renderMenu()}
@@ -595,6 +639,7 @@ class Chatizo extends Component {
         {this.renderMsgBody()}
         {quickReplyBar && inQR && !inAC && this.renderQuickReplyBar()}
         {inAC && this.renderAutoComplete()}
+        {inEmoji && this.renderEmoji()}
         {this.renderInputBar()}
       </VStack>
     );

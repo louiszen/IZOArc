@@ -133,7 +133,7 @@ class WMsg extends Component {
     if(canClick){
       return (
         <Box className={theme + " chatizo-msg-bubble" + (pos === "in"? " in" : " out")}>
-          <Holdable onPress={onMsgPressed} onHold={onMsgLongPressed}>
+          <Holdable onPress={onMsgPressed} onHold={onMsgLongPressed}> 
           {this.renderHeader()}
           {this.renderMsg()}
           {this.renderFooter()}

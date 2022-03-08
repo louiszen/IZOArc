@@ -5,6 +5,9 @@ import { VStack } from "IZOArc/LabIZO/Stackizo";
 import WMText from "./_parts/WMText";
 import WMButtons from "./_parts/WMButtons";
 import WMTyping from "./_parts/WMTyping";
+import WMImage from "./_parts/WMImage";
+import WMVideo from "./_parts/WMVideo";
+import WMImgButtons from "./_parts/WMImgButtons";
 
 /**
  * @augments {Component<Props, State>}
@@ -54,21 +57,31 @@ class WBBody extends Component {
     }), callback);
   }
 
-  renderText(xtext){
+  renderText(otext){
     return (
       <WMText
         {...this.props}
-        text={xtext}
+        otext={otext}
         />
     );
   }
 
-  renderImage(ximg){
-
+  renderImage(oimage){
+    return (
+      <WMImage
+        {...this.props}
+        oimage={oimage}
+        />
+    );
   }
 
-  renderVideo(xvideo){
-
+  renderVideo(ovideo){
+    return (
+      <WMVideo
+        {...this.props}
+        ovideo={ovideo}
+        />
+    );
   }
 
   renderButtons(xbtns){
@@ -80,11 +93,16 @@ class WBBody extends Component {
     );
   }
 
-  renderImgButtons(ximgbtns){
-    
+  renderImgButtons(oimgbtns){
+    return (
+      <WMImgButtons
+        {...this.props}
+        oimgbtns={oimgbtns}
+        />
+    );
   }
 
-  renderTemplates(xtemplates){
+  renderTemplates(otemplates){
 
   }
 

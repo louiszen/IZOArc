@@ -102,3 +102,40 @@
   color: white;
   background: linear-gradient(90deg, rgb(200, 123, 30) 0%, rgb(125, 60, 10) 75.75%, rgb(125, 60, 10) 100%) !important;
 }
+
+.chatizo-msg-image{
+  width: 100%;
+  margin: 2px 0;
+  min-width: 50vw;
+}
+
+.chatizo-msg-image img{
+  width: 100%;
+  height: 100%;
+}
+
+.chatizo-msg-video{
+  width: 100%;
+  margin: 2px 0;
+  min-width: 60vw;
+}
+
+.chatizo-msg-imgbtnlist{
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+}
+
+.chatizo-msg-imgbtn{
+  width: 22%;
+  margin: 5px 10px;
+  cursor: pointer;
+}
+
+.chatizo-msg-imgbtn.disabled{
+  opacity: 0.5;
+}
+
+.chatizo-msg-imgbtn-img img{
+  width: 100%;
+}

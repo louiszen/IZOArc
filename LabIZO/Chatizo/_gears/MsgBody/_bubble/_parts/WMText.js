@@ -29,11 +29,11 @@ class WMText extends Component {
     HTMLEnabled: PropsType.bool,
 
     //runtime
-    text: PropsType.oneOfType([PropsType.string, PropsType.func]),
+    otext: PropsType.oneOfType([PropsType.string, PropsType.func]),
   }
 
   static defaultProps = {
-    text: "",
+    otext: "",
     addOns: {}
   }
 
@@ -72,8 +72,8 @@ class WMText extends Component {
     });
   }
 
-  ReplaceSpecialTags = (text) => {
-    let parsed = htmlParser(text);
+  ReplaceSpecialTags = (otext) => {
+    let parsed = htmlParser(otext);
     let {theme, HTMLSpecialTagParser, iaddOns} = this.state;
 
     if(HTMLSpecialTagParser){
@@ -103,12 +103,12 @@ class WMText extends Component {
 
   renderText(){
     let {theme, HTMLEnabled, hideLongAnswer, longAnswerLength,
-      revertReadMore, hide, text} = this.props;
+      revertReadMore, hide, otext} = this.props;
     
     let rtn = [];
   
     if(HTMLEnabled){
-      let blocks = this.ReplaceSpecialTags(text);
+      let blocks = this.ReplaceSpecialTags(otext);
       if(hideLongAnswer){
         if(!Array.isArray(blocks)) {
           blocks = [blocks];
@@ -154,12 +154,12 @@ class WMText extends Component {
         }
       }
     }else{
-      rtn = text;
+      rtn = otext;
       
       if(hideLongAnswer){
-        if(text.length > longAnswerLength){
-          let showText = text.substring(0, longAnswerLength);
-          let hideText = text.substring(longAnswerLength);
+        if(otext.length > longAnswerLength){
+          let showText = otext.substring(0, longAnswerLength);
+          let hideText = otext.substring(longAnswerLength);
 
           rtn = [
             <Box className={theme + " chatizo-msg-text-box"}>

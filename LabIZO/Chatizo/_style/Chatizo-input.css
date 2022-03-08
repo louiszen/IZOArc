@@ -34,10 +34,11 @@
 
 .chatizo-input-text-inner{
   border-radius: 5px;
-  width: "100%";
+  width: 100%;
   border-width: 0;
   background: transparent;
   transition: width 2s;
+  
 }
 
 .chatizo-input-text-inner:focus{
