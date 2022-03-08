@@ -51,8 +51,9 @@ class WMVideo extends Component {
     return (
       <Box className={theme + " chatizo-msg-video"}>
         <Player
-            src={ovideo.src}
-            poster={ovideo.poster}/>
+          autoPlay={false}
+          src={ovideo.src}
+          poster={ovideo.poster}/>
       </Box>
     );
   }

@@ -637,8 +637,8 @@ class Chatizo extends Component {
         {this.renderHeadline()}
         {this.renderNotice()}
         {this.renderMsgBody()}
-        {quickReplyBar && inQR && !inAC && this.renderQuickReplyBar()}
-        {inAC && this.renderAutoComplete()}
+        {quickReplyBar && inQR && !inAC && !inEmoji && this.renderQuickReplyBar()}
+        {inAC && !inEmoji && this.renderAutoComplete()}
         {inEmoji && this.renderEmoji()}
         {this.renderInputBar()}
       </VStack>
