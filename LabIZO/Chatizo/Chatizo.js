@@ -311,6 +311,12 @@ class Chatizo extends Component {
     });
   }
 
+  _setShowCMD = (tf) => {
+    this.setState({
+      inCMD: tf
+    });
+  }
+
   _setShowEmoji = (tf) => {
     this.setState({
       inEmoji: tf
@@ -547,7 +553,7 @@ class Chatizo extends Component {
   }
 
   renderInputBar(){
-    let {input, inMenu, inEmoji} = this.state;
+    let {input, inMenu, inEmoji, inCMD} = this.state;
     return (
       <WInputBar
         {...this.props}
@@ -557,8 +563,10 @@ class Chatizo extends Component {
         input={input}
         inMenu={inMenu}
         inEmoji={inEmoji}
+        inCMD={inCMD}
         _setShowMenu={this._setShowMenu}
         _setShowEmoji={this._setShowEmoji}
+        _setShowCMD={this._setShowCMD}
         _saveCursor={this._saveCursor}
         />
     );

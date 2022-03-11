@@ -52,6 +52,7 @@ class WInputBar extends Component {
     //base functions
     _setShowMenu: PropsType.func,
     _setShowEmoji: PropsType.func,
+    _setShowCMD: PropsType.func,
     _onInputChange: PropsType.func,
     _onSend: PropsType.func,
     _saveCursor: PropsType.func,
@@ -93,6 +94,7 @@ class WInputBar extends Component {
     //base functions
     _setShowMenu: () => {},
     _setShowEmoji: () => {},
+    _setShowCMD: () => {},
     _onInputChange: () => {},
     _onSend: () => {},
     _saveCursor: () => {},
@@ -158,6 +160,8 @@ class WInputBar extends Component {
 
   toCMD = () => {
     console.log("toCMD");
+    let {inCMD, _setShowCMD} = this.props;
+    _setShowCMD(!inCMD);
   } 
 
   toAtth = () => {
@@ -231,11 +235,11 @@ class WInputBar extends Component {
   }
 
   renderCMDBtn(){
-    let {theme, enableCMD} = this.props;
+    let {theme, enableCMD, inCMD} = this.props;
     if(!enableCMD) return;
     return (
       <Holdable onPress={() => this.toCMD()} key="cmd">
-        <IconButton className={theme + " chatizo-input-icon"} size="small">
+        <IconButton className={theme + " chatizo-input-icon" + (inCMD? " in" : "")} size="small">
           <Code style={{width:"100%", height: "100%"}}/>
         </IconButton>
       </Holdable>
