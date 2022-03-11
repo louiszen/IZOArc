@@ -1,0 +1,69 @@
+:root{
+  --transparent: rgba(0, 0, 0, 0);
+  --aliceblue: rgba(240, 248, 255, 1);
+
+  /*company*/
+  --elainOrange: rgba(242, 132, 62, 1);
+  --elainOrangeDark: rgba(142, 67, 35, 1);
+
+   /*cell color fg*/
+  --black: rgba(29, 29, 29, 1);
+  --white: rgba(255, 255, 255, 1);
+  --green: rgba(85, 136, 38, 1);
+  --red: rgba(163, 1, 8, 1);
+  --yellow: rgba(157, 88, 22, 1);
+  --gold: rgba(230, 200, 0, 1);
+  --blue: rgba(74, 98, 136, 1);
+  --purple: rgba(171, 84, 211, 1);
+  --grey: rgba(80, 80, 80, 1);
+  --orange: rgba(212, 120, 0, 1);
+  
+  /*cell color bg*/
+  --bgTransparent: rgba(0, 0, 0, 0);
+  --bgDark: rgba(29, 25, 25, 1);
+  --bgBlack: rgba(29, 29, 29, 1);
+  --bgWhite: rgba(255, 255, 255, 1);
+  --bgGreen: rgba(198, 239, 206, 1);
+  --bgRed: rgba(255, 199, 206, 1);
+  --bgYellow: rgba(255, 235, 156, 1);
+  --bgLightYellow: rgba(255, 245, 206, 1);
+  --bgBlue: rgba(155, 194, 230, 1);
+  --bgPurple: rgba(250, 198, 255, 1);
+  --bgGrey: rgba(197, 197, 197, 1);
+  --bgOrange: rgba(255, 220, 191, 1);
+  --bgLightBlue: rgba(175, 214, 250, 1);
+
+  /*alert*/
+  --Success: rgba(76, 175, 80, 1);
+  --Warn: rgba(255, 152, 0, 1);
+  --Info: rgba(33, 150, 243, 1);
+  --Error: rgba(244, 67, 54, 1);
+
+  /*special meaning*/
+  --Warning: rgba(255, 220, 0, 1);
+
+  /*light | dark*/
+  --lightRed: rgba(200, 0, 0, 1);
+  --darkBox: rgba(60, 60, 60, 1);
+  --darkRed: rgba(140, 1, 8, 1);
+  --greyOut: rgba(160, 160, 160, 1);
+  --lightGrey: rgba(220, 220, 220, 1);
+  --lightGreen: rgba(160, 255, 160, 1);
+
+  /*pure*/
+  --pureRed: rgba(255, 0, 0, 1);
+  --pureGreen: rgba(0, 255, 0, 1);
+  --pureBlue: rgba(0, 0, 255, 1);
+  --pureYellow: rgba(255, 255, 0, 1);
+  --pureCyan: rgba(0, 255, 255, 1);
+  --pureMagenta: rgba(255, 0, 255, 1);
+  --pureWhite: rgba(255, 255, 255, 1);
+  --pureDark: rgba(0, 0, 0, 1);
+
+  /*project*/
+  --hexagoncolor: rgba(140, 167, 212, 0.918);
+  --gambotblue: rgb(75, 104, 151);
+  --elainorangeG: linear-gradient(90deg, rgb(200, 123, 30) 0%, rgb(125, 60, 10) 75.75%, rgb(125, 60, 10) 100%);
+  --tgblueG: linear-gradient(90deg, rgb(67, 169, 223) 0%, rgb(31, 103, 176) 75.75%, rgb(31, 103, 176) 100%);
+
+}

@@ -7,7 +7,6 @@ import { AttachFile, Code, Hive, InsertEmoticon, Mic, RadioButtonChecked, Send }
 import { Box } from "@mui/system";
 import _ from "lodash";
 import Holdable from "IZOArc/LabIZO/Controlizo/Holdable";
-import Picker from 'emoji-picker-react';
 
 /**
  * @augments {Component<Props, State>}
@@ -18,7 +17,7 @@ class WInputBar extends Component {
 
     //Command
     enableCMD: PropsType.bool,
-    cmds: PropsType.objectOf(PropsType.func),
+    inCMD: PropsType.bool,
 
     //state
     inMenu: PropsType.bool,

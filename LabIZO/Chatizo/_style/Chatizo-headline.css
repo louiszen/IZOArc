@@ -6,7 +6,7 @@
   width: 100%;
   border-radius: 0;
   padding: 0;
-  background: rgba(74, 98, 136, 1)
+  background: var(--gambotblue);
 }
 
 .chatizo-headline-icon{

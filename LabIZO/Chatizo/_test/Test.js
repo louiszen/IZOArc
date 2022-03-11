@@ -194,6 +194,23 @@ class Test extends Component {
         menu={Menu}
         onSend={this.onSend}
         onQuickReply={this.onQR}
+        enableCMD={true}
+        cmds={
+          [
+            {
+              cmd: "/sio",
+              desc: "Safety inspection / observation"
+            },
+            {
+              cmd: "/dra",
+              desc: "Dynamic risk analysis"
+            },
+            {
+              cmd: "/qia",
+              desc: "Quality inspection analysis"
+            }
+          ]
+        }
         />
     );
   }

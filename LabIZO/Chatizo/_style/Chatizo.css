@@ -1,0 +1,6 @@
+:root {
+  --hexagoncolor: rgba(140, 167, 212, 0.918);
+  --gambotblue: rgb(75, 104, 151);
+  --elainorangeG: linear-gradient(90deg, rgb(200, 123, 30) 0%, rgb(125, 60, 10) 75.75%, rgb(125, 60, 10) 100%);
+  --tgblueG: linear-gradient(90deg, rgb(67, 169, 223) 0%, rgb(31, 103, 176) 75.75%, rgb(31, 103, 176) 100%);
+}

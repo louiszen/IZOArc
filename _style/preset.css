@@ -1,0 +1,141 @@
+.h-pad{
+  padding-left: 5px !important; 
+  padding-right: 5px !important; 
+}
+
+.h-margin{
+  margin-left: 5px !important; 
+  margin-right: 5px !important; 
+}
+
+.v-pad{
+  padding-top: 5px !important; 
+  padding-bottom: 5px !important; 
+}
+
+.v-margin{
+  margin-top: 5px !important; 
+  margin-bottom: 5px !important; 
+}
+
+.h-pad-15{
+  padding-left: 15px !important; 
+  padding-right: 15px !important; 
+}
+
+.h-margin-15{
+  margin-left: 15px !important; 
+  margin-right: 15px !important; 
+}
+
+.v-pad-15{
+  padding-top: 15px !important; 
+  padding-bottom: 15px !important; 
+}
+
+.v-margin-15{
+  margin-top: 15px !important; 
+  margin-bottom: 15px !important; 
+}
+
+.h-pad-30{
+  padding-left: 30px !important; 
+  padding-right: 30px !important; 
+}
+
+.h-margin-30{
+  margin-left: 30px !important; 
+  margin-right: 30px !important; 
+}
+
+.v-pad-30{
+  padding-top: 30px !important; 
+  padding-bottom: 30px !important; 
+}
+
+.v-margin-30{
+  margin-top: 30px !important; 
+  margin-bottom: 30px !important; 
+}
+
+.green{
+  color: rgb(85, 136, 38);
+  background: rgb(198, 239, 206);
+  border-color: rgba(85, 136, 38, 0.2);
+}
+
+.red{
+  color: rgb(163, 1, 8);
+  background: rgb(255, 199, 206);
+  border-color: rgba(163, 1, 8, 0.2);
+}
+
+.yellow{
+  color: rgb(157, 88, 22);
+  background: rgb(255, 235, 156);
+  border-color: rgba(157, 88, 22, 0.2);
+}
+
+.blue{
+  color: rgb(74, 98, 136);
+  background: rgb(155, 194, 230);
+  border-color: rgba(74, 98, 136, 0.2);
+}
+
+.purple{
+  color: rgb(171, 84, 211);
+  background: rgb(250, 198, 255);
+  border-color: rgba(171, 84, 211, 0.2);
+}
+
+.grey{
+  color: rgb(80, 80, 80);
+  background: rgb(197, 197, 197);
+  border-color: rgba(80, 80, 80, 0.2);
+}
+
+.orange{
+  color: rgb(212, 120, 0);
+  background: rgb(255, 196, 141);
+  border-color: rgba(80, 80, 80, 0.2);
+}
+
+.fantasticblue{
+  background: linear-gradient(90deg, rgb(67, 169, 223) 0%, rgb(31, 103, 176) 75.75%, rgb(31, 103, 176) 100%);
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.italic{
+  font-style: italic;
+}
+
+.greenF{
+  color: rgb(85, 136, 38);
+}
+
+.redF{
+  color: rgb(163, 1, 8);
+}
+
+.yellowF{
+  color: rgb(157, 88, 22);
+}
+
+.blueF{
+  color: rgb(74, 98, 136);
+}
+
+.purpleF{
+  color: rgb(171, 84, 211);
+}
+
+.greyF{
+  color: rgb(80, 80, 80);
+}
+
+.orangeF{
+  color: rgb(212, 120, 0);
+}

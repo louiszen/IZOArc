@@ -25,7 +25,7 @@
   float: right;
   color: white;
   border-radius: 10px;
-  background: rgba(74, 98, 136, 1);
+  background: var(--gambotblue);
 }
 
 .chatizo-msg-header-main{

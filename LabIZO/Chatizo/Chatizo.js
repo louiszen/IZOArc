@@ -14,7 +14,8 @@ import "./_style";
 import WQuickReplies from "./_gears/QuickReplies/WQuickReplies";
 import WAutoComplete from "./_gears/AutoComplete/WAutoComplete";
 import WMenu from "./_gears/Menu/WMenu";
-import WEmoji from "./_gears/Emoji/WEmoji";
+import WEmojiPicker from "./_gears/Emoji/WEmojiPicker";
+import WCMD from "./_gears/CMD/WCMD";
 
 /**
  * @augments {Component<Props, State>}
@@ -58,7 +59,7 @@ class Chatizo extends Component {
 
     //Command
     enableCMD: PropsType.bool,
-    cmds: PropsType.objectOf(PropsType.func),
+    cmds: PropsType.array,
 
     //Menu
     showMenu: PropsType.bool,
@@ -176,7 +177,7 @@ class Chatizo extends Component {
 
     //Command
     enableCMD: true,
-    cmds: {},
+    cmds: [],
 
     //Menu
     showMenu: false,
@@ -249,6 +250,7 @@ class Chatizo extends Component {
   constructor(){
     super();
     this.state = {
+      inCMD: false,
       inQR: false,
       inAC: false,
       inEmoji: false,
@@ -380,7 +382,8 @@ class Chatizo extends Component {
    */
   _resetInput = () => {
     this.setState({
-      input: {}
+      input: {},
+      inCMD: false
     });
   }
 
@@ -501,30 +504,35 @@ class Chatizo extends Component {
    * @returns 
    */
   _onInputChange = (input, callback) => {
-    let {typingDisabled, onInputChange} = this.state;
+    let {typingDisabled, onInputChange, enableCMD} = this.state;
     if(typingDisabled) return;
 
     if(onInputChange)
       onInputChange(input);
 
+    let inCMD = false;
+    if(enableCMD && input.text.startsWith("/")){
+      inCMD = true;
+    }
+
     this.setState({
-      input: input
+      input: input,
+      inCMD: inCMD
     }, () => {
       if(callback) callback(input);
     });
   }
 
-  _onEmojiClick = (e, emoji) => {
+  _onEmojiClick = (emoji) => {
     let {input, inputCursorPos} = this.state;
     let newText = input.text || "";
-    newText = newText.slice(0, inputCursorPos) + emoji.emoji + newText.slice(inputCursorPos);
+    newText = newText.slice(0, inputCursorPos) + emoji + newText.slice(inputCursorPos);
 
     this.setState((state, props) => ({
       input: {
         ...state.input,
         text: newText
-      },
-      inEmoji: false
+      }
     }));
   }
 
@@ -570,8 +578,20 @@ class Chatizo extends Component {
 
   renderEmoji = () => {
     return (
-      <WEmoji
-        _onEmojiClick={this._onEmojiClick}
+      <WEmojiPicker
+        onEmojiClick={this._onEmojiClick}
+        />
+    );
+  }
+
+  renderCMD = () => {
+    let {input, inCMD} = this.state;
+    return (
+      <WCMD
+        {...this.props}
+        _onQuickReply={this._onQuickReply}
+        inputText={input?.text || ""}
+        inCMD={inCMD}
         />
     );
   }
@@ -630,7 +650,7 @@ class Chatizo extends Component {
 
   render(){
     let {width, height, quickReplyBar} = this.props;
-    let {inQR, inAC, inMenu, inEmoji} = this.state;
+    let {inQR, inAC, inCMD, inMenu, inEmoji} = this.state;
     return (
       <VStack width={width} height={height}>
         {inMenu && this.renderMenu()}
@@ -638,9 +658,10 @@ class Chatizo extends Component {
         {this.renderNotice()}
         {this.renderMsgBody()}
         {quickReplyBar && inQR && !inAC && !inEmoji && this.renderQuickReplyBar()}
-        {inAC && !inEmoji && this.renderAutoComplete()}
-        {inEmoji && this.renderEmoji()}
+        {inCMD && !inEmoji && this.renderCMD()}
+        {inAC && !inCMD && !inEmoji && this.renderAutoComplete()}
         {this.renderInputBar()}
+        {inEmoji && this.renderEmoji()}
       </VStack>
     );
   }

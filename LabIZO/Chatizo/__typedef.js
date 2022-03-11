@@ -10,6 +10,16 @@ import moment from "moment";
 
 /**
  * @typedef {{
+ *   cmd: String,
+ *   desc: String | {
+ *    EN: String,
+ *    TC: String
+ *   }
+ * }} cmd
+ */
+
+/**
+ * @typedef {{
  *  text?: String,
  *  imgSrc?: String,
  *  videoSrc?: String,
@@ -45,6 +55,9 @@ import moment from "moment";
  * }} quickReply
  * 
  * @typedef {{
+ * }}
+ * 
+ * @typedef {{
  *  src: String | Function,
  *  poster?: String | Function,
  *  style?: CSSProperties
@@ -68,8 +81,9 @@ import moment from "moment";
  * @typedef {{
  *  system?: String | Function,
  *  text?: String | Function,
- *  image?: String | Function | [String],
- *  video?: video,
+ *  image?: image | [image],
+ *  audio?: audio,
+ *  video?: video | [video],
  *  quickReplies?: [quickReply],
  *  buttons?: [button],
  *  imgButtons?: [imgbutton]

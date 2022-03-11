@@ -1,5 +1,5 @@
-.chatizo-input-ac-btnlist{
-  max-height: 150px;
+.chatizo-input-cmd-btnlist{
+  max-height: 120px;
   height: fit-content;
   border-radius: 5px 5px 0 0;
   width: 99%;
@@ -8,7 +8,7 @@
   background: var(--gambotblue);
 }
 
-.chatizo-input-ac-btn{
+.chatizo-input-cmd-btn{
   padding: 4px;
   margin: 1px;
   border-radius: 3px;
@@ -17,15 +17,21 @@
   cursor: pointer;
 }
 
-.chatizo-input-ac-btn:hover{
+.chatizo-input-cmd-btn:hover{
   background: var(--gambotblue);
 }
 
-.chatizo-input-ac-text:hover{
+.chatizo-input-cmd-text:hover{
   color: white;
 }
 
-.chatizo-input-ac-text{
+.chatizo-input-cmd-text{
+  width: fit-content !important;
   color: var(--gambotblue);
   font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+}
+
+.chatizo-input-cmd-desc{
+  flex-wrap: nowrap !important;
+  font-size: x-small !important;;
 }

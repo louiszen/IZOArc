@@ -4,7 +4,7 @@
 }
 
 .chatizo-input-bar{
-  background: rgba(74, 98, 136, 1);
+  background: var(--gambotblue);
   padding: 5px;
 }
 

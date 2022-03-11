@@ -49,20 +49,6 @@ class MockChatbotEngine {
         user: user,
         msg: {
           text: "請提供相片",
-          image: {
-            src: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/220px-Image_created_with_a_mobile_phone.png"
-          },
-          video: {
-            poster: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/220px-Image_created_with_a_mobile_phone.png",
-            src: "https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
-          },
-          imgButtons: [
-            {
-              image: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/220px-Image_created_with_a_mobile_phone.png",
-              title: "test",
-              payload: "testpayload"
-            }
-          ]
         }
       }
     ];
@@ -88,6 +74,11 @@ class MockChatbotEngine {
               title: "不良質量事項",
               payload: "no",
               color: "red"
+            },
+            {
+              title: "N/A",
+              payload: "na",
+              color: "purple"
             }
           ]
         }
