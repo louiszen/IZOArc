@@ -300,14 +300,23 @@ class WInputBar extends Component {
   }
 
   renderButtons(){
+    let {inCMD} = this.props;
+    let rtn = [];
+    if(this._isInputEmpty() || inCMD){
+      rtn.push(this.renderCMDBtn());
+    }
+
     if(this._isInputEmpty()){
-      return [
-        this.renderCMDBtn(),
+      rtn.push(
         this.renderAttachBtn(),
         this.renderAudioRecordBtn()
-      ];
+      );
+    }else{
+      rtn.push(
+        this.renderSendBtn()
+      );
     }
-    return this.renderSendBtn();
+    return rtn;
   }
 
   renderMainBar(){

@@ -17,18 +17,20 @@ class WEmojiPicker extends Component {
   static propTypes = {
     theme: PropsType.string,
     onEmojiClick: PropsType.func,
-    version: PropsType.number,
+    minVersion: PropsType.number,
+    maxVersion: PropsType.number,
     catIcons: PropsType.object,
   }
 
   static defaultProps = {
     onEmojiClick: () => {},
-    version: 11,
+    minVersion: 0,
+    maxVersion: 12,
     catIcons: {
       "smileys-emotion": <EmojiEmotions fontSize="10"/>,
       "people-body": <EmojiPeople fontSize="10"/>,
       "animals-nature": <EmojiNature fontSize="10"/>,
-      "food-drinks": <EmojiFoodBeverage fontSize="10"/>,
+      "food-drink": <EmojiFoodBeverage fontSize="10"/>,
       "activities": <EmojiEvents fontSize="10"/>,
       "objects": <EmojiObjects fontSize="10"/>,
       "symbols": <EmojiSymbols fontSize="10"/>,
@@ -75,14 +77,15 @@ class WEmojiPicker extends Component {
   }
 
   _loadEmoji = () => {
-    let {version} = this.props;
+    let {minVersion, maxVersion} = this.props;
     let emojis = unicodeEmoji.getEmojis();
     let grouped = {};
     _.map(emojis, (o, i) => {
       let v = Number(o.version);
-      if(!_.isNaN(v) && v <= version){
+      if(!_.isNaN(v) && v >= minVersion && v <= maxVersion){
         grouped[o.group] = grouped[o.group] || [];
         grouped[o.group].push(o.emoji);
+        return;
       }
     });
 
@@ -146,8 +149,8 @@ class WEmojiPicker extends Component {
     let {theme} = this.props;
     return (
       <VStack height="fit-content" className={theme + " chatizo-emojipicker"}>
-        {this.renderCategory()}
         {this.renderSelect()}
+        {this.renderCategory()}
       </VStack>
     );
   }

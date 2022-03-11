@@ -312,15 +312,17 @@ class Chatizo extends Component {
   }
 
   _setShowCMD = (tf) => {
-    this.setState({
-      inCMD: tf
-    });
+    this.setState((state, props) => ({
+      inCMD: tf,
+      inEmoji: tf? false : state.inEmoji
+    }));
   }
 
   _setShowEmoji = (tf) => {
-    this.setState({
-      inEmoji: tf
-    });
+    this.setState((state, props) => ({
+      inEmoji: tf,
+      inCMD: tf? false : state.inCMD
+    }));
   }
 
   _Typing = (tf = true) => {
@@ -523,9 +525,9 @@ class Chatizo extends Component {
 
     this.setState({
       input: input,
-      inCMD: inCMD
     }, () => {
       if(callback) callback(input);
+      this._setShowCMD(inCMD);
     });
   }
 
@@ -668,8 +670,9 @@ class Chatizo extends Component {
         {quickReplyBar && inQR && !inAC && !inEmoji && this.renderQuickReplyBar()}
         {inCMD && !inEmoji && this.renderCMD()}
         {inAC && !inCMD && !inEmoji && this.renderAutoComplete()}
-        {this.renderInputBar()}
         {inEmoji && this.renderEmoji()}
+        {this.renderInputBar()}
+        
       </VStack>
     );
   }
