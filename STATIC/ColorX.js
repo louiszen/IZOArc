@@ -129,7 +129,7 @@ class ColorX {
 
   /**
    * Get the color from the mapping
-   * @param {String} name 
+   * @param {String | color} name 
    * @param {Number} a 
    * @returns
    */
@@ -140,7 +140,7 @@ class ColorX {
 
   /**
    * Get the color with bgXxxx 
-   * @param {String} name 
+   * @param {String | color} name 
    * @param {Number} a 
    * @returns 
    */
@@ -159,7 +159,7 @@ class ColorX {
 
   /**
    * Preset 0.2 alpha
-   * @param {String} name 
+   * @param {String | color} name 
    * @returns 
    */
   static GetBorderColorCSS(name){
@@ -169,7 +169,7 @@ class ColorX {
 
   /**
    * Preset "0 0 2px 2px", alpha 0.2
-   * @param {String} name 
+   * @param {String | color} name 
    * @returns 
    */
   static GetBoxShadowCSS(name){

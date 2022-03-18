@@ -51,8 +51,10 @@ class Container extends Component {
   }
 
   componentDidUpdate(prevProps, prevState){
+
+    let {snackOpen, loadingOpen, dialogOpen, backdropOpen} = this.state;
   
-    when(() => this.state.snackOpen !== !_.isEmpty(STORE.alert), 
+    when(() => snackOpen !== !_.isEmpty(STORE.alert), 
       () => {
         this.setState({
           snackOpen: !_.isEmpty(STORE.alert)
@@ -60,7 +62,7 @@ class Container extends Component {
       }
     );
 
-    when(() => this.state.loadingOpen !== STORE.loading,
+    when(() => loadingOpen !== STORE.loading,
       () => {
         this.setState({
           loadingOpen: STORE.loading
@@ -68,7 +70,7 @@ class Container extends Component {
       }
     );
 
-    when(() => this.state.dialogOpen !== !_.isEmpty(STORE.ask),
+    when(() => dialogOpen !== !_.isEmpty(STORE.ask),
       () => {
         this.setState({
           dialogOpen: !_.isEmpty(STORE.ask)
@@ -76,7 +78,7 @@ class Container extends Component {
       }
     );
 
-    when(() => this.state.backdropOpen !== !_.isEmpty(STORE.backdrop),
+    when(() => backdropOpen !== !_.isEmpty(STORE.backdrop),
       () => {
         this.setState({
           backdropOpen: !_.isEmpty(STORE.backdrop)
