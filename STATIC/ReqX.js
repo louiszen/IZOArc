@@ -45,10 +45,16 @@ class ReqX {
 
     let url = DOMAIN + path;
     let payloadOut = {
-      JWT: noJWT? undefined : STORE.user.JWT,
       data: data,
       addOns: addOns
     };
+
+    let config = {};
+    if(!noJWT){
+      config = {
+        headers: { Authorization: `Bearer ${STORE.user.JWT}` }
+      };
+    }
 
     try {
       if(ReqXSettings.OutLog.show) {
@@ -60,7 +66,7 @@ class ReqX {
         
       }
       if(loading) STORE.isLoading(true);
-      let res = await axios.post(url, payloadOut);
+      let res = await axios.post(url, payloadOut, config);
       if(loading) STORE.isLoading(false);
       if(ReqXSettings.InLog.show) {
         if(ReqXSettings.InLog.object){
