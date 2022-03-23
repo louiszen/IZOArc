@@ -63,7 +63,6 @@ class ReqX {
         }else{
           console.log("[OUT]", path);
         }
-        
       }
       if(loading) STORE.isLoading(true);
       let res = await axios.post(url, payloadOut, config);
