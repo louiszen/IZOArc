@@ -55,9 +55,6 @@ import moment from "moment";
  * }} quickReply
  * 
  * @typedef {{
- * }}
- * 
- * @typedef {{
  *  src: String | Function,
  *  poster?: String | Function,
  *  style?: CSSProperties
