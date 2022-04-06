@@ -14,3 +14,4 @@ export {default as ZRichText} from "./ZRichText";
 export {default as LocaleX} from "./LocaleX";
 export {default as ZFunc} from "./ZFunc";
 export {default as ReqX} from "./ReqX";
+export {default as Task} from "./Task";
